@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "lithe-vent-392501",
+  "private_key_id": "59ebb081f29e5883e5c433b4978845c954e951bc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCXB60YLZcBPWOb\nP4bcAv2qAdAD9JFE0ZZ/PalNhQw46Zo90F5HD4Fu0y2gL1TI+O/d+1ZX0yD+FOQg\n1AS2wQH3qz8PqkXDf+vByTfjIsTcpI+8dwk1dqOk9J8KxXLBa1g31xpwRLhBKjfB\nXMUpWUqeoXduaOh9duVFV0QmhiwXusl32Fgb8l4uM4l55c+HVEa/tFbMwjBo8eT8\nEmsaZFNjeQslOVh6KtDsKDPXb4LOP+hXOeW0ViKbvIrzGUtRqvU2z/Ly+UZ4NeW6\nrSCbad3xDUYqJ0cEnJDMAzo6x5WM9fC13JUQwAbZbz+xRZsdqAzdpUgpnh3Zu/gx\nFXCoRsspAgMBAAECggEAApbiejrE3yPx7l5aVfEUr4qgqgKyT2lfAM86NP6qGRsz\nNmpZRXNf+xoSiw+ortnqxeXqYu7XHtgVmbT84DPCsH/+gKqhD9MkhAHqzAGDect1\n/euWDDU8pMY/aFA+kY+hN3LgDIr3FEHwqwdnx3fVEk9vJGTW0JjeYTAX9megP6dg\nzZePIs3owLzYU/vDPxOuQEK15HCVK+yET8eErGfsVLuXy9ixTsnmCr7twOaCu+uJ\n5PuO5kvPLWYdG20kX1Yoa0K2JDRrtPCYOGdAvj8Mu8vvh/tGFFRyga8Oj8Y+7kww\nvyquCHjwH2/Alp6i/y58GCN/DiCifG1YpYRJ4mIL0QKBgQDRfulY2bqwXQVNILMS\nwQS5V0qAw3IE34hPUaiQ45e9FR72Q8XwRUQZW+MQi8mr12sH4kwIBnD4n4DXx5Rt\nVCg4tGgKC6eRus2+a+t+WxKK9VAOZb7UJA4wkv68xZNUxpAv80ZFvj3PmUYXwTIe\nbEnZSa/0eDvPeF4LoNkj5F4POQKBgQC4jk9nhhoMKfTkW68Gg/iAhShiZ6Ri5iBe\nJiqGeU3/9QBWOdMP7NvR0ScJE5jvunqVNbAB4ZDfGCl4x0WwZl1I7kFtm4WO84F2\nrgaMdwLx2N7ViFx5O6BwxI0pvSEun7Hsw744gRQtxGPRTfpXgwlT0RxxFXIAOBw0\npaqt9E+rcQKBgAYN6uR8dl6+cXbHKSWzmlVY5nhOLa9iXmgcbgix6yK1x41KbCAD\ngHJTK37A63Uh5p/1tEjPFti4k1qpE+sM8ZSh8hfIOnGFuoh0Sfv+2cxWRpgD7L3o\nxNg2h1IhS565llUsbK17UAH95f6twKsMah3zeThReTkHu4AOh/f3k5hRAoGADsXl\neUX0w9B/99+W7RCXTcJa7zWYpQoCwUaQ1N7U7Y4xDrXmPToahnsVgtZ8wYPN2C/J\n/PyPWixW9YIOBAbNpM7dkeaHFGBNlrBrecb1B2Lyw2j87f9l4mD5Y8Pt6guCdI9e\npKtAcEFuNAzn4yVsE7eDbVHoJDhZmaVBOld6ISECgYA1lffElLEJRik0TO5AEvsR\nrm5FUTHuSLzm6w/+DL1/Qrum7kVqmQEwYdMUo5YGVPxkLyF/Oi9SS59k79xdxNkM\nrFiml8ar7vYCtY3dHoh0AUP4HXc+wPSX1dy9Mh5v39HpQUoZau+TlQcn2WdXqf9D\n+DSBQmAlwJoUl13VYmEk1Q==\n-----END PRIVATE KEY-----\n",
+  "client_email": "my-vision-ocr@lithe-vent-392501.iam.gserviceaccount.com",
+  "client_id": "111432409824311745778",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/my-vision-ocr%40lithe-vent-392501.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

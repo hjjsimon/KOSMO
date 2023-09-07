@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "utilitarian-mix-392501",
+  "private_key_id": "8fb701a73fa171e73075e33aecae91488068c189",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCpNgyWhGgBOHpx\nRq7vzIn3rnLNj0vIu7emtU2Vhaa6tr8Wn/VQ5ZZ7XEVTgYebgE23PwxFi0+pKxBM\nHow4KvtSL7NoQrTx9aCV4LuFcSPYbsmXYAwkV77Fqac/qPJhfV4ypHt2BJkPjvlV\n73ffAAkgnnuO3C5+blbpUc+eau3P2vJ1GtJjjWx6R5UHgsvkMmPRunNRkssjtNRb\nyiBl1sh0NH72U7GQ/7hjDjinMWQo+Fd3gg85ojn+jrxwW2VUSOoooxhkomRQFnGj\nJjMTrwquzwJuxH01hmlX0vLH6LL5pJxynvkfFZDVJqCzsqs4/Tot1H1KqvDkTi82\nt6wyY5afAgMBAAECggEAAtTop42DBjCa5ycNMkOYvM4ofDRKKLYjfccKAyPS+Ie7\nk5QVkVgjCUcv9DbLkqEUK91X6Bix/sffxoupZB740VDx1uxbqAggMnDUif+91tMM\n3lLGBYK93dCLEPggfCCBbi6YNlOXGs5qk8QuE4+/l1rAq4R+CEryJcrjB08vL8Mx\n9DzShGV1/pP+uLV3Vxhup9ocFh5Z7o9VuxhdOIAx4PsjbUqzx6eg78paaNsNrD+c\n1M9QH/2FzE0iuQ6KpzWyCMPGcveCvzHFHhrBvqYiaPOYz/VOYfWRdHKpUQpWeyLi\n/rc0om0lM1fbKtXWyjgVOc8Zdkgy7EE5yPkXYczhKQKBgQDpPIpKWfxZhtbTVc9P\nyYmHSabO86D1jhiPLJFRxPN5sX9VaEQlXTePjEYidQj1kfpB6mB32AKWvkdZqFbA\njNQfpriFCxWLHQ767qzmg6n82zme4B1SjrZDT7j6wXL30zIl7UpgzCDChy0Vcy4M\ntYFHx9Rzjur+ZvOCv3wkWJpLxQKBgQC5udKhjbwGihes+SlptDm/yR2hmyOCjdxg\noLBSjuE6KbhJznxZ/ur846U6r22Cj/hOz9cZR3Axnc10+W0M4WS4sPTD2kCGR4b+\ned4v/ZWa9qw9zN7r1KccJXw7Se/UC/AnEF8AbA+8f05/ryRtsxm6hvn/y0QL54ac\nFHZY+VyLEwKBgQCnR8B3qyqOm2Mgl/7kXsvAuFZnP91FwPBkX7aqSvPFaETHYMzf\nb4gV8KmstPwEBPrUo+Ekk0zoCPjrmQz/dQH+4XieE2EUMXc5Ck3/1pbov+MHy/27\n5Jdcl6U4U969WEAza4lY+47TdlgjdkSk4NkkPnJlny9z3yrvr56+Ar5HcQKBgEc2\nmi3587OqNYPMkfWG9nG0QtlZbBc+H9cpJhKx2Gh94LzkIMg9N4s6GnvTEjFy1Kob\nhYWa38kWkdYdYZQDxKQQrfl+8SjLulZPEkPifv/JP6f+qydQBbeEJAtzwTLUVQQV\ngefeh3Ymdkn9NQGfH+lmoetT3EaYQwQL0IkzLCnjAoGANeJLO9n1OmM485AByl5g\nsajBCYFC7ddVF2n4Q65AqYoWB8X2NM82kwJ7JVO0A80U9IgEsPwjg/Y4Uu8p3Euz\n7rTSGAeFBkADMVK0kyFTcPjVtA0ZGzyV9j85LWUaLdyvYrMJaVyObIqXbGkcO+rg\nG+BsaGfd1Up9dmoy2LssEtA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "my-vision-ocr@utilitarian-mix-392501.iam.gserviceaccount.com",
+  "client_id": "105843251120371325372",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/my-vision-ocr%40utilitarian-mix-392501.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
