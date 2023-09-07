@@ -1,0 +1,20 @@
+<!--
+jinja2.html템플릿 파일을 상속받는다
+{#
+    {% extends '상속받을 html파일명' %}
+
+    {% block 상속받는 블락명 %}
+    새로운 내용 작성
+    {% endblock %}
+#}
+-->
+{% extends 'jinja2/jinja2.html' %}
+{% block mycontent %}
+
+    <h3>올해는 {{years}}년 입니다</h3>
+    {% if years % 2==0 %}
+        <h4>짝수해 입니다</h4>
+    {% else %}
+        <h4>홀수해 입니다</h4>
+    {% endif %}
+{% endblock %}

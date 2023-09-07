@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>파일업로드</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul >
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+  <form method="post" action="/upload" enctype="multipart/form-data" >
+        <input type="text" name="title" placeholder="제목을 입력하세요">
+        <input type="file" name="upload" multiple/>
+        <input type="submit" value="파일 업로드"/>
+    </form>
+</body>
+</html>

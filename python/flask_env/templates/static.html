@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--url_for('정적파일위치시킬 루트 폴더명',filename='루트를 제외한 정적파일의 전체 경로')-->
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/style.css')}}">
+    <script src="{{url_for('static',filename='js/jquery-3.6.2.min.js')}}"></script>
+    <script>
+       /*
+       CORS에러 발생시
+        1. pip install flask_cors 설치
+        2. app.py에서 from flask_cors import CORS
+        3. app = Flask(__name__)
+           CORS(app)# 이 코드 추가
+       */
+
+
+      $(function(){
+        $('#ajax').click(function(){
+          $.ajax({
+              url:'http://localhost:8282/ajax',
+              data:JSON.stringify({name:'한소인'}),
+              contentType:'application/json',
+              //data:{name:'한소인'},
+              type:'post',
+              dataType:'json'
+            }).
+            done(function(data){
+              console.log('서버로 부터 받은 데이타:',data)
+              var span=document.querySelector("#result");
+              span.textContent = data.name+':'+data.loc;
+            }).
+            fail(function(e){
+                console.log('에러:',e)
+            });
+        });
+      });
+
+    </script>
+    <title>정적파일</title>
+</head>
+<body>
+  <h2>정적파일 사용하기</h2>
+  <img src="{{url_for('static',filename='images/flask.png')}}" alt="Flask이미지"/>
+  <a href="#" id="ajax">AJAX요청</a><br/>
+  <span id="result"></span>
+</body>
+</html>
