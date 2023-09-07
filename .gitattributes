@@ -9,3 +9,4 @@ jQuery/* filter=lfs diff=lfs merge=lfs -text
 python/* filter=lfs diff=lfs merge=lfs -text
 React/* filter=lfs diff=lfs merge=lfs -text
 Teachable_ML/* filter=lfs diff=lfs merge=lfs -text
+python/DataAnalysis/*.log filter=lfs diff=lfs merge=lfs -text
