@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P06.html</title>
+</head>
+<body>
+    <!--
+          [P태그]
+          - PARAGRAPH:문단을 나눌때 사용하는 태그
+          - BLOCK ELEMENT: P태그안에는 BLOCK ELEMENT를 넣지 말아라(원래 블락 안에 인,블락 모두 넣을 수 있음)
+          ※Block Element:세로배치되는 태그들(예:hn계열 태그 혹은 p태그등/부모가 크기기본)
+            Inline Element:가로배치되는 태그들(예:a태그 혹은 img태그등/컨텐츠가 크기기본)
+      -->
+      <div>
+        <h2>P태그 연습</h2>
+        <h3>자기 소개서</h3>
+        <p><!--p는 문단-->
+            저는 유복한 가정에서 태어났습니다.<br/>
+            자상하신 부모님의 사랑을 받으며 자랐습니다.<!--br안썼지만 문단이라 떨어짐-->
+        </p>
+        <p style="background-color: green;text-align: right;"><!--백그라운드 칼라 전체 차지하면 블락엘리먼트/ 컨텐츠만큼이면 인라인엘리먼트-->
+                                                                <!--부모만큼인거 보면 블락임-->
+            지원동기는 사장이 되려고합니다.<br/>
+            열심히 하겠습니다.
+        </p>
+      </div>
+      <div style="background-color: yellow;width: 400px;"><!--컨텐츠 없으면 백그라운드 칼라도 안보임-->
+        <p style="text-align: center;">가운데 정렬</p><!--부모는 400px div임, 이를 기준으로 정렬-->
+      </div>
+</body>
+</html>

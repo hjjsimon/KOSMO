@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion.html</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function(){
+            /*
+                ※위젯 생성 방법
+                방법1. $("선택자").위젯함수() : 초기화
+                        ※게터/세터는 초기화후 사용
+                        1) setter:   $("선택자").위젯함수('option','옵션명','옵션값');
+                        2) getter:   var 변수명 = $("선택자").위젯함수('option','옵션명');
+
+                방법2. $("선택자").위젯함수({'옵션명':'옵션값'}) : 권장
+
+                Want to learn more about the accordion widget? Check out the API documentation.
+                클릭시 https://api.jqueryui.com/accordion/ 로 넘어감
+            */
+            /*
+            //방법1
+            $( "#accordion" ).accordion({});//아코디언 초기화
+            //$( "#accordion" ).accordion( "option", "active", 2 );//setter로 active옵션 2로 설정, index2면 section3임
+            console.log('게터로 active옵션 읽기:',$( "#accordion" ).accordion( "option", "active"))//getter, 2출력
+            $( "#accordion" ).accordion( "option", "collapsible", true );//
+            $( "#accordion" ).accordion( "option", "active", false );//모든 패널 닫기
+            */
+
+            //방법2
+            var accordion = $('#accordion').accordion({
+                active: false, //인덱스로 최초 열릴 것 설정
+                collapsible: true, //false주면 닫기 불가
+                animate: {duration:1000, easing:'easeOutBounce'},//1초간 열림, 끝에 가서 따당
+                //event: 'mouseover click',//마우스 오버, 클릭 둘 다 열리게 함, 공백으로 설정 추가
+                activate: function(event,ui){//애니메이션이 완료된 후 트리거
+                    console.log('activate이벤트 발생:',event,ui);//ui는 객체
+                    ui.newHeader.css('background-color','black');//열린 제목
+                    ui.newPanel.css('background-color','grey');//열린 내용
+                    ui.oldHeader.css('background-color','red');//봤던거 제목
+                    ui.oldPanel.css('background-color','yellow')//봤던거 내용
+                }
+            })
+            //어코디언 함수가 적용된 div요소 반환
+            console.log('accordian:',accordion);
+
+            $(':button:first').click(function(){
+                var activeNumber = $(':input[type=number]').val();
+                //setter로 active변경
+                accordion.accordion("option","active",parseInt(activeNumber));//숫자 선택 후 active변경 버튼 클릭 시 변경
+            });
+
+            $(':button:eq(1)').click(function(){
+                accordion.accordion('disable');//버튼 클릭시 비활성화됨
+            })
+
+            $(':button:eq(2)').click(function(){
+                accordion.accordion('enable');//버튼 클릭시 활성화됨
+            })
+
+            $(':button:last').click(function(){
+                var animate = accordion.accordion('option','animate');
+                console.log(animate);//{duration: 1000, easing: 'easeOutBounce'} 객체 나옴
+                console.log('애니메이션 시간:%s, 효과함수:%s',animate.duration,animate.easing);//애니메이션 시간:1000, 효과함수:easeOutBounce
+            });
+
+
+
+        });
+    </script>
+    <style>
+        .ui-state-active{
+            background-color: green;/*누를때마다 바뀌는 소스를 확인, 찾아서 바꾼것*/
+        }
+
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>제목</legend>
+        <!-- https://jqueryui.com/ 참고 -->
+        <!-- 사람들이 많이 쓰는 UI를 미리 만들어 놓음, link, src -> ui 필요 -->
+        <div id="accordion">
+            <h3>Section 1</h3>
+            <div>
+              <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+              </p>
+            </div>
+            <h3>Section 2</h3>
+            <div>
+              <p>
+              Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+              purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+              velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+              suscipit faucibus urna.
+              </p>
+            </div>
+            <h3>Section 3</h3>
+            <div>
+              <p>
+              Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+              Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+              ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+              lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+              </p>
+              <ul>
+                <li>List item one</li>
+                <li>List item two</li>
+                <li>List item three</li>
+              </ul>
+            </div>
+            <h3>Section 4</h3>
+            <div>
+              <p>
+              Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+              et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+              faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+              mauris vel est.
+              </p>
+              <p>
+              Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+              Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos.
+              </p>
+            </div>
+        </div>
+        <hr/>
+        <input type="number" step="1" max="3" min="0"/>
+        <button>active변경</button>
+        <button>비활성화 하기</button>
+        <button>활성화 하기</button>
+        <button>GETTER로 애니메이트 속성읽기</button>
+    </fieldset>
+</body>
+</html>

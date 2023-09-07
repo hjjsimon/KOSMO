@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background05.html</title>
+    <style>
+        #div div{
+          width:80%;/*부모 div, div아이디 하위의 div태그니까*/
+          height:400px;
+          background-image: url(../Images/sumnail.png) ;
+          background-color: #B10D0D;
+          background-repeat: no-repeat;
+        }
+        #div div:first-child{
+          /* css3.0에서 등장*/
+          background-size: 100% 100%;/* 가로폭 세로폭-> 이미지가 빨간 백그라운드 전체를 덮음*/
+        }
+        #div div:last-child{
+          /* css3.0에서 등장*/
+          background-size: 30% 50%;/* 가로폭 세로폭-> 이미지가 빨간 백그라운드 일부를 덮음*/
+        }
+      </style>
+</head>
+<body>
+    <h2>배경관련 CSS속성</h2><!--배경색, 배경이미지 둘 다 지정시 배경이미지가 우선순위높음-->
+    <div>
+        <h2>배경색 지정</h2>
+        <div style="background-color: #f00;">블락 엘리먼트</div>
+        <span style="background-color: #00ff00;">인라인 엘리먼트</span>
+        <h2>배경 이미지 지정</h2>
+        <!-- 배경색 과 배경이미지 동시에 주면 최종적으로
+            배경이미지가 적용됨(배경색 위를 덮음)
+            이미지의 가로 세로 위치는 반복속성이
+            no-repeat일때 의미 있다.
+            다시 말해서 repeat-x일때는 x좌표는 의미 없고
+            repeat-y일때는 y좌표는 의미 없다.
+        -->
+        <div style="background-image: url(../Images/sumnail.png);width: 500px;height:300px;
+                    background-repeat: no-repeat; background-color: yellow;background-position: 50% 50%;">
+        다이브 입니다.<!--왼쪽 텍스트 크기만큼 x,y축 반복중, 기본이 repeat반복임, x는 x축만 반복, 배경이라 드래그선택불가-->
+                    <!--50%,50%하면 정가운데 옴-->
+        </div>
+        <div id="div">
+            <div>첫번째 DIV</div>
+            <hr/>
+            <div>두번째 DIV</div>
+        </div>
+        <hr/>
+        <!-- 50% 50%(background-position)/30% 30%(background-size) 액자 느낌-->
+        <div style="width: 300px;height: 300px;background: url(../Images/sumnail.png) no-repeat rgb(100, 100, 100) 50% 50%/90% 90%;">
+        <!--bachground라는 css이름으로 이미지, 노리핏, color 속성 모두 순서없이 줄 수 있음, 즉 많은 속성을 분할x 한번에 쓰기-->
+        <!--백그라운드 포지션 50,50%(정가운데), 크기조정(백그라운드-사이즈)은 98,98%(정가운데 위치는 고정)-->
+        동시에 여러 속성 지정하기
+        </div>
+    </div>
+</body>
+</html>

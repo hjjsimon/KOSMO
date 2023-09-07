@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForWhile06.html</title>
+    <script>
+        /*
+        1)자바: for문 안에서 선언된 변수는 for문이 끝나면 소멸된다
+        2)자스: script태그 안에서 선언된 변수(아래 var 변수=초기값)는 해당 페이지 모든 영역에서 사용가능하다.
+        (호이스팅:변수나 함수 선언문은 맨위로 호이스팅된다)
+        for(var 변수 =초기값;반복조건;증감식){
+        반복조건이 참일때 수행할 명령문들
+        }
+        //자바는 scope가 {}블락단위를 따름, 블락 벗어나면 소멸되어 변수 못씀
+        //자스는 scope가 함수스코프를 따름, 함수 벗어나면 소멸되어 변수 못씀
+    */    
+    /*    for(var i=0;i<5;i++){
+            var num=100;
+            console.log('i=',i);
+        }
+         ->위 코드는 인터프리터시 호이스팅되어 아래코드처럼 실행된다
+    */  var i;
+        var num;
+        for(i=0;i<5;i++){
+            num=100;
+            console.log('i=',i);
+        }
+        console.log('for문이 끝난후:i=%s,num=%s',i,num);//i는 5일때 빠져나옴, num은 100
+
+        //document객체의 write메소드 쓰면 body의 맨위에 출력됨
+        document.write('<h2>for문으로 출력</h2>');
+        for(i=0;i<5;i++){//행
+            for(var k=0;k<5;k++){//열
+                if(i===k) document.write('1 &nbsp;&nbsp;');
+                else document.write('0 &nbsp;&nbsp');
+            }
+            document.write('<br/>');
+        }
+        //문] 10000 출력
+        document.write('<h2>while문으로 출력</h2>');
+        document.write("<table style='text-align:center;width:300px;background-color:red;border-spacing:1px'>");//밖이 더블이니까 안에 싱글해야함, 더블하려면 \"\"하면됨
+        i=0;
+        while(i<5){
+            document.write('<tr style="background-color:white">');//밖이 싱글이면 안쪽이 더블
+            var k=0;    
+            while(k<5){
+                if(i===k) document.write('<td>1</td>');
+                else document.write('<td>0</td>');
+                k++;
+            }
+            document.write('</tr>');
+            i++;
+        }
+        document.write("</table>");
+        //문] table태그를 사용해 구구단 출력(for 또는 while)
+        document.write('<h2>구구단출력 첫번째-직접 출력</h2>')
+        document.write("<table style='text-align:center;width:700px;background-color:red;border-spacing:1px'>");
+        for(i=1;i<=9;i++){
+            document.write('<tr style="background-color:white">');
+            for(k=2;k<=9;k++){
+                document.write("<td>"+k+" * "+i+" = "+i*k+"</td>");
+            }
+            document.write('</tr>')
+        }
+        document.write("</table>");
+
+        document.write('<h2>구구단출력 두번째-문자열에 누적</h2>')//원하는 위치에 출력시 누적씀
+        var table="<table style='text-align:center;width:700px;background-color:red;border-spacing:1px'>";
+        for(i=1;i<=9;i++){
+            table+='<tr style="background-color:white">';
+            for(k=2;k<=9;k++){
+                table+=("<td>"+k+" * "+i+" = "+k*i+"</td>");
+            }
+            table+='</tr>';
+        }
+        table+="</table>"//닫는 태그 문자열에 누적
+        document.write(table);
+
+        document.write('<h2>구구단출력 세번째-DOM API사용</h2>')//문자열누적보다 깔끔하대
+        var table_=document.createElement('table');//엘리먼트가 태그 의미, 테이블태그 명을 주면 됨->이제 <table></table>만들어진것
+        //table_.style='text-align:center;width:700px;background-color:red;border-spacing:1px;'//이렇게 해도 되고 아래도 됨
+        table_.setAttribute('style','text-align:center;width:700px;background-color:red;border-spacing:1px;')
+        //Attribute가 속성, style속성을 위위코드에서 만든 table에 설정한것
+
+        for(i=1;i<=9;i++){
+            var tr=document.createElement('tr');
+            //tr.style="background-color:white";//속성은 변수, setAttribute나 style이나 가능 이렇게 쓰기 가능
+            tr.setAttribute('style',"background-color:white");//지금까지 <tr style~> </tr>만든것
+            for(k=2;k<=9;k++){
+                var td=document.createElement('td');
+                var text=document.createTextNode(k+'*'+i+'='+k*i);//태그 사이에 있는건 node라고함, 태그<> </> 사이에 들어가는 값이 node
+                td.appendChild(text);//node가 child임, 위에서 담은 변수를 뽑음,
+                tr.appendChild(td);
+            }
+            table_.appendChild(tr);
+        }
+
+        window.addEventListener("DOMContentLoaded",function(){
+            var h2Node=document.querySelector('#position')//이로써 h2 node로 만듦, id같은건 node라고 안하고 node의 속성
+            h2Node.insertAdjacentElement('afterend',table_);//for문 및 while문 아래에 출력시킴
+        });
+        
+    </script>
+</head>
+<body>
+    <h2 id="position">for문 및 while문 연습</h2>
+    <script>
+        console.log('for문이 끝난후(body안):i=%s,num=%s',i,num);//여기도 잘 됨, 같은 페이지내 문맥은 변수 그대로됨, 위스크립트랑, 아래 스크립트는 같은 스크립트
+    </script>
+</body>
+</html>

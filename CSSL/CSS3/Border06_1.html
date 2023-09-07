@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Border06_1.html</title>
+    <style>
+        div div{/*div 하위 div들 선택*/
+            width: 200px;
+            height: 200px;
+            text-align: center;/*수평정렬*/
+            line-height: 200px;/*수직정렬*/
+        }
+    </style>
+</head>
+<body>
+    <h2>테두리 관련 CSS속성</h2>
+    <div>
+        <h3>테두리 스타일</h3>
+        <div style="border-top-style: dotted;border-bottom-style: dashed;
+                    border-left-style: solid;border-right-style: double;">border-style</div>
+        <!--색상, 두께 등 보이려면 스타일 먼저 줘야함-->            
+        <h3>테두리 색상</h3>
+        <div style="border-style: solid; border-top-color: red; border-bottom-color: green;
+                    border-left-color: blue; border-right-color: rgb(200, 30, 30);">border-color</div>
+        <h3>테두리 두께</h3>
+        <div style="border-style: solid;border-top-width: 5px;border-bottom-width: 10px;
+                    border-left-width: 15px; border-right-width: 20px;border-color: red;">border-width</div>
+        <h3>테두리 색상/두께/스타일 동시지정</h3>
+        <div style="border: 5px aqua solid;">border</div><!--width, color, style 순서대로 준 것-->
+        <h3>폼의 하위요소 input type="text"계열에 테두리 적용</h3>
+        <input type="text" style="border:none;border-bottom: 1px green solid;"/><!--입력칸에 밑줄 그어줌-->
+    </div>
+</body>
+</html>

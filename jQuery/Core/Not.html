@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //$(선택자).not(제거할 선택자): 여러개 선택 후 특정 요소만 제외(filter역할)
+            var href="";
+            $('#btn').click(function(){
+                //not함수 미사용
+                /*
+                $('a').filter('[href^=www]').each(function(){//www로 시작하는거 선택
+                    href+=$(this).attr('href')+ ' ';
+                })    
+                console.log(href);
+                //www.naver.com 
+                //www.naver.com www.daum.net 
+                //www.naver.com www.daum.net www.cyworld.com 
+
+                */
+                //not함수 사용
+                $('a').not('[href$=jsp]').each(function(){
+                    href+=$(this).attr('href')+ ' ';
+                });
+                console.log(href);
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>not("선택자")함수</legend>
+        <a href="www.naver.com">네이버</a>
+        <a href="www.daum.net">다음</a>
+        <a href="Form3.jsp">페이지로1</a>
+        <a href="Form4.jsp">페이지로2</a>
+        <a href="www.cyworld.com">싸이월드</a>
+        <a href="Form5.jsp">페이지로3</a>		 
+        <button id="btn">확인</button>
+    </fieldset>
+</body>
+</html>

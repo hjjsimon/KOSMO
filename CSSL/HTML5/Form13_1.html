@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form13_1.html</title>
+</head>
+<body>
+<!--네이버본사에 데이터베이스를 가지고있음, 비싼 오라클 쓰겠지, 회원데이터 테이블이 있음, 아이디 컬럼, 비밀번호 컬럼
+    내가 로그인창에 데이터 입력시 네이버로 전송, 아이디, 비밀번호 받아서 회원정보에 있는지 SELECT 후 로그인처리 
+    전송할때 쓰는게 폼태그, action(전송하는 곳), method(전송방식) 속성이 매우 중요
+    https -> s는 secure 보안증가(데이터 암호화, 훔쳐가기 불가), html태그로 http요청 보낼 때는 post, get만 가능
+    login.html요청시 네이버가 로그인페이지를 보여주는게 응답, 그래서 브라우저로 볼 수 있음, 비번 틀리면 또 login.html 요청
+-->
+<!--
+    form태그: 사용자가 입력한 값 혹은 선택한 값을 서버(웹문서를 제공)로 전송할때 사용하는 태그
+    주요 속성:
+    1)action: 사용자가 입력한 값을 전송할 서버상에 있는 페이지경로 지정(action생략시 기본값은 자신의 페이지)
+    2)method(2개): get/post(method 생략시 기본값은 get) 데이타 전송방식(서버 자원에 대한 요청방식)을 의미
+    
+    ->네트워크에서 프로토콜은 전세계의 약속(규칙), pc마다 os등 다름
+    ex. http라는 프로토콜은 html문서를 주고받는 프로토콜(서버와 브라우저의 약속)
+    ->웹서버에 .html문서가 있음, 모니터에서 브라우저(웹클라이언트 프로그램) 켜서 웹서버에 요청함, 서버는 응답함
+    ->http 프로토콜 약속에 따라 서로 주고받음, 
+    ->요청=요청헤더(요청의 요약정보 간략하게 정리)+요청바디/ 응답=응답헤더+응답바디 로 구성됨
+    ->get은 요청헤더에 내용포함해 전송(요청헤더는 크기가 고정, 크기제한 존재)
+    ->post는 요청바디에 내용포함해 전송(요청바디는 크기가 큼, 크게제한 없음)
+    ->응답헤더는 작업지시서, 이대로 응답해줘~라고 보냄(요청헤더도 작업지시서느낌), 응답바디에 있는 내용이 브라우저에 보임
+    ->요청 응답 한번씩 실행시 http 끊어짐, 전세계 다 http연결 유지하면 서버터짐
+
+        ---------------------+--------------------+--------------------------
+            데이타 전송 방식   |    1>get           |    2>post
+        ---------------------+--------------------+--------------------------
+            URL노출(주소에 보임)|  데이타 노출됨      |   노출 안됨(ID,PW에 씀)*** -> URL에 안보이게함
+        ---------------------+--------------------+--------------------------
+            전송방식          |HTTP 요청헤더에 내용이| HTTP 요청바디에 내용이
+                            | 포함돼서 전송됨      | 포함돼서 전송됨
+        ---------------------+--------------------+--------------------------
+            데이타량          | 최대 4KB            | 무한대
+        ----------------------+--------------------+-------------------------
+
+    *get방식에서 URL을 통해 데이타 전송시 FORM태그 하위 요소의 NAME속성에 지정한 이름(파라미터)을 통해서 전송 된다
+    즉 이름=값(사용자가 입력하거나 선택한 값)의 쌍으로 전송, 여러개 전송시에는 이름1=값1&이름2=값2&...즉 &로 연결되어서 전송됨
+    
+    target:이 속성은 a태그의 target속성과 같은 기능
+   
+    enctype:URL 인코딩방식 지정
+            application/x-www-form-urlencoded(디폴트값)
+            multipart/form-data(파일 업로드)
+-->
+    <div>
+        <h2>form태그로 데이터 전송하기</h2>
+        <h3>GET방식 요청</h3><!--A태그 get방식 기억!-->
+        <form action="https://www.naver.com"><!--메소드 생략, get방식으로 서버에 요청-->
+            아이디 : <input type="text" name="user"/><!--name에 지정한게 파라미터, 파라미터명은 내맘-->
+            비밀번호 : <input type="password" name="pass"/>
+            <input type="submit" value="로그인"/><!--html에 노출위험, 뭐라고 쓴거 .html? 이후에 ~~~ 출력됨-->
+        </form>
+        <h3>POST방식 요청</h3>
+        <form action="https://www.naver.com" method="post"><!--post방식! url노출x-->
+            아이디 : <input type="text" name="user"/>
+            비밀번호 : <input type="password" name="pass"/>
+            <input type="submit" value="로그인"/>
+        </form>
+        <h3>action속성 색량(현재페이지 다시요청)/method속성 생략(get)</h3>
+        <form><!--이런애들이 다 form의 자식태그-->
+            아이디 : <input type="hidden" name="no" value="120"/><!--타입히든이면 아이디입력창 숨겨짐-->
+            비밀번호 : <input type="password" name="pass"/>
+            날짜 : <input type="date" name="date"/>
+            색상 : <input type="color" name="color"/><!--파라미터명은 내맘-->
+            이메일 : <input type="email" name="email"/>
+            나이 : <input type="number" name="age" min="1" max="200"/><!--숫자만 들어가게됨-->
+            <input type="submit" value="로그인"/><!--로그인 누르면 자신페이지 다시 초기화상태로 호출됨-->
+        </form>
+        <h3>a태그로 데이터 전송</h3><!--모르겠다 싶으면 get방식이 99%맞음-->
+        <a href="Form13_1.html?no=120&pass=1234&date=2023-04-05&color=%23000000&email=kim%40naver.com&age=30">GET요청</a>
+        <!--현재페이지에 요청, a태그에는 쿼리스트링으로 요청, 페이지명? 이후가 쿼리명-->
+    </div>
+</body>
+</html>

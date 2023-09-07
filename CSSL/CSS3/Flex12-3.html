@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex12-3.html</title>
+    <style>
+        *{/*처음에는 영역 여백 없애기 처리*/
+            margin: 0;    
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            /*컨텐츠 위아래로 추가하므로, 가로만 설정, 세로는 설정x*/
+        }
+        .allWrap{
+            display: flex;
+            justify-content: center;
+        }
+        .wrap{
+            display: flex;
+            flex-direction: column;/*크게보면 header,content,footer를 3개 열배치*/
+            flex: 1;/*flex-grow:1,flex-shrink:1,flex-basis:0*/
+            width: 80%;/*오른쪽 여백 20%남음*/
+            align-items: center;/*지금 주축이 열, 교차축인 행방향으로 중간배열 */
+        }
+        .header{
+            /*background-color: red;*/
+            display: flex;/*로고,탑메뉴는 손자라 flex적용x, 행배치 하면됨*/
+            justify-content: space-between;/*좌우벽에 붙게 만듦*/
+        }
+        .header>.logo{
+            flex: none;/*로고이미지고정: flex 0 0 auto, 컨텐츠크기만큼, 확대축소는 불가*/
+            width: 100px;
+            padding-top: 10px;/*위에서 10px띄움*/
+        }
+        .logo>img{
+            width: 100%;/*부모크기 꽉채움, 위의 부모 15%를 모두 채운것(width지정안하면 원래크기됨)*/
+            margin-left: 10px;/*부모에서 왼쪽 떨어트림*/
+        }
+        .header>.topMenu{
+            /*background-color: aqua;*/
+            display: flex;
+            align-items: center;/*위에 붙는것보다, 수직가운데정렬이 좋음, 이를 위해 flex줌*/
+        }
+        .header .topMenu>ul{
+            display: flex;
+            list-style: none;
+        }
+        .header .topMenu>ul>li{
+            border-right: 1px gray solid;/*메뉴 오른쪽 바 생성*/
+            padding: 0 5px;/*상하 0, 좌우 5*/
+        }
+        .header .topMenu>ul>li:last-child{
+            border:none/*Q&A 오른쪽 바 제거*/
+        }
+        .content{
+            /*background-color: green;*/
+            display: flex;
+        }
+        .aside{
+            flex: none;
+            width: 100px;
+        }
+        .aside>ul{
+            margin: 10px 0 0 10px;/*시계방향(상우하좌)*/
+            list-style: none;/*불릿제거*/
+        }
+        .aside>ul>li{
+            margin-bottom: 5px;/*서브메뉴 서로 떨어짐*/   
+        }
+        .between{
+            flex: none;/*로고 옆에 메뉴랑 안겹치게 함*/
+            width: 50px;
+        }
+        .main{
+            flex-grow: 1;
+            padding: 10px 0 0 10px;
+        }
+        .footer{
+            /*background-color: blue;*/
+            display: flex;
+            height: 60px;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer>address{
+            font-style: normal;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="allWrap">
+        <div class="wrap">
+            <div class="header">
+                <div class="logo"><img src="../Images/logo.jpg" alt="회사 로고 이미지"/></div>
+                <div class="between"></div><!--프로젝트메뉴 줄였을때 탑메뉴 텍스트가 로고 겹치지 않게함-->
+                <div class="topMenu">
+                    <ul>
+                        <li>홈</li>
+                        <li>로그인</li>
+                        <li>회원가입</li>
+                        <li>공지사항</li>
+                        <li>자주묻는질문</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="aside">
+                    <ul>
+                        <li>서브메뉴1</li>
+                        <li>서브메뉴2</li>
+                        <li>서브메뉴3</li>
+                        <li>서브메뉴4</li>
+                        <li>서브메뉴5</li>
+                    </ul>
+                </div>
+                <div class="main">
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                    <h2>실제 내용이 들어갑니다</h2>
+                </div>
+            </div>
+            <div class="footer">
+                <address>서울시 금천구 가산동 한국소프트웨어 인재개발원</address>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

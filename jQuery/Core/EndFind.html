@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EndFind.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //end(): 바로 이전에 선택된 객체를 반환한다
+            //(즉 end()함수가 적용된 바로 이전 객체)
+            //$('선택자').find("찾을 선택자"): find는 선택된 객체의 하위에서 찾는다(한칸 띄는 하위선택자 동일)
+            $('button').click(function(){
+                console.log($('div').find('b').length);
+                //div의 자식 중 b찾음, 제이쿼리 반환해서 length로 확인 못찾으면 0, 찾으면 0아님 -> 3나옴
+                console.log($('div').find('p:last').text().trim());// 찾는데 스페이스 포함, trim해야함
+                console.log($('div p:last').text().trim());//위와 동일
+                console.log($('div').find('p:last').find('b').end().html().trim());//	<b>배구</b>
+                console.log($('div').end());//이전객체 없는데도 출력은 됨, length도 1임
+                //원래 $(document).ready(function(){})으로 시작임, div 전에 document부터 찾는 것
+                console.log($('div').end().is(document));//true, 제이쿼리 객체 써야함
+                //자스객체 아니라 instanceof document, === document는 false 나옴
+                //제이쿼리 document객체는 자스의 document객체를 래핑한 것이다
+                try{
+                   console.log($('div').end().html());//당연히 안나옴
+                }
+                catch(e){
+                    console.log('요소를 못찾았어요:',e.message);
+                    //Cannot read properties of null (reading 'createDocumentFragment')
+                }
+                $('span').css('color','red').eq(0).css('border','1px red solid').end().eq(2).css('color','blue');
+                //지금 end()는 3개 span 선택했을 상황으로 돌아감
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>end()함수/find(선택자)함수</legend>
+		<span title="SPAN1">SPAN1</span>
+		<span title="SPAN2">SPAN2</span>
+		<span title="SPAN3">SPAN3</span>
+		<div>
+			<p>
+				<b>축구</b>
+			</p>
+			<p>
+				<b>농구</b>
+			</p>
+			<p>
+				<b>배구</b>
+			</p>
+			<button>확인</button>
+		</div>
+	</fieldset>
+</body>
+</html>

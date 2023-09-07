@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio17.html</title>
+</head>
+<body>
+    <!--https://caniuse.com/ 홈페이지에서 video, audio 등 태그 사용가능 버전 확인 가능-->
+    <h2>기본 audio(src속성과 controls만 사용) 태그</h2>
+    <audio src="Media/audio.mp3" controls><!--controls는 필수! 이쁘게 재생표시 나옴-->
+        <!--브라우저가 위코드를 태그로 인식 못하면 밑에 코드 두줄 나옴, 요즘 다 됨, 아래 두줄 안보임-->
+        audio태그를 지원하지 않는 브라우저입니다<br/>
+        여기를 <a href="Media/audio.mp3">클릭</a>하세요
+    </audio>
+    <h2>audio 하위태그인 &lt;source&gt;태그 사용</h2>
+    <audio controls><!--ex.파이어폭스는 ogg만 사용가능, 그러면 mp3버리고 ogg만 재생, 이런 식으로 아래 둘 중 하나만 재생-->
+        <source src="Media/audio.ogg" type="audio/ogg"/>
+        <source src="Media/audio.mp3" type="audio/mp3"/>
+    </audio>
+    <h2>커스텀 오디오</h2>
+    <div>
+        <progress value="0"></progress>
+    </div>
+    <div>
+        <input type="button" value="PLAY" onclick="play();"/>
+        <input type="button" value="PAUSE" onclick="pause();"/>
+        <input type="button" value="STOP" onclick="stop();"/>
+        &nbsp;&nbsp;<span id="current"></span> / <span id="total"></span>
+        <!--위 span 사이에 현재 재생시간, 총 재생시간 뿌릴 예정-->
+    </div>
+    <script>
+        //Audio객체 생성(audio객체 없어서 자스로 만들어야함)
+        //var audio=new Audio()//<audio></audio>, 반환타입이 Audio 태그 만들어주는 것
+        //audio.currentSrc="Media/audio.mp3"; //속성은 변수!! 이 두줄이 아래 한줄이랑 동일함, 설정해준 오디오 소스의 위치 찍어줌
+        var audio=new Audio("Media/audio.mp3");
+        //var audio=document.createElement('audio'); // 이거 써도 됨~
+        //audio.setAttribute('src',"Media/audio.mp3); // 위코드 쓰면 이걸로 속성도 추가해야지
+        console.log('타입:',typeof audio); //new했으니까 object
+        console.log('%O',audio);
+        //span객체 얻기
+        var currentSpan=document.querySelector('#current');
+        var totalSpan=document.querySelector('#total');
+        //progress객체 얻기
+        var progress=document.querySelector('progress');
+        //Audio객체에 timeupdate이벤트 처리를 위한 리스너 부착
+        //재생되어 0.1초 단위로 0초->0.1초->0.2초.. 시간이 업데이트 될 때마다 실행되는 아래 이벤트
+        audio.addEventListener('timeupdate',function(){//ontimeupdate가 있음, on계열이 이벤트관련, on만 빼면 된대
+            //오디오의 총 재생시간 얻고 설정
+            totalSpan.textContent=audio.duration;//duration 속성, 200.5735초
+            //오디오의 현재 재생시간 얻고 텍스트 설정
+            currentSpan.textContent=audio.currentTime;
+            //타입업데이트에 따른 프로그레스의 진행정도 표시(최대값 max속성 설정)
+            progress.max=audio.duration;
+            //진행정도 표시
+            progress.value=audio.currentTime;
+
+        });
+
+        function play(){
+            audio.play();
+        }
+        var pause=function(){
+            audio.pause();
+        }
+        function stop(){
+            //play, pause 있는데 stop함수 없음(아래처럼 stop효과 기능구현)
+            if(audio.played){// played재생중이면 t, 아니면 f -> 재생멈추면 currenttime 0으로 재설정
+                audio.currentTime=0;
+                audio.pause();
+            }
+        }
+    </script>
+</body>
+</html>

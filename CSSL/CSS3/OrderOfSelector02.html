@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrderOfSelector02.html</title>
+
+    <!--외부 CSS파일을 적용시키기 위해서 link태그사용(External Style)-->
+    <link href="styles/style.css" rel="stylesheet"><!--external style: 다른 곳에 만든 색깔을 링크 걸어서 가져옴-->
+    <!--blue였다가 겨자색으로 바뀜/ 이거랑 dd 순서 바꾸면 가까운 dd가 파랑적용시킴-->
+
+    <!--embedding style: style태그로 css설정(style태그 안에 넣은 것)-->
+    <style>
+
+        /* 크게보면 태그, 아이디, 클래스, 전체 선택자 존재(결국 이 중에 하나를 고르는 것) */
+        /*
+            [선택자 사이의 우선순위]
+
+            !important > inline style > id선택자 > class선택자 > 태그선택자> *
+
+            ※우선 순위가 같다면 태그랑 가까운 css(늦게 실행된)가 적용된다(인터프리터 방식 이니까)
+        */
+        h1{
+            color: blue;
+        }
+        h1{/*똑같은 요소 선택, 근데 같은 태그로 선택, 태그선택자 우선순위 같아 파랑->빨강 색 바뀜*/
+            color: red;
+        }
+        #sea{
+            color: blue;
+        }
+        .sea{/*점클래스보다 샵아이디 선택자가 우선순위 높아 색 파랑 그대로 유지됨*/
+            color: red;
+        }
+        .mountain{
+            color: green;
+        }
+        li{
+            color: yellow !important;/*태그 순위 구려서 안바뀜, 근데 뒤에 !중요 하면 바뀜*/
+        }
+        /*
+            inline style: HTML 요소 내부에 style 속성을 사용하여 CSS 스타일을 적용하는 방법(body태그에서 설정)
+            external style: 별도의 css파일 만들어 적용
+        */
+        dd{
+            color: blue;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>선택자 종류에 따른 CSS적용순서</h1>
+    <ul>
+        <li class="mountain">관악산</li>
+        <li class="mountain">치악산</li>
+        <!-- inline style(태그안에 style 속성으로 css설정), (ex. 위에 embedding 보다 아래 li 안에 style~ 로 css쓰면 가까운게 적용)-->
+        <li class="sea" id="sea" style="color:pink">경포대</li><!--인라인 2등임-->
+        <li class="sea">해운대</li>
+    </ul>
+    <h1>CSS적용 스타일(inline style,embedding style,external style)에 따른 적용 순서</h1>
+    <dl>
+        <dd class="local">종로구</dd>
+        <dd>강서구</dd>
+        <!-- inline style(태그안에 주는 style 속성으로 CSS설정)-->
+        <dd style="color: red;">강동구</dd>
+        <dd>강남구</dd>
+    </dl>
+    <h2>여러 클래스명을 동시에 사용하기</h2>
+
+    <style>/*body에 style있어도 됨, 아래BOX처럼 클래스명 여러개 가질 수도 있음*/
+        .box-2{/*box2클래스명인 BOX1,2 둘 다 선택*/
+            width: 200px;
+            height: 50px;
+            background-color: green;
+            border-radius: 10% 5%;
+        }
+        .box-3{
+            background-color: aqua;
+        }
+        .box-1{/*BOX1만 바뀜*/
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        /*클래스가 많은게 우선, 아래 핑크가 적용안됨*/
+        .box-1.box-3.box-2{/*클래스 복수선택시 .을 사용(순서무관), box-1,2,3 모두 가진 요소인 BOX1을 선택함*/
+            background-color: yellow;
+        }
+        .box-2.box-3{/*BOX1,2 둘 다 핑크 돼야하는데x, 클래스 많이 선택한 위의 코드가 선택되어 BOX1은 노란색 유지*/
+            background-color: #ffaabb;
+        }
+    </style>
+
+    <div class="box-1 box-2 box-3">BOX1</div>
+    <div class="box-2 box-3">BOX2</div>
+    <h2>최종 선택자가 우선순위가 같은 경우</h2>
+
+    <style>
+        /*최종선택자의 우선순위 같은경우 오른쪽에서 왼쪽으로 이동하며 CSS의 우선순위 결정
+          ex. 두개 비교시 맨 오른쪽 #depth3가 아이디 vs .depth3가 클래스 -> 아이디가 우선이라 선택됨
+          그냥 실험상 그렇더라~ 하고 넘겨라 선생님이 만듦, 가장 가까운게 오른쪽이니까 그게 우선이래*/
+        #depth1 #depth2 #depth3 input{/*depth1의 하위, 2의 하위, 3의 하위 그리고 input*/
+            background-color: red;
+        }
+        .depth1 #depth2 .depth3 input{/*이것도 클래스명, 아이디명, 클래스명 이후 input찾은거 결국 위와 동일, 근데 초록색적용x, */
+            background-color: green;
+        }
+    </style>
+
+    <div class="depth1" id="depth1">
+        <div class="depth2" id="depth2">
+        <div class="depth3" id="depth3">
+            <input type="text" />
+        </div>
+        </div>
+    </div>
+</body>
+</html>

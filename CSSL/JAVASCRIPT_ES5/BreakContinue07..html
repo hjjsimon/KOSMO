@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BreakContinue07.html</title>
+    <script>
+        //1)break문: switch문이나 반복문 빠져나갈때
+        //2)continue문: 반복문 처음으로 갈때
+        //-> break나 continue 이후의 문장은 실행안됨
+
+        //break;//[x] switch나 반복문 필수
+        //continue;//[x] 반복문 필수
+        var i=0;
+        while(-1){//0,null,false 제외 true취급
+            i++;
+            console.log('i='+i);
+            if(i===3) break;
+            console.log('break문 이후');
+            if(i%2===0) continue;//i=2되면 continue라 위로 올라감, 아래실행x, 조건확인 후, i=3됨
+            console.log('continue문 이후');
+        }
+//머신러닝(데이터로 기계가 학습함)은 y=f(x) 중 학습용데이터x, 정답레이블y 2개를 입력함, 그러면 f()는 컴퓨터가 만듦, 훈련시키는것
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sibling.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //siblings() : 모든 형제들 요소를 반환
+            //next(), prev() : 형제요소 1개만 반환
+            console.log($('p').siblings()); // p 2개 선택됨
+            //0: legend, 1: div, 2: p.selected, 3: p 이렇게 4개가 나옴
+            console.log($('p.selected').siblings()); //클래스명 selected인  p 1개만 선택
+            console.log($('div').siblings('.selected'));//형제 중 .selected 가진 p 1개만 선택
+            $('div').siblings('.selected').css('background-color','yellow');
+
+            $('p').siblings().each(function(index,item){
+                //선택된 요소 4개 하나씩 순서대로 꺼내서 지금 함수에 적용
+                //index는 번호, item은 번호로 꺼낸 객체
+                //※item은 자바스크립트 객체(자바스크립트 DOM)이다, 제이쿼리 객체가 아님
+                //index:0, item:[object HTMLLegendElement] 이런식으로 나옴
+                //index:1, item:[object HTMLDivElement]
+                console.log('index:%s, item:%s',index,item);
+                if(item.nodeName==='DIV'){
+                    console.log(item.firstElementChild.innerHTML);//Hello
+                }
+                else{
+                    console.log(item.innerHTML);//Hello Again, And Again
+                }
+
+            });
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>siblings([선택자])</legend>
+        <div>
+          <span>Hello</span>
+        </div>
+        <p class="selected">Hello Again</p>
+        <p>And Again</p>
+    </fieldset>
+</body>
+</html>

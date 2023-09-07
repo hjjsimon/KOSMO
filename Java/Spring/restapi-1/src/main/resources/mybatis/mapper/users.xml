@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- 매퍼파일 -->
+<mapper namespace="com.kosmo.restapi.model.UsersMapper"><!-- UsersMapper.java 패키지랑 클래스명 -->
+	<insert id="save" parameterType="usersDto">
+		INSERT INTO users VALUES(#{username},#{password},#{name},DEFAULT)
+	</insert>
+<!-- 
+탈렌드 가서 POST로 http://localhost:8080/users, Content-Type은 application/x-www-form-urlencoded(근데 안넣어도 됨)
+{"username":"KIM","password":"1234","name":"김길동"} 바디는 이런 식으로 넣어줌 
+-->
+	<select id="find" resultType="usersDto">
+		SELECT * FROM users ORDER BY joindate DESC
+	</select>
+	<select id="findByUsername" parameterType="String" resultType="usersDto">
+		SELECT * FROM users WHERE username=#{username}
+	</select>
+	<update id="update" parameterType="usersDto">
+		UPDATE users SET password=#{password},name=#{name} WHERE username=#{username}
+	</update>
+	<delete id="delete" parameterType="String"><!-- 인자 스트링 넘어옴 -->
+		DELETE users WHERE username=#{username}
+	
+	</delete>
+	
+	
+	
+	
+	
+	
+</mapper>

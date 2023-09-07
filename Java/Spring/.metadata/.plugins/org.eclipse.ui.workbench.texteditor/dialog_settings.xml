@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="colors"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="colors"/>
+			<item value="ageRange"/>
+			<item value="ageRanges"/>
+			<item value="chart"/>
+			<item value="data-disease"/>
+			<item value="getAgeData"/>
+			<item value="get"/>
+			<item value="textContent"/>
+			<item value="predictionResultText.textContent"/>
+			<item value="뇌졸증"/>
+			<item value="증"/>
+			<item value="100"/>
+			<item value="tssection"/>
+			<item value="20px"/>
+			<item value="span"/>
+		</list>
+		<list key="replacehistory">
+			<item value=" "/>
+			<item value="w-75"/>
+			<item value="55"/>
+			<item value="inactive_Date"/>
+			<item value=""/>
+			<item value="name"/>
+			<item value="를"/>
+			<item value="27px"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="1303"/>
+		<item key="DIALOG_Y_ORIGIN" value="343"/>
+		<item key="DIALOG_WIDTH" value="322"/>
+		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+</section>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attr.html</title>
+    <style>
+        .bg{
+          background-color: green;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //html의 속성은 attribute라고 함 (ex 아래 button의 id)
+            //자스 객체의 속성은 property라고 함 (ex 아래 get() 이후 속성명 ex. title)
+            
+            /*
+                ※ 결론
+                1) 속성 추가: attr, prop 둘 다 가능
+                2) 속성 읽기: prop
+                3) 속성 제거: removeAttr
+            */
+
+            /*
+                태그의 속성 읽기]
+                ※단,해당 태그에 속성명 미 기술시에는 읽어 오지 못함
+                    방법1) $("선택자").attr("속성명") -> getter에 해당함 ※아래도 동일
+                    방법2) $("선택자").get(인덱스).속성명 
+                    방법3) this.속성명
+                    
+                
+                속성 설정]
+                ※동시에 여러 속성 설정시에는 메소드 체인 또는 JSON데이타 형식 사용
+                    방법1) $("선택자").attr("속성명","속성값")
+                    방법2) $("선택자").attr({속성1:'속성1값',속성2:속성2값.....}) 
+                    
+                
+                속성 제거]
+                    방법1) $("선택자").removeAttr("속성명");
+
+                ※속성 추가시는 attr()이나 prop()사용
+                  속성 읽기시는 prop()사용 ,만약 HTML태그상에 속성이 기술이 안되어 있다면
+                            attr()은 undefined
+                            prop()은 빈문자열
+                            속성 삭제시에는 removeAttr()사용.
+                            (removeProp()은 HTML태그의 속성은 제거가 안된다.)
+
+                attr()은 HTML의 속성(attribute),
+                prop()는 자스 객체의 속성(property)를 다루는 함수
+                체크박스의 값이나 a태그의 href속성값을 읽어보면 차이를 알수 있다.
+            */
+
+            //속성 추가
+            $('#add').click(function(){
+                /* 
+                //속성 추가] attr()함수 사용(메소드 체인)
+                $('#div').attr('title','여기를 클릭하세요')
+                    .attr('class','bg')
+                    .attr('style','width:100px;height:100px;text-align:center;line-height:100px')
+                    .on('click',function(){
+                        $(this).html('JQUERY');//클릭시 JQUERY로 바껴야함
+                    });
+                      
+                //속성 추가] JSON 데이터 형식 사용(권장)
+                //방법1) attr()
+                $('#div').attr({title:'여기를 클릭하세요',class:'bg',style:'width:100px;height:100px;text-align:center;line-height:100px'})
+                    .on('click',function(){
+                        $(this).html('JQUERY');
+                });
+                */
+                //방법2) prop() 그냥 둘 다 동일
+                $('#div').prop({title:'여기를 클릭하세요',class:'bg',style:'width:100px;height:100px;text-align:center;line-height:100px'})
+                    .on('click',function(){
+                        $(this).html('JQUERY');
+                });
+
+
+            });    
+
+            //속성 읽기
+            $('#read').click(function(){
+                //※암기: 읽어올때는 prop, 설정은 attr/prop 무관
+
+                console.log('체크박스의 checked속성(attr함수):',$(':checkbox').attr('checked'));
+                //attr로 체크드 속성을 읽어옴, undefined 나옴
+                console.log('체크박스의 checked속성(attr함수):',$(':checkbox').prop('checked'));
+                //prop로 체크드 속성을 읽어옴, false(미체크시) 나옴, true(체크시) 나옴
+
+                console.log('링크요소의 href속성(attr함수):',$('#atag').attr('href'));
+                //#
+                console.log('링크요소의 href속성(prop함수):',$('#atag').prop('href'));
+                //http://127.0.0.1:5500/Core/Attr.html#
+
+                console.log('div의 class속성(attr함수):',$('#div').attr('class'));
+                //bg
+                console.log('div의 class속성(prop함수):',$('#div').prop('class'));
+                //bg
+
+                console.log('div의 class속성(자스객체의 class속성명):',$('#div').get(0).class);
+                //undefined, class가 예약어임, 속성명은 자스객체에 다 있음, 그러나 이건 문제
+                console.log('div의 class속성(자스객체의 className속성명:',$('#div').get(0).className);
+                //bg, class 대신 className 써야함
+                console.log('div의 title속성:',$('#div').get(0).title);
+                //여기를 클릭하세요
+            });
+
+            //속성 제거
+            $('#remove').click(function(){
+
+                $('#div').removeAttr('class').removeAttr('style');
+                //removeAttr은 속성제거 됨
+                //$('#div').removeProp('class').removeProp('style');
+                //removeProp은 속성제거 안됨, 무조건 attr로 제거해라, 설정 attr, prop은 무관함
+
+            });
+
+            //속성버튼 3개 제외 이후부터 버튼에 클릭이벤트 걺
+            $('button').slice(3).click(function(){
+                $('img').attr('src','../images/'+this.id+'.jpg');
+            });
+                  
+            //value 속성이 없는 type=text의 값 읽어오기: val()이 유리하다(attr은 안됨, prop은 귀찮)
+            $('#button').click(function(){
+                console.log('attr():',$(':text').attr('value'));//undefined
+                console.log('prop():',$(':text').prop('value'));//빈문자열, 읽을때는 이거!
+                console.log('val():',$(':text').val());//위와 동일
+            });
+
+            //동적으로 체크박스 체크하기
+            $('#chkbtn').click(function(){
+                //처음부터 체크후 테스트시 attr, prop 차이점 비교 가능
+                if($(':checkbox').prop('checked'))//$('input[type=checkbox]') 동일함, 체크시 true
+                    $(':checkbox').prop('checked',false);
+                else   
+                    $(':checkbox').prop('checked',true);
+                //값 읽을때 attr은 하면 안됨, 되는 것 같은데 옳은게 아님
+                /*
+                console.log($(':checkbox').attr('checked')); //찍어보면 뭐가 안된대
+                if($(':checkbox').attr('checked'))
+                    $(':checkbox').attr('checked',false);
+                else   
+                    $(':checkbox').attr('checked',true);
+                */
+
+            });
+
+            
+
+
+
+
+
+
+
+
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend >attr()함수 및 removeAttr(),prop()함수</legend>
+		<button id="add" title="속성추가">속성추가</button>
+		<button id="read">속성읽기</button>
+		<button id="remove">속성제거</button>
+		<div id="div" >DIV태그</div>
+		
+		<button id="1">1번 이미지</button>
+		<button id="2">2번 이미지</button>
+		<button id="3">3번 이미지</button>
+		<button id="4">4번 이미지</button>
+		<br />
+		<img src="#" alt="이미지" /><br />
+		<a>href속성을 미 지정한 A태그</a><br />
+		<input type="text"	size="30" />
+		<input value="확인" type="button" id="button" />
+		
+		<hr />
+		<input type='checkbox' />체크박스
+		<a href="#" id="atag">A태그</a>
+		<input type="button" id="chkbtn" value="attr및 prop으로 체크 설정하기" />
+	</fieldset>
+</body>
+</html>

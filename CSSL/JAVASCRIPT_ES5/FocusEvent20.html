@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusEvent20.html</title>
+</head>
+<body>
+    <fieldset>
+        <legend>focus 및 blur이벤트</legend>
+        <input type="text"  onfocus="console.log('focus: 포커스 얻었을 때(버블링X)')"
+                            onfocusin="console.log('focusin: focus 발생 후(버블링O)')"
+                            onblur="console.log('blur: 포커스 잃었을 때(버블링x)')" 
+                            onfocusout="console.log('focusout: blur 발생 후(버블링O)')"/>
+    </fieldset>
+    <fieldset>
+        <legend>focus 및 blur이벤트 예제(HTML5의 속성 이용-IE에서만 적용됨)</legend>
+        아이디 <input type="text" placeholder="아이디" />
+        비밀번호 <input type="password" placeholder="비밀번호" />
+    </fieldset>
+    <fieldset>
+        <legend>focus 및 blur이벤트 예제(자바스크립트로 구현)</legend>
+        아이디 <input type="text" value="아이디" style="color:lightgray"/>
+        비밀번호 <input type="text" value="비밀번호" id="txt" style="color:lightgray"/><input type="password" id="pwd" style="display:none"/>
+    </fieldset>
+    <script>
+        /*
+            focus: 포커스 얻었을 때(버블링X)
+            focusin: focus 발생 후(버블링O)
+            blur: 포커스 잃었을 때(버블링x)
+            focusout: blur 발생 후(버블링O)
+
+            포커스 블러는 아이디에 적용
+            사용자가 비밀번호 입력하려고 클릭함, 그리고 입력할때는 보이지않게, focus를 얻었을 때는 password로 바꿔야 함
+            포커스를 얻으면 뒤쪽을 얻게하고, 잃으면 앞쪽을 얻게, display none 주면 됨, 보이게할때는 display 빈문자열
+        */
+        
+        //window.addEventListener('DOMContentLoaded',function(){ // body 밑에서하면 이거 할 필요 없음
+            
+        //1] 아이디 세팅
+        var username=document.querySelector('fieldset:nth-child(3)>[type=text]:nth-child(2)');
+        //body > fieldset:nth-child(3) > input[type=text]:nth-child(2) -> 클릭해서 카피 셀렉터하면 알아서 찍어옴
+        //var id=document.querySelector('[value=아이디]'); //이따구 금지 위처럼하기
+        //console.log(id);//??이것도 되는뎅
+        username.onfocus=function(){
+            if(this.value==='아이디'){ //focus얻었을때 밸류값이 아이디면 지워야함, 아무때나 지우면 비밀번호 넘어가면 지워짐
+                this.value='';//포커스 넣고 빈문자열로 시작
+                this.style.color='black';
+            }
+        };
+        username.onblur=function(e){
+            if(this.value.trim().length===0){
+                this.value='아이디';
+                this.style.color='lightgray';
+            }
+        }
+
+        //2] 비밀번호 세팅
+        var text=document.querySelector('#txt');
+        var pass=document.querySelector('#pwd');
+        //type="text"에는 onfocus 리스너 부착
+        text.onfocus=function(){
+            text.style.display='none';
+            pass.style.display='';//block줘도 보이는데 block element로 내려가서 안됨
+            pass.focus();
+        }
+        //type="password"에는 onblur 리스너 부착(빈문자열에 focus잃으면 돌아와야함)
+        pass.onblur=function(){
+            if(pass.value.trim()===''){
+                pass.style.display='none';
+                text.style.display='';
+            }
+        }
+       
+
+
+
+
+    </script>
+</body>
+</html>

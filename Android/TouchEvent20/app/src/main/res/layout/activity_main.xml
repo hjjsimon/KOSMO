@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnClick"
+            android:text="클릭이벤트"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+
+            android:id="@+id/btnTouch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="터치이벤트" />
+        <Button
+
+            android:id="@+id/btnClear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="지우기" />
+    </LinearLayout>
+    <!--
+        원본 이미지 비율 유지시:centerCrop,
+                       비유지시:fitXY
+    -->
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_media_video_poster" />
+    <!--
+    <com.kosmo.touchevent20.view.MyTouchDrawing
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    -->
+
+
+
+</LinearLayout>

@@ -1,0 +1,7 @@
+{
+    name:'코스모',
+    "age":20,
+    "hobbies":["등산","낚시","축구"],
+    'users':{username:'hwanyhee',password:'1234'}
+
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PositioningOfJS23.html</title>
+    <!--https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/What_is_JavaScript -->
+    <!--
+        HTML태그 파싱 =====>파싱이 블락킹 된 후 positioning.js파일 다운(fetching=서버에서 가져옴)후 positioning.js를 실행====>
+        ======> HTML태그를 다시 파싱하여 DOM TREE생성
+    -->
+    <!--<script src="js/positioning.js"></script> 아직 body 못읽음, button이 null 나와서 실행x--> 
+    
+    <!--
+        HTML태그 파싱하면서 병렬로 button.js파일 다운(fetching)====>
+        HTML태그 파싱이 끝난 후(DOM TREE완성 후) button.js를 실행
+    -->
+    <!--1. <script>
+        당연히 맨 위부터 파싱(분석) 근데 <script>는 패칭(다운로드) 후 바로 .js실행, 바디의 돔트리 아직 안올라와서 에러남
+        그래서 body 밑 <script>안에 넣어서 실행해야함
+        2. <script defer>
+        얘는 패칭(다운로드)하는동안 별개로 파싱, 그리고 파싱 다 끝나면 실행, 이게 짱임
+        3. <script async>
+        얘는 패칭하는동안 파싱도 진행, 근데 파싱 다 안끝났는데 실행, 구려서 잘 안씀, 똑같이 에러발생가능-->
+    <script defer src="js/positioning.js" module></script><!--defer갓 위에 script쓸거면 무조건 쓰기-->
+    <!--module방식으로 불러올 때는 module쓰면 됨, 지금 우리가 하는건 페이지 방식, .js페이지를 불러옴, 이 때는 순서 중요, 모듈은 순서중요x-->
+</head>
+<body>
+    <fieldset>
+        <legend>.js파일의 위치에 따른 DOM API사용</legend>
+        <button>버튼</button>
+    </fieldset>
+    <!--<script src="js/positioning.js"></script> 밑에 넣으면 정상실행-->
+</body>
+</html>

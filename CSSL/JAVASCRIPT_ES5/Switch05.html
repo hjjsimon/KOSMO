@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch05.html</title>
+    <script>
+/*
+switch(식):
+1) 자바: 식이 정수값(byte/short/char/int)이 나올 수 있는 정수식(산술식) 또는문자열(String: JDK7.0 부터 가능)이어야 한다(long[x])
+2) 자스: 모든 값이 나올수 있는 모든 식이 가능하다(if동일). 즉 정수뿐만 아니라 실수 그리고 논리값(true/false) 문자열도 가능하다.
+*/
+        var f=3.00001;
+        switch(f){//자바x f넣으면 빨간줄, 자스o 소수도 됨
+            case 3.0000001:
+            case 3.000001:
+            case 3.00001: 
+            case 3.0001:
+                console.log('f는 3이다');break;//그냥 다 3으로 처리하자~
+            default: console.log('f는 3이 아니다');
+        }
+        switch(10%2==0){//자바x 조건식 넣으면 빨간줄(불린 불가), 자스o 불린도 됨
+            case true: console.log("짝수다");break;//true라 이거나옴
+            case false: console.log("홀수다");
+        }
+    </script>    
+</head>
+<body>
+    
+</body>
+</html>

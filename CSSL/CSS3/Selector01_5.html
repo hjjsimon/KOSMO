@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector01_5.html</title>
+    <style>
+        /*링크 걸려고 a태그 씀, 링크걸린 텍스트에 밑줄생기고, 파란색 됨
+            네이버 보면 검은색이넹 링크선택자 쓴것~*/
+        a{
+            color: black;/*검은색으로 만듦*/
+            text-decoration: none;/*none 대신 underline쓰면 밑줄감*/
+        }
+        /*링크 선택자: 링크가 걸린 컨텐츠의 사용자 반응에 따라 요소 선택*/
+        a:hover{/*hover로 마우스 오버시 텍스트 초록색, 밑줄로 변경*/
+            color: green;
+            text-decoration: underline;
+        }
+        a:active{/*마우스 클릭시 텍스트 빨간색 변경*/
+            color: red;    
+        }
+        a:visited{/*한번 방문한 주소는*/
+            color: aqua;
+        }
+        /*after 선택자: 선택된 태그가 감싸고있는 컨텐츠 뒤에 다른 내용을 추가*/
+        ul.link a::after{/*link 클래스명의 ul태그~~, a태그 컨텐츠의 after(다음) 즉 "네이버" 텍스트*/
+            content: '-' attr(href);/*attribute 약자, 속성명 넣어주면됨*/
+                                 /*a태그 컨텐츠 뒤에 -를 추가하고 href속성값(http://www.nate.com)도 넣어줄 것*/
+        }
+        /*부정 선택자: not(제외할 선택자)함수사용: 선택된 요소중 특정요소 제외*/
+        ul.not li:not(.odd){/*not클래스명을 가진 ul선택, -> odd라는 클래스명을 가진 li는 제외!, 네이트 구글만 선택*/
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>링크 선택자</h1>
+  <div>
+      <ul class="link">
+          <li><a href="http://www.nate.com">네이트</a></li>
+          <li><a href="http://www.naver.com">네이버</a></li>
+          <li><a href="http://www.daum.net">다음</a></li>
+          <li><a href="http://www.google.com">구글</a></li>
+          <li><a href="SELECTOR01_1.html">페이지</a></li>
+          <li><a href="http://www.baewoomart.co.kr">배움센터</a></li>
+      </ul>
+  </div>
+  <h1>부정 선택자</h1>
+  <div>
+      <ul class="not">
+          <li class="odd"><a href="http://www.naver.com">네이버</a></li>
+          <li><a href="http://www.nate.com">네이트</a></li>
+          <li class="odd"><a href="http://www.daum.net">다음</a></li>
+          <li><a href="http://www.google.co.kr">구글</a></li>
+      </ul>
+  </div>
+</body>
+</html>

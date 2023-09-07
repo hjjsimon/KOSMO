@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoLocation22_3.html</title>
+    <style>
+        fieldset{
+          margin:0 auto;
+          width: 70%;
+          text-align: center;
+          font-size:.8em
+        }
+        fieldset legend{
+          border: yellowgreen solid 2px;
+          border-radius: 10px;
+          padding:5px 10px;
+        }
+      </style>
+</head>
+<body>
+    <!--
+        카카오 지도 API 자바스크립트 앱 키
+        1. 카카오 개발자 사이트 https://developers.kakao.com/ 
+        2. 내 어플리케이션 - 어플리케이션 추가하기
+        3. 앱 키중 자바스크립트 앱 키 사용
+        4. 플랫폼 설정하기
+            사이트 도메인 등록: [웹] 플랫폼을 선택하고, [사이트 도메인] 을 등록합니다.
+            (예: http://localhost:8080 단,http://localhost:8080/에서 끝에 /는 제거)
+        그 다음부터 문서에서 API사용법 보고 진행(지도/로컬 -문서보기-Maps API텍스트 클릭-Web 이미지 클릭)
+
+        JacaScript개발가이드 누름 -> https://apis.map.kakao.com/web/ 나옴
+        실제 지도를 그리는 Javascript API를 불러오기
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 넣으시면 됩니다."></script>
+
+	-->
+    <fieldset>
+        <legend id="main">&nbsp;현재 위치를 지도에 표시하기&nbsp;</legend>
+        <div id="map" style="height:500px;border-radius:20px;"></div>
+        지도 레벨 : <input type="range" min="1" max="14" value="3" id="range"/>
+    </fieldset>
+    <hr style="width: 70%;"/>
+    <fieldset>
+        <legend>주소로 위치 찾기</legend>
+        <div>
+        <input id='address' type='search' placeholder="주소를 입력하세요" autofocus list="data_list"/>
+            <datalist id="data_list"><!--가 하면 아래 2개 뜸-->
+                <option value="가산디지털2로 123 월드메르디앙2차"></option>
+                <option value="가로수길 5"></option>
+                <option value="벚꽃로 309 가산디지털단지역"></option>
+                <option value="양화로 160 홍대입구역"></option>
+                <option value="한강대로 405 서울역"></option>
+            </datalist>
+        <button onclick='searchByAddress()'>주소찾기</button>
+        <button onclick='zoomIn()'>줌인</button>
+        <button onclick='zoomOut()'>줌아웃</button>
+        현재 지도 레벨은 <span id="maplevel" style="font-weight:bold;font-size:1.4em;color:green"></span>레벨.
+        </div>
+    </fieldset>
+    <!--자바스크립트 키값 넣어줌-->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34295ed66db2c9930a56fb02e8b6d926&libraries=services"></script>
+    <script>
+        /*
+        //지도를 띄우는 코드작성(샘플코드)
+        var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+        var options = { //지도를 생성할 때 필요한 기본 옵션({}이므로 객체, center가 키)
+            center: new kakao.maps.LatLng(37.4770579, 126.8796693), //지도의 중심좌표.
+            level: 3 //지도의 레벨(확대, 축소 정도)
+        };
+
+        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴(지도를 표시할 그릇이 container, 우린 div)
+        //http://localhost:5500/HTML5/GeoLocation22_3.html -> localhsot해도 지도 나옴
+        */
+        var map;
+        var markers=[];//마커를 여러개 찍을 수 있도록 배열설정
+        var range=document.querySelector('#range');
+        var maplevel=document.querySelector('#maplevel');
+        var address=document.querySelector('#address');
+
+        //페이지 최초 로드시 range의 기본값으로 지도레벨 표시하기
+        maplevel.textContent=range.value;
+        
+        if(navigator.geolocation){              
+            navigator.geolocation.getCurrentPosition(positions=>{
+                var lat = positions.coords.latitude;
+                var lng = positions.coords.longitude;
+                //1.지도 생성
+                map=getKakaoMap(lat,lng);
+                //2.지도에 마커 표시하기 :Sample - 오버레이-마커생성하기
+                setMarker(lat,lng);
+                //3.마커에 클릭이벤트 등록하기
+                var content='<div style="padding:5px;">현재 나의 위치</div>';
+                console.log(markers)
+                addMarkerClick(content,markers.length-1);//content:마커 내용,markers.length-1는 마커의 인덱스
+               
+                //아래 두 줄은 또 다른 마커를 뿌려주기위한 테스트 코드
+                setMarker(37.4816268,126.8829256);
+                addMarkerClick('<div style="padding:5px;">(주)연전</div>',markers.length-1);
+
+            });
+        }/////////if
+        function getKakaoMap(lat,lng){
+            var container = document.getElementById('map');
+            var options = {
+                center: new kakao.maps.LatLng(lat,lng), //현재 위치로 지도의 중심좌표 설정
+                level: range.value,//지도레벨 초기값을 range요소의 기본값으로 설정
+                mapTypeId:kakao.maps.MapTypeId.ROADMAP//kakao.maps.MapTypeId.HYBRID//지도 종류 (기본값: 일반 지도)
+            };
+            console.log('range.value:',range.value);
+            return new kakao.maps.Map(container, options);
+        }//////////////getKakaoMap
+
+        function setMarker(lat,lng){
+            // 마커가 표시될 위치입니다 
+            var markerPosition  = new kakao.maps.LatLng(lat, lng); 
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                position: markerPosition,
+                draggable:false,
+                clickable:true
+            });
+            //마커 객체를 배열에 저장       
+            markers.push({'marker':marker});
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+            // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+            // marker.setMap(null);    
+        }//////////////////////////setMarker
+
+        function addMarkerClick(content,markerIndex){       
+           
+           // 인포윈도우를 생성합니다
+           var infowindow = new kakao.maps.InfoWindow({
+               'content' : content,
+               removable : true
+           });
+
+           //배열에 해당 마커의 인포 내용도 함께 저장 즉 {'marker':마커,'info':마커내용}
+           //마커마다 인포내용을 추가로 저장하자
+           markers[markerIndex].info=infowindow;
+           console.log(markers[markerIndex]);//{'marker':marker객체,info:info윈도우객체}
+           // 마커에 클릭이벤트를 등록합니다
+           kakao.maps.event.addListener(markers[markerIndex].marker, 'click', function() {
+               // 마커 위에 인포윈도우를 표시합니다
+               infowindow.open(map, markers[markerIndex].marker);  
+           });
+
+       }///////////////////addMarkerClick
+       //range요소에 이벤트리스너 부착-range조정시 지도 줌레벨 변경  
+       range.addEventListener('input',function(e){
+           map.setLevel(parseInt(e.target.value));
+           maplevel.textContent=e.target.value;
+       });
+
+        //Sample - 라이브러리 - 주소로 장소표시하기
+        //(준비사항: script태그의 src속성에 &libraries=services 추가하기)
+        //주소찾기 버튼클릭시 해당 주소로 지도의 중심좌표를 이동시키기
+        function searchByAddress(){
+            //console.log(address.value)//value하면 사용자 입력한게 나옴
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch(address.value, function(result, status) {
+                // 정상적으로 검색이 완료됐으면 
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    setMarker(result[0].y,result[0].x);
+                    addMarkerClick('<div style="padding:5px;">'+address.value+'</div>',markers.length-1);
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords);
+                } 
+                else{
+                    alert(address.value+'와 일치하는 주소가 없어요');
+                    address.value='';
+                    address.focus();
+                }
+            });    
+        }///////////////////
+        //지도 확대
+        function zoomIn(){
+            // 현재 지도의 레벨( 1 ~ 14)을 얻어옵니다
+            var level = map.getLevel();
+            if(level ===1) return;
+            // 지도를 1레벨 내립니다 (지도가 확대됩니다)
+            map.setLevel(level - 1);
+            maplevel.textContent=level - 1;
+            range.value=level - 1;
+        }
+        //지도 축소
+        function zoomOut(){
+            // 현재 지도의 레벨( 1 ~ 14)을 얻어옵니다
+            var level = map.getLevel();
+            if(level ===14) return;
+            // 지도를 1레벨 올립니다 (지도가 축소됩니다)
+            map.setLevel(level + 1);
+            maplevel.textContent=map.getLevel();
+            range.value=map.getLevel();
+        }
+    </script>
+</body>
+</html>

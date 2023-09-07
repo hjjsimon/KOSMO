@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Append.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $(':button').click(function(){
+                var table = "<table style=\"border-spacing: 1px; background-color: red\">";//"는 이스케이프 처리
+                var row = $('#row').val();
+                var col = $('#col').val();
+                for(var i=1; i<=row; i++) {
+                    table += "<tr style=\"background-color: white\">";
+                    for(var k=1; k<=col; k++) {
+                        table+="<td>"+i+"행 "+k+"열</td>";
+                    }
+                    table += "</tr>";
+                }
+                table+="</table>";
+                //append계열 함수 미사용(몰라도 됨)
+//                $('#lblDisplay').html(table);//행, 열에 값 입력하고 버튼 누르면 테이블 생김
+                //$('#lblDisplay').html(table+$('#lblDisplay').html());//기존내용 앞에 table 추가
+
+                //추가할 대상의 컨텐츠 이후에 추가됨
+                //$("선택자").append("추가할 요소")
+                //$("선택자").append($()함수를 기존객체 선택)
+//                $('#lblDisplay').append(table);//위의 html(table) 동일
+//                $('#lblDisplay').append($('table:first'));
+                //기존요소 append시에는 잘라내서 붙여넣기, 스크립트로 보면 위에 있던 테이블 코드가 사라졌다 아래로 나타남
+
+                //$("추가할 요소").appendTo("선택자")
+                //결과 동일, 그냥 append 쓰면 돼, 이거 무시
+//                $(table).appendTo('#lblDisplay'); //이건 이미 있는 테이블
+//                $('table').appendTo('#lblDisplay'); //이건 버튼으로 만든 테이블
+               
+                /*
+                    ※결론: before, after만 기억해라~ 아래 2개 무시 어차피 동일, $('선택자') 이게 익숙함
+
+                    before():
+                    -DOM요소 이전에 html요소 추가
+                    $('선택자').before('html요소');
+
+                    after():
+                    -DOM요소 다음에 html요소 추가
+                    $('선택자').after('html요소');
+
+                    insertBefore():
+                    -DOM요소 이전에 html요소 추가 됨
+                    $('html요소').insertBefore('선택자');	
+
+                    insertAfter():
+                    -DOM요소 다음에 html요소 추가 됨
+                    $('html요소').insertAfter('선택자');			
+                */
+
+                //$('#lblDisplay').before(table);//대상, 대상2 앞에 새로 만든 테이블이 들어감
+                $('#lblDisplay').after($('table:first'));//대상, 대상 뒤에 기존 테이블이 들어감
+
+
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>DOM객체를 동적으로 추가하는 함수들</legend>
+		<h2>
+			<span>제목입니다</span>
+		</h2>
+		<input type="text" id="row" />행 <input type="text" id="col" />열
+		<input type="button" value="테이블 동적 생성" />
+		<table style="border-spacing: 1px; background-color: red">
+			<tr style="background-color: white">
+				<td>1행 1열</td>
+				<td>1행 2열</td>
+			</tr>
+			<tr style="background-color: white">
+				<td>2행 1열</td>
+				<td>2행 2열</td>
+			</tr>
+		</table>	
+		
+		<div id="lblDisplay" style="border: 1px red solid; width: 600px">
+			대상<br />대상2
+		</div>
+		
+	</fieldset>
+</body>
+</html>

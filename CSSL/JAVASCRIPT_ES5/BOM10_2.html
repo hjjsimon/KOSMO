@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM10_2.html</title>
+    <script>
+        //location객체: 주소 넣는 곳+새로고침/ history객체: 뒤로가기,앞으로가기 버튼(navigator객체, screen객체는 안보임)
+        //1]location객체
+        //href = "http://127.0.0.1:5500/JAVASCRIPT_ES5/BOM10_2.html"
+        //1)href:뒤로가기O
+        //2)replace:뒤로가기x
+        /*  1)protocol: http
+            2)hostname: 127.0.0.1(서버주소)
+            3)port: 5500
+            4)pathname: /JAVASCRIPT_ES5/BOM10_2.html*/
+        console.log(window.location);   
+        console.log(location.href);//.으로 속성값 가져옴
+        console.log(location.port);//그냥 이런 것들 있다~ 속성은 console로 찍어보고 확인~
+        //사용자 이벤트(클릭)에 의하지 않고 자동으로 이동(뒤로가기O)
+        //location.href="https://www.nate.com;";//id,pw 받아서 로그인,회원이면 마이페이지,아니면 회원가입페이지 바로 옮길때 씀
+        //href처럼 이동(뒤로가기x, 단 뒤쪽 기록 1개만 삭제, 뒤로가기 활성화시 전페이지말고 전전페이지로 이동함)
+        //replace로 이동시 이전페이지 url 얻는 document.referrer쓰면 안나옴, 기록1개 삭제
+        //location.replace("https://www.nate.com;");
+        //location.reload();//새로고침
+        function fnLogin(){
+            //가정]아이디가 KIM, 비번 1234인 경우 회원이라고 가정, 회원이면 마이페이지(DOM9_4.html)로 자동으로 이동시키자
+            var username=document.querySelector('#user').value;//ID입력값을 가져옴
+            var password=document.querySelector('#pass').value;//PW입력값을 가져옴
+            if(username==='KIM' && password==='1234'){
+                //location.href='DOM09_4.html';//뒤로가기O
+                location.replace('DOM09_4.html');//뒤로가기x
+            }
+            else{
+                //location.href='DOM09_5.html';
+                location.replace('DOM09_5.html');
+            }
+        };
+        //2]history객체
+        console.log(history);//{}보니까 객체(오브젝트)
+        //1)history.back():뒤로가기 =go(-1)
+        //2)history.forward():앞으로가기 =go(1)
+        //+a)document.referrer: 이전페이지의 url얻기
+
+        //3]navigator객체(브라우저가 정보의 바다 항해사, 정보를 찾게 도와줌)
+        //1)navigator.userAgent: 사용자 웹브라우저 종류 확인
+        //Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+        console.log(navigator);
+        console.log(navigator.geolocation?'현 브라우저는 Geolocation API지원':'미지원');
+        console.log(navigator.storage?'현 브라우저는 스토리지 API지원':'미지원');
+        console.log(navigator.userAgent);
+    
+        //4]screen객체
+        console.log(window.screen);//window생략가능
+        console.log(window.screen.availWidth);//1920, 이용가능한(avail) 모니터 가로해상도(트레이바 제외)
+        console.log(window.screen.availHeight);//1040, 이용가능한(avail) 모니터 세로해상도(트레이바 제외)
+        console.log(screen.width);//1920, 모니터 가로해상도(트레이바 포함)
+        console.log(screen.height);//1080,모니터 세로해상도(트레이바 포함, 트레이바크기가 40)
+        //아래는 브라우저의 body내용이 뿌려지는 영역의 가로/세로 크기
+        window.onresize=function(){
+            console.log('가로폭:',window.innerWidth);//브라우저의 body내용이 뿌려지는 영역의 가로크기
+            console.log('세로폭:',window.innerHeight);//브라우저의 body내용이 뿌려지는 영역의 세로크기
+        }
+
+    </script>
+</head>
+<body>
+    <h2>location & history & navigator & screen객체</h2>
+    <fieldset>
+        <legend>BOM객체의 함수 혹은 속성 테스트</legend>
+        아이디 <input type="text" id="user" />
+        비밀번호 <input type="password" id="pass" />
+        <input type="button" value="로그인" onclick="fnLogin()" />
+        <input type="button" value="새로고침" onclick="location.reload();"/><!--새로고침은 reload()가 원래 있음-->
+        <input type="button" value="history테스트(href)" onclick="location.href='BOM10_1.html'"/>
+        <input type="button" value="다음 페이지" onclick='history.go(1)'/>
+        <input type="button" value="이전 페이지" onclick='history.back()'/>
+        <input type="button" value="웹브라우저 종류" onclick="console.log(navigator.userAgent);" />
+    </fieldset>
+    <script>
+        //document.referrer: 이전페이지 URL얻기
+        //단, history객체의 함수(go(),back())나 속성으로 페이지 이동시 document.referrer는 빈 문자열
+        //이전 페이지의 URL이 필요한 경우 반드시 그때는 location객체의 href로 이동하자
+        console.log('이전페이지 URL:',document.referrer);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoLocation22_1.html</title>
+</head>
+<body>
+    <fieldset style="width: 55%;">
+        <legend>Geolocation API : 현재 위치의 위도와 경도 얻기</legend>
+        <span id="display" style="color: red; font-size: 1.5em; font-weight: bold;"></span>
+    </fieldset>
+    <script>
+        //span태그 사이에 위도, 경도 넣을 것
+        console.log(navigator.geolocation);
+        var span=document.querySelector('#display');
+        if(navigator.geolocation){//브라우저의 geolocation 지원여부 판단
+            span.innerHTML='Geolocation API를 지원하는 브라우저입니다';
+            //PositionOptions객체 설정용]
+            var options={timeout:3000,maximumAge:5000};
+            //3초동안 위치 못받으면 timeout에러, 받은 최대유효시간 5초(5초 지나면 새로 받아옴 watchposition이)
+            //현재위치 정보를 한번만 얻기(컴퓨터는 GPS수신장치가 없어서 위치 좀 틀림)
+            navigator.geolocation.getCurrentPosition(successCallback,errorCallback,options);
+        }
+        function successCallback(positions){//위치 성공적으로 받아왔을 때 위치 전달, positions객체
+            console.log(positions);//여기 위도,경도 들어있음
+            var lat=positions.coords.latitude;
+            var lng=positions.coords.longitude;
+            span.textContent='위도:'+lat+' 경도:'+lng;
+        }
+        function errorCallback(error){//포지션에러
+            console.log(error);
+            switch(error.code){//파이어폭스로 위치동의 차단 시 코드 키값 있었음
+                case 0: span.textContent='알수 없는 오류'; break;
+                case 1: span.textContent='허용 거부'; break;
+                case 2: span.textContent='위치확인 불가'; break;
+                default: span.textContent=error.message; //message라는 코드값 있었음, 이번엔 에러메시지 출력
+            }
+        }
+    </script>
+</body>
+</html>

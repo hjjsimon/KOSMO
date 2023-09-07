@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AutoComplete13</string>
+    <string-array name="items">
+        <item>apple</item>
+        <item>application</item>
+        <item>arirang</item>
+        <item>baby</item>
+        <item>baseball</item>
+        <item>basic</item>
+        <item>antena</item>
+        <item>call</item>
+    </string-array>
+</resources>

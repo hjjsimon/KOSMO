@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector02.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        /*
+            ※eq(0)과 first : 자식.부모관계 상관없이(구조 무관) 선택된 객체에서 첫번째 객체를 의미
+                eq(선택된객체수-1)은 last와 동일
+
+            ※first-child:자식.부모관계에서 첫번째 자식인 객체
+                last-child는 반대
+        */
+        $(function(){
+            console.log('첫번째 자식인 UL태그의 수:', $('ul:first-child').length);
+            //필드셋의 첫번째자식 legend, UL태그는 두번째, 세번째라 첫번쨰가 아님, 0개라고 출력
+        
+            //문] li태그중 짝수번째는 글자색을 RED 홀수번째는 GREEN으로 하기
+            //방법1]ul:eq(0)의미 - ul태그중 첫번째 ul태그
+            //$('ul:eq(0) li:even').css('color','red');
+            //$('ul:eq(0) li:odd').css('color','green');
+            //ul만 선택했으므로 ul 2개는 각각 인덱스 0번, 1번이 됨
+            //방법2]ul:first의 의미-ul태그중에서 첫번째 ul태그
+            $('ul:first li:even').css('color','red');
+            $('ul:first li:odd').css('color','green');
+            
+            //문] 두번째 ul의 첫번째 li의 백그라운드 yellow 마지막번째 li는 blue
+            $('ul:last-child li:first-child').css('background-color','yellow');
+            //$('ul:last-last-child li:last-child').css('background-color','blue');
+            var size = $('ul:last li').length;
+            $('ul:last-child li:eq('+(size-1)+')').css('backgroundColor','blue');
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>선택자 두번째</legend>
+		<!-- li태그중 짝수번째는 글자색을 RED
+                홀수번째는 GREEN
+   		-->
+		<ul>
+			<li>가</li>
+			<li>나</li>
+			<li>다</li>
+			<li>라</li>
+		</ul>
+		<!--  첫번째 li의 백그라운드 YELLOW
+              마지막번쩨 li는 blue
+   		-->
+		<ul>
+			<li>A</li>
+			<li>B</li>
+			<li>C</li>
+			<li>D</li>
+			<li>E</li>
+			<li>F</li>
+			<li>G</li>
+		</ul>
+	</fieldset>
+</body>
+</html>

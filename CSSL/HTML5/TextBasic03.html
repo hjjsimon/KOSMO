@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextBasic03.html</title>
+</head>
+<body>
+    <!--
+     - HTML에서 사용하는 특수문자   
+     1> &nbsp;            : 스페이스바 한번(빈칸)
+     2> &gt;              : > (greater than) -> 태그<>로 감싸진건 브라우저에 안보임, 그래서 이렇게 표현
+     3> &lt;              : <  (less than)
+     4> &amp;             : &
+     5> &quot;            :"(double quotation)
+     6> &apos; 혹은 &#39; : ' &apos;는 IE에서는 적용 안됨
+     -->
+     <div>
+        <h1 style="color:aqua ;">사용 예</h1>
+        <kosmo>한국소프트웨어 인재개발원</kosmo><br/><!--지원하지않는 <kosmo> 태그 써도 효과 없음, 물론 kosmo는 태그라 브라우저에서 안보임-->
+        &lt;kosmo&gt;한국소프트웨어 인재개발원&lt;/kosmo&gt;<br/>
+        <!--https://www.w3schools.com/charsets/ref_utf_symbols.asp 참고하기-->
+        &#9742; 010-1234-5678<br/>
+        &#9749; 커피 한잔하자<br/>    
+        <h2 title="특수 &quot;문자&quot; 연습입니다">특수문자 연습</h2> <!--title을 속성, ""는 속성값/ 커서를 갖다대야 "특수문자 연습입니다" 라고 나옴-->
+        <h2 title='특수 "문자" 연습입니다'>특수문자 연습</h2> <!--싱글로 감싸면 ㄱㅊ-->
+        <h2 title='특수 &#39;문자&#39; 연습입니다'>특수문자 연습</h2>
+        <h2 title="특수 '문자'연습입니다">특수문자 연습</h2>
+        <h2>다음중 HTML 태그가 아닌것은?</h2>
+        <ul style="list-style: decimal;"><!--이거 왜 점으로 보이지? 아 <ul>을 전체처리 해야함-->
+            <li>&lt;u&gt;태그</li> <!--뒤에 </u>로 안닫으면 밑에까지 영향이 이어짐-->
+            <li>&lt;i&gt;태그</li>
+            <li>&lt;strong&gt;태그</li>
+            <li>&lt;java&gt;태그</li>
+        </ul>
+     </div>
+</body>
+</html>

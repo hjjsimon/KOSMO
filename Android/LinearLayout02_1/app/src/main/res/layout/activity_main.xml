@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+LinearLayoutCompat 과 LinearLayout차이
+API레벨에 무관하게 사용시 LinearLayoutCompat 사용
+LinearLayout은 targetSdk에 해당는  API레벨 메소드 지원.
+즉 구 버전의 API레벨에서 최신 버전의 메소드를 사용하려면 LinearLayoutCompat을 쓰자.
+-->
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/myback_color"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼1"
+            android:layout_gravity="end"
+            />
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="버튼2"
+            android:gravity="right|center_vertical"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FF0000"
+        >
+        <!--수직방향 정렬은 적용이 안된다 아래 영역(레이아웃의 orientation이 vertical이라)은
+           다른 컴포넌트가 배치될 영역임으로 침범을 할수 없다
+           ※레이아웃이 vertical일때 - 레이아웃 기준 세로정렬 안된다
+                     horizontal일때 - 레이아웃 기준  가로정렬 안된다
+        -->
+
+        <!--center_vertical은 의미없다-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼1"
+            android:layout_gravity="center_horizontal|center_vertical"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼1"
+            android:layout_gravity="right"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00ff00"
+        android:baselineAligned="true"
+        >
+        <!--android:baselineAligned="true" 디폴트-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="텍스트뷰1"
+            android:textSize="30sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="텍스트뷰2"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="텍스트뷰1"
+            android:textSize="45sp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00FFFF"
+        android:padding="5dp"
+        >
+        <!--
+       orientation이 vertical일때 : layout_height를 0dp
+                     horizontal일때 : layout_width를 0dp
+       -->
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="버튼1"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="버튼2"
+            android:layout_marginHorizontal="5dp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="버튼3"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#9BC571"
+        android:orientation="vertical"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="버튼1"
+            android:layout_gravity="center"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="버튼2"
+            android:layout_gravity="center_horizontal"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="버튼3"
+            android:layout_gravity="center"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

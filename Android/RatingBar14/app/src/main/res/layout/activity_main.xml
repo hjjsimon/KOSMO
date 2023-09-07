@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+    <!-- stepSize디폴트값:0.5
+         안드로이드에서 제공하는 스타일중에서 ratingBarStyleIndicator은
+         터치시  rating이 적용 안됨.자바코드로만 rating설정할 수 있다
+    -->
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stepSize="1"
+        android:id="@+id/ratingbar1"
+
+        />
+    <!--
+        -커스텀 색상 적용
+        방법1
+        1.themes.xml에 style추가
+        2.android:theme로 적용
+        android:theme="@style/MyRatingBarStyle"
+        방법2
+        선택안된 경우
+        android:progressBackgroundTint="#7C5858"
+        선택된 경우
+        android:progressTint="#420C0C"
+       - 커스텀 크기 적용
+        scaleX/scaleY로
+        아래는 여백 제거용
+        android:layout_marginLeft="-50dp"
+    -->
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="7"
+        android:rating="2"
+        android:id="@+id/ratingbar2"
+        android:progressBackgroundTint="#EDC7C7"
+        android:progressTint="#EC0E0E"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:layout_marginLeft="-50dp"
+
+        />
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stepSize="1.5"
+        android:rating="1.5"
+        android:id="@+id/ratingbar3"
+        style="@android:style/Widget.Material.RatingBar.Indicator"
+        />
+    <!--
+
+    style="?android:ratingBarStyleIndicator"
+    -->
+    <!--
+    버튼의 배경색 변경 -  Material계열 테마는 변경불가
+    방법1 - AppCompat계열로 변경
+    방법2 -
+            android:backgroundTint="색상"
+            android:backgroundTintMode="add"
+
+    -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_inc"
+        android:backgroundTint="#701414"
+        android:backgroundTintMode="add"
+        android:text="증가"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_decs"
+        android:backgroundTint="#4E2113"
+        android:backgroundTintMode="add"
+        android:text="감소"/>
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //one도 이벤트 바인딩, 근데 실행마다 발생x, 딱 1회만 콜백함수 실행함
+            $('button:first').one('click',function(){//첫번째 버튼에 이벤트
+                console.log('one()함수로 딱 한번만 실행');
+            });
+            $('button:last').on('click',function(){//마지막 버튼에 이벤트
+                console.log('on()함수로 클릭할때마다 실행');
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>one('이벤트명',콜백함수)</legend>
+        <button>한번만 실행</button>
+        <button>여러번 실행</button>
+    </fieldset>
+</body>
+</html>

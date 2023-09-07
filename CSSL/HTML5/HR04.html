@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR04.html</title>
+</head>
+<body>
+    <!--
+        hr: 괘선을 나타 내는 태그(수평선 horizental 의미)
+        속성:
+        1> color-괘선의 색상 지정(style로 적용)
+        2> size-괘선의 두께 지정(숫자만)
+        3> width-괘선의 가로폭 지정(숫자또는 %로 지정가능)
+        4> align-left,right,center(가운데정렬 기본 특이)
+
+        상기 속성으로 지정시 웹표준에 어긋남, 그래서 css로 지정
+        -종료 태그가 없음
+        -block element다.(br/ 할 필요 없음)
+    -->
+    <h2>hr태그 연습</h2>
+    <div style="background-color: yellow; width: 600px;">
+        <h3>hr기본 태그</h3>
+        <hr/><!--종료태그 없으면 한번에 바로 종료해주는기 기본-->
+        <h3>괘선의 색상지정</h3>
+        <!--<hr color="red"/>웹표준에 어긋남(속성이 제거됨) obsolete 구식-->
+        <hr style="background-color: red;height: 1px;"/> <!--css방식으로 해야 웹표준에 맞음-->
+        <h3>괘선의 두께지정</h3>
+        <!--<hr size="30"/>웹표준에 어긋남(속성이 제거됨) obsolete 구식-->
+        <hr style="height: 30px;"/>
+        <h3>괘선의 가로폭지정</h3>
+        <!--가로폭은 부모기준, 지금 <h3>를 감싸는 <div>가 부모인 블락엘리먼트, 그 부모는 <body>로 브라우저의 전체 영역, <div>는 부모와 동일-->
+        <!--<hr/>도 블락엘리먼트-->    
+        <!--<hr width="50%"/>부모인 <div>가 50%의 기준이됨, 가운데정렬, 웹표준 어긋남(속성이 제거됨)-->
+        <hr style="width: 50%;"/>    
+        <h3>괘선의 정렬</h3><!--가운데정렬 기본-->
+        <!--<hr width="50%" align="right"/> 웹표준 어긋남(속성이 제거됨)-->
+        <hr style="width: 50%;margin-right: 0;"/>
+        <h2>다음 중 웹브라우저가 아닌 것은?</h2>
+        <hr/>
+        <ul style="list-style: upper-roman;"><!--다 웹브라우저임-->
+            <li>크롬</li>
+            <li>파이어폭스</li>
+            <li>익스플로러</li>
+            <li>오페라</li>
+            <li>사파리</li>
+        </ul>
+
+
+    </div>
+</body>
+</html>

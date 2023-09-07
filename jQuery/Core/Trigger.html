@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigger.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            /*
+            //버튼에 클릭 이벤트 발생시 어떤 일이 수행되도록 정의
+            $('button:first').click(function(){
+                console.log($(this).html()+'을 클릭했어요');
+            });
+            //버튼에 트리거 설정-버튼에서 자동으로 클릭 이벤트가 발생하도록
+            $('button').trigger('click');
+            //어차피 버튼 하나뿐임, 이 코드 실행시 클릭안해도 버튼에 클릭이벤트 발생
+            */
+
+            //input type ="file"은 change 이벤트 걸어야된다!!
+            $('button').click(function(){
+                $('input[type=file]').trigger('click');//타입이 파일인 인풋태그 선택되어 클릭되도록함
+                //근데 사용자에게는 안보임, display:none이니까!
+            });
+
+            $('input[type=file]').change(function(){
+                console.log('change이벤트 발생:',$(this).val());//파일명 가져옴
+                //change이벤트 발생: C:\fakepath\자바정규표현식.txt
+                var filename = $(this).val().split("\\");// 역슬래시\로 스플릿, 이스케이프처리해줌
+                $('input[type=text]').val(filename[filename.length-1]);
+            });
+
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>트리거 연습</legend>
+        <input type="file" style="display:none"/>
+        <input type="text">
+        <button type="button">파일 선택</button>
+    </fieldset>
+</body>
+</html>

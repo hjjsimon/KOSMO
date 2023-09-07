@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoLocation22_2.html</title>
+</head>
+<body>
+    <fieldset style="width: 60%;">
+        <legend>Geolocation API : 현재 위치 갱신하기</legend>
+        <button onclick="start()">위치 추적 시작</button>
+        <button onclick="stop()">위치 추적 종료</button><br/>
+        <span id="display" style="color: red; font-size: 1.5em; font-weight: bold;"></span>
+    </fieldset>
+    <script>
+        //span태그 사이에 위도, 경도 넣을 것
+        console.log(navigator.geolocation);
+        var span=document.querySelector('#display');
+        var watcher;
+        function start(){
+            if(navigator.geolocation){//브라우저의 geolocation 지원여부 판단
+                span.innerHTML='Geolocation API를 지원하는 브라우저입니다';
+                //PositionOptions객체 설정용]
+                var options={timeout:3000,maximumAge:5000};
+                //현재 위치정보를 5초(maximumAge)마다 갱신해서 얻기(5초 뒤 얻은 위치정보 폐기, 위치바뀌면 다시얻음)
+                //계속 위치 찾는거라 전력소비 큼
+                watcher=navigator.geolocation.watchPosition(positions=>{//식별자 watcher에 담고, 화살표함수 사용
+                    var lat=positions.coords.latitude;
+                    var lng=positions.coords.longitude;
+                    span.textContent='위도:'+lat+' 경도:'+lng;
+                },error=>{
+                    switch(error.code){//파이어폭스로 위치동의 차단 시 코드 키값 있었음
+                        case 0: span.textContent='알수 없는 오류'; break;
+                        case 1: span.textContent='허용 거부'; break;
+                        case 2: span.textContent='위치확인 불가'; break;
+                        default: span.textContent=error.message; //message라는 코드값 있었음, 이번엔 에러메시지 출력
+                    }
+                },options);
+            }
+        }
+        function stop(){
+            if(navigator.geolocation){
+                navigator.geolocation.clearWatch(watcher);//식별자 넣음
+                span.textContent="위치 추적 중지";
+            }
+        }
+
+
+    </script>
+</body>
+</html>

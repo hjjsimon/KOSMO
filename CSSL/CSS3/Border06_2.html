@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Border06_2.html</title>
+    <style>
+        div > div{/*안쪽 div들 선택*/
+            width: 200px;
+            height: 200px;
+        }
+        .radius{
+            border: 5px green solid;
+            text-align: center;/*수평정렬*/
+            line-height: 200px;/*수직정렬*/
+            /*https://developer.mozilla.org/ko/docs/Web/CSS/border-radius*/
+            /* top-left-and-bottom-right | top-right-and-bottom-left */
+            border-radius: 100px 100px;/*50%로하면 원형됨, 정사각형 한변의 중간이 50%*/
+            /*위에서 가로,세로 200 정사각형 -> 100px씩 중점 찍어 원 그림*/
+        }
+        .shadow{
+            background-color: rgb(255, 0, 0);/*rgb함수로 빨간색주기*/
+            text-align: center;
+            line-height: 200px;
+            box-shadow: 100px 10px 10px gray;/*박스 왼쪽위가 0,0 -> 10,10부터 그림자 왼쪽위시작*/
+        }
+    </style>
+</head>
+<body>
+    <h2>둥근 테두리 및 그림자</h2>
+    <div>
+        <div class="radius">RADIUS</div>
+        <hr/>
+        <div class="shadow">SHADOW</div>
+    </div>
+</body>
+</html>

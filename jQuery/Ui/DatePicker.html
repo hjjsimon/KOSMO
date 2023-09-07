@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DatePicker.html</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function(){
+            //방법1] 구림
+            /*
+            $("#datepicker").datepicker();//초기화, 미국식 mm/dd/yy
+            $("#datepicker").datepicker('option','dateFormat','yy-mm-dd');
+            $("#datepicker").datepicker('option','showAnim','bounce');
+*/
+            //방법2] 권장
+            $('#datepicker').datepicker({
+                dateFormat:'yy-mm-dd',//자스에서 키는 ''생략가능, 밸류만 ''하면 됨
+                showAnim:'fold',
+                showOtherMonths: true,//디폴트 false, 달력에 다른 달의 일자도 보이게 만듦
+                selectOtherMonths: true,//다른 달의 일자도 선택 가능
+                minDate: new Date(),//오늘날짜 이후만 선택가능, 숫자로 0, -1은 어제
+                buttonImage: "../images/calendar.png",
+                buttonText: "달력",//이미지 안보일 때 대체 텍스트(위 코드 에러시 보험)
+                showOn:'both',
+                buttonImageOnly: true,//테두리 제거, 랜더링 잘 됨
+                onSelect:function(selectedDate,inst){
+                    //inst는 데이트피커 객체
+                    console.log('선택한 날짜:',selectedDate);
+                    console.log('선택한 날짜:',inst.input.val());
+                    console.log('선택한 날짜:',this.value);
+                    $('#display').html(selectedDate)//브라우저에 보여줌
+
+                }
+            });
+
+            //자스로 달력 이미지를 입력상자 크기에 맞게 스타일 설정(buttonImageOnly: true)
+            $('.ui-datepicker-trigger').css({height:'30px',verticalAlign:'middle'})
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>데이트 피커</legend>
+        <!-- https://jqueryui.com/ 참고 -->
+        <!-- 사람들이 많이 쓰는 UI를 미리 만들어 놓음, link, src -> ui 필요 -->
+        <p>Date: <input type="text" id="datepicker"></p>
+        <h2>선택한 날짜 아래에 표시하기</h2>
+        <span id="display" style="color:red;font-size:1.5em"></span>
+
+    </fieldset>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "users": [
+    {
+      "username": "KIM",
+      "password": "1234",
+      "name": "김길동",
+      "profile": "김길동의 회원정보 입니다"
+    },
+    {
+      "username": "LEE",
+      "password": "1234",
+      "name": "이길동",
+      "profile": "이길동의 회원정보 입니다"
+    },
+    {
+      "username": "PARK",
+      "password": "1234",
+      "name": "박길동",
+      "profile": "박길동의 회원정보 입니다"
+    }
+  ],
+  "bbs": [
+    {
+      "title": "리액트 가 여기있어",
+      "content": "리액트는 어려워\n그러나 재미있다",
+      "username": "KIM",
+      "postDate": "2023-12-12",
+      "visitCount": "12",
+      "id": 1
+    },
+    {
+      "title": "제목2",
+      "content": "내용2",
+      "username": "KIM",
+      "postDate": "2023-8-22",
+      "visitCount": 0,
+      "id": 3
+    },
+    {
+      "title": "1",
+      "content": "1",
+      "username": "KIM",
+      "postDate": "2023-8-22",
+      "visitCount": 0,
+      "id": 6
+    },
+    {
+      "title": "2",
+      "content": "2",
+      "username": "KIM",
+      "postDate": "2023-8-22",
+      "visitCount": 0,
+      "id": 7
+    },
+    {
+      "title": "3",
+      "content": "3",
+      "username": "KIM",
+      "postDate": "2023-8-22",
+      "visitCount": 0,
+      "id": 8
+    },
+    {
+      "title": "4",
+      "content": "4",
+      "username": "KIM",
+      "postDate": "2023-8-22",
+      "visitCount": 0,
+      "id": 9
+    },
+    {
+      "title": "126677999",
+      "content": "1266777999",
+      "username": "KIM",
+      "postDate": "2023-8-22",
+      "visitCount": 0,
+      "id": 17
+    },
+    {
+      "title": "16",
+      "content": "16",
+      "username": "KIM",
+      "postDate": "2023-8-23",
+      "visitCount": 0,
+      "id": 21
+    }
+  ]
+}

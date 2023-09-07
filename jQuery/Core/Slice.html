@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slice.html</title>
+    <style>
+        .bg {
+          background-color: green;
+          font-size: 1.4em	
+        }
+        div{
+          width:100px;
+          height:100px;
+          text-align:center;
+          line-height: 100px;
+          border:1px red solid	
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //1] slice(인덱스): 인덱스부터 끝까지 잘라서 선택
+            //$('div').slice(2).addClass('bg');//DIV3~6 선택
+            //$('div:eq(0)').removeClass('bg');//add가 있으니 remove도 있음, 클래스 지움
+
+            //2] slice(시작,끝): 시작부터 끝-1까지 추출
+            //$('div').slice(2,$('div').length).addClass('bg');//위와 동일
+
+            //3] slice(-n): 음수값은 오른쪽이나 아래부터 n개 추출
+            //$('div').slice(-4).addClass('bg');
+
+            //문] 버튼 클릭할때마다 한칸씩 넘어가기
+            /*
+            var button = document.querySelector('button');
+            var num = 0;
+            button.onclick = function(){
+                $(`div:eq(${num})`).removeClass('bg');
+                $(`div:eq(${num+1})`).addClass('bg');
+                num = num+1;
+                if(num > 4) num = -1;
+            }
+           */
+            var index = 1;
+            $('button').click(function(){
+                $('div').slice(index-1).removeClass('bg');//1-1=0이후 싹다 지움
+                $('div').slice(index,index+1).addClass('bg');//끝인덱스-1 이니까 딱 인덱스=1만 bg선택
+                index++;
+                if(index == $('div').length) index=0;//인덱스 0 되면 -1이니까 끝 div6의 bg를 제거해줌
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>slice(시작인덱스[,끝인덱스])</legend>
+		<button>색상변경</button>
+		<div class="bg">DIV1</div>
+		<div>DIV2</div>	
+        <div>DIV3</div>	
+        <div>DIV4</div>	
+        <div>DIV5</div>
+		<div>DIV6</div>	
+	</fieldset>
+</body>
+</html>

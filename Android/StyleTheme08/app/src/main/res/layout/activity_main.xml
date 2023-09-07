@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+
+    >
+    <!--
+       스타일 적용 순위
+       위젯의 스타일 > 앱의 테마
+       즉 android:textColor를 위젯과 앱의 테마에 동시 지정시
+       위젯에 지정한 스타일이 우선한다
+    -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--테마가 Material계열일때
+            버튼의 android:background="#855B69"적용이 안된다-->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Dark모드"
+            android:id="@+id/btnDark"
+            android:backgroundTint="#B8411B"
+            android:backgroundTintMode="add"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Light모드"
+            android:id="@+id/btnLight"
+
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="System모드"
+            android:id="@+id/btnSystem"
+
+            />
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <!--아래 텍스트뷰의 텍스트 색상는 테마 적용-->
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="모드 변경에 따라 테마에 지정한 색이 적용된다"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="위젯에 직접 텍스트 색상적용"
+        android:textColor="#FF0000"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="내가 만든 색상(리소스) 적용"
+        android:textColor="@color/my_dark_primary"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="안드로이드 제공 색상(리소스) 적용"
+        android:textColor="@android:color/holo_red_dark"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="안드로이드 제공 색상(리소스) 적용"
+        android:textColor="@color/material_dynamic_neutral0"
+/>
+</androidx.appcompat.widget.LinearLayoutCompat>

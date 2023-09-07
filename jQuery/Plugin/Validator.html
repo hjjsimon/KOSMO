@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <style>
+        .error{
+            color: red;
+            padding-left: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!--제이쿼리 유효성 검증용 플러그인-->
+    <script src="../js/jquery.validate.min.js"></script>
+    <!--이건 CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script>
+        $(function(){
+           /*
+            https://github.com/jquery-validation/jquery-validation/releases/tag/1.19.5에서 다운로드
+
+            ※$(폼 선택자).validate({rules:{},messages:{}}); -> 폼 선택후 validate함수 사용
+            
+            rules규칙:
+                -필수 입력 혹은 필수 선택(체크박스/라디오/선택상자)
+                하위요소명 : "required"
+                혹은
+                2개 이상  규칙 적용시
+                required:true
+                -최소 몇자 이상 혹은 몇개 이상 선택
+                minlength:최소수		
+            */
+            //1] input type="submit"버튼 일때
+            $('#frm').validate({
+                rules:{//유효성 규칙 설정(파라미터명이 키)
+                    name:'required', //필수 설정
+                    id: {required:true, minlength:4, maxlength:8},//여러개는 객체로 설정, 최소~최대 글자수
+                    pwd: {required:true, minlength:5},
+                    pwd2: {required:true, equalTo:'#pwd'},//이때 pwd에 반드시 id줘야함
+                    email: {required:true, email:true},//이메일 형식인지? true
+                    inter: {required:true, minlength:2},//2개 이상 선택
+                    sel: 'required',
+                    gender: 'required',
+                    file: 'required',
+                    self: 'required'
+
+                },messages:{
+                    name:'이름을 입력하세요',
+                    id: {required:'아이디를 입력하세요', minlength:'아이디는 최소 4글자입니다', maxlength:'아이디는 최대 8글자입니다'},
+                    pwd: {required:'비밀번호를 입력하세요', minlength:'비밀번호는 최소 5글자입니다'},
+                    pwd2: {required:'비밀번호 확인을 입력하세요', equalTo:'비밀번호가 일치하지 않습니다'},
+                    email: {required:'이메일을 입력하세요', email:'이메일 형식이 아닙니다'},
+                    inter: {required:'관심사항을 선택하세요', minlength:'최소 2개 이상 선택하세요'},
+                    sel: '학력을 선택하세요',
+                    gender: '성별을 선택하세요',
+                    file: '파일을 첨부하세요',
+                    self: '자기소개를 입력하세요'
+                }
+            });
+            //2] input type="submit"버튼이 아닐때
+            //  ex) input type="button"버튼 일때
+            //step 1) $(폼객체 선택자).validate()적용 
+            //step 2) $(폼객체 선택자).valid()호출 : 위의 validate() 유효성체크를 호출함
+            //  true 반환시 $(폼객체 선택자).submit()호출한다
+            $(':button').click(function(){
+                if($('#frm').valid()){
+                    $('#frm').submit();//서브밋기능 없어도 이렇게 서브밋 처리 가능함
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <!--https://jqueryvalidation.org/-->
+    <fieldset>
+        <legend>제이쿼리의 플러그인을 사용한 유효성체크</legend>
+        <span style="color: red; font-size: 1.8em"></span>
+        <form method="post" action="http://www.nate.com" id="frm">
+          이름:<input type="text" name="name" /><br />
+          <label for="id">아이디:</label>
+          <input type="text" value="" name="id" id="id" /><br />
+          비밀번호:<input
+            type="password" name="pwd" id="pwd" /><br /> 비밀번호 확인:<input
+            type="password" name="pwd2" /><br />
+            이메일 : <input type="email" name="email"/><br/>
+            관심분야: <input type="checkbox"
+            name="inter" value="A" id="pol" />정치
+            <input type="checkbox"
+            name="inter" value="B" />경제
+            <input type="checkbox" name="inter"
+            value="C" />스포츠
+          <!--
+                          체크박스나 라디오버튼은 에러 메시지가
+                                              첫번째 체크박스 나 첫번째 라디오버튼 다음에
+                                              표시됨.
+                          label태그를 이용해서 특정 위치(단,form태그안에서만)에
+                                              에러메시지를 뿌려 줄 수 있다.
+                          for속성:name 속성에 지정한 값
+                          class속성:반드시  "error" 문자열
+                         -->
+                         <label for="inter" class="error"></label><br /> 성별: 남자<input
+            type="radio" name="gender" value="man" /> 여자<input type="radio"
+            name="gender" value="woman" /> <label for="gender" class="error"></label><br />
+          <!--
+                option태그의 value속성에 빈 문자열("")을
+                설정하면 선택 하지 않은 것으로 간주한다.
+               -->
+          <select name="sel">
+            <option value="">==학력을 선택하세요==</option>
+            <option value="uni">대학교</option>
+            <option value="high">고등학교</option>
+            <option value="middle">중학교</option>
+            <option value="ele">초등학교</option>
+          </select><br /> <input type="file" name="file" /><br /> 자기소개<br />
+          <textarea name="self" cols="50" rows="5"></textarea>
+          <br />
+          <input type="button" value="button타입" />
+          <input type="submit" value="submit타입" />
+          <input type="reset" value="취소" />
+        </form>
+    </fieldset>
+</body>
+</html>

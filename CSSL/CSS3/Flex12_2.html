@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex12_2.html</title>
+    <style>
+        /*이번 챕터는 플렉스 아이템의 속성과 기본값(basis(auto), grow(0), shrink(1))*/
+        .container1{
+            background-color: yellow;
+            display: flex;/*기본세팅: flex-grow:0,flex-shrink:1,flex-basis:auto*/
+        }
+        .item{
+            background-color: green;
+            border: 2px red solid;
+            box-sizing: border-box;
+            /*flex-basis:아이템의 기본 크기를 설정(아이템 확장(grow)/축소(shrink)시의 기준 크기)*/
+            /*단,width를 px지정시 shrink해도 축소되지 않는다(grow는 가능). 크기 고정임으로(flex-basis는 작동)*/
+            /*width: 50px;줄이면 노란배경(컨테이너영역)은 줄어들지만, px인 아이템은 줄어들지않음(shrink 안먹음)*/
+            /*grow는 0이라 늘려도 늘어나지 않음, shrink만 1기본값으로 브라우저 줄이면 적용됨*/
+            /*width: 15%;브라우저 늘릴때 늘어나는건 grow 0과 무관, 15%를 맞추기 위한 것/ shrink도 영향x, 그냥 비율 유지하기 위해 변화*/
+            /*flex-basis: 150px;이거 세팅시 width크기 무시, shrink는 width따라 불가*/
+            /*flexbasis는 width처럼 같은 150px 고정크기라도 grow,shrink의 기준크기라 잘 먹음
+            (단, flex-basis와 width를 같이 주면 width가 우선(둘 다 크기 설정임), 즉 shrink영향 안먹게됨)
+            (단, 아이템 크기지정시 flex-basis와 width를 별도로 지정하면 크기는 flex-basis를 따른다)
+            1) 늘릴때 width: 150px처럼 고정, grow 0이니까
+            2) 줄일때 width 같은 비율로 변화, shrink 1이니까*/
+            /*
+            ※총정리] flex-basis:아이템의 기본 크기를 설정(아이템 확장/축소시의 기준 크기)
+            1)아이템 크기 지정
+                아이템의 크기를 지정시 flex-basis나 width(모든 요소의 기본CSS속성)속성으로 지정할 수 있다
+                flex-basis의 값에 따라 width속성의 값이 적용되기도 하고 무시되기도 한다
+                1> flex-basis:auto일때 width의 값이 flex-basis값이 된다(width미지정시 flex-basis는 컨텐츠크기)
+                2> flex-basis:특정값일때 width속성이 무시된다
+                3> flex-basis:0일때 컨텐츠 크기만큼 영역이 만들어진다(width속성 무시)
+            2)아이템의 축소
+                width속성을 설정시 basis값과 같거나 클때는 축소가 안된다 (grow 확대는 먹는다)
+                (width속성 설정시 basis값보다 작을때는 축소가 된다)
+                컨테이너를 줄여도 아이템이 flex-shrink에 지정한 비율대로 줄어들지 않는다
+                (※배치시 브라우저나 컨텐츠 크기를 줄여도 크기를 고정해야하는 컨텐츠는 width속성을 주는게 좋다)
+            */
+            /*
+            1> flex-basis:auto 테스트
+            flex-basis: auto;
+            width: 200px; -> 이 값이 flex-basis값이 된다, width줬으니 축소불가
+
+            2> flex-basis:특정값 테스트
+            flex-basis: 150px; -> 이 값이 flex-basis값이 된다(width 무시), width줬으니 축소불가
+            width: 300px;
+
+            3> flex-basis:0 테스트
+            flex-basis: 0; -> 컨텐츠 크기가 flex-basis값이 된다(width 무시), width줬으니 축소불가(컨텐츠 크기라 축소할 것도 없음)
+            width: 200px;
+            */
+            /*
+            flex-basis: auto와 0의 차이
+            공통점: 컨텐츠 크기만큼 아이템영역이 만들어짐
+            차이점: auto는 width지정시 width의 값이 basis값이 되고, 0은 width무시
+            */
+            /*특이사항1(사실 당연한것): width 200주면 컨테이너는 item 5개*200=1000크기로 고정, 브라우저 줄여도 안줄어듦, 
+                                     아이템 크기는 flex-basis따라 설정되지만 컨테이너 크기가 설정한 width에 따라 늘어난다*/
+            /*특이사항2: basis 150px 주고 width 50px 주면 아이템 크기가 150px로 보임, 그러나 아이템 영역은 50px됨
+                        이 때는 shrink하면 50px까지 줄어들게 됨*/
+            /*
+                ※총총정리(basis는 보이는 크기, width는 영역의 크기)
+                1) basis값 <= width값: basis값으로 아이템의 시각적 크기 결정, width값은 아이템 영역결정(보이지는 않음)
+                                        shrink적용X
+                2) basis값 > width값: basis값으로 아이템의 시각적 크기 결정, width값은 아이템 영역결정(보이지는 않음)
+                                        shrink적용o(width값까지 줄어듦)
+                */
+            flex-basis: 300px;
+            width: 50px;/*50px까지 줄어듦*/
+            
+        }
+        .container2{
+            background-color: yellow;
+            display: flex;
+        }   
+        .item-1,.item-2{
+            background-color: green;
+            border: 2px red solid;
+            box-sizing: border-box;
+            /*flex-grow:0(기본값),flex-shrink:1(기본값)의 의미
+                컨테이너를 늘려도 아이템 크기는 변하지 않고(grow =0)
+                줄일때 아이템의 크기가 똑같은 비율로 줄어든다(shrink =1)
+
+                브라우저를 줄였다 늘였다하면서 테스트.(단,flex-wrap:nowrap;해야함)
+                flex-basis로 아이템의 크기 지정후 테스트
+            */
+            /*1. 기본값 테스트
+            flex-basis: 150px;
+            flex-grow: 0;
+            flex-shrink: 1;*/
+            
+            /*2. flex-grow: 0아닌 값 설정시 그 비율대로 아이템 영역이 컨테이너의 여유공간 모두 채우도록 성장(grow)*/
+            /*flex-grow: 1;grow,shrink 모두 비율임*/
+            /*flex-basis: 0;flex-grow: 1;로 성장한 아이템의 크기가 flex-basis값이 된다*/
+
+            /*축약속성(숫자 순서가 있음)*/
+            /*1) flex:1(grow값); = flex-grow:1,flex-shrink:1,flex-basis:0(grow로 커진걸 flex-basis값으로 세팅하기 위함)
+                =flex:1 1 0;        컨테이너를 늘리면 아이템의 크기가 늘어나고 
+                                    컨테이너를 줄이면 아이템의 크기가 줄어드는 UI 만들때
+            
+              2) flex:none; = flex: 0 0 auto -> 근데 이거 별로임 크기 고정할때 width가 나음
+                                컨테이너가 여유 공간이 있든 없든 아이템의 크기를 유지시 사용(브라우저 크기무관)
+                                (폭 지정시에 그 폭으로 미 지정시는 컨텐츠 크기로)
+                                (위에 width 지정해서 크기 고정과 비슷, width 안주고 크기 고정하는법)*/
+            /*flex: none;
+              width: 150px;*/
+            /*위 상황에서는 flex: none이 의미가 없음, 어차피 width하면 shrink 안먹음*/
+        }
+        .item-1:nth-child(1){/*item1 선택한것*/
+            flex-basis: 100px;
+            flex-grow: 1;/*여러 아이템 중 하나만 grow 있어도 전체 컨테이너 채움*/
+            flex-shrink: 1;
+            order: 2;/*숫자가 작을수록 먼저배치(기본값:0,음수가능)
+                        오히려 양수주면 뒤쪽배치로 밀림(랜더링x, 시각적으로만 배치변경)*/
+        }
+        .item-1:nth-child(2){/*item2 성장,축소 둘 다 2배 속도*/
+            flex-basis: 100px;
+            flex-grow: 2;
+            flex-shrink: 2;
+            order: -5;
+        }
+        .item-1:nth-child(3){
+            flex-basis: 100px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            order: -10;
+        }
+        .item-1:nth-child(4){
+            flex-basis: 100px;
+            flex-grow: 1;
+            flex-shrink: 1;
+        }
+        .item-1:nth-child(5){
+            flex-basis: 100px;
+            flex-grow: 1;
+            flex-shrink: 1;
+        }
+       
+        .container3{
+            background-color: yellow;
+            display: flex; 
+            /*margin(=여백)속성:아이템 배치가 용이해짐(컨테이너 속성인 justify-content 같은 정렬가능)
+                margin: a b -> a상하, b좌우 -> a=0이면 상하여백 없앰, b=auto면 좌우여백 균등배분(말그대로 auto니까 자동배분)
+
+            -컨테이너의 flex-direction:row일때       
+                수평 중앙 배치 : margin: 0 auto;
+                왼쪽 배치 : margin-right: auto;
+                오른쪽 배치 : margin-left: auto;
+                
+            -컨테이너의 flex-direction:column일때        
+                수직 중앙에 배치 : margin: auto 0;
+                위쪽 배치 : margin-bottom auto;
+                아래쪽에 배치 : margin-top: auto;*/
+            /*justify-content: flex-start;/*왼쪽정렬(기본값)*/    
+            /*justify-content: flex-end;/*오른쪽정렬*/
+            /*justify-content: center;/*가운데정렬*/
+            /*justify-content: space-around;/*좌우 여백동일*/
+            /*justify-content: space-between;*/
+            /*justify-content: space-evenly;*/
+        }    
+        /*1) 아이템의 margin속성으로 justify-content: flex-start; 구현하기(item3에만 속성줘도 앞에 1,2가 밀림)
+        .item-2:last-child{
+            margin-right: auto;
+        }*/        
+        /*2) 아이템의 margin속성으로 justify-content: flex-end; 구현하기
+        .item-2:first-child{
+            margin-left: auto;
+        }*/
+        /*3) 아이템의 margin속성으로 justify-content: center; 구현하기
+        .item-2:first-child{
+            margin-left: auto;
+        }
+        .item-2:last-child{
+            margin-right: auto;
+        }*/
+        /*4) justify-content: space-around; 구현하기
+        .item-2{
+            margin: 0 auto;
+        }*/
+        /*5) justify-content: space-between;
+        .item-2:first-child{
+            margin-right: auto;
+        }
+        .item-2:last-child{
+            margin-left: auto;
+        }*/
+        /*이것도 됨
+        .item-2:nth-child(2){
+            margin: 0 auto;
+        }*/
+        /*6) justify-content: space-evenly;*/
+        .item-2:first-child{
+            margin: 0 auto;
+        }
+        .item-2:last-child{
+            margin: 0 auto;
+        }
+
+
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend><h2>Flex Item의 flex-basis속성</h2></legend>
+        <div class="container1">
+            <div class="item">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div><!-- style="flex-shrink: 2;" 옆에 1보다 2배로 줄어듦-->
+            <div class="item">item4</div>
+            <div class="item">item5</div>
+        </div>
+    </fieldset>
+    <hr/>
+    <fieldset>
+        <legend><h2>Flex Item의 flex-grow속성 및 flex-shrink속성</h2></legend>
+        <div class="container2">
+            <div class="item-1">item1</div>
+            <div class="item-1">item2</div><!-- style="flex-grow: 2;" 하나만 하면 전체 크기가 채워짐-->
+            <div class="item-1">item3</div>
+            <div class="item-1">item4</div>
+            <div class="item-1">item5</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h2>Flex Item의 margin속성 적용하기</h2></legend>
+        <div class="container3">
+            <div class="item-2">item1</div>
+            <div class="item-2">item2</div>
+            <div class="item-2">item3</div>
+        </div>
+    </fieldset>
+</body>
+</html>

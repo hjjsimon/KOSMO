@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math13.html</title>
+    <script>
+        //클래스메소드(=정적메소드)이므로 Math.함수명() 방식으로으로 호출한다(new 연산자 사용안함)
+        console.log(Math);//콘솔창에서 눌러보면 이것저것 나옴
+        console.log(Math.PI);//3.14
+        //1.abs():절대값(absolute)
+        console.log('-10의 절대값:',Math.abs(-10));
+        //2.pow( , ):지수 계산
+        console.log('2의 3승:',Math.pow(2,3));
+        //3.round():반올림(소수점 첫째자리에서 반올림)
+        console.log('반올림:',Math.round(3.1));//3
+        //4.ceil():올림
+        console.log('올림:',Math.ceil(3.1));//4
+        //5.floor():내림
+        console.log('내림:',Math.floor(3.5));//3
+        //6. random(): 0.0 <= 값 < 1.0사이의 값을 랜덤하게 발생 시킴
+        /*
+            parseInt(Math.random()*범위) + 시작값
+            ex]
+            1부터 5사이의 숫자를 랜덤하게 발생시키자
+            범위:5-1 = 4
+            시작값:1
+            parseInt(Math.random()*4)+1:마지막값 5는 포함 안됨
+
+            ※마지막 값을 포함하기 위해서 범위 + 1
+            parseInt(Math.random()*5)+1:마지막값 5도 포함됨
+        */
+        console.log(Math.random());
+        console.log(parseInt(Math.random()*6)+5);//5~10사이 숫자만 나옴
+
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>로또 발생기</legend>
+        <button onclick="showLottoNumber();">로또 발생</button>
+        <span id='lotto' style='font-size:2em;color:red;font-weight:bold;'></span>
+    </fieldset>
+    <script>
+        //문] 1~45까지 숫자 6개를 랜덤발생(단, 숫자중복은 안되도록)
+
+        //1. 함수정의: 자바코드를 자스코드로 변환
+        function setRandomNumber(random,start,end){
+            for(var i=0 ; i<random.length ; i++) {
+                while(true) {
+                    //랜덤하게 숫자 발생 시키자 -> random 배열에 저장할 것, 변수 i는 random배열의 인덱스, 0~2까지 됨, 3이면 빠져나옴
+                    var randomNumber = parseInt(Math.random()*(end-start+1))+start; // 차이값+1을 곱하고 시작값 더하고, 1~9 사이 숫자 발생
+                    //랜덤하게 발생시킨 숫자의 중복여부를 체크하는 변수선언
+                    var isDuplicated = false; //false로 초기화
+                    //랜덤하게 발생시킨 숫자(randomNumber)와 배열(random)에 저장된 값의 중복여부 체크
+                    for(var k=0 ; k<=i-1 ; k++){// k<i-1 반복조건한 이유? 최초 i=0,k=0 이 때는 중복체크할필요없음, 첫번째자리 그냥 넣으면 됨
+                        if(randomNumber==random[k]) {// k방의 값과 랜덤값이 같으면 중복된 것 -> 중복시 false세팅을 true로 바꿔줌
+                            isDuplicated=true;
+                            break;
+                        }
+                    }
+                    if(!isDuplicated) {//중복되지 않는경우, random 첫번째자리에 5 넣어줌 
+                        random[i]=randomNumber;
+                        break; //가장 가까운 반복문인 while문을 빠져나감
+                    }///////while안의 if
+                    
+                    //for문에서 처음으로가면 i++됨, i=1됨, 1<3이니까 내려오고, 숫자 랜덤발생하고, false로 초기화
+                    //두번째도 5면 0<=0 이니까 if로 들어감, 5중복이니까 빠져나감, break로 빠져나감, true에 not 붙였으니 if(false)되어 안감
+                    //while문 처음으로 다시 이동, true로 내려와서 다시 발생, 3발생시, randomnumber 3, random[0]=5, k=1 <= (i=1) -1 거짓이므로 if문 안 isDuplicated로 안들어감
+                    //!isduplicated로 들어감 
+                }///////while
+            }////////////밖for
+        }
+        //2.함수 호출
+        var lotto=new Array(6);
+        console.log(lotto[0]);//함수호출전 undefined
+        setRandomNumber(lotto,1,45);
+        console.log(lotto[0]);//함수호출후 랜덤값 출력
+        //3.로또 번호를 id가 lotto인 span태그 사이에 출력
+        var span=document.querySelector('#lotto');
+        function showLottoNumber(){
+            var lotto=new Array(6);//버튼 누를 때마다 초기화해서 값넣음
+            setRandomNumber(lotto,1,45);
+            var lottoNumber='';//빈문자열로 초기화
+            lotto.forEach(function(item){
+                lottoNumber+=item+' ';//출력숫자 후 한칸 띄우기
+            });
+            span.textContent=lottoNumber;
+        }
+    </script>
+</body>
+</html>

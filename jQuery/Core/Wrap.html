@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrap.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //wrap('요소'): 특정 요소로 태그를 감쌈
+            $('button').eq(0).on('click',function(){
+                $('span:first').wrap("<strike>").wrap("<strong>");
+            });
+            $('button:last').click(function(){
+                $('a').wrap('<li>');//a태그를 li로 감싸서 가로 -> 세로배치됨
+            });
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend><span>wrap()함수</span></legend>
+        <h2><span>포탈 사이트</span></h2>
+        <ul>		 
+          <a href="http://www.naver.com/">네이버</a>
+          <a href="http://www.daum.net/">다음</a>
+          <a href="http://www.nate.com/">네이트</a>
+        </ul>
+          <hr/>
+          <button>span태그 감싸기</button>
+          <button>a태그 감싸기</button>	     
+    </fieldset>
+</body>
+</html>

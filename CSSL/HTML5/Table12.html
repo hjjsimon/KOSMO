@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table12.html</title>
+    <style>
+        table.standard{ 
+            border: 50px gray solid;/*border="50"과 동일*/
+        }
+        table.standard td{
+            border: 1px gray solid;
+        }
+        table.standard{
+            background-color: green;/*bgcolor="green"과 동일*/
+            border-spacing: 20px;/*cellspacing="20"과 동일*/
+            width: 300px;/*width="300", height="300"과 동일*/
+            height: 300px;
+        }
+        table.standard td{
+            padding: 20px;/*cellpadding="20"과 동일*/
+        }
+        .wrapper{
+            margin: 0 auto;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        table태그: 표 형태로 컨텐츠를 표시하기 위한 태그, 하위태그로 아래와 같은 태그를 가질 수 있다.
+       
+        table의 하위태그
+        1)tr(table row)태그: 행을 표시한다.
+        2)td(table data cell)태그: 하나의 cell(칸)을 표시한다. 반드시 tr태그의 하위 태그(자식)로 존재해야 한다. 
+                                   데이타는 td태그사이에 넣어야 한다. ex.td 4개면 칸4개짜리 1행, 4열
+        3)th(table header)태그:역시 cell을 표시하는 태그이나 표의 헤더를 표시할때 사용 글자가 볼드체 이고 가운데 정렬
+       
+        -아래는 웹 표준이나 웹 접근성을 고려한 태그(웹접근성:시각장애인도 웹활용가능하게 함/ 스크린 리더: 음성으로 텍스트 읽어줌)
+        1)caption태그:테이블의 제목 표시
+        2)summary:테이블의 요약 설명
+        3)tbody태그:표에서 내용영역에 해당하는 부분을 의미적으로 구분하기 위한 태그(ex.게시판 내용)
+        4)thead태그: 표에서 헤더영역에 해당하는 부분을 의미적으로 구분하기 위한 태그(ex.제목, 작성자, 작성일 등 맨 위 항목)
+        5)tfoot태그:표에서 푸터영역에 해당하는 부분을 의미적으로 구분하기 위한 태그(ex. 총계 등 정보)
+       
+        [table태그의 속성]->모두 웹표준x, CSS사용해야함
+        1)height:표의 세로폭 지정(숫자나 부모기준 %로 지정)
+        2)width:표의 가로폭 지정(숫자나 부모기준 %로 지정)
+        3)border:테이블의 테두리 두께 지정
+        4)cellpadding(=padding):cell과 cell내부 컨텐츠(내용)사이의 여백(기본값:1)
+        5)cellspacing(=border-spacing):cell과 cell사이의 여백(기본값:2)
+        6)align:left(기본값),center,right
+        7)bgcolor:테이블의 백그라운드 색 지정
+       
+        [tr태그의 속성]
+        1)height:행의 높이를 지정(표 가로길이 고정됐으니 width는 못바꿈)
+        2)align:행을 구성하는 모든 cell의 컨텐츠(내용)의 정렬을 지정(left(기본값),center,right)
+        3)bgcolor:행의 백그라운드 색 지정
+        
+        [td태그의 속성]
+        1)height:cell의 높이를 지정
+        2)width:cell의 가로폭 지정(height 설정 시 다 변함, width는 자기만 변하기 가능)
+        3)align:cell의 내용의 정렬을 지정(left(기본값),center,right)
+        4)bgcolor:cell의 배경색 지정
+        5)colspan:열을 병합할때(가로 cell들 합침)
+        6)rowspan:행을 병합할때(세로 cell들 합침)
+        
+        -표의 기본 형태
+        <table>
+            <tr>:행을 의미
+                <td ></td><td></td> :cell을 의미
+            </tr>
+            <tr>
+                <td></td><td></td>
+            </tr>
+            ....
+        </table>
+        block 엘리먼트
+    -->
+    <h2>table태그</h2>
+    <h3>table태그의 속성들</h3>
+    <h4>table태그의 속성으로 테이블 만들기-웹표준에 어긋남</h4>
+    <table bgcolor="green" border="50" cellpadding="20" cellspacing="20" width="300" height="300" align="center">
+        <tr><!--2행2열-->
+            <td>가</td><td>나</td>
+        </tr>
+        <tr>
+            <td>다</td><td>라</td>
+        </tr>
+    </table>
+    <h4>CSS적용으로 테이블 만들기-웹표준에 적합</h4>
+    <div class="wrapper"><!--가운데 정렬 위해 div필요-->
+        <table class="standard">
+            <tr>
+                <td>가</td><td>나</td>
+            </tr>
+            <tr>
+                <td>다</td><td>라</td>
+            </tr>
+
+        </table>
+    </div>
+    <h3>tr태그의 속성들</h3>
+    <table border="1" bgcolor="red" width="200" height="200">
+        <!--<tr align="center" height="150"> width는 고정이라 못바꿈, height는 200고정 중 150하면 나머지가 50됨, 웹표준x-->
+        <tr style="text-align: center;height: 150px;"><!--결과동일, 웹표준o-->
+            <td>가</td><td>나</td>
+        </tr>
+        <tr style="background-color: yellow;">
+            <td>다</td><td>라</td>
+        </tr>
+    </table>
+    <h3>td태그의 속성들</h3>
+    <table border="1" bgcolor="red" width="200"><!--height 안주면 컨텐츠 크기만큼 height 기본세팅-->
+        <tr style="text-align: center;height: 150px;">
+            <td style="text-align: right;">가</td>
+            <td style="background-color: yellow;">나</td>
+        </tr>
+        <tr>
+            <td style="width: 150px;height: 100px;">다</td>
+            <td>라</td>
+            <!--다 가로길이 변경시 가 가로길이도 변경(열전체 가로길이 변경)-->
+            <!--다 세로길이 변경시 라 세로길이도 변경(행전체 세로길이 변경)-->
+        </tr>
+    </table>
+
+    <h3>셀 병합</h3>
+    <table border="1" width="400" height="400" style="text-align: center;">
+        <tr>
+            <td>1행1열</td>
+            <td rowspan="2">1행2열</td><!--행병합, 위아래-->
+            <td colspan="2">1행3열</td><!--열병합, 좌우-->
+            <!--<td>1행4열</td>-->
+        </tr>
+        <tr>
+            <td rowspan="2">2행1열</td>
+            <!--<td>2행2열</td>-->
+            <td>2행3열</td>
+            <td rowspan="2">2행4열</td>
+        </tr>
+        <tr>
+            <!--<td>3행1열</td>-->
+            <td colspan="2">3행2열</td>
+            <!--<td>3행3열</td>-->
+            <!--<td>3행4열</td>-->
+        </tr>
+    </table>
+
+    <h3>테이블의 백그라운드색과 여백을 이용한 테두리선 긋기</h3>
+    <table style="width: 400px;height: 400px;text-align: center;background-color: red;border-spacing: 1px;">
+        <tr style="background-color: white;"><!--전체를 빨갛게 칠하고 내부를 흰색처리, 선도 그은셈-->
+            <td>1행1열</td>
+            <td rowspan="2">1행2열</td>
+            <td colspan="2">1행3열</td>
+        </tr>
+        <tr style="background-color: white;">
+            <td rowspan="2">2행1열</td>
+            <td>2행3열</td>
+            <td rowspan="2">2행4열</td>
+        </tr>
+        <tr style="background-color: white;">
+            <td colspan="2">3행2열</td>
+        </tr>
+    </table>
+
+    <h3>웹 접근성을 고려한 테이블</h3><!--summary는 시각장애인에게 읽어주는 내용-->
+    <table summary="직원들의 연봉정보를 표시하는 표입니다" style="background-color: black;border-spacing: 1px;width: 400px;">
+        <caption>직원연봉표</caption><!--제목주기-->
+        <tfoot><!--코딩순서 안맞아도 위치세팅가능-->
+            <tr style="background-color: white;">
+                <td>총합</td>
+                <td colspan="2">18,000</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr style="background-color: white;">
+                <td>1</td>
+                <td>가길동</td>
+                <td>5,000</td>
+            </tr>
+            <tr style="background-color: white;">
+                <td>2</td>
+                <td>나길동</td>
+                <td>3,000</td>
+            </tr>
+            <tr style="background-color: white;">
+                <td>3</td>
+                <td>다길동</td>
+                <td>10,000</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr style="background-color: white;">
+                <th>번호</th>
+                <th>이름</th>
+                <th>연봉</th>
+            </tr>
+        </thead>
+    </table>    
+
+    <h3>테이블 연습</h3>
+    <table style="width: 600px; background-color: red; border-spacing:2px; border-color: red; border: 10px;">
+            <tr><!--th써서 볼드체, 중간정렬-->
+                <th colspan="3" style="background-color: yellow; height: 100px; text-align: left;">오늘의 수입 지출
+            </tr>
+            <tr style="background-color: aqua; text-align: center;">
+                <th>내용</th>
+                <th>수입</th>
+                <th>지출</th>
+            </tr> 
+        
+            <tr style="background-color: white;">
+                <td>월급</td>
+                <td>1,000,000</td>
+                <td></td>
+            </tr>
+            <tr style="background-color: white;">
+                <td>점심값</td>
+                <td></td>
+                <td>5,000</td>
+            </tr>
+            <tr style="background-color: white;">
+                <td>부모님 선물</td>
+                <td></td>
+                <td>30,000</td>
+            </tr>
+            <tr><!--그냥 흰색 tr에 주면 됨 귀찮게 각각x-->
+                <td rowspan="3" style="background-color: green; text-align: center;">총계</td>
+                <td style="background-color: white; text-align: center;">수입</td>
+                <td style="background-color: white; text-align: center;">지출</td>
+            </tr>
+            <tr>
+                <td style="background-color: white;">1,000,000</td><td style="background-color: white;">35,000</td>
+            </tr>
+            <tr>
+                <td style="background-color: white;">남은 돈</td><td style="background-color: white;">965,000</td>
+            </tr>
+    </table>
+</body>
+</html>

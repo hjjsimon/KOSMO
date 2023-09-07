@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font03.html</title>
+    <style>
+        /*html{
+            font-size: 36pt;
+        }*/
+        
+        h4{/*h4태그 선택해서 백그라운드칼라 주는 것(블락->가로:부모영역 전체, 세로:컨텐츠 크기)*/
+            background-color: red;/*h4기본으로 좀 위아래 떨어져서 나옴*/
+        }
+        span{
+            border: 1px red solid;/*인라인->가로,세로:컨텐츠 크기만큼*/
+        }
+    </style>
+</head>
+<body>
+    <h2>폰트관련 CSS속성들</h2>
+    <!--<div style="font-size: 12pt;">-->
+    <div>
+        <h3>텍스트 크기 및 글꼴</h3>
+        글자 크기(기본 텍스트)<br />
+        <span style="font-size: 12pt;">글자 크기 12pt</span><br /><!--브라우저 디폴트 폰트사이즈 12pt-->
+        <span style="font-size: 1em;">글자 크기 1em</span><br /><!--부모 div의 cascade로 1em은 부모설정 글자크기와 동일, 
+                                                                    html에 36pt주면 div도 36상속받아서 얘도 36으로 바뀜
+                                                                    div에만 12pt주면 얘는 div 기준이라 36->12로 바뀜-->
+
+        <span style="font-size: 1rem;">글자 크기 1rem</span><br /><!--최상위 부모 html태그 기준, html에 36주면 당연히 바뀜-->
+        <span style="font-size: 24pt;">글자 크기 24pt</span><br />
+        <span style="font-size: 2em;">글자 크기 2em</span><br />
+        <span style="font-size: 2rem;">글자 크기 2rem</span><br />
+        <span style="font-size: 0.8em;">글자 크기 0.8em</span><br /><!--0.8은 80%크기-->
+        <span style="font-size: .8em;">글자 크기 .8em</span><br /><!--0은 생략가능-->
+        <span style="font-size: .8rem;">글자 크기 .8rem</span><br />
+        <span style="font-size: 1.8em;font-family: 휴먼옛체;">글자 크기 1.8em,글꼴 휴먼옛체</span><br />
+        <!--
+            상대적인 비율을 나타내는 크기(해상도크기에 맞춰 바뀌므로 좋음)
+            (pt는 1/72인치로 절대크기->해상도 작으면 크게보임(크면 작게), 단점임)
+            em:부모 요소의 텍스트 크기에 대한 비율
+            rem:최상위 요소(html태그)의 텍스트크기에 대한 비율
+                -->
+        <div style="font-size: 36pt;">
+            글자 크기<br/><!--여기도 36pt적용-->
+            <span style="font-size: 1em;">글자 크기 1em</span><br /><!--div상속-->
+            <span style="font-size: 1rem;"> 글자 크기 1rem</span><br /><!--얘는 html상속이라 12pt 기본-->
+        </div>
+        <h3>텍스트 두께 및 스타일</h3>
+        <span style="font-weight: bold;font-style: italic;">텍스트 두껍게,스타일은 기울이기 </span>
+        <address style="font-style: normal;">서울시 종로구 탑골</address><!--address로 감싸면 기본이 이탤릭(기울어짐), 노말하면 세워짐-->
+        <h3>글자 사이의 간격</h3>
+        <span style="letter-spacing: .5em;">한국소프트웨어 인재개발원입니다.</span><!--글자사이 자간 띄우기/ .5em은 기본글자의 절반크기-->
+        <h3>줄 사이의 간격</h3>
+        <!--블락 엘리먼트는 컨텐츠 영역(시작태그~종료태그 사이)의 세로폭이 컨텐츠 크기였다가
+            5em만큼 세로폭이 늘어나서 마치 줄간격이 생긴 효과가 난다.
+        -->
+        <h4 style="line-height: 5em;">블락엘리먼트에 줄간격 적용</h4><!--세로로 5글자의 여백을 줌-->
+        <h4>블락엘리먼트에 줄간격 적용</h4>
+        <h4>블락엘리먼트에 줄간격 적용</h4>
+        <div class="inline">
+            <h4>인라인 엘리먼트에 적용하기</h4>
+            <!--인라인 엘리먼트는 컨텐츠 영역의 크기(border처리 고정)가 변하지 않고 5em만큼 줄간격이 생긴다
+                결론: 인라인은 무시, 블락이 해당된다~-->
+            <span style="line-height: 5em;">인라인 엘리먼트</span>
+            <span>인라인 엘리먼트</span>
+            <span>인라인 엘리먼트</span>
+        </div>
+        <!--아래는 잘 쓰이므로 암기!!!!!!!!!!!!-->
+        <h3>수직으로 가운데 정렬시</h3><!--vertical-align middle은 안먹는대 그냥 그렇대-->
+        <!-- height속성 과 line-height속성의 값을 동일하게 지정 ->레프트탑에서 레프트센터로 이동-->
+        <div style="background-color: yellow;height: 200px;line-height: 200px;"><!--div도 블락, 글자는 레프트탑에 존재-->
+            텍스트
+        </div>
+        <h3>영역의 정 가운데 정렬시</h3>
+        <div style="background-color: yellow;height: 200px;line-height: 200px;text-align: center;"><!--정가운데 배치-->
+            텍스트
+        </div>
+    </div>
+</body>
+</html>

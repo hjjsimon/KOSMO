@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#8E3573"
+        >
+        <!-- 각 컬럼에 배치된(위젯)의 가로폭 세로폭 지정
+        :기본이 wrap_content
+        :match_parent는 적용 안됨(다른 위젯이 배치되서 추가 열을 구성할 수 있기때문)
+        :숫자는 적용됨
+         -->
+        <TableRow>
+            <Button android:text="1행1열" />
+            <Button android:text="1행2열"/>
+            <Button android:text="1행3열" android:layout_width="200dp"/>
+        </TableRow>
+        <TableRow>
+            <Button android:text="2행1열" android:layout_height="70dp"/>
+            <Button android:text="2행2열" android:layout_height="match_parent"/>
+            <Button android:text="2행3열" android:layout_height="match_parent"/>
+        </TableRow>
+        <TableRow>
+            <Button android:text="3행1열" android:layout_height="match_parent"/>
+            <Button android:text="3행2열" android:layout_height="80dp"/>
+
+        </TableRow>
+    </TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#BB9CF3"
+        android:stretchColumns="*"
+        >
+        <!--  *는 모든 컬럼이 동일한 비율로 stretch된다-->
+        <TableRow>
+            <Button android:text="1행1열"/>
+            <Button android:text="1행2열"/>
+            <Button android:text="1행3열"/>
+        </TableRow>
+        <TableRow>
+            <Button android:text="2행1열"/>
+            <Button android:text="2행2열"/>
+        </TableRow>
+
+    </TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9C7A16"
+        android:stretchColumns="1,2"
+        >
+        <!--  2번째 및 3번째 컬럼이 동일한 비율로 stretch된다-->
+        <TableRow>
+            <Button android:text="1행1열"/>
+            <Button android:text="1행2열"/>
+            <Button android:text="1행3열"/>
+        </TableRow>
+        <TableRow>
+            <Button android:text="2행1열"/>
+            <Button android:text="2행2열"/>
+        </TableRow>
+
+    </TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DF4C1D"
+        android:stretchColumns="3"
+        >
+        <!--병합(layout_span):해당 컬럼을 포함한 컬럼 수-->
+        <TableRow>
+            <Button android:text="1행1열"/>
+            <Button android:text="1행2열"/>
+            <Button android:text="1행3열" android:layout_span="2"/>
+        </TableRow>
+        <TableRow>
+            <Button android:text="2행1열"/>
+            <Button android:text="2행2열"/>
+            <Button android:text="2행3열"/>
+            <Button android:text="2행4열"/>
+        </TableRow>
+
+    </TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff9f93"
+        android:stretchColumns="*"
+        >
+        <!--병합(layout_span):해당 컬럼을 포함한 컬럼 수-->
+        <TableRow>
+            <Button android:text="1행1열"/>
+            <Button android:text="1행2열"/>
+            <Button android:text="1행3열"/>
+            <Button android:text="1행4열"/>
+        </TableRow>
+        <TableRow>
+            <!-- 인덱스가 2인 즉 3번째 컬럼자리에 위젯 배치-->
+            <Button android:text="2행3열" android:layout_column="2"/>
+            <Button android:text="2행4열"/>
+        </TableRow>
+
+    </TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="*"
+        android:padding="10dp"
+        >
+        <TableRow>
+            <TextView android:text="아 이 디" android:layout_height="match_parent" android:gravity="center" android:textSize="18sp" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:hint="아이디를 입력하세요"
+                android:id="@+id/username"
+                android:layout_span="5"
+                android:gravity="center"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView android:text="비 밀 번 호" android:layout_height="match_parent" android:gravity="center" android:textSize="18sp"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:hint="비밀번호를 입력하세요"
+                android:id="@+id/password"
+                android:inputType="textPassword"
+                android:layout_span="5"
+                android:gravity="center"
+                />
+
+        </TableRow>
+        <TableRow>
+            <Button android:text="확인" android:layout_column="4" android:id="@+id/btnOk"/>
+            <Button android:text="취소" android:id="@+id/btnCancel" android:layout_marginLeft="5dp"/>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+

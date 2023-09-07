@@ -1,0 +1,208 @@
+
+5월 17, 2023 13:23:16.687 NEW SESSION
+5월 17, 2023 13:23:16.687 [12236:920:0517/132316.686:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 17, 2023 14:15:42.61 [0517/141542.054:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.61 [0517/141542.061:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.62 [0517/141542.062:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.62 [0517/141542.062:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b300f7da-92fb-4f98-9653-011f663abd06: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.63 [0517/141542.063:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d179ce9d-26ff-496b-b0e3-b29ffbc6f30f: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.63 [0517/141542.063:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d517c5dc-b9ad-4e7e-9fc3-9d1b120ae9d3: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.63 [0517/141542.063:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b1cf8203-6ceb-4b34-a650-2c8e44f3ac6a: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.64 [0517/141542.064:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3695136-fd6c-4f49-a2f3-89e23a56380b: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.64 [0517/141542.064:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.65 [0517/141542.065:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.65 [0517/141542.065:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.66 [0517/141542.065:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b300f7da-92fb-4f98-9653-011f663abd06: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.66 [0517/141542.066:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d179ce9d-26ff-496b-b0e3-b29ffbc6f30f: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.66 [0517/141542.066:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d517c5dc-b9ad-4e7e-9fc3-9d1b120ae9d3: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.67 [0517/141542.066:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b1cf8203-6ceb-4b34-a650-2c8e44f3ac6a: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.67 [0517/141542.067:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3695136-fd6c-4f49-a2f3-89e23a56380b: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.80 [0517/141542.080:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.80 [0517/141542.080:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.81 [0517/141542.080:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.81 [0517/141542.081:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b300f7da-92fb-4f98-9653-011f663abd06: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.81 [0517/141542.081:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d179ce9d-26ff-496b-b0e3-b29ffbc6f30f: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.82 [0517/141542.082:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d517c5dc-b9ad-4e7e-9fc3-9d1b120ae9d3: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.82 [0517/141542.082:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b1cf8203-6ceb-4b34-a650-2c8e44f3ac6a: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.82 [0517/141542.082:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3695136-fd6c-4f49-a2f3-89e23a56380b: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.83 [0517/141542.083:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3695136-fd6c-4f49-a2f3-89e23a56380b: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.84 [0517/141542.084:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.84 [0517/141542.084:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.85 [0517/141542.084:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.85 [0517/141542.085:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b300f7da-92fb-4f98-9653-011f663abd06: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.85 [0517/141542.085:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d179ce9d-26ff-496b-b0e3-b29ffbc6f30f: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.86 [0517/141542.086:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d517c5dc-b9ad-4e7e-9fc3-9d1b120ae9d3: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.86 [0517/141542.086:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b1cf8203-6ceb-4b34-a650-2c8e44f3ac6a: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.88 [0517/141542.088:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b1cf8203-6ceb-4b34-a650-2c8e44f3ac6a: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.89 [0517/141542.088:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.89 [0517/141542.089:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.89 [0517/141542.089:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.89 [0517/141542.089:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b300f7da-92fb-4f98-9653-011f663abd06: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.90 [0517/141542.090:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d179ce9d-26ff-496b-b0e3-b29ffbc6f30f: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.90 [0517/141542.090:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d517c5dc-b9ad-4e7e-9fc3-9d1b120ae9d3: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.93 [0517/141542.093:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d517c5dc-b9ad-4e7e-9fc3-9d1b120ae9d3: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.93 [0517/141542.093:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.94 [0517/141542.094:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.94 [0517/141542.094:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.94 [0517/141542.094:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b300f7da-92fb-4f98-9653-011f663abd06: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.94 [0517/141542.094:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d179ce9d-26ff-496b-b0e3-b29ffbc6f30f: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.95 [0517/141542.095:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d179ce9d-26ff-496b-b0e3-b29ffbc6f30f: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.95 [0517/141542.095:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.95 [0517/141542.095:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.96 [0517/141542.096:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.96 [0517/141542.096:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b300f7da-92fb-4f98-9653-011f663abd06: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.97 [0517/141542.097:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b300f7da-92fb-4f98-9653-011f663abd06: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.98 [0517/141542.098:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.98 [0517/141542.098:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.99 [0517/141542.098:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.99 [0517/141542.099:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\af70009e-3b91-46a9-a34a-356116f58999: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.99 [0517/141542.099:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.100 [0517/141542.100:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.100 [0517/141542.100:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\dd598fa5-d4f4-4614-8767-eab085719420: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.103 [0517/141542.103:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:42.103 [0517/141542.103:ERROR:filesystem_win.cc(130)] GetFileAttributes C:\Users\kosmo\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d3e32660-7b1a-49ad-ab3b-f95816661dd2: 지정된 파일을 찾을 수 없습니다. (0x2)
+5월 17, 2023 14:15:49.21 [12236:920:0517/141549.020:ERROR:sharing_service.cc(252)] Device un-registration failed with fatal error
+5월 17, 2023 14:16:21.957 [12236:920:0517/141621.957:ERROR:device_event_log_impl.cc(222)] [14:16:21.957] Bluetooth: bluetooth_adapter_winrt.cc:1058 Getting Default Adapter failed.
+5월 17, 2023 14:17:39.95 [12236:920:0517/141739.095:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 17, 2023 14:17:41.249 [12236:920:0517/141741.249:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 17, 2023 14:17:45.87 [12236:920:0517/141745.086:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 17, 2023 14:49:03.08 [3396:6092:0517/144903.008:ERROR:sharing_service.cc(252)] Device un-registration failed with fatal error
+5월 17, 2023 15:13:58.48 [1828:13016:0517/151358.048:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 17, 2023 16:16:28.768 [7568:9252:0517/161628.768:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 17, 2023 20:09:22.842 [2972:12732:0517/200922.841:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 17, 2023 20:09:22.999 [2972:12732:0517/200922.999:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:23.186 [2972:12732:0517/200923.186:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:23.298 [2972:12732:0517/200923.298:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:23.470 [2972:12732:0517/200923.470:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:23.579 [2972:12732:0517/200923.579:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:24.151 [2972:12732:0517/200924.151:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:25.548 [2972:12732:0517/200925.548:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:25.651 [2972:12732:0517/200925.651:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:26.341 [2972:12732:0517/200926.341:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:26.487 [2972:12732:0517/200926.487:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:26.784 [2972:12732:0517/200926.784:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:27.327 [2972:12732:0517/200927.327:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:27.372 [2972:12732:0517/200927.371:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:27.500 [2972:12732:0517/200927.500:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:29.968 [2972:12732:0517/200929.968:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:31.956 [2972:12732:0517/200931.956:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:36.978 [2972:12732:0517/200936.978:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:46.959 [2972:12732:0517/200946.959:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:09:55.968 [2972:12732:0517/200955.968:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:10:03.961 [2972:12732:0517/201003.961:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:10:07.982 [2972:12732:0517/201007.982:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:10:27.114 [2972:12732:0517/201027.114:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+5월 17, 2023 20:10:27.609 [2972:12732:0517/201027.609:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.164 s for first_image_paint 0.143 s
+
+5월 22, 2023 17:56:36.855 NEW SESSION
+5월 22, 2023 17:56:36.855 [6968:8796:0522/175636.854:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 22, 2023 17:56:36.856 [6968:8796:0522/175636.854:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 22, 2023 18:02:42.564 [6968:8796:0522/180242.564:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:42.723 [6968:8796:0522/180242.723:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:42.849 [6968:8796:0522/180242.849:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:43.12 [6968:8796:0522/180243.012:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:43.122 [6968:8796:0522/180243.122:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:43.434 [6968:8796:0522/180243.434:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:43.545 [6968:8796:0522/180243.545:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:43.926 [6968:8796:0522/180243.926:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:46.160 [6968:8796:0522/180246.160:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:47.165 [6968:8796:0522/180247.165:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:52.166 [6968:8796:0522/180252.166:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:02:57.164 [6968:8796:0522/180257.164:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:03:03.164 [6968:8796:0522/180303.164:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:03:16.159 [6968:8796:0522/180316.159:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:03:24.165 [6968:8796:0522/180324.165:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:03:45.160 [6968:8796:0522/180345.160:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:04:35.150 [6968:8796:0522/180435.150:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:04:55.176 [6968:8796:0522/180455.176:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:05:09.178 [6968:8796:0522/180509.178:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:05:51.176 [6968:8796:0522/180551.176:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:06:14.156 [6968:8796:0522/180614.156:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:08:37.161 [6968:8796:0522/180837.161:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:09:47.275 [6968:8796:0522/180947.275:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:10:02.162 [6968:8796:0522/181002.162:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:10:23.168 [6968:8796:0522/181023.168:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:10:44.149 [6968:8796:0522/181044.149:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:13:15.155 [6968:8796:0522/181315.155:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:15:54.154 [6968:8796:0522/181554.154:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:16:04.278 [6968:8796:0522/181604.278:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:16:09.176 [6968:8796:0522/181609.176:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:16:19.176 [6968:8796:0522/181619.176:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:18:04.150 [6968:8796:0522/181804.150:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:20:33.154 [6968:8796:0522/182033.154:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:22:18.267 [6968:8796:0522/182218.267:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:22:23.162 [6968:8796:0522/182223.162:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:22:36.153 [6968:8796:0522/182236.153:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:22:48.162 [6968:8796:0522/182248.162:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:22:57.158 [6968:8796:0522/182257.158:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:25:03.154 [6968:8796:0522/182503.154:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:27:34.152 [6968:8796:0522/182734.152:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:28:24.261 [6968:8796:0522/182824.261:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:28:32.170 [6968:8796:0522/182832.170:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:28:53.157 [6968:8796:0522/182853.157:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:29:44.163 [6968:8796:0522/182944.163:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+5월 22, 2023 18:32:14.160 [6968:8796:0522/183214.160:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 0.155 s for first_image_paint 0.131 s
+
+5월 23, 2023 10:15:19.176 NEW SESSION
+5월 23, 2023 10:15:19.176 [11288:10600:0523/101519.174:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 23, 2023 11:23:52.791 [4828:9208:0523/112352.791:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 23, 2023 17:17:10.335 [11096:11944:0523/171710.335:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+
+5월 24, 2023 13:59:10.483 NEW SESSION
+5월 24, 2023 13:59:10.483 [11512:9240:0524/135910.482:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 24, 2023 13:59:11.931 [11512:9240:0524/135911.931:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 24, 2023 15:06:15.147 [4528:6764:0524/150615.147:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 24, 2023 15:06:16.454 [4528:6764:0524/150616.453:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 24, 2023 15:38:56.273 [10440:4548:0524/153856.273:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 24, 2023 16:22:28.30 [10440:4548:0524/162228.030:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 24, 2023 16:22:40.522 [10440:4548:0524/162240.522:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 24, 2023 17:37:08.530 [10876:7312:0524/173708.530:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+
+5월 25, 2023 10:36:54.630 NEW SESSION
+5월 25, 2023 10:36:54.630 [3636:1904:0525/103654.617:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 25, 2023 11:37:54.217 [8684:5888:0525/113754.217:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 1.224 s for first_image_paint 1.208 s
+5월 25, 2023 11:37:54.428 [8684:5888:0525/113754.428:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 1.224 s for first_image_paint 1.208 s
+5월 25, 2023 11:37:54.814 [8684:5888:0525/113754.814:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 1.224 s for first_image_paint 1.208 s
+5월 25, 2023 11:37:54.931 [8684:5888:0525/113754.931:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 1.224 s for first_image_paint 1.208 s
+5월 25, 2023 11:37:57.848 [8684:5888:0525/113757.847:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 1.224 s for first_image_paint 1.208 s
+5월 25, 2023 11:37:57.964 [8684:5888:0525/113757.964:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 1.224 s for first_image_paint 1.208 s
+5월 25, 2023 11:37:58.65 [8684:5888:0525/113758.065:ERROR:page_load_metrics_update_dispatcher.cc(178)] Invalid first_paint 1.224 s for first_image_paint 1.208 s
+5월 25, 2023 11:43:47.700 [8684:7580:0525/114347.700:ERROR:mcs_client.cc(750)] Received close command, resetting connection.
+5월 25, 2023 13:23:51.389 [7084:9060:0525/132351.389:ERROR:mcs_client.cc(750)] Received close command, resetting connection.
+5월 25, 2023 14:09:32.364 [7084:6576:0525/140932.364:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 25, 2023 15:11:22.962 [5420:9236:0525/151122.962:ERROR:mcs_client.cc(750)] Received close command, resetting connection.
+5월 25, 2023 15:48:42.994 [4492:9092:0525/154842.994:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 25, 2023 16:23:54.452 [4492:9272:0525/162354.452:ERROR:mcs_client.cc(750)] Received close command, resetting connection.
+5월 25, 2023 17:03:52.413 [11360:596:0525/170352.413:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+
+5월 26, 2023 17:08:06.502 NEW SESSION
+5월 26, 2023 17:08:06.503 [8048:11992:0526/170806.493:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 26, 2023 17:08:07.937 [8048:11992:0526/170807.937:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+
+5월 30, 2023 10:46:35.963 NEW SESSION
+5월 30, 2023 10:46:35.963 [11256:9528:0530/104635.962:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 30, 2023 11:30:22.903 [4680:3772:0530/113022.903:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+
+5월 30, 2023 16:41:46.636 NEW SESSION
+5월 30, 2023 16:41:46.636 [10204:1364:0530/164146.635:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 30, 2023 17:10:44.642 [10204:1364:0530/171044.642:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 30, 2023 17:48:30.306 [10204:1364:0530/174830.306:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+
+5월 31, 2023 09:14:06.884 NEW SESSION
+5월 31, 2023 09:14:06.884 [13212:4024:0531/091406.883:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 31, 2023 09:14:08.690 [13212:4024:0531/091408.690:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 31, 2023 11:13:54.567 [2232:13096:0531/111354.567:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 31, 2023 11:13:56.55 [2232:13096:0531/111356.055:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 31, 2023 12:29:14.731 [10836:10452:0531/122914.731:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 31, 2023 12:29:19.326 [10836:10452:0531/122919.326:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 31, 2023 13:04:06.911 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 13:10:19.00 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 13:10:45.689 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 13:16:47.607 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 13:16:53.976 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 13:16:55.470 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 13:20:02.80 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 13:20:03.640 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 13:20:05.318 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)
+5월 31, 2023 14:35:13.997 [10836:10452:0531/143513.996:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 31, 2023 14:37:06.89 [libprotobuf ERROR ..\..\third_party\protobuf\src\google\protobuf\message_lite.cc:133] Can't parse message of type "safe_browsing.ClientDownloadRequest" because it is missing required fields: (cannot determine missing fields for lite message)

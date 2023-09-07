@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 매퍼 파일 -->
+<mapper namespace="com.kosmo.springapp.onememo.service.impl.OneMemoMapper"><!-- 여기 인터페이스로 이동 -->
+	<select id="findByIdAndPwd" resultType="String" >
+		SELECT N_NAME FROM NUTRIENT
+	</select>
+</mapper>

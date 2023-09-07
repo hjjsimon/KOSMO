@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+cardElevation:그림자가 있는 카드뷰를 생성
+cardCornerRadius:모서리 반지름 설정
+cardBackgroundColor:카드뷰의 배경색을 설정
+contentPadding:카드 뷰 내의 여백 설정
+-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <!--카드뷰(안드로이드에서 제공)로 라운드 이미지 만들기-->
+        <!--카브뷰대신 이미지뷰관련 라이브러리 사용해도 무방
+           예:https://github.com/vinc3m1/RoundedImageView
+           -->
+        <!--카드뷰안에는 뷰가 무조건 하나 -->
+        <!--
+            app:cardUseCompatPadding="true"
+            추가시 여백이 많이 생김
+            -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/cardview"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="#CDAFAF"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="50dp"
+
+            >
+            <!--https://github.com/vinc3m1/RoundedImageView-->
+            <ImageView
+                android:id="@+id/itemImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/rounded"
+                />
+
+        </androidx.cardview.widget.CardView>
+        <GridLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:rowCount="3"
+            android:columnCount="2"
+            android:background="#88000000"
+            >
+            <TextView
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:text="이      름 : " />
+            <TextView
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:id="@+id/itemName"
+                android:layout_gravity="fill"
+                />
+            <TextView
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:text="부 서 명 : " />
+            <TextView
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:id="@+id/itemDept"
+                android:layout_gravity="fill"
+                />
+            <TextView
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:text="입 사 일 : " />
+            <TextView
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:id="@+id/itemDate"
+                android:layout_gravity="fill"
+                />
+        </GridLayout>
+    </LinearLayout>
+    <!--구분선-->
+    <!--
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#3C3939"/>-->
+</androidx.cardview.widget.CardView>

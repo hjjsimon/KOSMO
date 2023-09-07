@@ -1,0 +1,11 @@
+Android/* filter=lfs diff=lfs merge=lfs -text
+Bootstrap4/* filter=lfs diff=lfs merge=lfs -text
+ChatGPT_REST_API_WITH_STT_TTS/* filter=lfs diff=lfs merge=lfs -text
+CSSL/* filter=lfs diff=lfs merge=lfs -text
+ES6/* filter=lfs diff=lfs merge=lfs -text
+Extra/* filter=lfs diff=lfs merge=lfs -text
+Java/* filter=lfs diff=lfs merge=lfs -text
+jQuery/* filter=lfs diff=lfs merge=lfs -text
+python/* filter=lfs diff=lfs merge=lfs -text
+React/* filter=lfs diff=lfs merge=lfs -text
+Teachable_ML/* filter=lfs diff=lfs merge=lfs -text

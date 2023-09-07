@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            /*
+                1) CSS속성값 읽기
+                    string css("css속성명"): getter 개념(String 반환이라 제이쿼리 바로 사용 불가)
+                2) CSS 속성값 설정
+                    jQuery css("css속성명","속성값"): setter 개념(제이쿼리 바로 사용 가능)
+            */
+            $('#get').click(function(){
+                var div = $('div');
+                var width = div.css('width');
+                var height = div.css('height');
+                console.log('가로폭:%s, 세로폭:%s',width,height);//parseInt하면 숫자만 반환
+                var back = div.css('background-color');
+                //var back = div.css('backgroundColor');//자스 방식으로 -빼고 대문자로 바꿔도 동일
+                console.log('배경색(제이쿼리):',back);// rgb(255, 0, 0) 로 출력됨
+                console.log('배경색(바닐라):',div.get(0).style.backgroundColor);// red 로 출력됨
+                $('span').html('가로폭:'+width+',세로폭:'+height+',배경색:'+back);
+                //[CSS 속성 설정]= css("속성명","설정할 값")
+                //단위 생략시 무조건 px가 기본 단위이다
+
+            });
+
+            $('#set').on('click',function(){
+                //메소드 체인으로
+                //$('div').css('width','200px').css('height','200px').css('background-color','green');
+                //JSON타입으로
+                $('div').css({width:'200px',height:'200px',backgroundColor:'green'});
+            });
+
+            /*
+            var a = $('a').click(function(){});
+            console.log(a.length);//클릭이벤트 걸린 모든 JQUERY객체 반환
+            var a = $('a').click(function(){
+                console.log("a.html():",$('a').html());//무조건 첫번째만 반환
+                console.log($(this).html());//이건 클릭한 요소의 컨텐츠 반환
+
+            });
+            */
+            /*
+            $('a').click(function(e) {
+            
+                var html = $(this).html();
+                var article = $('#article');
+                switch (html) {
+                    case '크게': article.css('fontSize', '24px'); break;
+                    case '작게': article.css('fontSize', '12px'); break;
+                    case '진하게': article.css('fontWeight', 'bold'); break;
+                    case '보통': article.css('fontWeight', 'normal'); break;
+                    case '빨강': article.css('color', 'red'); break;
+                    case '그린': article.css('color', 'green'); break;
+                    case '검정': article.css('color', 'black'); break;
+                    case '기울이기': article.css('fontStyle', 'italic'); break;
+                    default : article.css('fontStyle', 'normal'); break;
+                }
+            });
+            */
+            var p = $('#article');
+            $('a').click(function(){
+                //클릭시 현재 글자 크기 얻기
+                var fontSize = parseInt(p.css('fontSize'));
+                switch($(this).html().substring(0,1)){//맨앞글자만 가져옴
+                    case '크': p.css('fontSize',fontSize+5+'px'); break;
+                    case '작': 
+                        if(fontSize >= 17)//17부터만 작게 먹게함
+                            p.css('fontSize',fontSize-5+'px'); 
+                        break;
+                    case '진': p.css('fontWeight','bold'); break;
+                    case '보': p.css('fontWeight','normal'); break;
+                    case '빨': p.css('color','red'); break;
+                    case '그': p.css('color','green'); break;
+                    case '검': p.css('color','black'); break;
+                    case '기': p.css('fontStyle','italic'); break;
+                    default: p.css('fontStyle','normal'); break;
+                }
+
+            })
+
+
+
+
+
+
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset >
+        <legend>string css("css속성명"),jQuery css("css속성명","속성값")</legend>
+        <span style="color:green;font-size:1.2em"></span>		
+        <div style="width:100px;height:100px;background-color:red"></div>
+        <button id="get">속성값 읽기</button>
+        <button id="set">속성값 설정</button>
+        <hr/>
+        <a href="#">크게</a> | <a href="#">작게</a> | <a href="#">진하게</a>
+        | <a href="#">보통</a> | <a href="#">빨강</a> | <a href="#">그린</a>
+        | <a href="#">검정</a>  | <a href="#">기울이기</a> | <a href="#">똑바로</a>
+        <p id="article" style="font-size:12px">
+          기사 내용입니다<br/>
+          기사 내용입니다<br/>
+          기사 내용입니다<br/>
+          기사 내용입니다<br/>
+          기사 내용입니다<br/>
+        </p>
+    </fieldset>
+</body>
+</html>

@@ -1,0 +1,41 @@
+package etcclass12;
+
+public class MathClass { //Math는 있음, Class 붙여줘야함
+
+/*	https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Math.html
+ 	
+ 	Class Math
+	java.lang.Object
+	java.lang.Math
+	public final class Math
+	extends Object            ->상속받으면 extends 나옴
+	
+	
+	Method Summary
+	All Methods/ Static Methods/ Concrete Methods ->매개변수로 받은 값으로 작업, 인스턴스 메소드 없음, 스태틱메소드뿐, 별도 값을 가질 필요 없으니까
+*/	
+	
+	
+	public static void main(String[] args) {
+
+		//Math클래스는 인스턴스화(객체화/Heap에 메모리생성) 불가]
+		//Math math=new Math(); //[x]The constructor Math() is not visible, 접근지정자할 때 봄, private라는 뜻
+		System.out.println(Math.PI); //클래스명 Math.으로 접근
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}//////////////main
+}//////////////////class

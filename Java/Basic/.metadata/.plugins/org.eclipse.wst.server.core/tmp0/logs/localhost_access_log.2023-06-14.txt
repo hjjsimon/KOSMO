@@ -1,0 +1,15 @@
+127.0.0.1 - - [14/Jun/2023:20:17:08 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:17:10 +0900] "GET /JSPProj/session06/LoginProcessBasedToken.jsp HTTP/1.1" 200 4168
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:17:10 +0900] "GET /favicon.ico HTTP/1.1" 404 818
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:17:31 +0900] "POST /JSPProj/session06/LoginProcessBasedToken.jsp HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:17:31 +0900] "GET /JSPProj/session06/MyPageBasedToken.jsp HTTP/1.1" 200 4152
+127.0.0.1 - - [14/Jun/2023:20:30:01 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:30:02 +0900] "GET /JSPProj/session06/LoginBasedToken.jsp HTTP/1.1" 200 4148
+127.0.0.1 - - [14/Jun/2023:20:31:39 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:35:56 +0900] "GET /JSPProj/session06/LogoutBasedToken.jsp HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:35:56 +0900] "GET /JSPProj/session06/LoginBasedToken.jsp HTTP/1.1" 200 4142
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:35:57 +0900] "GET /JSPProj/bbs08/List.jsp HTTP/1.1" 200 4174
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:37:33 +0900] "GET /JSPProj/bbs08/List.jsp HTTP/1.1" 200 4174
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:38:26 +0900] "POST /JSPProj/session06/LoginProcessBasedToken.jsp HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:38:26 +0900] "GET /JSPProj/session06/MyPageBasedToken.jsp HTTP/1.1" 200 4153
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:20:38:29 +0900] "GET /JSPProj/bbs08/List.jsp HTTP/1.1" 200 7512

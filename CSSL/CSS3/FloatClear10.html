@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloatClear10.html</title>
+
+</head>
+<body>
+    <!--1) table은 붙박이라 겹칠 수 없음
+        2) div는 겹칠 수 있어서 float로 떠다니게 할 수 있음
+        -> 옛날에는 table로 웹 레이아웃 짰지만 이제 div가 더 좋음-->
+    <fieldset>
+        <legend>float속성(div의 width미 지정)</legend>
+        <div style="background-color:red;float: left;">div1</div>
+        <!--width없이 왼쪽 주면 float 특성에 의해 컨텐츠 크기만큼 줄어들며 왼쪽 붙음
+            div1 줄어들고 남은 자리는 float로 떠다니는 div2가 위로 붙음-->
+        <div style="background-color:green;float: right;">div2</div>
+        <div style="background-color:blue;clear: both;">div3</div>
+        <!--위에서 주는 left 영향을 안받겠다 그러면 left 주면 됨, 모르겠다 싶으면 both(맘 편함,보통 both줌)-->
+    </fieldset>
+        <!-- div의 width미정시에는 나머지 여유 공간을
+            채운다 단,width 지정시에는 자동으로
+            여유 공간을 채우지 않는다 따라서
+            배치를 위해서는 반드시 float속성의 left/right로
+            배치하자.그러면 남은 영역의 왼쪽/오른쪽등을 채우게 된다
+        -->
+    <fieldset>
+        <legend>float속성(div의 width 지정)</legend>
+        <div style="background-color:red;width:100px;float: left;">div1</div><!--안보여도 줘야함-->
+        <div style="background-color:green;width:100px;float: left;">div2</div><!--위의 div1 옆 남는 공간의 왼쪽으로 들어감-->
+        <div style="background-color:blue;width:100px;">div3</div><!--float: left;하면 또 왼쪽에 붙음/냅두고싶으면 float안주면됨-->
+    </fieldset>
+        <!--
+            height도 지정시에는 배치시에
+            모든 DIV에 float나 clear속성을 부여해라
+        -->
+    <fieldset>
+        <legend>float속성(div의 width/height 지정)</legend>
+        <div style="background-color:red;width:50px;height:50px;float: left;">div1</div>
+        <div style="background-color:green;width:50px;height:50px;float: left;">div2</div>
+        <div style="background-color:blue;width:50px;height:50px;clear: both;">div3</div>
+        <!--height 지정이라 float,clear 꼭 써야함-->
+        <!--자식무관 위코드에서 float하면 아래로 다 먹음, 중간에 clear하면 이후로 다 멈춤-->
+    </fieldset>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegExp11.html</title>
+    <script>
+        /*
+        -주요 메소드
+        "문자열".match(/정규표현식/[flags]) : "문자열"에서 정규표현식에 일치하는 요소을 배열로 반환.
+        "문자열".replace(/정규표현식/[flags], "대체문자열") : 정규표현식에 일치하는 요소들을 대체문자열로 변환
+        "문자열".split(/정규표현식/[flags]) : 정규표현식에 일치하는 요소로 split하여 배열로 변환
+        pattern.test("문자열") : 문자열이 정규표현식과 일치하면 true, 아니면 false
+        pattern.exec("문자열") : match메서드와 유사.단, 무조건 첫번째 일치한 요소만 반환
+
+        //1)g는 원하는걸 찾아도 멈추지않고 계속 찾는다.
+        //2)g가 없으면 찾자마자 멈춘다.
+        const regex=/foo/g;//정규표현식 리터럴로 RegExp(정규표현식)객체 생성(생성자함수 RegExp라고 나옴)
+        console.log('%O',regex);//전체에서 찾아서 lastIndex 0
+        console.log(regex.test('foo'));//true, foo갖고있음(test()함수는 regex조건에 맞춰 분석할 문자열)
+        console.log('%O',regex);//0번(f),1번(o),2번(o) 인덱스마다 한번씩 총 3번 찾음
+                                //0번에서 foo찾으므로 true(찾고난 후 인덱스는 맨 뒤 4번에 존재함) */
+
+        //RegExp객체 생성 첫번째
+        
+        //1] RegExp객체.test()함수: 일치하는 패턴 찾으면 true, 아니면 false
+        //2] String객체.match(RegExp객체)함수: 처음 발견된 패턴만 배열로 반환
+        //1) g옵션을 안준 경우(스캔해서 찾으면 멈춤)
+        //var regexp1=/(\d{2})//*g*/;//숫자연속 2개 포함된 것
+        var regexp1=new RegExp(/\d{2}/);//생성자함수버전, 혹은 new RegExp("\\d{2}"); 도 가능(문자열은 이스케이프 처리)
+        console.log('%O',regexp1);// 생성자함수 RegExp()라고 나옴, 이걸로도 위 객체를 만들 수 있다는 뜻
+        var str="AB100CDE99FGHI";
+        console.log(regexp1.test(str));//패턴 찾으면 t, 아니면 f
+        //console.log('lastIndex:',regexp1.lastIndex);
+        //10찾고 10의 0뒤의 4번인덱스에서 멈춤(라스트인덱스는 무시, 쓸일 없음)
+        var findArr=str.match(regexp1);
+        console.log(findArr,findArr.length,findArr.index);//g없는 경우 ['10'] 반환, 길이 1, 찾은 패턴의 시작 인덱스 2
+        var execArr=regexp1.exec(str);
+        console.log(execArr);//match와 결과 동일,무조건 첫번째 반환이라 ['10']반환
+
+        //2) g옵션을 준 경우(문자열 끝까지 스캔반복)
+        //var regexp2=/(\d{2})/g;
+        var regexp2=new RegExp(/\d{2}/,'g');//생성자함수버전 혹은 new Regexp("\\d{2}",'g'); 도 가능ㄴ
+        console.log('%O',regexp2);
+        console.log(regexp2.test(str));//t
+        findArr=str.match(regexp2);
+        console.log(findArr,findArr.length,findArr.index); //g있는 경우(2) ['10', '99'], 길이 2, undefined(인덱스 속성 없음)
+        execArr=regexp2.exec(str);
+        console.log(execArr);//g 줘도 무조건 첫번째 반환이라 ['10']
+
+        //3. 추출하기
+        var str2="[17.07.11 23:29:11] [INFO ]  [eclipse.galileo-bean-thread-50618297 galileo.site.SiteBean:317 ] - ##galileo_bean end. MessageExchange_ID:ID:localhost-15a6308ba1c-6:86071562";
+
+        var regexp3 = /\[(\d{2}\.\d{2}\.\d{2}\s\d{2}:\d{2}:\d{2})\]\s\[(.+)\]\s\s\[(.+)\]\s-\s(.+)/i;
+        var isMatch=regexp3.test(str2);//t
+        //추출방법1
+        if(isMatch){//t일때만 추출
+            
+            //괄호 () 로 그룹을 만들어주고 RegExp.$그룹번호 와 같은 방식으로 접근.
+            //자바는 정규표현식 0번 그룹이 전체 문자열
+            //자스는 정규표현식 1번 그룹부터 시작, 구분한 첫 그룹(1번 그룹은 처음 나타난 (~~) 사이값)
+            console.log('[추출방법1]');
+            console.log(RegExp.$1);
+			console.log(RegExp.$2);
+			console.log(RegExp.$3);
+			console.log(RegExp.$4);
+        }
+        //추출방법2
+        var extractArr=str2.match(regexp3);
+        if(isMatch){
+            console.log('[추출방법2]');
+            console.log(extractArr[0]);//전체문자열
+            console.log(extractArr[1]);
+            console.log(extractArr[2]);
+            console.log(extractArr[3]);
+            console.log(extractArr[4]);
+        }
+        function checkEmail(){
+            var email=document.querySelector('[type=email]').value;
+            console.log(email);
+            var regexp=/\w+@(\w+)\.com/i;//+ 랑 {1,} 동일 -> 1개이상 의미, .도 임의의 한문자
+            regexp.test(email);
+            if(!regexp.test(email)){
+                alert('이메일 형식이 아닙니다');
+                return;
+            }
+            console.log(RegExp.$1);//@(\w+) <- 골뱅이 뒤의 정보를 가져옴, 1번방 시작
+        }
+        //여러줄로 구성된 문자열에서는 패턴을 찾으려면 m옵션을 추가하자
+        var str4 = "#국어\r\n영어\r\n#산수\r\n미술\r\n#음악";
+        var regexp4 = /^#.+$/mg;
+        console.log(regexp4.test(str4));//위에 m있으면 true, m없으면 false(여러줄이면 아예 못찾음)
+        var multilineArr = str4.match(regexp4);
+        console.log(multilineArr);//위에 m있으면 (3) ['#국어', '#산수', '#음악'], m없으면 null(여러줄이면 아예 못찾음)
+    </script>
+</head>
+<body>
+    이메일을 입력하세요?
+    <input type="email"/>
+    <input type="button" value="확인" onclick="checkEmail()"/><!--button태그는 새로고침 기능이 있음, 이걸 대신 씀-->
+</body>
+</html>

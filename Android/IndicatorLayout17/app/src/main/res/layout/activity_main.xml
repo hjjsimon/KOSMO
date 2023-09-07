@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--인디케이터 레이아웃 구현 방법-->
+<!--Step1. 루트 뷰는 FrameLauout-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#347E77"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="클릭하세여"
+                android:layout_gravity="center"
+                />
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <!--
+    인디케이터는
+    Step2. android:layout_gravity="bottom" 속성추가
+    Step3. android:layout_marginBottom="?" 속성 추가
+
+    -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="50dp"
+        >
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/circle1"
+            android:scaleType="centerCrop"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/circle2"
+            android:scaleType="centerCrop"
+            android:layout_marginHorizontal="5dp"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/circle3"
+            android:scaleType="centerCrop"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>

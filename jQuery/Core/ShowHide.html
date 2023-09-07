@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShowHide.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function(){
+            //hide(): 페이지 최초 로드시 내용 숨기기(style="display: none;" 추가됨)
+            $('.content').hide();
+            //제목 클릭시 내용 보이기
+            //1] show() : show한 상태에서 제목 다시 클릭시 그대로다
+            /*
+            $('.title').click(function(){
+                //$(this).next().show();//클릭한 div 다음꺼 보여줌
+                $(this).next().show(1500,function(){//1.5초간 보여줌, 완전 보이면 함수 호출가능
+                    $(this).css('backgroundColor','yellow');
+                });
+
+            })
+            */
+            //2] toggle() : 제목을 다시 클릭시 토글링, show(), hide() 반복
+            /*
+            $('.title').click(function(){
+                $(this).next().toggle(1500,function(){
+                    $(this).css('backgroundColor','yellow');//토글시 실행함수
+                });
+            })
+            */
+            //3] toggle()함수 미사용, show()와 hide()만 사용하여 제목 클릭시 다른 제목의 내용이
+            //  열린게 있으면 자동으로 닫기도록 하기
+            /*
+            $('.title').click(function(){
+                var content = $(this).next();
+                
+                if (content.is(':visible')) {
+                    content.hide(1000);
+                }
+                else {
+                    $('.content').hide(1000);
+                    content.show(1000);
+                }
+            });
+            */
+            /*
+            $('.title').click(function(){
+                //클릭한 제목의 내용이 숨겨져 있다면
+                if($(this).next().css('display')==='none'){
+                    $('.content').hide(1000);
+                    $(this).next().show(1000);
+                }
+                else 
+                    $(this).next().hide(1000);
+            });
+            */
+
+            //JQUERY UI에 accordion이 있음, 이거쓰면 1줄이면 됨
+            $('#accordion').accordion({
+                collapsible : true,
+                active : false
+            })
+
+
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>show(),hide()함수</legend>
+		<div id="accordion"><!-- 제이쿼리 UI적용시 추가DIV -->
+			<div class="title"><h2>제목1</h2></div>
+			<div class="content">
+				내용입니다1<br/>
+				내용입니다1<br/>
+				내용입니다1<br/>
+			</div>
+			<div class="title"><h2>제목2</h2></div>
+			<div class="content">
+				내용입니다2<br/>
+				내용입니다2<br/>
+				내용입니다2<br/>
+			</div>
+			<div class="title"><h2>제목3</h2></div>
+			<div class="content">
+				내용입니다3<br/>
+				내용입니다3<br/>
+				내용입니다3<br/>
+			</div>
+		</div>
+	</fieldset>
+</body>
+</html>

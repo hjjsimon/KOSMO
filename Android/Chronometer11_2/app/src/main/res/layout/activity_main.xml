@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <!-- ※chronometer는 안드로이드에서 사용하는 아이디 고로
+         id로 설정하지 말아라
+         -->
+
+    <Button
+        android:id="@+id/btnTime"
+        android:text="시간설정"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnDate"
+        android:text="날짜설정"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <!--기본적으로 분:초만 표시 .시간까지 표시하려면 자바코드로 구현-->
+    <Chronometer
+        android:id="@+id/timer_chronometer"
+        android:textSize="20sp"
+        android:textStyle="italic|bold"
+        android:textColor="#BD3636"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="안드로이드 OS부팅후 흘러온 시간"
+        android:id="@+id/btnElaspedTime"
+        />
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="타이머"
+            android:textSize="50sp"
+
+            />
+        <Button
+            android:id="@+id/btnStop"
+            android:text="중지"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview"
+            android:layout_alignRight="@id/textview"
+            />
+        <Button
+            android:id="@+id/btnStart"
+            android:text="시작"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btnStop"
+            android:layout_below="@id/textview"
+            />
+    </RelativeLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

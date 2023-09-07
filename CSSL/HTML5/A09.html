@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A09.html</title>
+</head>
+<body>
+    <!--
+       a태그(inline element):Hyper Link기능을 제공하는 태그.(하이퍼텍스트:링크걸린 텍스트)
+                            a태그로 값을 전달하면 get방식(걍 암기)
+       속성:
+            1)href:이동할 페이지 경로 혹은 url주소(http://www....이게 url주소)
+            2)target:이동할 페이지를 보여줄 대상 지정
+                   _self(기본값):자기자신의 브라우저에 이동할 페이지 표시(ex.구글)
+                   _top: _self동일
+                   _parent: _self동일
+                   _blank(새창(탭)으로 페이지가 열림 ex.네이버)
+
+            ※중요
+            a태그를 사용해 이동할 페이지로 값을 전달(쿼리스트링 이용)할수 있다.
+
+            쿼리스트링: 페이지명 ? 이후로 연결된 문자열 의미
+                       ?이름(파라미터)=값의 쌍으로 전달
+                       여러개 전달시에는 &로 연결
+
+            예]<a href="aTag.html?name=hong&age=10&id=kim">클릭</a>
+            
+            -링크 거는 방법 2가지
+            1)절대주소: 링크거는 페이지의 위치가 바뀌더라도 주소가 절대로 변하지 않음(권장)
+                       https://~ 또는 /(홈 디렉토리의 루트를 의미)로 시작
+                       
+                       예]http://www.naver.com:8080/member/login.html
+                         /는 http://www.naver.com:8080(도메인)까지를 의미(8080은 포트번호)
+                        <a href="http://www.baeoomart.co.kr/member/login.html">로그인</a>
+
+            2)상대주소: 링크거는 페이지의 위치에 따라 주소가 상대적으로 변함(현재 작성페이지가 기준)
+                        A/ 표시는 A 디렉토리 아래(/뜻)라는 뜻
+                        . :현재 디렉토리를 의미
+                        .. :상위 디렉토리
+
+                        예]\html\src1\a.html
+                                \src2\b.html
+                                \c.html
+                        -> .html을 파일로 생각, src1, src2, c.html은 같은 폴더에 존재한다고 생각
+                        -> a.html은 src1폴더에 있음, ../으로 위로 가면 html폴더 가면 c.html보임
+
+                      ※이동하려하고 하는 페이지가 같은 디렉토리에 없다면
+                        그 페이지가 속한 현재 디렉토리의 상위 디렉토리를 찾아간다(../시작)
+                        같은 디렉토리에 존재한다면 ./(생략가능)로 시작
+    -->
+    <div>
+        <h2>A태그</h2>
+        <h3>_self(현재 탭에 이동할 웹문서의 내용을 표시:디폴트)</h3>
+        <a href="./ULOL08.html">target속성 미지정(상대경로)</a><br/><!--a태그 인라인이라 줄바꿈 필요-->
+        <a href="http://127.0.0.1:5500/HTML5/ULOL08.html">target속성 미지정(절대경로-http로 시작)</a><br/>
+        <a href="/HTML5/ULOL08.html">target속성 미지정(절대경로-/로 시작)</a><!--포트번호까지 / 처리-->
+        <h3>_blank(새로운 탭에 이동할 웹문서의 내용을 표시)</h3>
+        <a href="../JAVASCRIPT_ES5/Variable01.html" target="_blank">target속성 지정(_blank)</a><!--하나 상위 후 폴더선택 후 .html-->
+        <h3>쿼리 스트링(그냥 url 뒤에 하드코딩)으로 데이터 전달</h3>
+        <a href="https://www.naver.com:443?username=kim&name=가길동&age=20">네이버로 데이터 전달</a>
+        <!--username=kim&name=가길동&age=20인 url전달하지만 우리가 만든 웹문서가 아니라 파라미터로 값을 못받음, 
+            심지어 html이라 정적-->
+    </div>
+</body>
+</html>

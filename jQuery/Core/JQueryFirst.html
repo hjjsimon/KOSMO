@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQueryFirst.html</title>
+
+    <!--jQuery사용을 위한 라이브러리 임베딩-->
+    <!--방법1] 다운받은 .js파일 임베디드
+    <script src="./js/jquery-3.7.0.min.js"></script>-->
+    <!--방법2] CDN(Content Deliver Network)주소 사용-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script>
+        //방법1] 순수 자바스크립트(바닐라 JS)로 구현
+        /*
+        window.addEventListener("DOMContentLoaded", function(){
+            var span = document.querySelector('#jQuery');//자바스크립트 DOM 객체
+            console.log(span);
+                //<span id="jQuery">jQuery 첫 수업입니다</span> 출력
+                //자바로 치면 toString 오버라이딩 됐다고 생각
+            console.log('%O',span);//span#jQuery, 객체라는 뜻, 계속 가다보면 프로토타입 오브젝트 나옴
+            console.log(span.tagName);//SPAN, 태그명은 대문자로 나옴
+            span.style.color='red';//속성 설정
+            span.innerHTML='<strong>프로그램 진입점</strong>';//자바는 프로그램 진입점 메인 메소드
+                //시작~끝 태그 사이에 이걸로 교체
+            var legend = document.querySelector('legend');//태그명으로 얻어옴
+            legend.onclick = function(){//레전드영역 클릭시
+                span.style.color='blue';
+                span.innerHTML='jQuery 첫 수업입니다';
+            };
+        });
+        */
+        /*
+        //방법2] 제이쿼리로 구현
+        //프로그램 진입점-방법1] $(document).ready(function(){});
+        $(document)//$(CSS셀렉터 넣어줌): 팩토리 함수 라고 함, document.querySelector와 동일 기능
+                    //선택한 도큐먼트에 .찍으면 다 jQuery 함수가 나옴
+            .ready(function(){
+                //도큐먼트가 준비가 되었다면? 과 동일, DOM문서가 브라우저에 로딩이 되었다면
+                //function 함수가 호출 된다~ 와 동일
+                //자스로 window.addEventListener("DOMContentLoaded" 코드 동일
+                var span = $('#jQuery');//제이쿼리 DOM 객체, 자바스크립트 DOM 객체와 다름
+                console.log(span);
+                console.log('%O',span);
+                console.log(span.tagName);//undefined, tagName 이라는 속성이 없는 것
+                //span.style.color='red';//style 속성도 없음 에러남
+                //span.css('color','red');//제이쿼리 코어에 있음, 위와 동일 코드임
+                //span.html('<strong>프로그램 진입점</strong>');//위에서 innerHtml동일코드
+                //자바스크립트는 위의 두 줄을 한줄로 코딩 불가, 제이쿼리는 가능
+                span.css('color','red').html('<strong>프로그램 진입점</strong>');
+                //제이쿼리는 제이쿼리 DOM 객체를 반환함, 그러면 또 함수 바로 적용가능 이런식으로 체인!
+                $('legend').click(function(){
+                    //legend 태그 걸고, 클릭이벤트 걸었음, 콜백함수로 인자에 넣어주면됨
+                    span.css('color','blue').html('jQuery 첫 수업입니다');
+                });
+        });
+        //위 코드 간결하게
+        $(document).ready(function(){
+            var span = $('#jQuery');
+            span.css('color','red').html('<strong>프로그램 진입점</strong>');
+            $('legend').click(function(){
+                span.css('color','black').html('jQuery 첫 수업입니다');
+            });
+        });    
+        */
+        /*
+        //프로그램 진입점-방법2] $().ready(function(){});
+        $().ready(function(){
+            $('#jQuery').css('color','red').html('<strong>프로그램 진입점</strong>');
+            $('legend').click(function(){
+                $('#jQuery').css('color','blue').html('jQuery 첫 수업입니다');
+            });
+        });
+        */
+        //프로그램 진입점-방법3] $(function(){}); - 권장, 최다사용
+        $(function(){//자스로 window.addEventListener("DOMContentLoaded" 코드 동일
+            $('#jQuery').css('color','red').html('<strong>프로그램 진입점</strong>');
+            $('legend').click(function(){
+                $('#jQuery').css('color','blue').html('jQuery 첫 수업입니다');
+            });
+        });
+        /*
+        //프로그램 진입점-방법4] jQuery() - $쓰는게 제이쿼리 말고도 있어서 충돌방지용
+        jQuery(function(){
+            jQuery('#jQuery').css('color','red').html('<strong>프로그램 진입점</strong>');
+            jQuery('legend').click(function(){
+                jQuery('#jQuery').css('color','blue').html('jQuery 첫 수업입니다');
+            });
+        });
+        */
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>jQuery첫 수업</legend>
+        <span id="jQuery">jQuery 첫 수업입니다</span>
+   </fieldset>
+</body>
+</html>

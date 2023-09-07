@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormSelectorExam.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            
+            $(':button:first').click(function(){
+                $('#desc').val($('#src').val());
+            });
+
+            //select는 change이벤트
+            $('#sel').change(function(){
+                $('#sport').val($(this).val()==='baseball'?'야구':$(this).val()==='soccer'?'축구':'배구');
+            });
+
+            $(':radio').click(function(){
+                $('#gender').val($(this).val()==='M'?"남자":"여자");
+            })
+            
+            //문] 메일 전체 선택시 체크, 하나라도 미선택시 체크해제
+            /*
+            var checkboxes = $('ul :checkbox');
+            var allCheckbox = $('[value=all]');
+            
+            checkboxes.click(function(){
+                if(checkboxes.filter(':checked').length === checkboxes.length){
+                    allCheckbox.prop('checked', true);
+                }
+                else{
+                    allCheckbox.prop('checked', false);
+                }
+            });
+
+            allCheckbox.click(function(){
+                checkboxes.prop('checked', allCheckbox.prop('checked'));
+            });
+            */
+
+            var mailingLength = $(':checkbox').slice(1).length;//전체선택 체크박스 빼고 숫자샌것
+            console.log(mailingLength);//7
+            $(':checkbox').click(function(){
+                if($(this).val()==='all'){//전체선택 체크박스 클릭시
+                    if($(this).prop('checked')){//체크된 상태라면
+                        $(':checkbox').slice(1).prop('checked',true);//전체 체크해줌
+                    }
+                    else
+                        $(':checkbox').slice(1).prop('checked',false);
+                }
+                else{//전체선택 체크박스 이외의 체크박스 클릭시
+                    if($(this).prop('checked'))
+                        if(mailingLength === $(':checkbox:checked').length){
+                            $(':checkbox:first').prop('checked',true);
+                        }
+                        else
+                            $(':checkbox:first').prop('checked',false);
+                    else
+                        $(':checkbox:first').prop('checked',false);
+                }
+            })
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>폼 셀렉터 연습</legend>
+		<h2>텍스트 복사</h2>
+		<input type="text" id="src" />
+		<input type="button" value="복사" />
+		<input type="text"  id="desc" />
+		<h2>선택상자의 값 복사</h2>
+		<select  id="sel" >
+			<option value="baseball">야구</option>
+			<option value="balleyball">배구</option>
+			<option value="soccer">축구</option>
+		</select>
+		<input type="text" id="sport" />
+		<h2>radio상자의 값 복사</h2>
+		<input type="radio" name="gender" value="M" />남자
+		<input type="radio"	name="gender" value="W" />여자
+		<input type="text" id="gender" />
+		<h2>메일선택</h2>
+		<input type="checkbox" value="all">전체 선택
+		<ul style="list-style-type: decimal;">
+			<li><input type="checkbox" name="mailing" value="mail1" />메일1</li>
+			<li><input type="checkbox" name="mailing" value="mail2" />메일2</li>
+			<li><input type="checkbox" name="mailing" value="mail3" />메일3</li>
+			<li><input type="checkbox" name="mailing" value="mail4" />메일4</li>
+			<li><input type="checkbox" name="mailing" value="mail5" />메일5</li>
+			<li><input type="checkbox" name="mailing" value="mail6" />메일6</li>
+			<li><input type="checkbox" name="mailing" value="mail7" />메일7</li>
+		</ul>
+	</fieldset>
+</body>
+</html>

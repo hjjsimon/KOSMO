@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ScrollView15" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#D65127</item>
+        <item name="android:layout_marginHorizontal">5dp</item>
+    </style>
+
+    <style name="Theme.ScrollView15" parent="Base.Theme.ScrollView15" />
+
+</resources>

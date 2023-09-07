@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bind.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            /*
+                ※아래 : 이후 띄어쓰기 금지
+                :first-child 혹은 :last-child 자식/부모관계일때 부모안에서 첫번째 태그이거나 마지막 태그여야한다
+                :first 혹은 :last 자식 부모와 관계없이 해당 태그중에 첫번째냐 마지막이야(바닐라에는 적용안됨)
+                :eq(인덱스) 자식부모 관계와 상관없이 해당 태그들중에서 순서를 의미
+            */
+            //자식태그로 존재하는 div중 첫번째 div태그
+            //선택한 div요소 중에서 부모/자식관계에 있는 div중 첫번째
+            console.log($('div:first-child').html());//네이버
+            //팩토리 함수로 <div id="naver" title="네이버">네이버</div> 하나 선택
+
+            //선택한 div요소중 첫번째 div
+            console.log($('div:first').html());//div1
+            console.log($('div:eq(0)').html());//위 동일코드
+
+            //구조적으로 마지막 자식
+            console.log($('div:last-child').length);//2나옴
+            $('div:last-child').css('background-color','yellow');//테스트
+            //<div id="nate" title="네이트">네이트</div> 랑 마지막 div 선택된 것
+            console.log($('div:last-child').html());
+            //근데 html()하면 선택된 요소 중 첫번째 요소인 네이트 만 가져옴
+            //.each()함수를 써서 선택된 각각의 요소에 html()함수를 적용해야한다
+            $('div:last-child').each(function(){//콜백함수 넣어줌
+                //팩토리함수에 의해 요소 2개 선택되면 각각에 대해서 콜백함수 function이 실행되는 것
+                console.log($(this).html());//function안에서 this는 함수가 적용된 요소 의미
+                /*
+                    h2 style="background-color: red">unbind테스트</h2>
+                    <input type="button" value="이벤트해제">
+                */
+            });
+            //메모리가 생성된 순서대로 인덱스가 부여된다
+            //아래코드 실행시 네이버가 2(마지막 div가 2가 아님)
+            console.log($('div:eq(2)').html())
+            
+            //click이벤트는 워낙 빈번하게 발생하므로 함수로 구현해놓음
+            /*
+            $('button').click(function(e){//이벤트 객체 넣을수도 있음
+                //버튼 3개에 모두 클릭함수 적용, 클릭시 인자로 전달된 function 발생
+                //※$(this)는 $(선택자).jQuery함수()안에서 해당 선택자를 지칭]
+                //즉 이벤트 핸들러 안에서 $(this)는 해당 이벤트가 발생한 객체를 의미
+                var buttonText = $(this);//클릭한 버튼이 this가 됨, 그떄마다 다를것
+                console.log('클릭이벤트 발생한 버튼:',$(this).html());//값 가져오면 게터
+                console.log('클릭이벤트 발생한 버튼:',$(this).html('<strong>'+$(this).html()+'버튼이 클릭되었어요</strong>'));//값 넣으면 세터
+            });
+            */
+            $('button').bind('click',function(){
+                //bind, 이벤트랑 핸들러함수를 바인딩함
+                //클릭이벤트 실행시 function실행되도록 바인딩~
+                //다른 이벤트는 써도 click은 너무 많이 써서 함수로 구현한만큼 이렇게는 잘 안씀, 위에 방식으로 씀
+                var buttonText = $(this).html();
+                console.log(buttonText);//클릭한 버튼 텍스트 나옴
+                console.log(buttonText.indexOf('해제')); //이벤트해제 버튼만 3 출력, 나머지는 -1
+                if(buttonText.indexOf('해제') == -1){
+                    if(buttonText.indexOf('버튼') != -1)//-1이 아니면 버튼이 포함된것
+                        buttonText.substring(0,3);//0~끝인덱스 -1까지
+                    else
+                        buttonText+='버튼이 클릭 되었어요';
+                    $(this).html(buttonText);//클릭한 버튼에 추가
+                }
+            });
+            /*
+            $('div:eq(1) > div').bind('mouseover',function(){
+                //1번 다이브의 자식 다이브 3개 선택
+                //마우스 오버시 현재 함수 실행
+                $(this).css({backgroundColor:'black',color:'white'});
+
+            }).bind('mouseout',function(){
+                //마우스 아웃시 현재 함수 실행
+                $(this).css({backgroundColor:'white',color:'black'});
+            });
+            */
+/*
+            //mouseover(), mouseout()도 click()처럼 함수로 제공된다
+            $('div:eq(1) > div').mouseover(function(){
+                $(this).css({backgroundColor:'black',color:'white'});
+            }).mouseout(function(){
+                $(this).css({backgroundColor:'white',color:'black'});
+            });
+*/
+            /*
+                이벤트 핸들러(콜백함수) 즉 jQuery함수안에서 this 와 $(this)의 차이점]
+            
+                1] this: 이벤트가 발생한 자바스크립트 객체
+                2] $(this):이벤트가 발생한 제이쿼리 객체
+                
+                즉 $(this) 와 this는 이벤트 핸들러에서 이벤트가 발생한 객체를 의미한다(자스의 target!)
+            */
+            //네이버, 다음, 네이트 클릭시 페이지이동
+            $('div:eq(1) > div').bind('click',function(){
+                //자바스크립트 객체로 얻어오면 태그의 title속성 그대로 쓰지만 제이쿼리는 불가
+                console.log($(this).title);//undefined
+                console.log($(this).get(0).title);
+                console.log(this.title);//위의 get하면 지금 this와 동일, 인덱스 넣으면, 자스객체로 바꿔줌
+                switch(this.id){
+                    case "naver": location.href="https://www.naver.com";break;
+                    case "daum": location.href="https://www.daum.net";break;
+                    default: location.href="https://www.nate.com";
+                }
+            });
+
+            //h2요소(unbind()함수 테스트)에 클릭 이벤트 바인딩
+            $('div:last h2').bind('click',function(){
+                console.log($(this).html());
+            });
+            //이벤트 해제
+            //bind()메소드로 바인딩한 이벤트는
+            //unbind("해제할 이벤트명")메소드로 언바인딩 즉 이벤트 해제
+            $('button:last').click(function(){//이벤트해제 버튼 누르면 h2태그 눌러도 출력안됨
+                $('div:last h2').unbind('click');
+            });
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>bind("이벤트명",콜백함수)</legend>
+		<div>div1</div><!--div선택시 인덱스 0번, 돔이 하나하나 메모리에 그려나감-->
+		<button type="button">클릭1</button>
+		<button type="button">클릭2</button>
+		<button type="button">클릭3</button>
+		<div><!--인덱스1번-->
+			<div id="naver" title="네이버">네이버</div><!--인덱스2번-->
+			<div id="daum" title="다음">다음</div><!--인덱스3번-->
+			<div id="nate" title="네이트">네이트</div><!--인덱스4번-->
+		</div>
+		<div><!--인덱스5번-->
+			<h2 style="background-color: red">unbind()함수 테스트</h2>
+			<button type="button">이벤트해제</button>
+		</div>
+	</fieldset>
+</body>
+</html>

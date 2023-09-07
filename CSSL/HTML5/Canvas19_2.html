@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas19_2.html</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="200" style="background-color: yellow;"></canvas>
+    <script>
+        var canvas=document.querySelector('#canvas');
+        var ctx=canvas.getContext('2d');
+        ctx.font='25px 굴림체';
+        ctx.fillStyle='blue';//글자 채우기 색상 설정
+        //기준선 보이기]
+        ctx.strokeStyle='red';//선 색상 스타일 설정
+        ctx.moveTo(50,20);
+        ctx.lineTo(50,180);
+        ctx.stroke();//선긋기
+        //그림자 표시를 위한 설정]
+        ctx.shadowColor='rgba(192,192,192,0.8)';
+        ctx.shadowOffsetX=5;//그림자 시작 x위치(아래보면 50,50이 기준, 여기서 오른쪽,아래로 5,5 내려가 그림자 시작)
+        ctx.shadowOffsetY=5;//그림자 시작 y위치
+        ctx.shadowBlur=1;//그림자 퍼짐 정도(최대값100->너무 퍼져서 안보임)
+        //글자 그리기
+        ctx.textAlign='start';//텍스트 정렬, start, end 등 줄 값 정해져있음
+        ctx.fillText('HTML5_START',50,50);//텍스트 그릴때는 fill text, 첫번째인자 text넣어주면 됨, 50,50부터 H 그림
+        
+        ctx.textAlign='end';
+        ctx.fillText('HTML5_END',50,80);//이건 x=50에서 끝남, y축은 80시작
+
+        ctx.textAlign='center';
+        ctx.fillText('HTML5_CENTER',50,110);
+
+        ctx.textAlign='left';//left는 우리같은 LTR 작성기준 start동일, 아랍이면 RTL
+        ctx.fillText('HTML5_LEFT',50,140);
+
+        ctx.textAlign='right';//end동일
+        ctx.fillText('HTML5_RIGHT',50,170);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFrame14.html</title>
+</head>
+<body>
+    <!--
+        iframe태그(inline element):인라인 프레임, 화면속의 화면을 구성할때 사용하는 태그
+                                   (ex.네이버 홈페이지 중 일부 광고)
+        [주요 속성]
+        1) src: 프레임안의 내용을 구성할 문서 경로나 사이트 경로
+        2) frameborder: 인라인 프레임의 테두리 두께
+        3) height: 프레임의 세로 폭
+        4) width: 프레임의 가로 폭
+        5) scrolling  
+            1> auto: 프레임안 의 내용에 따라 자동으로스크로바가 생김(기본값)
+            2> no: 내용이 많아도 스크롤바를 생기지 않게 설정(권장)
+            3> yes: 내용이 적어도 무조건 스크롤바 생김
+        6) marginheight: 프레임과 내용사이의 세로 여백
+        7) marginwidth: 프레임과 내용사이의 가로 여백
+    -->
+    <div>
+        <h2>화면속의 화면(사이트)</h2>
+        <iframe src="https://www.nate.com" scrolling="no" frameborder="0" width="400" height="400">
+        </iframe>
+        <h2>화면속의 화면(페이지)</h2>
+        <iframe src="Link/IFrameInLink.html" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" width="400" height="400">
+
+        </iframe>
+
+    </div>
+
+
+
+
+</body>
+</html>

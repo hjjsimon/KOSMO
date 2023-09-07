@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector01.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //1]선택된 제이쿼리 DOM객체 수 얻기
+            // -length속성(요소 존재여부 판단에도 사용 즉 0이면 요소가 없다)
+            // size()함수: 3.0에서 removed, 대신 length속성 사용 권장
+            console.log('a요소의 수:', $('a').length);//팩토리함수로 요소 선택, 태그명으로 선택자 고름
+            console.log('tr요소의 수:', $('TR').length);//태그 대문자로 써도 나옴
+          
+            //2]$("선택자[속성*='속성값']") 형식으로 jQuery객체 선택
+            // 속성값을 포함한! 선택자를 가져옴(*은 포함한다는 뜻)
+            //*없으면 정확히 http가 naver여야함, *쓰면 포함만되면 됨
+            //$('a[href=naver]').css('color','red').css('fontSize','1.8em');
+            $('a[href*=naver]').css('color','red').css('fontSize','1.8em');
+            //$는 끝자리 의미, 다음 선택됨(정규표현식 참고)
+            $('a[href$=net]').css('color','blue').css('fontSize','1.8em');
+            //^는 시작 의미
+            $('a[href^=www]').css('color','green').html('NATE');//nate를 바꿈
+           
+            //3]$("선택자:contains('문자열')"): 시작태그와 종료태그 사이의 내용으로 선택
+            $('a:contains(이)').css('backgroundColor','black');//'이'가 포함된 네이버 선택
+
+            //4]$("선택자:even") 혹은 $("선택자:odd"). 인덱스는 0부터
+            //짝수번째는 빨간, 홀수번째는 그린으로 배경색 적용
+            //table 한칸 띄고 tr하면 table 밑에 하위 tr 가져옴
+            // 첫번째 tr은 0부터 시작, 두번째 table의 첫번째 tr은 5번이 됨
+            $('table tr:even').css('background-color','red');
+            $('table tr:odd').css('background-color','green');
+
+            //5]$("선택자:first-child") 혹은 $("선택자:eq(인덱스)")
+            //first-child는 구조선택자, 구조적으로 table의 첫번째 tr인 맨 위 2개 tr을 흰색으로
+            //eq()는 인덱스 번호로 찾음
+            $('table tr:first-child').css('background-color','white');
+            $('table tr:eq(3)').css('background-color','blue');//tr 맨위부터 0번 인덱스로 시작
+            $('table tr:eq(6)').css('background-color','blue');
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>선택자 첫번째</legend>
+		<ul style="list-style-type: decimal;">
+			<li><a href="http://www.naver.com">네이버</a></li>
+			<li><a href="http://www.daum.net">다음</a></li>
+			<li><a href="www.nate.com">네이트</a></li>
+		</ul>			
+	
+		<table  style="background-color:gray ;width:60%;border-spacing: 1px;">
+			<tr style="background-color:white ;" >
+				<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>
+			</tr>
+			<tr style="background-color:white ;" >
+				<td>1</td><td>제목1</td><td>작성자1</td><td>2013-9-12</td>
+			</tr>
+			<tr style="background-color:white ;" >
+				<td>2</td><td>제목2</td><td>작성자2</td><td>2013-9-12</td>
+			</tr>
+			<tr style="background-color:white ;">
+				<td>3</td><td>제목3</td><td>작성자3</td><td>2013-9-12</td>
+			</tr>
+			<tr style="background-color:white ;">
+				<td>4</td><td>제목4</td><td>작성자4</td><td>2013-9-12</td>
+			</tr>						
+		</table>
+		<br/>
+		<table  style="background-color:gray ;width:60%;border-spacing: 1px;">
+			<tr style="background-color:white ;" >
+				<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>
+			</tr>
+			<tr style="background-color:white ;" >
+				<td>1</td><td>제목1</td><td>작성자1</td><td>2013-9-12</td>
+			</tr>
+			<tr style="background-color:white ;" >
+				<td>2</td><td>제목2</td><td>작성자2</td><td>2013-9-12</td>
+			</tr>
+			<tr style="background-color:white ;">
+				<td>3</td><td>제목3</td><td>작성자3</td><td>2013-9-12</td>
+			</tr>
+			<tr style="background-color:white ;">
+				<td>4</td><td>제목4</td><td>작성자4</td><td>2013-9-12</td>
+			</tr>			
+		</table>
+	</fieldset>
+</body>
+</html>

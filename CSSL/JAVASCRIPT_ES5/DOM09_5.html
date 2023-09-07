@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM09_5.html</title>
+    <script>
+        //태그명으로 얻기- 사용자가 체크한값과 입력값을 콘솔에 출력하기
+        function fnGetElementsByTag(){//아래 버튼 클릭시 실행되는 함수 정의해줌
+            var inputs=document.getElementsByTagName('input');//input태그들 잔뜩 가져옴(11개)
+            console.log('%O',inputs);//HTML태그(엘리먼트)를 담는 컬렉션이라 HTML컬렉션이라고 나옴
+            //HTMLCollection(11): 유사배열, length속성, item()함수
+            //var inputs=document.querySelectorAll('input');//태그명으로 선택
+            //console.log('%O',inputs);
+            //NodeList(11): 유사배열, length속성, forEach()함수, item()함수,entries()함수,keys()함수,values()함수
+            //console.log(inputs.item(0).value);//input노드 반환
+            //console.log(inputs.item(0).checked);//체크하고 누르면  true나옴
+            console.log(inputs[0].value);//item 대신 인덱스로 접근해도 결과 동일
+            console.log(inputs[0].checked);//0번 체크시 true반환
+            //유사배열은 배열처럼 사용[o] -> index, length 사용가능
+            //for(var i=0;i<inputs.length;i++) console.log(inputs[i]);//11개 요소 가져오기
+            //inputs.forEach(function(item){});//[x]함수정의 안돼있음, 에러남
+
+            //[유사배열에 forEach 적용하기]
+            //방법1] 유사배열을 배열로 만들기:Array.from() ->위의 NodeList는 forEach있어서 안바꿔도 됨
+            //Array.from(inputs).forEach(function(item){console.log(item);})//모든 input태그 출력
+            
+            //방법2] 유사배열의 프로토타입에 배열의 forEach메소드 추가하기
+            HTMLCollection.prototype.forEach=Array.prototype.forEach;//원래 메소드명 내맘, 근데 헷갈리니까 forEach 똑같이 이름 만듦
+            //Array의 forEach함수를 떼와서 HTMLCollection에 forEach(왼쪽이름)라는 메소드를 만들어 붙인다~
+            //inputs.forEach(function(item){console.log(item);});
+            
+         var checkString='',textString='';
+            inputs.forEach(function(item){
+                //자스에서 checked속성 체크여부 판단은 반드시 true, false로 판단
+
+                if(item.name==='inter' && item.checked===true){
+                    checkString+=codeToValue(item.value)+' ';        
+                }
+                if(item.name==='txt') textString=item.value;
+            });
+            
+            console.log('체크된 값:',checkString);
+            console.log('입력한 값:',textString);
+        }; 
+        function codeToValue(code){
+            switch(code.toUpperCase()){//대문자
+                case 'POL': return "정치";
+                case 'ECO': return "경제";
+                default: return "연예";
+            }
+        }
+        //name속성으로 얻기- 체크된건 체크해제, 체크안된건 체크
+        function fnGetElementsByName(){
+            var names=document.getElementsByName('inter');
+            console.log('%O',names);//NodeList(3) 반환
+            //keys():{'value':인덱스,done:boolean}으로 JSON형태의 객체반환
+            //value는 NodeList에 저장된 요소들의 인덱스
+            //done은 꺼내올 요소가 있으면 false, 없으면 true
+            //즉, 배열의 키라고 할 수 있는 인덱스를 꺼내옴
+            var iterator=names.keys();
+            console.log('%O',iterator);//자바처럼 next로 꺼내옴
+            //console.log(iterator.next());//{value: 0, done: false}
+            //console.log(iterator.next());//{value: 1, done: false}
+            //console.log(iterator.next());//{value: 2, done: false} 3개니까 3번하면 다 꺼내옴
+            //console.log(iterator.next());//{value: undefined, done:true} 꺼내올게 없으면 true
+            //var value;
+            //while(!(value=iterator.next().done)){//hasnext()가 없음, done이 true가 아닐때까지 반복시키면 같음, done을 value에 담음
+            var index;
+            while((index=iterator.next().value)!==undefined){
+                //console.log(value);//true되면 !이라 false로 while나감, 위의 4줄 while로 한큐해결
+                console.log(names[index]);//index가져오는게 의미가 있대, value에 인덱스 담아옴
+            }
+            //values():{'value':노드,done:boolean}형태의 객체반환
+            //value는 NodeList에 저장된 노드들
+            //done은 꺼내올 요소가 있으면 false, 없으면 true
+            var iterator_=names.values();//반환타입:IterableIterator<HTMLElement> 즉 HTML요소(태그)
+            //console.log(iterator_.next());//{value: input, done false}
+            //console.log(iterator_.next());//{value: input, done: false}
+            //console.log(iterator_.next());//{value: input, done: false}
+            //console.log(iterator_.next());//{value: undefined, done: true}
+            var node;
+            while((node=iterator_.next().value)!==undefined){
+                console.log(node);//values로 꺼내온 요소3개 
+            }
+            //자스로 체크 설정시에는 checked="checked"나 checked=true;
+            //자스로 체크 해제시에는 checked=null나 checked=false;
+            //단, 조건 판단시에는 반드시 true나 fasle로 판단해야한다(그냥 무조건 t,f로 판단)
+            names.forEach(function(item){
+                if(item.checked) item.checked=false;
+                else item.checked=true;
+            });
+        }
+        //클래스명으로 얻기
+        function fnGetElementsClass(){
+            var portals=document.getElementsByClassName('portal');
+            console.log('%O',portals);//HTMLCollection
+            //시작태그와 종료태그 사이의 컨텐츠 읽어오기, forEach대신 for문 쓰면 됨(위의 방법1,2대신 가능)
+            for(var i=0;i<portals.length;i++){
+                console.log(portals[i].textContent);
+            }
+        }
+        //아이디명으로 얻기1
+        function fnChangeImage(num){
+            var img=document.getElementById('image');//아이디 없으면 null반환
+            //img.setAttribute('src','../Images/'+num+'.jpg')//num으로 이미지 바꿀 예정
+            img.src='../Images/'+num+'.jpg';//태그에 src속성 있음, img.src 가능 99%
+        }
+        //아이디명으로 얻기2
+        function fnCopy(){
+            document.getElementById('dest').value=document.getElementById('src').value;
+            document.getElementById('destTxt1').value=document.getElementById('srcTxt1').value;
+            document.getElementById('destTxt2').value=document.getElementById('srcTxt2').value;
+        }
+    </script>
+</head>
+<body>
+    <h2>DOM API 사용하기:노드 가져오기</h2>
+    <fieldset style="width:60%">
+        <legend>다양한 방법으로 노드 가져오기</legend>
+        <h2>태그명으로 얻기</h2>
+        <input type="checkbox" name="inter" value="POL">정치
+        <input type="checkbox" name="inter" value="ECO" />경제
+        <input type="checkbox" name="inter" value="ENT" checked />연예
+        <input type="text" name="txt" />
+        <input type="button" value="태그명으로 DOM객체 얻기" onclick="fnGetElementsByTag()" />
+        <h2>태그의 name속성으로 얻기</h2>
+        <input type="button" value="NAME속성에 지정한 값으로 DOM객체 얻기" onclick="fnGetElementsByName()" />
+        <h2>클래스명으로 얻기</h2>
+        <ul>
+            <li><a href="#" class="portal">네이버</a></li>
+            <li><a href="#" class="portal">다음</a></li>
+            <li><a href="#" class="portal">네이트</a></li>
+        </ul>
+        <button onclick="fnGetElementsClass()">클래스명으로 DOM객체 얻어오기</button>
+        <h3>아이디명으로 얻기</h3>
+        <fieldset>
+            <legend>이미지 교체</legend>
+            <a href="javascript:fnChangeImage(1)">1번 이미지</a>
+            <a href="javascript:fnChangeImage(2)">2번 이미지</a>
+            <a href="javascript:fnChangeImage(3)">3번 이미지</a>
+            <a href="javascript:fnChangeImage(4)">4번 이미지</a>
+            <hr />
+            <img id="image" src="../Images/1.jpg" alt="이미지교체" style="width:200px;height:200px" />
+        </fieldset>
+        <fieldset>
+            <legend>전화번호 복사</legend>
+            <select id="src">
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="017">017</option>
+                <option value="019">019</option>
+            </select>
+            -
+            <input type="text" size="4" maxlength="4" id="srcTxt1" />
+            -
+            <input type="text" size="4" maxlength="4" id="srcTxt2" />
+            <br />
+            <input type="button" value="복사" onclick="fnCopy()" />
+            <br />
+            <select id="dest">
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="017">017</option>
+                <option value="019">019</option>
+            </select>
+            -
+            <input type="text" size="4" maxlength="4" id="destTxt1" />
+            -
+            <input type="text" size="4" maxlength="4" id="destTxt2" />
+        </fieldset>
+    </fieldset>
+</body>
+</html>

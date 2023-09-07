@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM09_3.html</title>
+    <script>
+        window.addEventListener('DOMContentLoaded',function(){
+            var ul=document.querySelector('ul');
+            var buttonUp=document.querySelector('.up');//.클래스명
+            var buttonDown=document.querySelector('.down');
+           
+            var li= null;//클릭한 LI를 담는 변수
+            //li의 부모인 ul에 이벤트바인딩(리스너 부착)
+            //li마다 클릭이벤트 달아야함 귀찮, 부모 ul에만 걸면 다 전파됨 굿(이벤트 버블링)
+            ul.onclick=function(e){//이벤트객체 관련정보를 e가 갖고있음(지금까진 e필요없었어서 안씀)
+                console.log(e.target.nodeName);//클릭이벤트가 발생한 대상.nodeName은 대문자 태그명
+                if(e.target.nodeName==='LI'){//클릭이벤트가 LI에서 발생시
+                    if(li!=null) {//처음에 null해서 false나옴
+                        li.style.backgroundColor='white';//다른걸 클릭시 이전 클릭은 흰색배경으로 전환
+                    }    
+                    //클릭한 li의 배경색설정(이벤트 발생대상 e.target이 LI임)
+                    e.target.style.backgroundColor='green';
+                    //변수 li를 클릭한 li로 변경
+                    li=e.target;
+                }
+            };
+            buttonUp.onclick=function(){//e안쓸거라 안씀
+                if(li===null){//null이면 선택안한것
+                    alert('메뉴를 클릭하세요');
+                    return;
+                }
+                var previous=li.previousElementSibling;//li는 현재 클릭한 것, 위로 올릴거라 형 끌어내림
+                console.log('previous:',previous);
+                if(previous===null){//맨 위에 있는 메뉴클릭하고 위로 누르면 끌어내리고 올라갈 형제가 없어서 null나옴
+                    alert('이전 메뉴가 없어요');
+                    return;
+                }
+                li.insertAdjacentElement('afterend',previous)//클릭하면 그게 li(현재노드), 그 한칸 위가 previous(새로운노드)됨,
+                //targetelement(기존요소)가 li임, li 밑(afterend)에 previous(li위에 있던놈)를 끌어내리는 것 
+            };
+            buttonDown.onclick=function(){
+                if(li===null){
+                    alert('메뉴를 클릭하세요');
+                    return;
+                }
+                var next=li.nextElementSibling;
+                if(next===null){
+                    alert('다음 메뉴가 없어요');
+                    return
+                }
+                li.insertAdjacentElement('beforebigin',next)//이번엔 위로 올리는 개념(버튼업 반대) 
+            };
+        });
+    </script>
+</head>
+<body>
+    <h2>DOM API 사용하기:노드의 위치 바꾸기</h2>
+  <fieldset style="width:60%">
+    <legend>메뉴 위치 변경하기</legend>
+    <ul>
+      <li>메뉴1</li>
+      <li>메뉴2</li>
+      <li>메뉴3</li>
+      <li>메뉴4</li>
+      <li>메뉴5</li>
+      <li>메뉴6</li>
+    </ul>
+    <button class="up">위로</button>
+    <button class="down">아래로</button>
+  </fieldset>
+</body>
+</html>

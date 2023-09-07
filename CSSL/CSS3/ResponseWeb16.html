@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResponseWeb16.html</title>
+  <style>
+    /*미디어 규칙(@있으면 규칙)을 이용해 해상도에 따라 반응형 웹 만들기(다른 CSS속성적용)*/
+    @media screen and (max-width:640px) {/*스마트폰용: 0~640px까지는 지금 CSS적용*/
+      #allWrap {
+          width: 100%;
+      }
+      #content p {
+        font-size: 2em;
+      }
+    }
+    @media screen and (min-width:1000px) {/*데스크탑용: 1000px이상은 지금 CSS적용*/
+      #allWrap {
+          width: 80%;
+      }
+      #content p {
+          font-size: 1em;
+      }
+    }
+    @media screen and (min-width:641px) and (max-width:999px) {/*640~1000px까지는 지금 CSS적용*/
+      #allWrap {
+          width: 100%;
+      }
+      #content p {
+          font-size: 1.5em;
+      }
+    }
+    * {/*이하로는 해상도무관 공통적용*/
+      margin: 0;
+      padding: 0;
+      font-family: Verdana;
+    }
+    #allWrap {
+      margin: 0 auto;
+      text-align: center;
+    }
+    #partWrap {
+      margin: 0 auto;
+      width: 100%;
+      text-align: left;
+    }
+    #header {
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+    }
+    #contentWrap #content > h2 {
+      font-size: 2em;
+    }
+    #content {
+      padding: 30px;
+    }
+    #footer {
+      font-size: 2em;
+      font-weight: bold;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+    }
+    </style>
+    <script>
+        //자스로 해상도에 따른 폰트크기 변경 확인하기 
+        /*
+            인라인 스타일이 아닌 임베딩 혹은 엑스터널로 적용된 스타일을 자스로 얻어올 때
+            1. 스타일이 적용된 요소를 얻는다
+            2. var 요소에 적용된 style객체 = window.getComputedStyle(1.에서 얻은 요소)
+            3. 요소에 적용된 style객체.css속성명(단, -포함시, 빼고 대문자시작으로 접근)
+        */
+        window.onresize=function(){
+            var p=document.querySelector('p');/*p태그 가져옴*/
+            var style=window.getComputedStyle(p);/*엘리먼트의 계산된 스타일 가져옴*/
+            console.log('해상도:%s,폰트크기:%s',window.innerWidth,style.fontSize);
+        };
+    </script>
+</head>
+<body>
+  <div id="allWrap">
+    <div id="partWrap">
+        <div id="header">
+            <h1>HEADER</h1>
+        </div> 
+        <div id="contentWrap">
+            <div id="content">
+                <h2>Roboto, 12 Styles by Christian Robertson</h2>
+                <p>
+                    Grumpy wizards make toxic brew for the evil Queen and Jack. One morning, when Gregor Samsa woke
+                    from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on
+                    his armour-like back, and if he lifted his head a little he could see his brown belly, slightly
+                    domed and divided by arches into stiff sections. The bedding was hardly able to cover it and
+                    seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of
+                    the rest of him, waved about helplessly as he looked. One morning, when Gregor Samsa woke from
+                    troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his
+                    armour-like back, and if he lifted his head a little he could see his brown belly, slightly
+                    domed and divided by arches into stiff sections. The bedding was hardly able to cover it and
+                    seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of
+                    the rest of him, waved about helplessly as he looked.
+                </p>
+            </div>
+        </div> 
+        <div id="footer">FOOTER</div>
+    </div>
+  </div>
+</body>
+</html>

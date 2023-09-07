@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerXXXtextContent22.html</title>
+    <script>
+        /*
+            ex) <div> <h2>hello</h2> </div>
+            
+            1)innerText: hello만 가져옴(텍스트는 다 반환)
+            2)innerHTML: <h2>까지 가져옴(HTML태그와 텍스트 반환)
+            3)textContent: hello만 가져옴(innerText 비슷)
+        */
+    </script>
+</head>
+<body>
+    <h2 id="h2"><i>inner계열 및 textContent
+                <span style="color: red;font-style: normal;">속성</span></i></h2>
+    <input type="button" value="시작태그와 종료태그사이에 있는값 얻기" />
+    <input type="button" value="innerHTML"  />
+    <input type="button" value="innerText" />
+    <input type="button" value="textContent" />
+    <span id="span">텍스트</span>
+    <p>
+        HELLO
+
+        JAVASCRIPT
+    </p>
+    <script>
+        /*
+            시작태그와 종료태그가 있는 모든 태그들은
+            innerHTML과 innerText 및 textContent속성을 갖고 있다.
+            (단,<input/> ,<br/>나 <img/>등은 제외)
+
+            시작태그와 종료태그 사이의 컨텐츠가 inner계열 속성 및 textContent에 저장됨.(속성이므로 변수)
+            1] 시작태그와 종료 태그 사이에 태그요소가 있는 경우
+                1) innerHTML:태그 요소를 실행
+                2) innerText 와 textContent:태그요소를 제외한 순수 텍스트만 저장
+
+            2] 시작태그와 종료 태그 사이에 빈 공백이 많은 경우
+                1) innerHTML 와 textContent:빈 공백 그대로를 저장
+                2) innerText : 빈 공백 제외
+        */
+        var h2=document.querySelector('#h2');
+        var span=document.querySelector('#span');
+        var p=document.querySelector('p')
+        //컨텐츠 읽어오기
+        document.querySelector('[type=button]:nth-child(2)').onclick=function(){//시작태그와 종료태그사이~~버튼
+            console.log(h2.innerText);//inner계열 및 textContent속성(텍스트만)
+            console.log(h2.textContent);//inner계열 및 textContent속성(텍스트만)
+            console.log(h2.innerHTML);//<i>inner계열 및 textContent
+                //<span style="color: red;font-style: normal;">속성</span></i>(텍스트+태그, 공백유지)
+        };
+        //공백이 많은 컨텐츠 읽어오기
+        console.log('[공백이 많은 컨텐츠 읽어오기]')
+        console.log(p.innerText);//HELLO JAVASCRIPT(공백제거)
+        console.log(p.textContent);/*        HELLO(공백유지)
+
+JAVASCRIPT
+*/
+        console.log(p.innerHTML);/*        HELLO(공백유지)
+
+JAVASCRIPT
+*/
+
+        //컨텐츠 설정하기
+        document.querySelector('[type=button]:nth-child(3)').onclick=function(){
+            span.innerHTML='<strong>컨텐츠 설정</strong>';//컨텐츠 설정(진하게 출력)속성이므로 변수처럼 설정, span태그 사이에 넣음, 진하게(strong=bold)
+        };
+        document.querySelector('[type=button]:nth-child(4)').onclick=function(){
+            span.innerText='<strong>컨텐츠 설정</strong>';//<strong>컨텐츠 설정</strong>
+        };
+        document.querySelector('[type=button]:nth-child(5)').onclick=function(){
+            span.textContent='<strong>컨텐츠 설정</strong>';//<strong>컨텐츠 설정</strong>
+        };
+        
+        //CSS적용법
+        //방법1:인라인스타일 <a style="css코드">
+        //방법2:임베딩스타일 <style> css코드 </style>
+        //방법3:엑스터널스타일 .css css코드 :공통적용시 사용(링크태그의 src에 사용) 
+        //      ->이건 .js파일로 여기저기 src에 .js로 적용가능
+
+        //자스코드
+        //방법1: <script>태그 사이에 작성: 공통적용시 사용
+        //방법2: <a onclick='자스코드'
+    </script>
+</body>
+</html>

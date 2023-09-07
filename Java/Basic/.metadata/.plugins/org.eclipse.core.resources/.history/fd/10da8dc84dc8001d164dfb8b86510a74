@@ -1,0 +1,52 @@
+package etcclass12;
+
+public class MathClass { //Math는 있음, Class 붙여줘야함
+
+/*	https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Math.html
+ 	
+ 	Class Math
+	java.lang.Object
+	java.lang.Math
+	public final class Math
+	extends Object            ->상속받으면 extends 나옴
+	
+	
+	Method Summary
+	All Methods/ Static Methods/ Concrete Methods ->매개변수로 받은 값으로 작업, 인스턴스 메소드 없음, 스태틱메소드뿐, 별도 값을 가질 필요 없으니까
+*/	
+	
+	
+	public static void main(String[] args) {
+
+		//Math클래스는 인스턴스화(객체화/Heap에 메모리생성) 불가]
+		//Math math=new Math(); //[x]The constructor Math() is not visible, 접근지정자할 때 봄, private라는 뜻
+		System.out.println(Math.PI); //클래스명 Math.으로 접근, 3.14~ 나옴
+		//Math클래스의 겁나 많은 정적메소드 중 중요한 것들 다름
+		//Math.//오버로딩: Math. 치면 abs () 안에 double, float등 다양하게 넣을 수 있음을 의미, 오버라이딩 아님
+		
+		//Math 클래스의 주요 메소드
+		//절대값: static 반환타입 abs(매개변수): 반환타입은 매개변수의 타입에 따라 결정됨, int넣으면 int나오고~ 넣은대로 절대값 반환해줌 (절대값-> absolute라 abs)
+		float f= -3.14F;
+		double d= -100.9;
+		int num=10;
+		System.out.println("[abs()메소드]");
+		System.out.println(Math.abs(f));
+		System.out.println(Math.abs(d));
+		System.out.println(Math.abs(num));
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}//////////////main
+}//////////////////class

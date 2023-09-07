@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULOL08.html</title>
+</head>
+<body>
+    <!--
+        1)UL태그:Unordered List(순서가 없는 목록)을 나타낼때 사용하는 태그
+               목록을 나타내기 위해서 하위요소(자식)로 li(List item)태그(block element)를 가짐
+
+        속성- type:disc(●-기본),square(■),circle(○) ->1,2,3 같은 순서가 없음,이런 모양을 bullet이라 함
+              block element
+        (단,type속성에 1(number순)이나 A,a(알파벳순),I,i(로마숫자)도 지정가능 -> 1,2,3..A,B,C...이런식으로 순서 줄 수도 있음)
+        
+        2)OL태그:Ordered List(순서가 있는 목록) 하위요소로 li태그를 가짐
+        속성- type:1(기본)이나 A,a(알파벳순),I,i(로마숫자)
+              start:순서의 시작 값 지정(ol만 갖고있는 속성) ->이게 하나 더 있는게 차이, 순서 시작값을 3주고 type1주면 3부터 시작, 근데 잘 안씀
+        (li태그에도 type속성을 지정할 수 있다.)
+    -->
+    <div>
+        <h2>당신이 좋아하는 스포츠는?</h2>
+        <!--<ul type="square">disc(●-기본), type으로 다른거 바꾸기 가능, 근데 타입속성은 웹표준 어긋남-->
+        <ul style="list-style-type: square;background-color: yellow;"><!--블락이라 전체 노란색됨-->
+            <li style="background-color: red;">축구</li><!--이것도 블락이라 전체 빨간색됨-->
+            <li style="list-style-type: circle;">배구</li>
+            <li>농구</li>
+        </ul>
+        <h2>당신이 좋아하는 영화장르는?</h2>
+        <ol style="list-style-type: upper-roman;"start="3"><!--STYLE은 CSS속성 없어서 웹표준어긋나지않음-->
+            <li>액션</li>
+            <li>SF</li>
+            <li>스펙타클</li>
+            <li>범죄스릴러</li>
+        </ol>
+        <h2>UL로 메뉴구현</h2>
+        <ul>
+            <li>회사소개</li><!--블락이라 세로배치로 나옴, CSS배우고 가로배치해야함-->
+            <li>인재채용</li>
+            <li>제휴약관</li>
+            <li>개인정보처리방침</li>
+        </ul>
+    </div>
+</body>
+</html>

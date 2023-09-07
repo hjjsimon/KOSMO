@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function08_2.html</title>
+    <script>
+        //함수 형식1] 위아래막힘(입력값,반환값 없음)
+        //함수 정의-함수선언문
+        function noParamNoReturn(){//인자 안받는데 어떻게 메뉴출력? arguments 있으니까!
+            console.log('=======================Menu=======================');
+            var menu='';
+            if(arguments.length !=0){
+                for(i in arguments){
+                    menu+=" "+arguments[i];//유사배열 배열로 만들어도 되는데, 누적하자 그냥~
+                }
+            }    
+            //menu=arguments[0];//0번방 메뉴 1개만 되게함
+            
+            console.log('1.계속 2.나가기 '+menu);
+            console.log('==================================================');
+        }
+        console.log(noParamNoReturn);
+        console.log('타입:%s',typeof noParamNoReturn);
+        window.noParamNoReturn();//함수선언으로 윈도우객체에 추가됨, 윈도우 생략가능
+        window.noParamNoReturn('메뉴1','메뉴2','메뉴3');
+
+        //함수 형식2]
+        //함수 정의-함수표현식
+        var yesParamNoReturn=function(start,end){
+            var total=0;
+            for(var i=start;i<=end;i++) total+=i;
+            console.log('%d부터 %d까지 누적합:%d',start,end,total);//반환값 없으면 이 작업 왜해, 여기서 출력해서 결과 보여주자
+        };
+        console.log(yesParamNoReturn);
+        console.log('타입:%s',typeof yesParamNoReturn);
+        yesParamNoReturn(1,10);
+
+        //1.전역변수: script태그안에 선언된 변수로 해당페이지 어디에서나 사용가능
+        //2.지역변수: 함수안에 선언된 변수(매개변수 포함)로 함수밖에서는 사용불가
+
+        //함수 형식3]
+        //함수 정의-함수표현식
+
+        var noParamYesReturn=function(){
+            var name=prompt('이름 입력?','');//prompt는 공부할때나 쓰지 잘 안씀 -> 브라우저에 팝업이 뜸   
+            var age=prompt('나이 입력?',1);//두번째가 디폴트값
+            return '이름:'+name+',나이:'+age;
+            console.log('return문 이후')//return문 이후도 에러x 물론 실행은x, 자바는 언리처블 에러o
+        };
+        console.log(name);//이건 에러x, 윈도우객체에 기본적으로 name속성이 있어서 그럼(window. 하면 name있음)
+        //console.log(age);//이건 에러o, 함수안에서만 쓰는 지역변수라 에러나는게 정상
+        //console.log(noParamYesReturn());//호출이니까 괄호열닫 필수
+        
+        //함수 형식4]
+        //함수 정의-함수선언문
+        function yesParamYesReturn(num1,num2){
+            if(arguments.length==2){
+                return num1>num2? num1: num2;
+            }
+/*            var max=arguments[0];//0번방을 max에 넣고, 1번방부터 비교하자
+            for(var i=1;i<arguments.length;i++){
+                if(max<arguments[i]) max=arguments[i];
+            }
+            return max;//최대값 구하기*/
+            return Array.from(arguments).sort((x,y)=>y-x)[0] 
+            //배열로 만들어서 sort로 오름차순시킴, 오름차순이니까 y-x, 배열반환하니 0번방, 위 코드 1줄처리(자바면 스트림처리한것)
+        }
+        console.log('최대값:',yesParamYesReturn(10,9));//10반환, 2개중 큰 값
+        console.log('최대값:',yesParamYesReturn(10,9,99,100,88));//arguments니까 2개보다 더 넣어도 됨, 최대값 찾기
+
+        //즉시실행함수: 아래는 즉시실행함수에서 반환값을 realTime에 저장
+/*        var realTime=function(num1,num2){//이건 즉시실행함수[x], 그냥 함수표현식, 통으로 감싸야 즉시실행함수됨
+            console.log('즉시실행함수');
+            return num1+num2;
+        }*/
+        var realTime=(function(num1,num2){//전체 감싼 즉시실행함수
+            console.log('즉시실행함수');
+            return num1+num2;
+        })(10,20)
+        console.log('반환값:',realTime)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

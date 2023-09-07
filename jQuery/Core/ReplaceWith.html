@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReplaceWith.html</title>
+    <style>
+        div{
+          width:50px;
+          height:50px;
+          border:1px red solid;
+          text-align: center;
+          line-height: 50px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $(':button').click(function(){
+                if($('div').length===0){//div가 없으면? 원래 3개임, 이제 여기로 옴
+                    $('button').not(':first').each(function(){
+                        $(this).replaceWith('<div>'+$(this).html()+'</div>');
+                    })
+                }
+                else{
+                    $('div').each(function(){//div 3개, 여기부터 시작, 버튼으로 바꿈
+                        $(this).replaceWith('<button>'+$(this).html()+'</button>');
+                    })
+                }
+
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <button>확인</button>
+		<legend>replaceWith()함수</legend>
+		<div>div1</div>
+		<div>div2</div>
+		<div>div3</div>
+	</fieldset>
+</body>
+</html>

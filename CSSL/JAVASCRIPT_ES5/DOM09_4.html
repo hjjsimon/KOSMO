@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM09_4.html</title>
+    <script>
+        window.addEventListener('DOMContentLoaded',function(){//이벤트 진행시 실행되는게 콜백함수
+            var data = [//[]로 감싸서 배열
+                {no:2, title:"제목2", postDate:"2022-01-01", writer:"김길동1", hit:10},//{}로 감싼 JSON, hit는 조회수
+                {no:3, title:"제목 입니다", postDate:"2022-02-03", writer:"박길동2", hit:5},
+                {no:4, title:"내일 공약사항을 발표하겠습니다", postDate:"2022-05-03", writer:"박길동3", hit:15},
+                {no:5, title:"축하드립니다", postDate:"2022-11-15", writer:"박길동4", hit:25},
+            ];
+            //data만 바꾸는게 좋음, 페이지를 초기소스로 바꾸면 안됨, 입력사항 다 초기화됨(새로고침이 다시 소스요청, 동일한셈) 
+            //서버에서 데이터만 받는다고 가정하고
+            //이전처럼 tr노드생성후 생성된 각 노드를 append()로 추가하여 구현하는 대신(이 방법도 당연히 됨)
+            //cloneNode()를 사용해 기존노드를 복제하여 구현하자
+            //기존노드가 없는 경우는 template태그를 사용하자
+            var tbodys=document.querySelectorAll('tbody');//태그선택자로 tbody는 다 가져옴
+            var btnDatas=document.querySelectorAll('.btnData');
+            //복제할 행 얻기(document.은 document(최상급)부터 하나씩 찾아 내려가는 것, 차라리 tbody부터 찾는게 빠름)
+            var tr=tbodys[0].querySelector('tr');//첫번쨰 자식이라 0번 가져옴
+            //console.log(tr) //갖고온 태그 확인
+            btnDatas[0].onclick=function(){//버튼 클릭시마다 호출되는 콜백함수
+                data.forEach((item)=>{//item 하나가 no:2, title:"제목2", postDate:"2022-01-01", writer:"김길동1", hit:10 하나
+                    //데이터개수 4개만큼 forEach 순회함
+                    //기존 tr 복제:true이면 깊게(자식까지) 모두 복제
+                    var clone=tr.cloneNode(true);//자식까지 가져오려면 true, 저놈만 가져오려면 false
+                    //복제한 clone에서 td들 얻고 배열의 데이터로 변경
+                    var tds=clone.querySelectorAll('td');
+                    tds[0].textContent=item.no;//키값 no
+                    tds[1].textContent=item['title'];
+                    tds[2].textContent=item.postDate;
+                    tds[3].textContent=item['writer'];
+                    tds[4].textContent=item.hit
+                    //console.log(clone);
+                    //tbodys[0].append(clone);//또는 insertAdjacentElement() 사용
+                    //tbody은 beforeend, tr는 afterend 써야한다~
+                    //tbodys[0].insertAdjacentElement('beforeend',clone);//또는
+                    //tr.insertAdjacentElement('afterend',clone);//역순으로
+                    //기존노드 없으면 template태그 사용함
+                    tr.insertAdjacentElement('afterend',clone);
+                    tr=clone;//기존 tr을 clone로 변경-역순이 아닌 순서대로
+                });
+            };//onclick
+
+            //복제할 행이 없는 경우
+            var template=document.querySelector('template');
+            //console.log(template);
+            //console.log('%O',template);//template요소의 하위요소들을 가져올때는 content속성으로 
+            console.log(template.content);
+            btnDatas[1].onclick=function(){
+                data.forEach(function(item){
+                    //현재 DOM이 아닌 외부 DOM의 노드를 복사하여 현재 DOM에 넣을 수 있도록 한다
+                    //DOM트리에 추가되면 랜더링에 보이는데 안보임, 외부DOM인것, DOM트리에 없는 외부노드를 현재 DOM으로 가져옴 
+                    //true주면 자식노드까지 추가해 반환
+                    //ex.여기서 외부 DOM이란 iframe(페이지 안의 페이지)을 구성하는 문서의 노드 혹은 template태그로 구성한 노드
+                    var clone=document.importNode(template.content,true);
+                    //복제한 clone에서 td들 얻고 배열의 데이터로 변경
+                    var tds=clone.querySelectorAll('td');
+                    tds[0].textContent=item.no;
+                    tds[1].textContent=item['title'];
+                    tds[2].textContent=item.postDate;
+                    tds[3].textContent=item['writer'];
+                    tds[4].textContent=item.hit;
+                    tbodys[1].append(clone);
+                    //console.log(clone);
+                });
+            };  
+        });
+    </script>
+</head>
+<body>
+    <input type="text" placeholder="페이지 혹은 데이터 교체 테스트용" style="width: 60%;"/>
+    <h2>DOM API 사용하기:노드복제 하기</h2><!--DOM트리를 구성하는 건 모두~~노드!(태그,사이 텍스트도)-->
+    <fieldset>
+        <legend>데이타 뿌려주기(복제할 행이 있는 경우)</legend>
+        <input type="button" class="btnData" value="데이타 넣기" />
+        <hr/>
+        <table style="text-align:center;background-color: black;border-spacing:1px;width:70%">
+            <thead>
+                <tr style="background-color: white;">
+                    <th style="width:5%">번호</th><!--%로 주면 부모기준 길이결정-->
+                    <th>제목</th>
+                    <th style="width:15%">작성일</th>
+                    <th style="width:15%">작성자</th>
+                    <th style="width:8%">조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr style="background-color: white;">
+                <td>1</td>
+                <td style="text-align:left">제목1</td>
+                <td>2022-09-01</td>
+                <td>가길동</td>
+                <td>20</td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>데이타 뿌려주기(복제할 행이 없는 경우)</legend>
+        <input type="button" class="btnData" value="데이타 넣기" />
+        <hr/>
+        <template>
+        <tr style="background-color: white;">
+            <td>1</td>
+            <td style="text-align:left">제목1</td>
+            <td>2022-09-01</td>
+            <td>가길동</td>
+            <td>20</td>
+        </tr>
+        </template>
+        <table style="text-align:center;background-color: black;border-spacing:1px;width:70%">
+            <thead>
+                <tr style="background-color: white;">
+                    <th style="width:5%">번호</th>
+                    <th>제목</th>
+                    <th style="width:15%">작성일</th>
+                    <th style="width:15%">작성자</th>
+                    <th style="width:8%">조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </fieldset>
+</body>
+</html>

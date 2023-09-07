@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator02.html</title>
+    <script>
+        //우선순위가 같을 때는 왼쪽에서 오른쪽으로 계산(우선순위: 산>비>논)
+        //1]산술연산자: +,-,*,/,% (우선순위: *,/,% > +,-)
+        console.log('[산술연산자]');
+        console.log('3%5*2+10/5는 %d',3%5*2+10/5);//6+2
+        console.log(5/3);//자바는 인트연산이라 1나옴, 자스는 11.66 더블로 나옴
+        //2]비교연산자: >,>=,<,<=,==,!=,===,!==(우선순위 모두 동일)
+        //자스 중 조건식에서 0, null, false는 false(0)으로 처리되고 그 외 모든 값은 true(1)로 판단한다
+        //기타 산술식에서 true는 1, false는 0으로 실행된다(조건식은 0 null false 셋 다 false)
+        console.log('[비교연산자]');
+        console.log("가나다">="가나다");//true 자스는 내부적으로 한자씩 코드값으로 비교함/ 자바에서 문자 1개 '가'=43032라 '가'>=30000 연산됨, 그 외 문자열은 당연히 비교 불가
+        console.log(3>9==0);//false==0, 0==0과 동일, true 자스 연산중 false는 0처리/ 자바는 당연히 불가
+        //==(loose equality):타입이 다르더라도 내부적으로 강제형변환해서 비교해줌
+        //===(strict equality): 강제형변환 없이 정확히 값과 타입 모두 일치해야 true(주소비교), 비교시 권장
+        console.log(0=='0');//true, 넘버와 스트링 근데 true나옴, 타입x 값만 비교함, ''싱글만 지우고 0으로 바꿈
+        console.log(0==='0');//false, 타입 다름
+        console.log(false=='0')//true, 불린과 스트링, 그래도 0과 0으로 착하게 비교해줌
+        console.log(false==='0')//false, 타입 다름
+        console.log('NaN의 값:%s,NaN의 타입:%s',NaN,typeof NaN);//NaN의 값:NaN,NaN의 타입:number-> NaN은 Not a Number 숫자가 아니래, 근데 타입은 number임 웃기는놈 
+        //NaN은 등가비교시 무조건 false이므로 하지말고, isNaN()함수로 NaN인지 여부를 판단해라
+        console.log(NaN==NaN);//false ?!, 숫자가 아닌게 NaN, 숫자아닌게 한두개가 아님, 그래서 2개 같다고 못함 false 떄림
+        console.log(NaN===NaN);//당연히 이건 false
+        var num1=new Number('HELLO');
+        console.log('%s',num1);//NaN, 찍어봤더니 숫자가 아니래
+        var num2=new Number('WORLD');
+        console.log('%s',num2);//NaN
+        console.log(num1==num2);//NaN끼리 비교라 이것도 false 나옴
+        console.log(isNaN(num1));//num1은 숫자가 아니냐? 넹 true나옴 ->isNaN으로 봐야 숫자가 아닌지 제대로 알 수 있다~
+        console.log(isNaN(num2));//num2도 숫자 아님 true나옴
+        num1=new Number(100);//new 연산자를 써서 Object타입
+        num2=100;//정수 넣은건 Number타입
+        console.log(num1==num2);//true 타입 달라도 됨
+        console.log(num1===num2);//false 타입 달라서 안됨
+        //자스 배열은 대괄호(자바 중괄호)로 감쌈, 모든타입 저장가능, 자바의 List컬렉션과 동일
+        var arr1=['가길동',20];//new Array('가길동',20)과 완전 동일
+        var arr2=['가길동',20];
+        console.log('arr1:%s,arr1의타입:%s',arr1,typeof arr1);//arr1:가길동,20,arr1의타입:object
+        console.log(arr1==arr2);//배열에 저장된게 같은데 false? 자바처럼 arr1,arr2에 각각 주소가 저장돼있음!!
+        console.log(arr1===arr2);//2개가 f면 3개 당연히 f
+        arr1=arr2;//arr1에 arr2를 넣음, 주소 같아짐
+        console.log(arr1==arr2);//주소 동일
+        console.log(arr1===arr2);//주소 동일, 타입 object 동일
+        //3]논리연산자: !, &&, || (우선순위: !(단항)>&&>||)
+        console.log('[논리연산자]');
+        console.log(3>2||5>-10&&!(3-4));//괄호먼저, 0제외 모든 수는 true처리
+        console.log(!(-1));
+        //4]증감연산자: ++,--
+        console.log('[증감연산자]');
+        var num=10;
+        num++;
+        console.log('num:%s',num++);//11
+        console.log('num:%s',num);//12, 위에서 이미 +1됨
+        //5]단축표현식: +=,-=,*=,/=,%=
+        console.log('[단축연산자]');
+        console.log(num%=5)
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

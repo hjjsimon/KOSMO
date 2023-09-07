@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- NutrientSelectMapper.xml -->
+
+<mapper namespace="com.kosmo.springapp.nutrient.service.impl.NutrientSelectMapper">
+	<select id="selectName" resultType="String">
+		SELECT N_NAME FROM NUTRIENT
+	</select>
+</mapper>

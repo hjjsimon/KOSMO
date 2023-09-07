@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        >
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="위치감지시작"
+            android:textColor="@color/white"
+            android:background="@drawable/button_left_background"
+            />
+        <Button
+            android:layout_marginStart="5dp"
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="위치감지중지"
+            android:textColor="@color/white"
+            android:background="@drawable/button_right_background"
+            />
+    </LinearLayout>
+    <!--
+    android:enabled="false" 는
+    권한이 있는 경우 true로 변경(자바코드에서)
+    -->
+    <Button
+        android:id="@+id/btnMyLastPosition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="나의 최근 위치"
+        android:enabled="false"
+        android:textColor="@color/white"
+        android:background="@drawable/button_selector"
+
+        />
+</LinearLayout>

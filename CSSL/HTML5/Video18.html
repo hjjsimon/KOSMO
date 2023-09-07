@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video18.html</title>
+</head>
+<body>
+    <h2>기본 비디오 태그</h2>
+    
+    <video src="Media/video.mp4" controls width="200" height="200">
+    <!--
+    <video src="Media/video.mp4" controls width="200" height="200" autoplay loop>
+    -->    
+    
+        video태그를 지원하지 않는 브라우저입니다<br/>
+        여기를 <a href="Media/video.mp4">클릭</a>하세요
+    </video>
+    <h2>video 하위태그인 &lt;source&gt;태그 사용</h2>
+    <video controls width="200" height="200">
+        <source src="Media/video.3gp" type="video/3gp"/>
+        <source src="Media/video.mp4" type="video/mp4"/>
+    </video>
+    <h2>커스텀 비디오</h2>
+    <div>
+        <video width="300" height="200" id="video" src="Media/video.mp4" hidden></video>
+    </div>
+    <!--위 video태그에 controls 안주고 대신 API로 만들 예정-->
+    <div>
+        <progress value="0" ></progress>
+    </div>
+    <div>
+        <input type="button" value="PLAY" onclick="play();"/>
+        <input type="button" value="PAUSE" onclick="pause();"/>
+        <input type="button" value="STOP" onclick="stop();"/>
+        <input type="range" id="volume" value="1" min="0" max="1" step="0.1" style="width:80px"/>
+        <!--0.1단위로 조절, value=1, 최대값 1을 기본값으로 준 것-->
+        &nbsp;&nbsp;<span id="current"></span> / <span id="total"></span>
+    </div>
+    <script>
+        //비디오객체 얻기]
+        var video=document.querySelector('#video');
+        //span객체 얻기
+        var currentSpan=document.querySelector('#current');
+        var totalSpan=document.querySelector('#total');
+        //progress객체 얻기
+        var progress=document.querySelector('progress');
+        //range객체 얻기
+        var volume=document.querySelector('#volume');
+        //video객체에 timeupdate이벤트 처리를 위한 리스너 부착
+        video.ontimeupdate=function(){//속성이니까 변수처럼 씀
+            //비디오의 총 재생시간 얻고 설정
+            totalSpan.textContent=video.duration;//duration 속성, 200.5735초
+            //비디오의 현재 재생시간 얻고 텍스트 설정
+            currentSpan.textContent=video.currentTime;
+            //타입업데이트에 따른 프로그레스의 진행정도 표시(최대값 max속성 설정)
+            progress.max=video.duration;
+            //진행정도 표시
+             progress.value=video.currentTime;
+        };    
+        //볼륨조절
+        //마우스를 드래그하다 놓았을때 change이벤트가 트리거된다
+        /*
+        volume.onchange=function(){//모든 range에는 change이벤트가 있음
+            console.log('볼륨:',volume.value)//form의 하위속성은 무조건 value속성있음, 근데 ui의 값일뿐, 비디오랑 연결 아직 x
+        }*/
+        volume.oninput=function(){//얘를 써야함, 드래그 도중에도 멈추지않고 소리 조절되며 재생, 위에껀 볼륨 드래그중 소리조절x,멈춰야함
+            console.log('볼륨:',volume.value);
+            video.volume=volume.value;//비디오 볼륨과 연결
+        }
+       
+        function play(){
+            video.hidden='';//비디오 보이기, hidden속성 이런거 다 있다고~ 그리고 ''; 하면 비디오 보임
+            video.play();
+        }
+        var pause=function(){
+            video.pause();
+        }
+        function stop(){
+            if(video.played){
+                video.currentTime=0;
+                video.pause();
+                video.hidden='block';//스탑하면 비디오 숨기기
+            }
+        }
+
+
+    </script>
+
+
+</body>
+</html>

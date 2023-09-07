@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- admin.xml -->
+
+<mapper namespace="com.kosmo.springapp.admin.service.AdminMapper">
+
+	<!-- 전체 회원 정보 -->
+	<select id="getMemberInfo" resultType="memberDto">
+		SELECT * FROM MEMBER
+	</select>
+
+	<!-- 회원 정보 삭제 -->
+	<delete id="deleteMemberInfoByAdmin" parameterType="String">
+	    DELETE FROM MEMBER WHERE ID = #{memberId}
+	</delete>
+
+	<!-- 수정 전 ID로 회원 정보 가져오기 -->
+	<select id="getMemberInfoById" parameterType="String" resultType="MemberDTO">
+		SELECT * FROM MEMBER WHERE ID = #{memberId}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMemberInfoByAdmin" parameterType="MemberDTO">
+	    UPDATE MEMBER
+	    SET
+	        NAME = #{name},
+	        BIRTH = #{birth},
+	        GENDER = #{gender},
+	        EMAIL = #{email},
+	        ACTIVE = #{active},
+	        INACTIVE_DATE = #{inactive_date},
+	        SITE = #{site},
+        	SOCIAL_FL = #{social_Fl}
+        	
+	    WHERE
+	        ID = #{id}
+	</update>
+
+
+
+</mapper>

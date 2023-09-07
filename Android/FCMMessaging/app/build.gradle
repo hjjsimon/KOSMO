@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.kosmo.fcmmessaging'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.kosmo.fcmmessaging"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //스프링 서버와 통신용:REST API 통신용(HTTP/HTTPS) 클라이언트 라이브러리
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //스프링 서버와 통신용:Jackson 컨버터 라이브러리(JSON형식의 문자열 ->Serialize->자바객체,자바객체->Deserialize->JSON형식의 문자열)
+    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
+    //파이어베이스 메시징 서비스-추가1
+    implementation 'com.google.firebase:firebase-messaging:23.0.5'
+
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+//파이어베이스 메시징 서비스-추가2(위의 plugins 섹션에 추가)
+//apply plugin: 'com.google.gms.google-services'

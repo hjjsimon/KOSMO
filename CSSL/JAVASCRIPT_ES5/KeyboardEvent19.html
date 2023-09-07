@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyboardEvent19.html</title>
+    <script>
+        window.addEventListener('DOMContentLoaded',function(){
+            var input=document.querySelector('input');
+            input.onkeydown=function(e){//키보드를 눌렀을 때 발생(누르고있으면 계속 이벤트 발생)
+                console.log('이벤트명:',e.type);
+                console.log(e.key);//누른 자판 그대로 나옴(1이면 1, 아래 2개는 1이면 아스키코드가 나옴)
+                console.log(e.keyCode);//deprecated(사용금지, 대신 key사용)
+                console.log(e.which);//deprecated(사용금지, 대신 key사용)
+                if(e.key.toUpperCase()==='ENTER'){//입력 끝나고 엔터치면, 입력한 텍스트 출력해보기
+                    console.log(this.value)//이벤트핸들러 안에서 this는 e.target
+                }
+            };
+        })    
+        function fnKeyHandler(flag){
+            switch(flag){
+                case 1:
+                    console.log('keyup이벤트 발생');//키보드 누르다가 손 뗏을때 발생
+                    break;
+                default://keypress이벤트: deprecated(사용금지, 입력가능한 키에만 쓰던 것)
+                    console.log('keypress이벤트 발생');
+                
+            }
+        }
+        
+        function fnSetFocus(obj){
+            if(obj.value.length===6) document.querySelector('#ssn').focus();//6자 치면 자동 다음칸 넘기기
+        }
+    
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>key이벤트 테스트</legend>
+        keydown: <input type="text"/>
+        keyup: <input type="text" onkeyup="fnKeyHandler(1)" />
+        keypress: <input type="text" onkeypress="fnKeyHandler(2)" />
+    </fieldset>
+    <fieldset>
+        <legend>주민번호</legend>
+        <input type="text"  size="6" maxlength="6" onkeyup="fnSetFocus(this)" />
+        -
+        <input type="text" size="7" maxlength="7" id="ssn" />
+    </fieldset>
+</body>
+</html>

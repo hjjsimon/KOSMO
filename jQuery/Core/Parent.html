@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('button').click(function(){
+                //console.log($('.third').parent());//div third의 부모 div, li third의 부모 ul
+                //모든 부모에 배경색 지정
+                //$('.third').parent().css('background-color','yellow');
+                //third의 부모중 div만 배경색 지정
+                //$('.third').parent('.div').css('background-color','yellow');
+                //div는 배경색 지정 그리고 콘솔에는 버튼의 컨텐츠 출력
+                //console.log($('.third').parent('.div').css('background-color','yellow').prev().html());
+                //css()는 제이쿼리 객체 반환하므로 그대로 체인메소드 가능
+
+                //바닐라로 똑같이 하기(위에 console.log로 한줄인데 겁나 긺)
+                document.querySelectorAll('.third').forEach(function(item){
+                    //console.log(item.parentElement);//div, ul 부모 가져옴
+                    //console.log(item.parentElement.nodeName);//DIV, UL 노드네임은 대문자로 가져옴
+                    if(item.parentElement.nodeName==='DIV'){
+                        item.parentElement.style.backgroundColor='yellow';
+                        console.log(item.parentElement.previousElementSibling.innerHTML);
+                    }
+                });
+            });
+            //행에 마우스 hover
+            $('tr').slice(1).hover(function(){//마우스 오버시, slice(1)하면 맨위 tr은 hover에서 제외한것
+                $(this).css({backgroundColor:'yellow',cursor:'pointer'});
+            },function(){//마우스 아웃시
+                $(this).css({backgroundColor:'white'});
+            })
+            //행 클릭시 제목이 input에 복사되도록함
+            $('tr').slice(1).click(function(){
+                $('input[type=text]').val($(this).children(':eq(1)').html());//eq(1)안하면 번호 넘어감
+                $('input[type=button]').filter('[value=등록]').val('수정');//클릭시 등록버튼이 수정이됨
+             });
+
+            $('.delete').click(function(){
+                console.log('삭제하려는 글 번호:',$(this).parent().prev().prev().prev().prev().html());
+                console.log('삭제하려는 글 번호:',$(this).parent().parent().attr('title'));
+                console.log('삭제하려는 글 번호:',$(this).parent().siblings(':first').html());
+            });
+
+
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>parent([선택자])함수</legend>
+        <button>부모얻기</button>
+        <div class="div">
+            <div>자식1</div>
+            <div >자식2</div>
+            <div class="third">자식3</div>
+        </div>
+        <ul>
+            <li>JAVA</li>
+            <li>JSP</li>
+            <li class="third">FRAMEWORK</li>
+            <li>JQUERY1</li>
+            <li>JQUERY2</li>
+            <li>JQUERY3</li>		
+            <li>JQUERY4</li>
+        </ul>	
+        <h2>형제요소찾기 연습</h2>
+        <input type="text" />	
+        <input type="button" value="등록" />	
+        <hr/>
+        <table cellspacing="1" bgcolor="gray" width="60%">
+                <tr bgcolor="white">
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>삭제</th>
+                </tr>
+                <tr bgcolor="white" title="1">
+                    <td>1</td>
+                    <td>제목1</td>
+                    <td>작성자1</td>
+                    <td>2013-9-12</td>
+                    <td><input type="button" class="delete" value="삭제"/></td>
+                </tr>
+                <tr bgcolor="white" title="2">
+                    <td>2</td>
+                    <td>제목2</td>
+                    <td>작성자2</td>
+                    <td>2013-9-12</td>
+                    <td><input type="button" class="delete" value="삭제"/></td>
+                </tr>
+                <tr bgcolor="white" title="3">
+                    <td>3</td>
+                    <td>제목3</td>
+                    <td>작성자3</td>
+                    <td>2013-9-12</td>
+                    <td><input type="button" class="delete" value="삭제"/></td>
+                </tr>
+                <tr bgcolor="white" title="4">
+                    <td>4</td>
+                    <td>제목4</td>
+                    <td>작성자4</td>
+                    <td>2013-9-12</td>
+            <td><input type="button" class="delete" value="삭제"/></td>
+                </tr>
+            </table>	
+    </fieldset>
+</body>
+</html>

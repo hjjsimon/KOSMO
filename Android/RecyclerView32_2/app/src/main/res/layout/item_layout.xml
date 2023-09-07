@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--MainActivity용 레이아웃의 리사이클러뷰 아이템 용-->
+<!--
+ 루트뷰의 가로폭/세로폭을 적용하려면 어댑터에서 자바코드로 적용해야한다
+ android:layout_width="150dp"
+ android:layout_height="150dp"
+ 는 확인용으로 보기위한 코드
+-->
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:id="@+id/cardView"
+    app:cardBackgroundColor="#E43333"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    app:contentPadding="5dp"
+    tools:viewBindingIgnore="false"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--https://github.com/vinc3m1/RoundedImageView-->
+        <!--
+        app:riv_oval="false" : 이미지뷰를 Circle로 설정 안함
+        특정 모서리를 라운드 처리시에는 아래 속성 사용
+         app:riv_corner_radius_top_left
+         app:riv_corner_radius_top_right
+         app:riv_corner_radius_bottom_right
+         app:riv_corner_radius_bottom_left
+        -->
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:id="@+id/itemImage"
+            android:scaleType="centerCrop"
+            app:riv_oval="false"
+            app:riv_corner_radius_top_left="25dp"
+            app:riv_corner_radius_bottom_right="25dp"
+            android:src="@drawable/rounded"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/itemTitle"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+
+            />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

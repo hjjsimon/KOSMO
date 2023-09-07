@@ -1,0 +1,12 @@
+.content{
+    color: black;
+    width: 80%;
+    background-color: yellow;
+    margin: 0 auto;/*상하, 좌우, ->좌우여백 동일(auto의미)*/
+}
+.content>p{/*부모 백그라운드 상속*/
+    width: 100%;
+    font-size: 1.5em;
+    border: 5px red solid;
+    box-sizing: border-box;/*영역 안쪽으로 보더 들어감*/
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle.html</title>
+    <style>
+        div {
+          width: 100px;
+          height: 100px;
+          background-color: green;
+          border: 1px red solid
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('button:eq(0)').click(function(){
+                //$('#div').toggle(1000);//애니메이션 효과 없음
+                //바닐라 자스로 구현, 모든 제이쿼리는 자스로 구현 가능함
+                /*
+                var div = document.querySelector('#div');                
+                if(div.style.display==='')//보이면 안보이게함
+                    div.style.display='none';
+                else   
+                    div.style.display='';//빈문자열 주면 보임
+                */
+              
+                var button = $(this);
+                $('#div').toggle(
+                    2000,//토글링이 걸리는 시간 시간설정(밀리세컨단위)
+                    function(){//토글로 발생하는 콜백함수
+                        var text = button.html();
+                        console.log('토글링이 완료되었습니다:',text)
+                        //완전히 안보인 후에 호출됨
+                        button.html(text==='안보이기'?'보이기':'안보이기');
+                    }
+                );
+            })    
+                /*
+                    ※클래스에 토글 걸면 끝!
+                    전제 조건1) 무조건 하나는 display:none
+                    전제 조건2) 두 요소의 클래스명 동일하게
+                */
+                $('button:last').click(function(){
+                    $('.div').toggle(1000);
+                })
+        });
+
+
+
+
+
+
+
+
+           
+            
+            
+       
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>toggle([Duration][,콜백함수])함수 첫번째:토글링을 걸을 요소가 하나</legend>
+		<button>안보이기</button>
+        <div id="div"></div>
+	</fieldset>
+	<fieldset>
+		<legend>toggle([Duration][,콜백함수])함수 두번째:토글링을 걸을 요소가 두개</legend>
+        <button>토글링</button>
+        <div class="div" style="background-color: red"></div>
+		<div class="div" style="display: none; background-color: green"></div>
+	</fieldset>
+</body>
+</html>

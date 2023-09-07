@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex12_1.html</title>
+    <style>
+        /* display:flex 주면 아래 4개가 기본세팅됨
+            1) flex-direction: row
+            2) flex-wrap: nowrap
+            3) justify-contents
+            4) align-items*/
+        .container1{
+            background-color: yellow;
+            display: flex;/*블락엘리먼트 특성의 컨테이너 생성(아이템은 인라인).가로폭은 전체부모영역.container1이 flex container가 됨*/
+            flex-direction: row;/*생략된 기본값, 시작선에 맞춰 주축(행)방향으로 정렬됨*/
+        }
+        .container2{
+            background-color: pink;
+            display: inline-flex;/*인라인엘리먼트 특성의 컨테이너 생성(아이템은 인라인).컨테이너 영역이 아이템들의 영역에 맞게 줄어듦*/
+            /*flex container인 container2의 분홍색안보임, 영역이 컨텐츠 크기만큼 줄어듦,인라인처럼 가로크기가 컨텐츠 크기만큼 된 것*/
+        }
+        .container3{
+            background-color: yellow;
+            display: flex;
+            /*flex-direction: row; 기본값이라 변화없음*/
+            /*flex-direction: row-reverse; 주축 행의 시작선이 오른쪽 됨(원래왼쪽), 오른쪽부터 item1시작*/
+            /*flex-direction: column; 교차축은 stretch로 꽉채우는게 기본, 행방향을 꽉채움, div블락이라 그런게 아님*/
+            flex-direction: column-reverse;/*시작선이 아래쪽 끝이 됨*/
+        }
+        .container4{
+            background-color: yellow;
+            display: flex;
+            /*flex-wrap: nowrap;기본값, 주나 안주나 똑같음, 브라우저 줄여도 계속 한줄 유지*/
+            /*flex-wrap: wrap;/*브라우저 줄이면 행이 아래로 내려감(공간 부족시 item10이 내려감)*/
+            /*flex-wrap: wrap-reverse;브라우저 줄이면 행이 위로 올라감(공간 부족시 item10이 올라감)*/
+            flex-flow: row-reverse wrap;/*축약속성: flex-direction(row), flex-wrap(nowrap) 동시 적용*/
+        }
+        /*justify content(주축정렬): 컨텐츠를 건드리지 않고 정렬하는거라 item1,2,3.. 순서는 바뀌지 않음(교차축은 stretch됨)*/
+        .container5{
+            background-color: yellow;
+            display: flex;/*inline-flex일때는 여유공간 없으므로 적용불가*/
+            justify-content: flex-start;/*왼쪽정렬(기본값)*/
+            justify-content: flex-end;/*오른쪽정렬*/
+            justify-content: center;/*가운데정렬*/
+            justify-content: space-between;/*시작선,끝선에 붙인 후 균등분배*/
+            justify-content: space-around;/*컨텐츠 1개 기준 양옆 여유공간 동일(컨텐츠 2개 사이 여유공간은 2배)*/
+            justify-content: space-evenly;/*모든 컨텐츠 기준 사이 여유공간 균등(IE지원x)*/
+        }
+        /*align-items(주축한줄(nowrap) 교차축정렬)*/
+        .container6{/*align-items(한줄 교차축정렬)*/
+            background-color: yellow;
+            display: flex;/*inline-flex주면 당연히 세로배치 불가*/
+            height: 150px;/*stretch, 테스트시 교차축 높이 줘서 확인*/
+            align-items: stretch;/*기본값이라 무의미,아이템들을 교차축방향으로 늘려 컨테이너 채움*/
+            /*align-items: flex-start;/*위쪽정렬,교차축의 시작선 기준 아이템정렬, 세로폭은 컨텐츠 크기만큼*/
+            /*align-items: flex-end;아래쪽정렬,교차축의 끝선 기준 아이템 정렬, 세로폭은 컨텐츠 크기만큼*/
+            /*align-items: center;가운데정렬,교차축방향으로 중간에 아이템 정렬*/
+            /*justify-content: center;교차축 중간에 이어 주축 중간정렬시 정가운데 정렬*/
+            /*align-items: baseline;가장 큰 글꼴(지금 item5)의 baseline에 맞춤*/
+        }
+        /*align-content(주축여러줄(wrap) 교차축정렬)*/
+        .container7{
+            background-color: yellow;
+            display: flex;
+            height: 150px;
+            flex-flow: row wrap;
+            /*flex-wrap: wrap; 이 설정된 상태에서, 아이템들의 줄이 2줄 이상 되었을 때의
+                                교차축을 따라 아이템들을 정렬하는 방식을 지정
+                                속성값은 justify-content와 동일
+                                아이템들이 한 줄일 경우 align-items 속성 사용
+                                즉 wrap일때는 교차축 정렬은 align-content를 사용하자
+                            결론: nowrap->justify-content
+                                wrap->align-content
+            */
+            /*align-items: flex-start; 느낌보기*/
+            /*align-content: flex-start;이건 중간 여백 없이 item들이 교차축대로 바로 붙음*/
+            /*  
+                1)여러행일때 align-items사용시: 여백O 
+                줄 사이에 여백이 생긴다, 여러행 사이에 남은 여백을 동일하게 배분한다
+                            
+                2)여러행일때 align-content사용시: 여백x
+                space-XXXX속성이 아닌 속성 즉, flex-start,flex-end,center 적용시 줄 사이에 여백이 없다
+                */
+            /*align-content: stretch;/*items처럼 stretch기본값*/
+            /*align-content: flex-end;여러행이 여백없이 묶여 아래쪽 정렬*/
+            /*align-items: center;여백O*/
+            align-content: center;/*여백x, 교차축 가운데 정렬*/
+            /*align-content: space-between;위아래 양끝에 붙이고 중간은 균등분배(행이 컨텐츠가 됨)*/
+            /*align-content: space-around;각 행 주위의 좌우 여백이 모두 동일(행사이 2배)*/
+            /*align-content: space-evenly;행간격 모두 동일*/
+        }
+        .item{
+            background-color: green;
+            border: 2px red solid;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend><h2>Flex Container의 display속성</h2></legend>
+        <div class="container1">
+            <div class="item">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+            <div class="item">item5</div>
+        </div>
+    <hr/>
+        <div class="container2" >
+            <div class="item">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+            <div class="item">item5</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h2>Flex Container의 flex-direction속성</h2></legend>
+        <div class="container3">
+            <div class="item">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+            <div class="item">item5</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h2>Flex Container의 flex-wrap속성</h2></legend>
+        <div class="container4">
+            <div class="item">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+            <div class="item">item5</div>
+            <div class="item">item6</div>
+            <div class="item">item7</div>
+            <div class="item">item8</div>
+            <div class="item">item9</div>
+            <div class="item">item10</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h2>Flex Container의 justify-content속성(주축방향 정렬)</h2></legend>
+        <div class="container5" style="height: 100px;">
+            <div class="item">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+            <div class="item">item5</div>
+            <div class="item">item6</div>
+            <div class="item">item7</div>
+            <div class="item">item8</div>
+            <div class="item">item9</div>
+            <div class="item">item10</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h2>Flex Container의 align-items속성(교차축방향 정렬-한줄일때)</h2></legend>
+        <div class="container6">
+            <div class="item" style="font-size:.5em">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+            <div class="item" style="font-size:2em">item5</div>
+            <div class="item">item6</div>
+            <div class="item">item7</div>
+            <div class="item">item8</div>
+            <div class="item">item9</div>
+            <div class="item" style="font-size:.5em">item10</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h2>Flex Container의 align-content속성(교차축방향 정렬-여러줄일때)</h2></legend>
+        <div class="container7">
+            <div class="item" style="font-size:.5em">item1</div>
+            <div class="item">item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+            <div class="item" style="font-size:2em">item5</div>
+            <div class="item">item6</div>
+            <div class="item">item7</div>
+            <div class="item">item8</div>
+            <div class="item">item9</div>
+            <div class="item">item10</div>
+            <div class="item">item11</div>
+            <div class="item">item12</div>
+            <div class="item">item13</div>
+            <div class="item">item14</div>
+            <div class="item" style="font-size:.5em">item15</div>
+        </div>
+    </fieldset>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- xml 선언문 -->
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0"><!-- xml에서는 태그라고 안함, 루트 엘리먼트라고 함 -->
+    <tlib-version>1.0</tlib-version>
+    <short-name>my</short-name><!-- 접두어로 사용할 이름, core그거는 였음 -->
+    <function><!-- EL에서 사용할 함수정의시 사용하는 엘리먼트, 메소드당 1개 -->
+        <name>isNumber</name><!-- EL에서 사용할 메소드명(똑같이 쓰기) -->
+        <function-class>eltaglib.MyTagLib</function-class>
+        <function-signature>
+	        <!-- 메서드 기록.리턴타입과 인자의 타입은 완전한 클래스 이름.-->
+			<!-- 인자의 경우 타입만 적는다, 단 기본자료형인 경우는 기본 자료형만(예: int)-->	
+       		boolean isNumber(java.lang.String)
+        </function-signature>
+    </function>
+    <function>
+        <name>getGender</name>
+        <function-class>eltaglib.MyTagLib</function-class>
+        <function-signature>
+       		java.lang.String getGender(java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>isMember</name>
+        <function-class>eltaglib.MyTagLib</function-class>
+        <function-signature>
+       	 	boolean isMember(jakarta.servlet.ServletContext, java.lang.String, java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>selectList</name>
+        <function-class>eltaglib.MyTagLib</function-class>
+        <function-signature>
+       	 	java.util.List selectList(jakarta.servlet.ServletContext, int, int)
+        </function-signature>
+    </function>
+</taglib>

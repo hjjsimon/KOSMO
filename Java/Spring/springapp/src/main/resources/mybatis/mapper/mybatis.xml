@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 현재 .xml을 매퍼 파일 이라 함 -->
+<mapper namespace="com.kosmo.springapp.basic.mybatis.MyBatisMapper"><!-- 여기 인터페이스로 이동 -->
+	<!-- 매퍼 인터페이스의 메소드명이 xml파일 내의 id(식별자)가 된다 -->
+	<!-- resultType은 반환타입, 메소드에 설정한 String 동일하게 설정 -->
+  <select id="getTimeByXml" resultType="String">
+    SELECT SYSDATE FROM DUAL
+  </select>
+  <!-- 동적 SQL 연습 -->
+  <!-- 
+  	1] id : 매퍼 인터페이스의 메소드명
+  	2] parameterType : 매퍼 인터페이스의 메소드 인자 타입
+  	3] resultType : 매퍼 인터페이스 메소드의 반환타입(select쿼리인 경우 레코드 하나를 담을 수 있는 타입 기준, select태그(쿼리)에만 resultType 존재) 
+  	
+  	요소안의 쿼리문에서 값 부분은 #{키}로 객체명 부분은 ${객체명}으로 작성한다
+  	#{키}에서 키는 맵 컬렉션일때는 Key를, 자바빈인 경우 필드명을, int나 String인 경우 임의의 키
+  	${객체명}에서 객체명은 테이블/컬럼 혹은 뷰명이어야 한다
+   -->
+  <select id="findWithTitleLike" parameterType="Map" resultType="Map">
+  <!-- 이건 값을 세팅해야함, 파라미터 넘어오는걸 파라미터타입에 쓰면 됨 -->
+  <!-- 이 MAP에는 레코드 1개가 담김, 컬럼명이 키, 값이 밸류가 됨 -->
+  <!-- 원래 resultType은 DTO 해야하는데 지금 Map에 함 -->
+  <!-- 파라미터 맵으로 넘어올때 파라미터명 title이 키, 밸류는 자바 -->
+  <!-- title이 null이 아니면, 즉 파라미터 넘어오면 WHERE절에 AND가 추가됨, WHERE 1=1이면 true니까 모든 레코드 가져옴 -->
+  <!-- 값 넘어오면 #{title} ->  -->
+  	SELECT * FROM onememo
+  	WHERE 1=1
+  	<if test="title != null"><!-- JSTL 생각, 값에 EL만 못들어감 -->
+  		AND title LIKE '%' || #{title} || '%'
+  	</if>
+  </select>
+  <!-- 값을 표현할때 샵 {} -->
+  <!-- OneMemoDTO.java 참고 -->
+   <!-- Lombok 쓰면 DAO,DTO 만들필요x --><!-- 파라미터명이 키 -->
+  <select id="findWithColumnsLike" parameterType="Map" resultType="oneMemoDto">
+  	SELECT o.*,name 
+  	FROM onememo o JOIN member m ON m.id=o.id
+  	WHERE 1=1 
+  	<if test="title != null">
+  		AND title LIKE '%' || #{title} || '%'
+  	</if>
+  	<if test="name != null">
+  		AND name LIKE '%' || #{name} || '%'
+  	</if>
+  	<if test="content != null">
+  		AND content LIKE '%' || #{content} || '%'
+  	</if>
+  </select>
+  
+  <select id="findWithColumnsLikeChoose" parameterType="Map" resultType="oneMemoDto">
+  	<!-- choose는 if, else if, else라서 위의 if처럼 하나하나 다 따지지 않고 맞으면 아래 다 재낌  -->
+  	SELECT o.*,name 
+  	FROM onememo o JOIN member m ON m.id=o.id
+  	WHERE 1=1 
+  	<choose>
+  		<when test="title != null">
+  			AND title LIKE '%' || #{title} || '%'
+  		</when>
+  		<when test="name != null">
+  			AND name LIKE '%' || #{name} || '%'
+  		</when>
+  		<when test="content != null">
+  			AND content LIKE '%' || #{content} || '%'
+  		</when>
+  	</choose>
+  </select>
+    <!-- WHERE가 짱이다 그냥 이거 써라~~ -->
+	<!-- 위 구문에서 where 1=1 을 where로 변경시 뒤에 조건 없이 AND 오므로 에러 발생 가능 -->
+	<!-- 아래 where 엘리먼트는 JSTL에 의해 컨텐츠가 리턴되면 단순히 "WHERE"만을 추가한다 -->
+	<!-- 게다가 컨텐츠가 "AND"나 "OR"로 시작한다면 그 "AND"나 "OR"을 지워버린다 -->
+	<!-- if test의 조건이 맞을 때 WHERE가 붙는다!! -->
+  <select id="findWithColumnsLikeWhere" parameterType="Map" resultType="oneMemoDto">
+  	SELECT o.*,name 
+  	FROM onememo o JOIN member m ON m.id=o.id
+	<where>
+		<if test="title != null">
+	  		AND title LIKE '%' || #{title} || '%'
+	  	</if>
+	  	<if test="name != null">
+	  		AND name LIKE '%' || #{name} || '%'
+	  	</if>
+	  	<if test="content != null">
+	  		AND content LIKE '%' || #{content} || '%'
+	  	</if>
+	</where>
+	ORDER BY no DESC
+  </select>
+  <!--
+  	trim요소의 속성들
+	1) prefix : if조건이 맞으면 <trim> 문 안에 쿼리 가장 앞에 붙는 접두어
+	2) suffix : if조건이 맞으면 <trim> 문 안에 쿼리 가장 뒤에 붙는 접미어
+	3) prefixOverrides : <trim> 문 안에 쿼리 가장 앞에 해당하는 문자들이 있으면 자동으로 지워준다.
+	4) suffixOverrides : <trim> 문 안에 쿼리 가장 뒤에 해당하는 문자들이 있으면 자동으로 지워준다.
+	
+	ex) 아래의 경우 title 들어오는 조건에만 WHERE 붙고 AND 지워짐
+		결론적으로 위의 where요소 쓰는거랑 같은데 더 구리대
+	 -->
+  <select id="findWithColumnsLikeTrim1" parameterType="Map" resultType="oneMemoDto">
+  	SELECT o.*,name 
+  	FROM onememo o JOIN member m ON m.id=o.id
+  	<trim prefix="WHERE" suffix="ORDER BY no DESC" prefixOverrides="AND">
+  		<if test="title != null">
+	  		AND title LIKE '%' || #{title} || '%'
+	  	</if>
+	  	<if test="name != null">
+	  		AND name LIKE '%' || #{name} || '%'
+	  	</if>
+	  	<if test="content != null">
+	  		AND content LIKE '%' || #{content} || '%'
+	  	</if>
+  	</trim>
+  </select>
+  <!-- trim문은 select보다 수정이나 삭제 쿼리에 쓰자 -->
+  <update id="updateWithColumnsLikeTrim2" parameterType="Map">
+  <!-- title, content 중 적어도 1개가 전달돼어야 수정, 둘 중 하나는 전달되도록 자바코드에서 제어함 -->
+  	UPDATE onememo
+  	<trim prefix="SET" suffixOverrides=",">
+  		<if test="title != null">
+	  		title = #{title}, 
+	  	</if>
+	  	<if test="content != null">
+	  		content = #{content},
+	  	</if>
+  	</trim>
+  	WHERE no = #{no}
+  </update>
+  <!-- 수정시는 trim대신 set태그를 쓰자! -->
+  <!-- 역시 set요소 안의 if조건중 최소한 하나는 만족해야한다, 그래야 set이 돼어 수정되고 ,는 알아서 지워진다 -->
+  <update id="updateWithColumnsLikeSet" parameterType="Map">
+  	UPDATE onememo
+  		<set>
+	  		<if test="title != null">
+		  		title = #{title}, 
+		  	</if>
+		  	<if test="content != null">
+		  		content = #{content},
+	  		</if>
+  		</set>
+  	WHERE no = #{no}
+  </update>
+  <!--
+    ※foreach요소의 속성들(foreach 막강함 중요)
+    
+   1] collection :List 혹은 배열 타입만 가능(List도 내부적으로는 배열)
+	            1) parameterType이 List인 경우 "list" 혹은 "collection"
+	               만약 List<DTO계열>이면 item속성에 지정한 변수명.DTO멤버 속성명 으로 꺼낸다
+	               예]<foreach item="item" ~ >
+	                    #{item.id}
+	                 </foreach>
+	            2) parameterType이 배열인 경우 "array"
+	            3) parameterType이 Map인 경우 key값(단,value는 List혹은 배열) 지정
+	           
+	2] item :컬렉션에서 꺼내온 객체 저장 변수
+	3] open : 시작 문자열
+	4] close : 종료 문자열
+	5] separator : 반복 되는 사이에 삽입할 문자열
+	6] index : 0부터 순차적으로 증가하는 인덱스번호
+  -->
+  <!-- 1)파라미터가 리스트인 경우(이전까지는 Map) -->
+  <!-- 하나의 레코드를 담을 수 있는 타입이 resultType, 조건 빡셈 -->
+  <!-- 목표: WHERE no IN (1,2,3,4,5,6,7,8,9,10) => no가 1이나 2나...10이거나 IN연산자, 이를 foreach로 바꾸기 -->
+  <!-- list에서 하나씩 꺼내서 item에 지정한 변수에 담음, (로 괄호 연다! -->
+  <!-- #{item} 하면 앞에 (붙고 1 구분자는 콤마, ~~ (1,2,...10) 되는 것! -->
+  <!-- 레코드 현재 4개라 4개만 딱 됨 -->
+  <!-- 
+  <select id="findAll" parameterType="List" resultType="oneMemoDto">
+  	SELECT * FROM onememo
+  	WHERE no IN 
+  	<foreach collection="list" item="item" open="(" close=")" separator=",">
+  		#{item}
+  	</foreach>
+  </select>
+  -->
+   
+  <!-- 2)파라미터가 맵인 경우 -->
+  <!-- 지금 id="findAll"인 메소드 2개라 에러남 하나 주석처리 -->
+  <select id="findAll" parameterType="Map" resultType="oneMemoDto">
+  	SELECT * FROM onememo
+  	WHERE no IN 
+  	<foreach collection="numbers" item="item" open="(" close=")" separator=",">
+  		#{item}
+  	</foreach>
+  </select>
+  
+  <delete id="deleteEmail" parameterType="int[]">
+  	DELETE onememo
+  	WHERE no IN
+  	<foreach collection="array" item="item" open="(" close=")" separator=",">
+  		#{item}
+  	</foreach>
+  </delete>
+  
+  
+</mapper>
+<!-- https://mybatis.org/mybatis-3/ko/getting-started.html 에서 가져옴 -->

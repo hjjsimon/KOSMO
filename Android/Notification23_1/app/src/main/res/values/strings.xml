@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Notification23_1</string>
+    <string-array name="sports">
+
+        <item>축구</item>
+        <item>배구</item>
+        <item>농구</item>
+        <item>야구</item>
+    </string-array>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- NutrientSelectMapper.xml -->
+
+<mapper namespace="com.kosmo.springapp.nutrient.service.impl.NutrientSelectMapper">
+	<select id="selectVitaminName" resultType="String">
+		SELECT N_NAME FROM NUTRIENT WHERE N_NAME LIKE '%비타민%' ORDER BY N_NAME
+	</select>
+	<select id="selectETCName" resultType="String">
+		SELECT N_NAME FROM NUTRIENT WHERE N_NAME NOT LIKE '%비타민%' ORDER BY N_NAME
+	</select>
+	<select id="selectIngredientName" resultType="String">
+		SELECT I_NAME FROM INGREDIENT ORDER BY I_NAME
+	</select>
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Resource09</string>
+    <string name="buttonText">배열 출력하기</string>
+    <string name="xmlMessage">XML에서 리소스 참조</string>
+    <string name="codeMessage">자바코드에서 리소스 참조</string>
+
+</resources>

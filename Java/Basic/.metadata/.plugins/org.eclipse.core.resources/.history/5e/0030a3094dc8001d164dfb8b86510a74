@@ -1,0 +1,9 @@
+package etcclass12;
+
+public class MathClass {
+
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kosmo.kosmoapp" >
+    <!-- 인터넷 권한-REST API 서버연동 :http인 경우 파이버전 이후는 android:usesCleartextTraffic="true" 추가 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 카메라 찰영 이미지를 갤러리에 저장하기위한 권한-Q이후 권한 불필요(학습용으로 필요하다고 가정) -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".GlobalApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.KosmoApp"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="33"
+
+        >
+        <!--이미지 보정-->
+        <!--가상전시관-->
+        <!-- 로그인 화면 -->
+        <!-- LoginActivity만 테마 변경:버튼의 백그라운드 이미지 적용하기 위해서 -->
+        <!-- android:noHistory="true"는 자바코드로 구현 -->
+        <activity
+            android:name=".LoginActivity"
+
+            android:exported="false"
+            android:label="로그인화면"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- - 인트로 화면 -->
+        <!-- 자바코드가 아닌 xml속성(android:noHistory)으로 Intent.FLAG_ACTIVITY_NO_HISTORY설정 -->
+        <activity
+            android:name=".IntroActivity"
+            android:exported="true"
+            android:label="코스모앱"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 컨텐츠 화면 -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="메인화면" >
+
+        </activity>
+        <!--
+        에러내용-android.os.FileUriExposedException: file:///storage/emulated/0/Android/data/com.kosmo.kosmoapp/files/2.jpg
+        Android 7.0이상의 경우
+        앱 외부에 file://URI 의 노출을 금지하기 때문에 FileUriExposedException 이 발생.
+        파일 공유(예:카카오톡  혹은 네이버 메일)를 위해서 content://URI 형식을 바꿔주고 권한을 부여해야한다.
+        그렇게 하기 위해 FileProvider를 사용
+        -->
+
+        <!--카카오 로그인 관련 액티비티-->
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="kakaodf5a3b705a1931b9b18bb988fe269f7f" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

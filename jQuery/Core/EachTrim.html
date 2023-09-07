@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EachTrim.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //1] $.each : 자바 정적메소드라고 생각
+
+            /*
+                제이쿼리 함수:자스의 forEach나 for~in문처럼 특정요소에 적용하는 것이 아니라
+                             배열이나 객체에 적용하는 순환문
+                
+                $.each(배열이나 객체,function(키값,밸류값){});
+                1) 배열 형태일 때: 
+                    첫번째 인자는 인덱스 ,두번째 인자에는 인덱스에 따른 요소값이 저장됨.
+                2) 객체일 때:
+                    첫번째 인자는 키, 두번째 인자는 키에 따른 요소값이 저장됨.
+            */
+            var mountains = ['한라산','지리산','덕유산'];//배열
+            $.each(mountains, function(index,element){//배열에서 하나씩 꺼내 적용할 함수
+                console.log(index,element);
+                //0 '한라산' 1 '지리산' 2 '덕유산'
+            });
+
+            var member = {name:'가길동',age:20,addr:'가산동'};//객체
+            $.each(member,function(key,value){
+                //console.log(key,value);
+                //name 가길동 age 20 addr 가산동
+                //console.log(member.key);//undefined
+                //※키를 변수처리시 key로 접근 불가, 대괄호 써야함, name, age, addr뿐 key없음(매우 중요***)
+                console.log(member[key]);
+                //가길동, 20, 가산동 출력
+            })
+
+            var members=[//배열인데 객체가 들어있음
+                        {name:'가길동', age:20, addr:'가산동'},
+                        {name:'나길동', age:30, addr:'나산동'},
+                        {name:'다길동', age:25, addr:'다산동'}
+                        ];
+            $.each(members,function(index,e){//index 필요 없으면 안써도 됨
+                console.log('번호:%s, 이름:%s, 나이:%s, 주소:%s', index+1, e.name, e.age, e['addr']);
+            })
+
+            //2] $.trim: 양쪽 공백 제거
+            console.log('X'+('        j Q   u e r    y   ')+'Y')
+            console.log('X'+$.trim('        j Q   u e r    y   ')+'Y')
+
+
+
+
+
+
+
+
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>$.each(대상,콜백함수) 및 $.trim(문자열)</legend>
+
+    </fieldset>
+</body>
+</html>

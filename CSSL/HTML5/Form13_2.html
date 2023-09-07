@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form13_2.html</title>
+</head>
+<body>
+    <!--
+    [INPUT태그(inline element)]
+    form태그의 하위요소로  type속성에 다양한 값을 지정함으로써 여러가지 형태의 모양을 만들어 
+    사용자로부터 입력이나 선택을 받을 수 있는 태그
+
+    -INPUT태그의 주요 속성
+    1)type:모양을 타나태는 값 지정(text,password,checkbox,radio등)
+
+    1>text:한줄 입력상자
+    2>password:입력시 입력한 값이 노출 안되게
+    3>checkbox: 여러개 선택 가능한 체크 박스 표시할때, 체크된 상태를 미리 보여주고자 할때는 checked="checked" 속성 추가
+    4>radio:하나만 선택 가능한 라디오 박스 표시할때, 미리 선택된 박스를 보여주고자 할때는 checked="checked" 속성 추가
+    5>hidden: 값을 웹브라우저에 표시하지 않고 전송하고자 할때 웹브라우저에 보이지 않음 웹 프로그래밍시 자주 사용
+    
+    --아래는 버튼 모양
+    1>submit: 값을 submit할때(서버로 전송,제출)
+    2>reset: 초기화 할때
+    3>image:값을 submit할때, 주로 버튼을 이미지로 만들때 사용
+    4>button:버튼모양을 표시할때,아무런 액션도 일어나지 않음
+    5>file: 파일 찾아보기 버튼과 힌줄 입력상자 표시
+
+    --선택상자
+    input 태그가 아닌 select태그로 시작.
+    하위 태그로 목록을 표시하기 위해 option태그를 가짐
+    미리 선택된 목록을 표시하기위해 selected="selected"
+
+    --여러줄 입력상자
+    textarea로 시작, 시작태그와 종료 태그 사이에 값을 넣어주면 여러줄 입력상자에 표시됨.
+    단, 사용자가 입력한값등을 가져올때는 역시 value속성 이용, cols,rows 속성으로 크기 지정.
+
+    --공통 사항
+    value: 사용자가 입력한 값이 저장되는 속성 혹은 값을 미리 지정시에 사용(모든 form의 하위요소는 value속성 가짐, 입력값 value에 저장)
+    name: 값 전송시 구분하기 위한 이름을 지정. 서버로 값 전송시 필수! 그래야 값이 전송됨(파라미터명=사용자입력값 으로 전송됨)
+
+    *값 전송하려면 반드시 name속성을 지정 checkbox나 radio계열을 제외하고는 name속성을 다르게 지정해야 한다.
+    왜냐하면 name속성에 지정한 값을 이용해 사용자가 전송한 값을 받으니까
+    type이 radio 및 checkbox는 반드시 value속성에 값을 지정해야 지정된 값이 전송이 된다.
+    그리고 name속성은 같은 그룹으로 묶기 위해서 name은 동일하게 지정해야 한다.
+    
+    *모든 태그는 id속성을 가질 수 있다. 단, 한 페이지안에서 id값은 중복될 수 없다.
+    -->
+    <div>
+        <h2>form태그의 하위요소들(자식태그들)</h2>
+        <h3>input계열의 type="text"(input타입 text)</h3>
+        <!--
+        [한줄 입력 상자]
+         주요 속성]
+         1> size:한줄입력 상자의 크기 지정(영문자나 숫자 기준)
+         2> maxlength:최대 입력할 수 있는 글자 수 지정
+         3> value:사용자가 입력한 값이 저장되는 속성
+         4> disabled ="disabled" :비활성화(html5에서는 disabled만 써도 됨, 최근엔 간결이 모토)
+         5> enabled="enabled" :활성화(기본값)
+         6> dir: "rtl" 혹은 "ltr" 입력방향(우리는 ltr, left to right로 글 써나감)
+        -->
+        기본텍스트상자: <input type="text"/><br/><!--문자 계속 입력가능-->
+        속성 추가: <input type="text" size="10" maxlength="5" value="기본텍스트" dir="rtl" disabled/><br/>
+        <!--대략 10자만 입력가능한 크기로 나옴, 5글자만 입력가능, 사용자 입력값 지정, rtl입력방식(디렉션), disabled로 입력불가-->
+        주민 번호: <input type="text" size="6" maxlength="6"/> - <input type="text" size="7" maxlength="7"/><br/>
+        홈페이지: <input type="text" value="http://"/><br/>
+        <!--http는 미리 입력해줌, 그 이후로 사용자가 입력-->
+        <h3>input계열의 type="password"</h3>
+        <!--type이 text일때와 속성 동일, 입력값이 노출안되고 동그라미 표시-->
+        기본패스워드: <input type="password"/><br/>
+        패스워드 지정: <input type="password" value="1234"/><br/><!--사용금지, 동그라미 표시되지만 소스보기에는 다 보임-->
+        <h3>type="checkbox"</h3>
+        <!--checkbox: 여러개 선택시, name을 같게 지정(그룹으로 지정), 반드시 value속성에 값 미리 지정,
+            value에 미리 지정한 값이 action에 지정한 페이지로 전송됨, 미리 선택해서 보여줄때는 checked속성-->
+        <fieldset>
+            <legend>당신의 관심사항은?</legend>
+            <form><!--전송할거라 form으로 감쌈--><!--보통 오른쪽에 항목명 씀-->
+                <input type="checkbox" name="inter" value="정치" id="pol"/> <label for="pol">정치</label>
+                <!--pol이름 맞춰서 바인딩, 정치 글자를 눌러도 체크됨-->
+                <input type="checkbox" name="inter" value="경제" checked/> 경제<!--checked로 미리 체크표시-->
+                <input type="checkbox" name="inter" value="연예"/> 연예
+                <input type="checkbox" name="inter" value="스포츠" id="spo"/> <label for="spo">스포츠</label>
+                <!--id값은 한 페이지에서 중복되면 안됨-->
+                <input type="submit" value="확인"/>
+                <!--그냥 확인만 누르면 파라미터 전송x 그냥.html?상태임, 선택많이하면 이름 하나에 값 여러개! 즉 배열로 받음-->
+                <!--Form13_2.html?inter=정치&inter=경제&inter=연예&inter=스포츠-->
+            </form>
+        </fieldset>    
+        <h3>type="radio"</h3>
+        <!--radio: 여러개 중 하나 선택시 사용, 나머지는 checkbox 동일, name속성에 값을 다르게 주면 여러개 선택가능-->
+        <fieldset>
+            <legend>당신의 성별은?</legend>
+            <form><!--radio버튼은 진짜 라디오버튼처럼 버튼 여러개 중 하나만 선택가능-->
+                <input type="radio" name="gender" value="남성" id="man"/> <label for="man">남성</label>
+                <input type="radio" name="gender" value="여성" checked/> 여성
+                <input type="radio" name="gender" value="트랜스젠더"/> 트랜스젠더
+                <input type="submit" value="확인"/>
+                <!--checkbox랑 radio는 이름 같게 해줘야함, 안그러면 라디오는 중복선택됨-->
+            </form>
+        </fieldset> 
+        <h3>type="file"</h3>
+        <!--input type="text"의 속성과 동일, 단 value속성에 값을 지정해도 디폴트로 텍스트상자에 보이지않음, 단 선택한 파일은 value속성에 저장은 됨-->
+        기본 : <input type="file"/><!--파일선택 대화상자 뜸, 누르면 탐색기 들어감-->
+        속성추가: <input type="file" size="50" value="기본텍스트"/><!--속성 추가해도 요즘 브라우저는 의미없음, 그냥 공부용-->
+        <!--요즘 브라우저는 옆에 텍스트상자 없이 "파일선택"만 보여줘서 "기본텍스트" value준게 의미 없음-->
+        <h3>type="hidden"</h3>
+        <!--
+            -프로그래밍시 자주 사용하는 폼의 하위태그
+            -웹브라우저에 아무 모양도 보이지 않음
+            -값을 숨겨서 전송할 때 사용(전송이므로 value, name속성 필수)
+            -주로 키값(Primary key)등을 전송할 때 사용(ex. 게시판 번호)
+        -->
+        <form><!--값 2개 전송함, empno랑 name, 근데 사용자는 name밖에 안보임-->
+            <input type="hidden" name="empno" value="7799"/>
+            이름: <input type="text" name="name"/>
+            <input type="submit" value="확인"/>
+        </form>
+        <h3>다양한 버튼들</h3><!--위치 등은 나중에 CSS로 다 조절함-->
+        <fieldset>
+            <form action="https://www.nate.com"><!--페이지 바뀌는걸 보기위해 action-->
+                아이디: <input type="text" name="id"/>
+                성별: 
+                <input type="radio" name="gender" value="남성" id="man"/> <label for="man">남성</label>
+                <input type="radio" name="gender" value="여성" checked/> 여성
+                <input type="radio" name="gender" value="트랜스젠더"/> 트랜스젠더
+                관심사항: 
+                <input type="checkbox" name="inter" value="정치" id="pol"/> <label for="pol">정치</label>
+                <input type="checkbox" name="inter" value="경제" checked/> 경제
+                <input type="checkbox" name="inter" value="연예"/> 연예
+                <input type="checkbox" name="inter" value="스포츠" id="spo"/> <label for="spo">스포츠</label>
+                <!--클릭시 액션에 지정한 페이지 또는 URL로 데이터 전송 및 이동, 서버로 제출기능 있음-->
+                <input type="submit" value="submit버튼"/>
+                <!--클릭시 폼의 하위요소 값들이 원래대로 초기화됨-->
+                <input type="reset" value="reset버튼"/>
+                <!--일반 버튼모양으로 아무런 기능도 하지않음(왜씀? 백엔드에서 자스로 처리가능함!)-->
+                <input type="button" value="button버튼"/>
+                <!--input type="submit"과 같은 전송기능(value속성 아님)-->
+                <button>button태그</button>
+                <!--이미지로 버튼 표시(전송기능 있음): 아무것도 안써도 그림 옆에 "제출"이라고 써져있음, 이미지 없으면 alt에 쓴거 나옴-->
+                <input type="image" src="../Images/button.jpg" alt="이미지 버튼" style="width: 75px;height: 25px;"/>
+            </form>
+        </fieldset>
+        <h3>&lt;select&gt;태그</select></h3>
+        <!--
+        select태그: 선택목록을 보여줌
+        [속성]
+        1)size:보여줄 목록의 개수 지정(기본값 1)
+        2)multiple:다중 선택 가능
+
+        - 단일 선택이 기본
+        - 종료태그 있다
+        - 하위태그로 option태그를 갖는다
+
+        option태그의 value속성에 값을 지정함으로써(서버로 전송) 목록을 표시한다
+        selected속성은 option태그의 속성
+        -->
+        <form><!--값 전송되는거 봐야하니까 form으로-->
+            <select name="grade" size="2" multiple><!--전송시 name속성 필수/ 2개씩 보이게함/ 드래그로 다중선택가능하게함-->
+                <option value="">학력을 선택하세요</option>
+                <option value="초등학교">초등학교</option><!--옵션태그 사이 값이 보임, 전송은 value값이 됨-->
+                <option value="중학교" selected>중학교</option><!--selected 기본노출(위의 checked랑 동일)-->
+                <option value="고등학교">고등학교</option>
+                <option value="대학교">대학교</option>
+            </select>
+            <input type="submit" value="확인"><!--선택하면 url에 표시 후 현재페이지 다시 보임-->
+        </form>
+        <h3>&lt;textarea&gt;태그</select></h3>
+        <!--
+        -rows(행의 수,세로폭)와 cols(컬럼 수, 가로폭)로 크기 결정(영문자/숫자 기준)
+        -value속성으로 사용자가 입력한 값을 얻는다.
+        -기본 텍스트를 줄때는 value속성이 아닌 시작태그와 종료태그 사이에 주면 된다.
+        -->
+        기본: <textarea value="기본텍스트"></textarea><br/><!--지금처럼 "기본텍스트"해도 안보임, 아래 코드처럼해야 보임-->
+        속성추가: <br/>
+<textarea cols="50" rows="10">
+관리자님의 답변글
+-----------------
+좋은 하루 되세요
+</textarea><!--50개 컬럼수 만큼 세로폭, 10개 행만큼 가로폭--><!--윗 글과 여기 안땡기면 공백 보임(textarea 내부는 그대로 출력)-->
+    </div>
+</body>
+</html>

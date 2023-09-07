@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        //next() = nextElementSibling 동일
+        
+        $(function(){
+            $('#next').click(function(){//다음 버튼 클릭시 JQUERY1 CSS변화
+                
+                //방법1] 제이쿼리로 해보기
+                /*
+                $('#third').next().css({color:'red',fontSize:'1.8em'});//JQUERY1 선택한 것
+                $('#third').next().next().next().next().css({color:'red',fontSize:'1.8em'});
+                //JQUERY4 선택
+                console.log('마지막 요소 이후 next()호출:', $('#third').next().next().next().next().next().length);
+                //다음 자식 없어서 안나올 것, null도 undefined도 아님 length로만 판단가능함
+                //그냥 console.log로 치면 안나옴, length=0으로 없는걸 판단해야함
+*/
+
+                //방법2] 바닐라 자바스크립트로 해보기
+                var third = document.querySelector('#third');
+                var nextElement = third.nextElementSibling;
+                //nextSibling은 요소 말고 그냥 text까지 뒤에 있는건 바로 가져옴
+                //nextElement.style.color='red';
+                //nextElement.style.fontSize='1.8em';
+                nextElement.style='color:red; font-size:1.8em';//위 두줄을 한줄로
+            });
+
+            $('#prev').click(function(){
+                console.log($('#third').prev().prev().html());//JAVA
+                console.log($('#third').prev().prev().prev());
+                //객체가 찍히긴함
+                //제이쿼리는 null 혹은 undefined 아닌 제이쿼리 객체 무조건 반환
+                //찾는 요소가 없는 것은 length로 판단한다!
+                console.log($('#third').prev().prev().prev().length===0);//true
+            });
+            //문] 한칸씩 넘어가기
+            //첫번째 li객체 저장
+            var liObj = $('li:first');
+            //마지막 객체여부 판단용 변수
+            var index = 0;
+            //li객체의 전체수
+            var length = $('li').length;
+            $('#continue').click(function(){
+                //index가 0일때 즉 최초 버튼 클릭시나
+                //마지막 li객체에 도달시 
+                //마지막 li객체를 원래대로
+                if(index===0) 
+                    $('li:last').css({color:'black',fontSize:'1em'});
+                else    
+                    liObj.prev().css({color:'black',fontSize:'1em'});//이전 li객체를 원래대로
+                //해당 li객체를 CSS변경
+                liObj.css({color:'red',fontSize:'2em'});
+                //인덱스 증가
+                index++;
+                if(index !== length)//마지막이 아니면
+                    liObj = liObj.next();
+                else{
+                    //인덱스를 다시 0으로 초기화
+                    index=0;
+                    //liObj에 처음 li객체를 저장
+                    liObj=$('li:first')
+                }   
+
+            })
+        
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>next() 및 prev()함수</legend>
+		<button id="next">다음</button>
+		<button id="prev">이전</button>
+		<button id="continue" >계속</button>
+		
+		<ul>
+		 <li id="java">JAVA</li>
+		 <li>JSP</li>
+		 <li id="third">FRAMEWORK</li>
+		 <li >JQUERY1</li>
+		 <li>JQUERY2</li>
+		 <li>JQUERY3</li>		
+		 <li>JQUERY4</li>
+		</ul>			
+	</fieldset>
+</body>
+</html>

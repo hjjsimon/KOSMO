@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebStorage21_2.html</title>
+    <!--local-> sessionStorage로만 바꿔주면됨
+        단, 이건 세션스토리지라 브라우저 닫으면 세션삭제, 브라우저 1개당 세션1개, 처음 방문됨-->
+</head>
+<body>
+    <fieldset>
+        <legend>웹 스토리지를 이용한 방문자 회원수 카운팅(세션 스토리지)</legend>
+        <span id="display" style='color:red;font-size:1.2em;font-weight: bold;'></span>
+        <button onclick="removeStorage();">세션 스토리지 삭제</button>
+      </fieldset>
+      <script>
+        //브라우저의 웹스토리지 지원여부 판단
+        console.log(typeof Storage!==undefined);//true, undefined가 아님, 지원함
+        if(typeof Storage!==undefined){//웹스토리지를 제공하는 브라우저
+            console.log('%O',Storage);//생성자함수 Storage(), prototype이 함수
+            var span=document.querySelector('#display');
+            span.textContent='웝 스토리지를 지원하는 브라우저입니다';//span태그에 작성한것(빨간글)
+            console.log(sessionStorage);//prototype Object 상속
+            var counter=sessionStorage.getItem('counter');
+            console.log(counter);//키에 해당하는 값이 없으니 null반환
+            if(counter===null){//로컬스토리지에 카운터라는 키가 없으면, 현재페이지 최초방문인것
+                //방문횟수 1로 초기화]
+                sessionStorage.setItem('counter',1);
+                span.textContent='처음 방문하셨군요';
+
+            }
+            else{//로컬스토리지에 카운터라는 키값이 있으면 재방문
+                //방문횟수 증가(새로고침할때마다 증가, 로컬이라 브라우저 껏다켜도 초기화x)
+                counter++;
+                span.textContent=counter+'번째 방문하셨군요';
+                sessionStorage.setItem('counter',counter);
+            }
+        }
+        function removeStorage(){
+            span.textContent='방문횟수가 초기화되었습니다';
+            sessionStorage.removeItem('counter');//counter키만 삭제
+            //sessionStorage.clear();//모든 키 삭제
+        }
+
+      </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+
+    >
+    <EditText
+        android:hint="메시지를 입력하세요!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoMessage"
+        android:textSize="20sp"
+        />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/btnShort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="짧은 메시지"
+
+            />
+        <Button
+            android:id="@+id/btnLong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="긴 메시지"
+            android:layout_marginHorizontal="5dp"
+
+            />
+        <Button
+            android:id="@+id/btnCustom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="커스텀뷰" />
+    </LinearLayout>
+</LinearLayout>

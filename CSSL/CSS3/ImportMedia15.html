@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImportMedia15.html</title>
+    <!--외부 CSS파일 연결방법1] link태그 사용
+    <link href="styles/import.css" rel="stylesheet"/>-->
+    <style>
+        /*외부 CSS파일 연결방법2] import규칙 사용(반드시 style태그 안의 최상단에 위치해야 적용됨)*/
+        @import url(styles/import.css);
+        .content{/*가까운게 적용됨 link보다 이게 가까우니까*/
+            color: yellow;/*글자색은 그냥 color*/
+            background-color: black;
+        }
+        /*media규칙(위치무관): 해상도에 따라 CSS속성 적용을 다르게 가능함, 반응형웹 만들기 가능
+            ex. 컴퓨터 브라우저 해상도로는 가로배치 -> 모바일 브라우저 해상도로는 세로배치
+            media는 브라우저, 프린터 등 가능, 당연히 브라우저가 대부분*/
+        @media screen {/*screen 모니터 의미, 현재 문서가 서비스되는 장치가 모니터일때 아래 CSS적용*/
+            .content{
+                color: white;
+            }
+        }
+        @media print {/*현재 문서가 서비스되는 장치가 프린터일때는 아래 CSS가 적용*/
+            .content{
+                color: black;
+                background-color: white;/*위에 인쇄하면 바탕 검정이라 잉크 너무 많이 먹음*/
+            }    
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <p>
+            이런 가운데 전세 수요는 폭발하고 있다. 
+            한국감정원의 지난 5일 기준 서울의 전세 수급지수는 121.4로 2016년 1월 이후 가장 높은 수준을 보였다. 
+            수도권 역시 117.6으로 같은 해 2월 이후 최고치다. 
+            이 지수는 0~200으로 표현되는데, 200을 향해갈수록 수요가 더 많다는 것을 드러낸다. 
+            서울을 비롯한 수도권 아파트 전셋값이 60주 이상 오름세를 보이는 것도 공급자 우위 시장이 굳어진 데 따른 것이다.
+        </p>
+      </div>
+</body>
+</html>

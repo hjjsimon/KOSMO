@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date14.html</title>
+    <script>
+        /*
+            Date객체는 var 변수명 =new Date();로 생성한다.
+            
+            ※배열객체 var 배열명 = new Array();
+            
+            ※Math객체 Math.함수명(); ->클래스메소드니까
+            
+            ※String객체는 ->타입은 틀리지만 자주 쓰므로 바로 호출 가능함
+            방법1] var 변수명 = new String("문자열");
+            방법2] var 변수명 = "문자열";
+            혹은 직접 "문자열".함수()형식으로 사용가능
+
+            날짜 정보를 가져올때는 getXXX()시리즈로
+            날짜를 설정할때는 setXXX()시리즈로
+        */
+        //1]Date객체 얻는 방법1: Date()
+        var today=new Date();
+        console.log('%O,타입:%s',today,typeof today);//toString 오버라이딩되어 %O가 바로 시간 출력
+        console.log(today);
+        //1]Date객체 얻는 방법2: new Date(년[,월,일,시,분,초,1/1000초])
+        //년은 그대로 연도 넣음, 월은 0~11사이 값.
+        var date2=new Date(2002,5,22,18,10,50);//1월이 0이니까 6월은 5, 2002년부터 날짜지정
+        console.log('%s년 %s월 %s일 %s시 %s분 %s초',
+            date2.getFullYear(),
+            date2.getMonth()+1,//6월
+            date2.getDate(),
+            date2.getHours(),
+            date2.getMinutes(),
+            date2.getSeconds()
+        )
+        //2]setxxx()함수로 날짜 변경
+        date2.setMonth(6);//6월->7월
+        date2.setDate(31);//22일->31일
+        console.log('%s년 %s월 %s일 %s시 %s분 %s초',
+            date2.getFullYear(),
+            date2.getMonth()+1,//6월
+            date2.getDate(),
+            date2.getHours(),
+            date2.getMinutes(),
+            date2.getSeconds()
+        )
+        //3]getDay(): 요일얻기(0:일요일~6:토요일)
+        switch(date2.getDay()){
+            case 0: console.log('일요일');break;
+            case 1: console.log('월요일');break;
+            case 2: console.log('화요일');break;
+            case 3: console.log('수요일');break;
+            case 4: console.log('목요일');break;
+            case 5: console.log('금요일');break;
+            case 6: console.log('토요일');break;
+        }
+        //4]getTime(): 두 날짜 사이의 차이 구하기
+        //1970년 1월 1일 0시 0분 0초부터 특정일까지 시간을 밀리세컨단위로 반환
+        var currDate=new Date();//입력 안하면 오늘 날짜정보 들어감
+        var endDate=new Date('2023-8-28');//자바는 이거 deprecate, 문자열 숫자열 둘 다 상관없음
+        var cTime=currDate.getTime();
+        console.log(cTime);//오늘
+        var eTime=endDate.getTime();
+        console.log(eTime);//수료날
+        console.log('수료일까지 남은 일수:',Math.ceil(Math.abs(eTime-cTime)/(1000*60*60*24)));
+        //Date.now(): 1970년 1월 1일 0시 0분 0초 UTC부터 현재까지 흘러온 시간을 밀리초단위로 반환
+        console.log('Date.now():',Date.now());//cTime 동일, 클래스메소드로 바로 접근
+        //Date.parse():날짜형식의 문자열을 날짜(Date타입)로 변환 후 해당 날짜와 1970년부터 밀리초단위로 반환
+        console.log("Date.parse():",Date.parse('2023-8-28'));//eTime동일
+        console.log('수료일까지 남은 일수:',Math.ceil(Math.abs(Date.parse('2023-8-28')-Date.now())/(1000*60*60*24)));
+        //1693148400000 숫자(1970년부터 수료일까지)를 년, 월, 일로 반환
+        /*
+        자바버전
+        SimpleDateFromat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        sysout(dateFormat.format(new Date(1693148400000L))); -> 롱형이라 L 붙여줌
+        */
+        //1.Date객체 생성
+        var temp=new Date();
+        //2.setTime()함수 사용: 밀리세컨 숫자에 맞는 날짜반환(자바에도 setTime()있음, 위에 SimpleDate 대신 가능)
+        temp.setTime(1693148400000);
+        console.log(temp);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

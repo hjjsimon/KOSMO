@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Border06_3.html</title>
+    <style>
+        *{
+            margin: 0;/*왼쪽,위 여백 제거*/
+            padding: 0;
+        }
+        div:not(.last){/*div :(중에) last 클래스만 제외*/
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            padding: 10px;/*box안에 상하좌우 10px씩 추가, 현재 크기는 220x220됨*/
+            border: 10px aqua solid;/*box밖에 상하좌우 10px씩 추가, 현재 크기는 240x240됨*/
+            /*패딩,보더도 영역 크기에 포함됨*/
+        }
+        div:nth-child(2){/*h2가 첫번째 자식, 그 밑이 두번쨰자식*/
+            background-color: red;
+            padding: 0;
+            border: none;/*패딩,보더 해줘야 다시 200x200됨*/
+        }
+        div:nth-child(3){
+            background-color: green;
+            box-sizing: border-box;/*원래 크기 200x200크기 맞추고, border가 박스안으로 들어감, padding은 사라짐*/
+            /*레이아웃 설계시 테두리 줄때 윗코드 함께 주기*/
+        }
+        div:nth-child(4){
+            background-color: blue;
+            box-sizing: content-box;/*240x240유지 콘텐트박스는 바뀌는거 없음, 박스사이징은 무조건 보더박스 준다*/
+        }
+    </style>
+</head>
+<body>
+    <h2>box-sizing속성</h2>
+    <div>가로 세로 200px</div>
+    <div>가로 세로 200px</div>
+    <div>가로 세로 200px</div>
+    <div class="last" style="width: 240px;height: 240px;background-color: yellow;">가로 세로 240px</div>
+    <!--인라인엘리먼트로 스타일설정, 위 박스랑 크기 동일함-->
+</body>
+</html>

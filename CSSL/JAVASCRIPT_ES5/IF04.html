@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IF04.html</title>
+    <script>
+        /*
+       if(자바처럼 비교식이나 논리식뿐 아니라 자스는 산술식까지 모든식 즉 모든값이 올 수있다.)
+       자바에서는 true아니면 false를 판단할 수 있는 비교식이나 논리식이 와야 한다(산술식(x))
+       자스에서는 모든 식이 가능하다.
+       0이나 null 그리고 false 이외의 모든 값은 true로 판단하기때문에.....
+       자스에서 0,null,false-> 모두 조건식에서 false처리(이외에는 모두 true)
+        */
+        console.log('[NaN판단하기]');//변수===NaN 무조건 false, 따라서 isNaN()으로 판단
+                                    //ex. 변수 '가', NaN '나' 즉 뭐가올지 몰라 무조건 false
+        var nan=parseInt('HELLO');
+        console.log(nan);//HELLO는 숫자 아니라 parseInt로 NaN 출력됨(HELLO아니어도 숫자 아니면 다 NaN)
+        if(isNaN(nan)) console.log('%s는 NaN이다',nan);//isNaN(): 숫자 아니면 true, 숫자면 false
+        else console.log('%s는 NaN이 아니다',nan);
+        console.log('[undefined판단하기]');//값이자 타입, 변수 선언하고 값 할당 안했을 때 undefined
+        var unvar;
+        console.log(unvar);//undefined(null 비슷 정확히 같지는 않음)
+        if(unvar===undefined) console.log('선언후 값을 할당하지 않았다');
+        else console.log('선언후 값을 할당했다');
+        console.log('[null판단하기]');//변수===null로 판단
+        var nullvar=null;//자스에서는 null을 이렇게 표현, 자바랑 동일함
+        if(nullvar===null) console.log('nullvar는 null이다');//null(값이 없다)
+        else console.log('nullvar는 null이 아니다');
+        console.log('[기타 type 비교시에는 문자열로 비교]');       
+        var str='HELLO';
+        if(typeof str==='string') console.log('str는 string타입이다');//그냥 string쓰면 변수로 봐서 안됨, '' 또는 ""로 감싸야함
+        else console.log('str는 string타입이 아니다');
+        var obj={};//object타입
+        if(typeof obj==='object') console.log('obj는 object타입이다');//그냥 string쓰면 변수로 봐서 안됨, '' 또는 ""로 감싸야함
+        else console.log('obj는 object타입이 아니다');
+        var num1=num2=10;//num1은 선언함, num2는 선언안함, 근데 에러안남, 10을 num2에 넣고 num2를 num1에 넣고 연쇄적으로 실행
+        if(num1-num2) console.log('0은 true다')//산술식인데 가능, num1-num2=0이므로 false
+        else console.log('0은 false다')
+        /* 삼항 연산자
+        자바와는 다르게 판단식(모든식 가능)이 참이거나 거짓일때 결과값을 변수에 담지 않아도 됨.
+        
+        방식1] 자바불가(문장에 sysout불가, 자스는 자바처럼 sysout에 변수 담을 필요없이 문장에 출력가능)
+        판단식 ? 참일때 실행할 문장 : 거짓일때 실행할 문장;
+
+        방식2] 자바동일
+        var 변수 =판단식 ? 참일때 값 : 거짓일때 값;
+        */
+        //방식1]자바x
+        num1>num2? console.log('num1이 num2보다 크다'): console.log('num1이 num2보다 크지않다');//같을수도 작을수도
+        //방식2]자바o
+        //1.변수 담는 방식
+        var result=num1>num2? 'num1이 num2보다 크다':'num1이 num2보다 크지않다';//같을수도 작을수도
+        console.log(result);
+        //2.변수 안담는 방식
+        console.log(num1>num2? 'num1이 num2보다 크다':'num1이 num2보다 크지않다');//같을수도 작을수도
+    </script>
+</head>
+<body>
+    <fieldset><!--form, name 다 없음, 서버로 제출x, 서버 말고 브라우저가 해석하도록 코딩할 것-->
+        <legend>성적 출력</legend>
+        국어 <input type="text" id="kor"/>
+        영어 <input type="text" id="eng"/>
+        수학 <input type="text" id="math"/>
+        <span id='span' style='color:red;font-weight:bold;'>여기에 출력</span>
+        <button onclick="getGrade();">확인</button>
+    </fieldset>
+    <script>
+        var korNode=document.getElementById("kor");
+        console.log(korNode);//ID로 엘리먼트(위에 input한 <input type="text" id="kor"/>)를 그대로 가져옴
+        var engNode=document.getElementById("eng");
+        var mathNode=document.getElementById("math");
+        var spanNode=document.getElementById("span");
+        function getGrade(){//버튼에 클릭이벤트 생길때마다 getGrade()실행됨
+            console.log('버튼에 클릭이벤트 발생');
+            var kor=parseInt(korNode.value);//입력한건 숫자라도 문자로 바껴서 입력됨, parseInt써서 숫자로 바꿔야함
+            var eng=parseInt(engNode.value);//뭐 어쩌구.. 타입인가 같은건 99% 있어서 .value도 있대
+            var math=parseInt(mathNode.value);//점수 3개 다 가져온것, 이제 평균 구하자
+            var avg=(kor+eng+math)/3;//3.0안해도 소수점까지 나옴
+            if(avg>=90) spanNode.textContent="A학점";//위의 "여기에 출력"이 A학점으로 바뀜
+            else if(avg>=80) spanNode.textContent="B학점";
+            else if(avg>=70) spanNode.textContent="C학점";
+            else if(avg>=60) spanNode.textContent="D학점";
+            else spanNode.textContent="F학점";
+        }
+    </script>
+</body>
+</html>

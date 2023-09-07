@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="아이디"
+            android:layout_marginRight="5dp"
+            android:background="#CC542F"
+            android:textColor="@color/white"
+            android:gravity="center"
+            />
+        <!--
+        EditText의 속성
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        imeOptions:소프트 키보드 즉 입력창에 커서 놓였을때 하단에 뜨는 자판기
+        의 액션버튼의 동작을 설정하는 속성이다
+        단,android:inputType="text"와 함께 설정해야한다
+        그렇지 않으면 디폴트가 멑티라인 입력이라 액션버튼이 무조건 엔터동작을 한다
+        -->
+        <EditText
+            android:id="@+id/editUser"
+            android:hint="아이디 입력"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:paddingLeft="10dp"
+            android:background="#888A6291"
+            android:inputType="text"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        >
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="비밀번호"
+            android:layout_marginRight="5dp"
+            android:background="#CC542F"
+            android:textColor="@color/white"
+            android:gravity="center"
+            />
+        <EditText
+            android:id="@+id/editPass"
+            android:hint="비밀번호 입력"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:background="#888A6291"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:inputType="textPassword"
+            android:imeOptions="actionNext"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        >
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="이름"
+            android:layout_marginRight="5dp"
+            android:background="#CC542F"
+            android:textColor="@color/white"
+            android:gravity="center"
+            />
+        <EditText
+            android:id="@+id/editName"
+            android:hint="이름 입력"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:background="#888A6291"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:text="나이"
+            android:layout_marginRight="5dp"
+            android:background="#CC542F"
+            android:textColor="@color/white"
+            android:gravity="center"
+            />
+        <EditText
+            android:id="@+id/editAge"
+            android:hint="나이 입력"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:background="#888A6291"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+        <Button
+            android:onClick="init"
+            android:text="초기화"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            />
+        <Button
+            android:onClick="insert"
+            android:text="입력"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            />
+        <Button
+            android:onClick="update"
+            android:text="수정"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            />
+        <Button
+            android:onClick="delete"
+            android:text="삭제"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--
+        아이템간 간격
+        android:divider="@android:color/transparent"
+            android:dividerHeight="5dp"
+        -->
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="15dp"
+            />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector01_4.html</title>
+    <style>
+        ul > li{/* >는 자식선택자 */
+            color: green;
+            font-size: 2em;
+            font-weight: bold;
+            border: 1px red solid;
+        }
+        /*반응선택자: 사용자의 반응에 따라 요소(태그)를 선택*/
+        li:hover{/*hover선택자: 사용자가 마우스 올린 li태그를 선택*/
+            color: red;/*영역에 마우스 갖다대면 글자가 빨간색으로 바뀜*/
+        }
+        li:active{/*active선택자: 마우스로 해당 태그영역을 클릭한 요소를 선택*/
+            color: yellow;
+            background-color: black;/*클릭 누르고있으면 색 바뀜*/
+        }
+        /*상태선택자: 요소의 상태에 따라 선택*/
+        input:focus{/*input 태그 중 focus 상태에 있는 input태그*/
+                    /*input 3개 중에 focus(클릭하면 포커스 얻음, 다른 곳 클릭시 포커스 잃음) 얻은 요소*/
+            background-color: yellow;
+            border: 2px dotted red;/*웹표준 잘 지키는 파이어폭스만 됨*/
+        }
+        input:enabled{/*enabled: input태그중 활성화 상태인 input태그*/
+            color: palegreen;
+            font-weight: bold;/*활성화 상태인 2개 칸만 해당*/
+        }
+        input:disabled{/*disabled: input태그중 비활성화 상태인 input태그*/
+            color: rgb(25,25,31);
+            background-color: aqua;
+            border: 5px dashed pink;/*비번칸만 바뀜*/
+        }
+    </style>
+</head>
+<body>
+    <h1>반응 선택자</h1>
+    <div>
+        <ul>
+            <li>menu1</li>
+            <li>menu2</li>
+            <li>menu3</li>
+            <li>menu4</li>
+            <li>menu5</li>
+            <li>menu6</li>
+        </ul>
+    </div>
+    <h1>상태 선택자</h1>
+    <div>
+        <form>
+            이름 : <input type="text" name="name" value="기본 텍스트"  /><br />
+            아이디 : <input type="text" name="id" /><br />
+            비번 : <input type="password" name="pwd" value="1234" disabled /><!--disabled라 비활성화상태-->
+        </form>
+    </div>
+</body>
+</html>

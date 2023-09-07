@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textDisplay"
+        android:text="첫번째 화면 입니다"
+        android:gravity="center"
+        android:textSize="20sp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+        <Button
+            android:id="@+id/btnFragment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="->프래그먼트"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:backgroundTint="#2B44BD"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            />
+        <Button
+            android:id="@+id/btnActivity"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="->액티비티"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:backgroundTint="#77203D"
+            android:gravity="center"/>
+    </LinearLayout>
+</LinearLayout>

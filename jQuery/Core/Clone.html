@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone.html</title>
+    <style>
+        .clone {
+          width: 50px;
+          height: 50px;
+          border: 1px red solid;
+          text-align: center;
+          line-height: 50px;
+        }
+      </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('.clone').eq(0).click(function(){//원본 클릭시 
+                //원본을 변경한 후 after()함수 적용: 원본이 변경되고 위치가 대상div아래로 이동
+//                var origin = $(this).css('background-color','yellow').html('복제');
+//                $('.clone:eq(1)').after(origin);//origin은 기존 요소니까 대상 아래로 잘라내서 붙여넣기 됨
+                //원본 유지시키고 복제(clone()) 후 복제본을 변경한 후 after()함수 적용: 원본은 유지됨
+                var clone = $(this).clone().css('background-color','yellow').html('복제');
+                $('.clone:eq(1)').after(clone);
+            });    
+
+            //설문지 문항을 동적으로 추가하기
+            //버튼 눌러서 문제 추가해야함, 근데 서버로 전송할거라 name 파라미터가 달라져야함
+            var index = 1;
+            var origin = $('div:last');
+            $(':button').click(function(){
+                /*
+                //clone() 미사용
+                index++;
+                $('div:last').after(`<div>                   
+                            <span>문제${index}번</span>
+                            <input type="text" name="problem${index}" style="width: 60%" />
+                            </div>`);//백틱씀, 문자열 연결할 필요도 없음
+
+                //origin은 왜 안 되지?????????? 아 변수로 설정시 div 고정됨, $('div:last')로 설정시 계속 바뀜
+
+                */
+
+                //clone() 사용
+                $('div:last').after(origin.clone().find('span').html('문제'+ ++index+'번').next().prop('name','problem'+index).parent());
+            });
+
+
+
+
+            
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>clone()</legend>
+		
+		<div class="clone">원본</div>
+		<div class="clone" >대상</div>
+		
+		<hr/>
+		<button>문제 추가</button>
+		<hr />
+		<div>
+			<span>문제1번</span>
+			<input type="text" name="problem1" style="width: 60%" />
+		</div>
+		
+	</fieldset>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "username": "KIM",
+      "password": "1234",
+      "name": "김길동",
+      "profile": "김길동의 회원정보 입니다"
+    },
+    {
+      "username": "LEE",
+      "password": "1234",
+      "name": "이길동",
+      "profile": "이길동의 회원정보 입니다"
+    },
+    {
+      "username": "PARK",
+      "password": "1234",
+      "name": "박길동",
+      "profile": "박길동의 회원정보 입니다"
+    }
+  ],
+  "bbs": [
+    {
+      "title": "React is Here ",
+      "content": "React is diffcult but exciting",
+      "username": "KIM",
+      "postDate": "2023-12-12",
+      "visitCount": "12",
+      "id": 1
+    },
+    {
+      "username": "KIM",
+      "title": "1",
+      "content": "1",
+      "postDate": "2023-2-27",
+      "visitCount": 0,
+      "id": 2
+    },
+    {
+      "username": "KIM",
+      "title": "6",
+      "content": "6",
+      "postDate": "2023-2-27",
+      "visitCount": 0,
+      "id": 6
+    },
+    {
+      "username": "KIM",
+      "title": "2",
+      "content": "2",
+      "postDate": "2023-2-27",
+      "visitCount": 0,
+      "id": 9
+    },
+    {
+      "username": "KIM",
+      "title": "3",
+      "content": "3",
+      "postDate": "2023-2-27",
+      "visitCount": 0,
+      "id": 10
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EachIndex.html</title>
+    <style>
+        div{
+          width:100px;
+          height: 100px;
+          text-align: center;
+          line-height: 100px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //index(): 부모자식 구조안에서의 인덱스 의미(0시작)
+            //click 함수는 click 걸린 모든 div 반환
+            var clickDivs = $('div').click(function(){
+                console.log('클릭한 DIV의 인덱스:',$(this).index());
+                //부모 자식 구조상에서 인덱스가 부여됨
+                //DIV1~4는 1~4번 나옴, legend가 0번임
+                //DIV5는 body의 fieldset이 0번이라 1번 나옴
+
+            });
+            
+            console.log(clickDivs.length);//5, div 5개 있으니까
+            console.log(clickDivs.html());//DIV1, html()는 첫번째것만 가져옴
+            //이럴 때 each(콜백함수) 사용!
+
+            //동적으로 div에 아이디 및 배경색 부여
+            var colors = ['#ff0000','#00ff00','#0000ff','#89afbc','gray'];
+            clickDivs.each(function(index,item){
+                //$(this).attr({style:'background-color:'+colors[index]})//콜백함수가 적용된 요소에 속성설정
+                //동적으로 아이디도 부여
+                $(this).attr({style:'background-color:'+colors[index], id:'div'+index})
+            });
+            //동적으로 부여된 아이디 객체 선택(동적 추가시 attr, prop 둘 다 읽어오기 가능)
+            console.log($('#div0').prop('style'));
+            console.log($('#div0').attr('style'));
+            //모든 DIV에 each를 걸어 오버시 노란색 아웃시 원래 색으로
+            $('div').each(function(){
+                //원래 배경색 얻기
+                var bgColor = $(this).css('background-color');
+                $(this).hover(function(){
+                    $(this).css('background-color','yellow')
+                },function(){
+                    $(this).css('background-color',bgColor);
+                });
+            });
+
+
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>each(콜백함수)함수 및 index()함수</legend>
+		<div id="div0">DIV1</div>
+		<div>DIV2</div>
+		<div>DIV3</div>
+		<div>DIV4</div>
+	</fieldset>
+	<div>DIV5</div>
+</body>
+</html>

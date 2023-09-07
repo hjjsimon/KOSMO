@@ -1,0 +1,10 @@
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:06 +0900] "GET /JSPProj/actiontag07/DynamicPage.jsp HTTP/1.1" 200 5065
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:07 +0900] "GET /JSPProj/actiontag07/DynamicPage.jsp HTTP/1.1" 200 5065
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:14 +0900] "GET /JSPProj/actiontag07/DynamicPage.jsp HTTP/1.1" 200 5065
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:15 +0900] "GET /JSPProj/actiontag07/DynamicPage.jsp HTTP/1.1" 200 5065
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:16 +0900] "GET /JSPProj/actiontag07/DynamicPage.jsp HTTP/1.1" 200 5065
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:16 +0900] "GET /JSPProj/bootstrap/js/jquery.slim.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:16 +0900] "GET /JSPProj/bootstrap/css/bootstrap.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:16 +0900] "GET /JSPProj/bootstrap/js/popper.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:16 +0900] "GET /JSPProj/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [18/Aug/2023:16:08:49 +0900] "GET /JSPProj/actiontag07/DynamicPage.jsp HTTP/1.1" 200 5062

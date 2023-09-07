@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5_NEW20.html</title>
+</head>
+<body>
+    <fieldset>
+        <legend>HTML5에 새롭게 추가된 요소(태그)나 속성들</legend>
+        <h2>텍스트에 하이라이트 효과주는 태그(mark)</h2>
+        <p>
+            <mark>쿠팡</mark>에도 <mark>택배노조</mark> 생겼다…
+            <span style="background-color: yellow;">'月 584만원'</span> 소득 두고 논란
+        </p><!--뭘로 검색했구나~ 이럴 때 쓴대-->
+        <h2>진행율을 표시하는 태그(progress)</h2><!--오디오에서 썼음-->
+        <progress max="200" value="100" style="width: 300px;height: 50px;"></progress>
+        <h2>자동완성태그(datalist)</h2>
+        <label for="keyword">검색어를 입력하세요</label><!--레이블 감싼거 눌러도 포커스 감-->
+        <input type="search" id="keyword" list="items"/><!--id(label연결용), list 내맘-->
+        <datalist id="items"><!--list랑 id 똑같이하면 input이랑datalist  연결된것-->
+            <option value="제주도"></option>
+            <option value="제주공항"></option>
+            <option value="제부도"></option>
+            <option value="제자"></option>
+            <option value="코로나"></option>
+            <option value="코로나19"></option>
+            <option value="코카콜라"></option>
+            <option value="코알라"></option>
+            <option value="HTML5"></option>
+            <option value="HYBRID"></option>
+        </datalist>
+        <h2>이미지를 그룹화 태그(figure)</h2>
+        <figure><!--얘는 블락이라 이미지 세로배치-->
+            <figcaption>자바이미지1</figcaption><!--이미지제목-->
+            <img src="../Images/java_logo.png" alt="첫번째 이미지" width="100" height="50"/>
+        </figure>
+        <figure>
+            <figcaption>자바이미지2</figcaption>
+            <img src="../Images/java_logo.png" alt="두번째 이미지" width="100" height="50"/>
+        </figure>
+        <h2>template태그</h2>
+        <!--자스를 이용해 HTML요소 등을 동적으로 추가할때 템플릿으로 사용하면 브라우저상에는 보이지않는다(랜더트리에서 제외,랜더링안됨)-->
+        <!--템플릿? 추가할 태그들의 틀(탬플릿)로 사용-->
+        <template>
+            <li>아이템1</li><!--원래 li는 ul자식, 근데 3개짜리 툴로쓴대-->
+            <li>아이템2</li>
+            <li>아이템3</li>
+        </template>
+        <h2>새롭게 추가된 속성들</h2>
+        <h3>multiple,accept속성(type="file")</h3>
+        <input type="file" multiple accept="image/png,image/jpeg"/>
+        <!--multiple속성 추가시 파일 여러개 선택가능, accept로 보고싶은 파일확장자 선택(이미지 중 png,jpg만 보임)-->
+        <h3>autofocus속성</h3>
+        <input type="text" autofocus/><!--원래 눌러야 포커스, 자동포커스 가게함, 원래 자스로 했대-->
+        <h3>contenteditable속성</h3>
+        <p contenteditable="true"><!--클릭하면 text area처럼 컨텐츠수정이 가능해짐-->
+            <mark>쿠팡</mark>에도 <mark>택배노조</mark> 생겼다…
+            <span style="background-color: yellow;">'月 584만원'</span> 소득 두고 논란
+        </p>
+        <h3>hidden속성</h3>
+        <input type="button" value="버튼" hidden><!--버튼 안보임-->
+        <h3>required속성</h3>
+        <form action="https://www.nate.com">
+            이름 <input type="text" name="name" required/><!--입력해야 확인버튼으로 홈페이지 이동가능, 근데 잘 안쓴대, 자스로 한대-->
+            남자 <input type="radio" name="gender" value="male" required/>
+            여자 <input type="radio" name="gender" value="female" required/>
+            동의 <input type="checkbox" name="accept" value="OK" required/>
+            <input type="submit" value="확인"/><!--확인 누르면 nate로 이동-->
+         </form>
+         <h3>placeholder속성</h3>
+         <!--아이디<input type="text" value="아이디 입력"/>값 전송할거 아니라 name 뻄-->         
+         아이디<input type="text" placeholder="아이디 입력"/><!--아이디입력 보였다 안보였다함-->
+         비밀번호<input type="password" placeholder="비밀번호 입력"/>
+    </fieldset>
+</body>
+</html>

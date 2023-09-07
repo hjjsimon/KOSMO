@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM10_1.html</title>
+</head>
+<body>
+    <h2>BOM의 최상위객체 window</h2>
+    <script>
+
+        //Window 객체의 함수공부
+        //script안에 변수나 함수 만들면 window의 속성에 추가됨, .으로 찾아갈 수 있음
+        var fn={//키값 login등 4개, 모두 함수//{}는 객체
+            login:function(){
+                //메시지 대화상자: window.alert("뿌려줄 메시지"); 
+                var user=document.querySelector('#user');//DOM의 속성은 최상위인 document.으로 찾음
+                if(user.value===''){
+                    alert('아이디를 입력하세요?');//최상위객체 window 생략가능(확인 뜸)
+                    user.focus();//아이디에 아무것도 입력x 후 로그인 누르면 포커스감
+                }
+            },
+            drop:()=>{//이번엔 화살표함수로
+                //확인 대화상자:boolean window.confirm("확인메시지");
+                var flag=confirm('퇴실하실래요?')//최상위객체 window 생략가능(이 대화상자는 버튼 2개 생김(확인/취소))
+                console.log(flag);//확인은 t, 취소는 f 반환함
+                if(flag){
+                    //퇴실처리 로직
+                    console.log('퇴실처리 했어요');
+                }
+            },
+            insertName:function(){
+                //입력 대화상자: String window.prompt("메시지","대화상자에 띄울 기본값");
+                //새 창을 띄워서 입력을 또 받음, 사용 잘 안함
+                var name=prompt('이름을 입력하세요?','')//빈문자열 기본값
+                alert('당신의 이름은 '+name+' 이군요');//입력한 문자열 반환함
+            },
+            insertAge:age=>{//인자 하나 필요, age라함
+                var age=prompt('나이를 입력하세요?',age);//인자로 받은 age를 기본값
+                console.log(typeof age);//반환된 age는 숫자입력이지만 string 처리함
+                alert('당신의 10년후 나이는 \r\n'+(parseInt(age)+10)+' 이군요');
+            }
+        };
+
+    </script>
+    <fieldset>
+        <legend>alert()/confirm()/prompt()</legend><!--alert,confirm 많이씀, prompt 코테나 씀-->
+        아이디 <input type="text" id="user" />
+        <input type="button" value="로그인" onclick="fn.login();"/>
+        <input type="button" value="퇴실" onclick="fn.drop();" />
+        <input type="button" value="입력" onclick="fn.insertName()"/>
+        <input type="button" value="나이입력" onclick="fn.insertAge(1)"/>
+    </fieldset>
+    <script>
+        /*
+        팝업창:광고 나 공지사항 게시할때
+        window.open("팝업으로 띄울 페이지 경로",
+            "팝업창명",
+            "팝업창 모양을 설정하기 위한 속성들");
+        - open()메소드는 윈도우 객체를 반환(열리는 팝업창도 결국 윈도우임)
+        - 팝업창을 여러개 띄울때 팝업창명이 같으면 하나의 창에 계속 덮어쓰며 뿌려진다.(팝업창 이름 같으면 안됨)
+
+        *팝업창 모양 설정을 위한 속성들
+        width:팝업창의 가로폭
+        height:팝업창의 세로크기
+        top:팝업창을 띄울 y좌표(모니터 기준)
+        left:팝업창을 띄울 x좌표(모니터 기준)
+        //왼쪽위 0,0기준, 팝업창 왼쪽 상단 좌표는 (left,top)임
+
+        //아래 속성값들의 ->scrollbars만 쓰기
+        기본값은 no(0)
+        enable시 yes(1)를 주면됨
+        toolbar
+        location
+        menubar
+        scrollbars: auto가 추가됨(팝업창 안의 내용이 많으면 자동으로 스크롤바가 생김)-> 얘만 써라(나머지는 최신브라우저에 안먹음)
+        resizable(파이어폭스는 적용 안됨)
+        */
+
+        //1]기본팝업창
+        //var winObj=window.open('https://www.daum.net','popup1','width=400,height=400,left=100,top=100');
+        //console.log('%O',winObj);
+        //window.open('DOM09_1.html','popup2','width=400,height=400,left=150,top=150');
+        //window.open('DOM09_2.html','popup3','width=400,height=400,left=200,top=200');
+        //팝업창 모니터 정가운데 띄우기
+        var width=window.screen.width;
+        var height=window.screen.height;
+        console.log('모니터 해상도:가로-%s,세로-%s',width,height);//단위는 픽셀
+        //하단의 바를 '트레이바' 라고함(제외하면 height 40 줄어듦)
+        console.log('모니터 해상도(트레이바 제외):가로-%s,세로-%s',screen.availWidth,screen.availHeight);
+        var xpos=width/2 - 200;//left(x좌표 위치)
+        var ypos=height/2 -200;//top(y좌표 위치)
+        //var winObj=window.open('https://www.daum.net','popup1','width=400,height=400,left='+xpos+',top='+ypos);
+        //지금 window는 본 페이지(부모를 opener라함, opener속성도 있음), 팝업은 새로 뜨는 작은 window객체
+
+        //2]팝업창 닫기(버튼클릭시)
+        //window객체의 close()함수로 창닫기
+        //self.close();현재 보고있는 웹브라우저 닫기
+        function popupClose(){
+            //self.close();//현재 페이지가 표시된 브라우저 닫기(최신 브라우저는 적용x)
+            //위의 winObj는 window반환, open에 대보면 나옴
+            winObj.close()//해당 팝업창이 닫힘
+        }
+        //3]우편번호 팝업창 띄우기
+        function zipOpen(){
+            window.open('Zip.html','zipcode','width=400,height=400,left='+xpos+',top='+ypos);//Zip만듦
+        }
+
+    </script>
+    <fieldset>
+        <legend>open()/close()/opener속성</legend>
+        <button onclick="popupClose();">부모에서 팝업창 닫기</button>
+        <hr/>
+        <table style="border-spacing:1px;background-color:green">
+        <tr style="background-color:white">
+            <td>우편번호</td>
+            <td>
+                <input type="text" id="zip1" size="3" maxlength="3" /> -
+                <input type="text" id="zip2" size="3" maxlength="3" />
+                <input type="button" value="우편번호" onclick="zipOpen();" />
+            </td>
+        </tr>
+        <tr style="background-color:white">
+            <td>기본 주소</td>
+            <td><input type="text" size="50" id="addr" /></td>
+        </tr>
+        <tr style="background-color:white">
+            <td>상세 주소</td>
+            <td><input type="text" size="50" id="detail" /></td>
+        </tr>
+        </table>
+    </fieldset>
+    <link rel="stylesheet" href="//t1.daumcdn.net/postcode/cssjs/guide/1680590229301/guide.v2.min.css">
+    <!--이쁨, 근데 우리것도 적용됨-->
+    <fieldset>
+        <!--https://postcode.map.daum.net/guide -> 카카오 우편번호 서비스-->
+        <legend>카카오 우편번호 API 적용하기</legend>
+        <input type="text" id="sample4_postcode" class="d_form mini" placeholder="우편번호">
+        <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="d_btn"><br/>
+        <input type="text" id="sample4_roadAddress" class="d_form std" placeholder="도로명주소">
+        <input type="text" id="sample4_jibunAddress" class="d_form std" placeholder="지번주소"><br/>
+        <span id="guide" style="color:#999;display:none"></span>
+        <input type="text" id="sample4_detailAddress" class="d_form" placeholder="상세주소">
+        <input type="text" id="sample4_extraAddress" class="d_form" placeholder="참고항목" hidden>
+        <!--불필요한건 hidden하면 됨-->
+    </fieldset>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function sample4_execDaumPostcode() {
+
+            var themeObj = {
+                bgColor: "#1A1717", //바탕 배경색
+                searchBgColor: "#2587B9", //검색창 배경색
+                contentBgColor: "#1F1A1A", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
+                pageBgColor: "#1D1919", //페이지 배경색
+                textColor: "#FAF4F4", //기본 글자색
+                queryTextColor: "#F1EBEB", //검색창 글자색
+                postcodeTextColor: "#FAED42", //우편번호 글자색
+                //emphTextColor: "", //강조 글자색
+                outlineColor: "#232121" //테두리
+            };
+
+        new daum.Postcode({
+
+            theme:themeObj,//테마적용
+
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("sample4_roadAddress").value = roadAddr;
+                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                } else {
+                    document.getElementById("sample4_extraAddress").value = '';
+                }
+
+                var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } else {
+                    console.log('guideTextBox:',guideTextBox)
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }     
+    </script>    
+    <fieldset>
+        <legend>setTimeout()/clearTimeout(),setInterval()/clearInterval()</legend>
+        <h4>일정 시간후 함수 실행</h4>
+        <input type="button" value="5초후 함수 실행" onclick='fnCallAfter("T");' />
+        <input type="button" value="함수 호출 중지" onclick="fnCallBreak(1);" />
+        <h4>일정시간마다 함수실행</h4>
+        <input type="button" value="3초마다 함수 실행" onclick="fnCallAfter('I');" />
+        <input type="button" value="함수 호출 중지" onclick="fnCallBreak(2);" />
+        <h4>시분초 표시</h4>
+        <span id="clock" style="color:Green;font-size:1.8em;font-weight:bold"></span>
+
+    </fieldset>
+    <script>
+        /*
+            var 타이머 식별자=setTimeout("함수명()" 혹은 함수표현식,1000분의 1초단위)
+            :타이머 식별자 반환(숫자 반환)
+            :특정시간이 지난후 어떤 인자로 넣은 함수를 
+            한번만 실행시키고자 할때 사용하는 메소드
+                타이머 객체로 실행 중지시
+                clearTimeout(타이머식별자)호출(setTimeout이 반환한 숫자)
+            타이머 변수=setInterval("함수명()" 혹은 콜백함수,1000분의 1초)
+            : 매개변수에 주어진 시간이 되면 해당 함수가
+            계속 호출됨
+                해제시- clearInterval(타이머 변수);
+        */
+        var timerOnce,timerContinue;
+        function fnCallAfter(flag){
+            if(flag==='T'){//T또는 I나올것
+                //방법1] 첫번째 인자를 함수표현식으로 전달
+                //timerOnce=setTimeout(function(){console.log('5초 후 한번 실행')},5000);
+                //방법2] 첫번째 인자를 별도의 외부함수로 정의
+                timerOnce=setTimeout('fnOnce()',5000);
+            }
+            else{
+                //방법1]
+                //timerContinue=setInterval(function(){console.log('3초마다 실행')},3000);
+                //방법2]
+                timerContinue=setInterval('fnContinue()',3000);
+            }
+        }//
+        function fnCallBreak(flag){
+            if(flag===1) clearTimeout(timerOnce);//식별자 담아놓은거
+            else clearInterval(timerContinue);
+        }
+        function fnOnce(){
+            console.log('5초 후 한번 실행');
+        }
+        function fnContinue(){
+            console.log('3초마다 실행');
+        }
+
+    </script>
+    <script>
+        
+        //문]현재 페이지가 웹브라우저에 로드시 'clock'이라는 아이디를 가진
+        //span태그에 시, 분, 초를 표시, 1초마다 갱신
+        var span=document.querySelector("#clock");
+        window.setInterval(()=>{
+            var date=new Date();
+            span.textContent=date.getHours()+"시 "+date.getMinutes()+"분 "+date.getSeconds()+"초";
+        },1000)
+    </script>
+    <fieldset>
+        <legend>encodeURIComponent()/decodeURIComponent()/isNaN()/pasreInt()/parseFloat()/eval()</legend>
+    <script>
+        /*
+            escape() :한글이나 일본어및 중국어등 2바이트로
+            표현하는 언어들을  UTF-8형식으로 인코딩
+            숫자나 영문자은 아스키코드(ANSI)로 표현함으로 인코딩이 안됨.
+
+            더 정확히 말하면 16진수 4자리로 표현하는 유니코드(한글,일본어,중국어)로 인코딩 됨.
+            예를 들면 빈공백은 %20으로 인코딩 처리됨.
+            Ajax나 jQuery Ajax에서 한글 처리시 주로 사용.(요청보낼때 한글포함돼있음, 인코딩안하면 한글깨져서 문제)
+	    */
+        var escapeString='안녕 가! HELLO 123456789';
+        console.log(escape(escapeString));//%uC548%uB155%20%uAC00%21%20HELLO%20123456789 -> 인코딩된게 콘솔에 출력
+        //%u는 유니코드 의미, 안=16진수로 c548, 빈공백은 %20, 느낌표는 %21
+        //unescape():UTF-8형식으로 인코딩된 값을 디코딩(암호화된걸 복원) ->근데 잘 안씀
+        console.log(unescape('%uC548%uB155%20%uAC00%21%20HELLO%20123456789'));
+        /*
+            [encodeURI() / decodeURI()]
+            최소한의 문자만 인코딩
+            ; / ? : @ & = + $ , - _ . ! ~ * ' ( ) #
+            상기 문자는 인코딩하지 않음.
+
+            ※[encodeURIComponent() / decodeURIComponent()]-추천(이게 짱임, 위아래 다 까먹어)
+            알파벳과 숫자 외의, 대부분의 문자를 모두 인코딩
+
+            [escape() / unescape()]
+            encodeURI() 와 encodeURIComponent()의 중간 정도의 범위로
+            문자를 인코딩
+        */
+        var query='name=가길동&key=you&age=30';//각 키값으로 인코딩
+        //1] 인코딩 대충하는애
+        console.log('encodeURI:',encodeURI(query));
+        //encodeURI: name=%EA%B0%80%EA%B8%B8%EB%8F%99&key=you&age=30
+
+        //2] 인코딩 좀 더 열심히 하는애
+        console.log('escape:',escape(query));
+        //escape: name%3D%uAC00%uAE38%uB3D9%26key%3Dyou%26age%3D30
+
+        //3] 인코딩 빡세게 하는애(추천)
+        console.log('encodeURIComponent:',encodeURIComponent(query));
+        //encodeURIComponent: name%3D%EA%B0%80%EA%B8%B8%EB%8F%99%26key%3Dyou%26age%3D30
+
+        /*
+            isNaN():IS NOT A NUMBER
+            숫자인지 아닌지 판단하는 함수
+            숫자라면 false 숫자가 아니면 true반환
+        */
+        isNaN('100A')?console.log('숫자가 아니다'):console.log('숫자다');//숫자 아니라 t
+        isNaN('가100')?console.log('숫자가 아니다'):console.log('숫자다');//숫자 아니라 t
+        isNaN('100')?console.log('숫자가 아니다'):console.log('숫자다');//숫자라 f
+
+        /*
+            parseInt(): 숫자부분만 반환해주는 함수
+                        단, 숫자가 아닌 문자로 시작하면 NaN반환.
+        */
+        console.log(parseInt('100A'));//자바는 에러, 자스는 숫자 100만 반환
+        console.log(parseInt('10A20'));//숫자 10만 반환, 문자 A부터 버림
+        console.log(parseInt('가10A20'));//NaN반환
+        console.log(parseInt('3.14'));//3만 가져옴, 문자 .부터 버림
+        console.log(parseFloat('3.14'));//3.14 소수 다 가져옴
+
+        //eval('문자열'); 매개변수에 있는 값(문자열)을 자스코드로 해석해 실행(보안상 위험하므로 사용금지)
+        console.log('alert("메시지 대화상자")');//eval 안쓴건 문자열로 그대로 출력
+        //eval('alert("메시지 대화상자")');
+
+        var user="{\"name\":\"가길동\",\"years\":20}";//""없으면 객체, 지금 ""있어서 string
+        console.log(user.name);//만약 자스객체면 key값으로 접근됨, string에는 name 속성 없어서 undefined나옴
+        //var userObj=eval(user);
+        //console.log(user.name);//:가 처리안됨, 자스로 해결불가, 아래처럼 괄호필요
+        //eval()로 적용시킬때는 반드시 ()로 감싸야한다
+        var userObj=eval("({\"name\":\"가길동\",\"years\":20})");
+        console.log(userObj.name);//이제 됨, 근데 아래가 더 나은가봐
+        var userObj=JSON.parse(user);//JSON.parse, .stringfy 암기
+        console.log(userObj.name);
+        console.log(userObj.years);
+    </script>
+
+    <h2>BOM10_2.html과 테스트용 코드</h2>
+    <hr/>
+    <button onclick="location.replace('BOM10_2.html')">location객체의 replace()함수</button>
+    <button onclick="history.go(-1)">history객체의 go(-1)함수</button>
+    <script>
+      //이전 페이지 URL얻기:document.referrer
+      console.log('이전 페이지 URL is:',document.referrer);
+    </script>
+
+</body>
+</html>

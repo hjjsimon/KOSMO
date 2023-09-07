@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--아이콘 설정 불가-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/file" android:title="File"/>
+    <item android:id="@+id/edit" android:title="Edit"/>
+    <item android:id="@+id/view" android:title="View"/>
+</menu>

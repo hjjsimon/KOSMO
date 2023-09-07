@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+    <div class="container" style="margin-top:50px">
+        <div class="jumbotron bg-info">
+            <h1>Teachable Machine <small>이미지 분류하기</small></h1> 
+        </div><!--jumbotron-->
+
+		      
+    </div><!--container-->
+<!-- 
+	한줄메모에 타일즈를 적용해보자
+	1. 뷰인 .jsp페이지에서 인클루드 처리한 탑과 푸터 제거
+	2. 컨트롤러에서 .kosmo 추가
+ -->
+

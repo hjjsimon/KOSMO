@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paragraph04.html</title>
+</head>
+<body>
+    <h2>문단 관련 CSS속성들</h2>
+    <div>
+        <h3>컨텐츠 수평방향 정렬</h3>
+        <div style="background-color: red;text-align: center;">블락 엘리먼트</div><!--div도 블락-->
+        <span style="background-color: #00ff00;text-align: center;">인라인 엘리먼트</span>
+    </div>
+    <div>
+        <p style="border: 1px red solid; text-align: justify;"><!--p태그 블락-->
+            <!--컨텐츠가 많으면 양쪽 끝을 기준으로 똑같이 채워지게 여백을 주는게 justify임-->
+            '비선 실세' 최순실(60·구속기소)씨를 둘러싼 의혹을 수사중인 검찰이 최씨의 딸 정유라(20·개명 전 정유연)씨도 필요하면 소환해 조사하겠다는 방침을 재확인했다.
+            검찰 특별수사본부(본부장 이영렬 서울중앙지검장) 관계자는 22일 "오늘 이화여대를 압수수색했으니 향후 수사가 진행될 것"이라고 밝혔다.
+            이 관계자는 "입학이나 학사관리와 관련해 정씨 본인이 직접 관련된 비리 혐의가 있다거나, 꼭 그런 것이 없더라도 조사해야 할 필요성이 있다고 판단되면 정씨를 소환해서 조사할 예정"이라고 말했다.
+            지난해 이화여대에 입학한 정씨는 체육특기자 입시 과정과 입학 이후 학사관리에서 부당한 특혜를 받았다는 의혹에 휩싸였다. 지난달 시민단체 서민민생대책위원회가 최경희 전 이대 총장과 최씨
+            모녀를서울중앙지검에 고발하면서 수사 대상에도 올랐다.
+            논란이 확산하자 교육부가 특별감사를 진행한 결과, 이런 의혹들중 상당수는 사실로 드러나기도 했다.
+            교육부는 이대가 지침과 달리 면접고사장에 정씨가 금메달을 반입하도록 허가했으며, 정씨가 수업에 거의 제대로 참여하지 않고 출석 대체물을 내지 않았음에도 출석과 학점을 인정해줬다고 발표했다.
+        </p>
+        <h3>텍스트 꾸미기</h3>
+        <span style="text-decoration: overline;">윗줄긋기</span><br />
+        <span style="text-decoration: underline;">밑줄 긋기</span><br />
+        <span style="text-decoration: line-through;">가운데선 긋기</span><br />
+        <a href="http://www.nate.com" style="text-decoration: none;">네이트</a><!--a태그 기본이 밑줄, none주면 사라짐-->
+        <h3>들여쓰기</h3>
+        <div style="text-indent: 5em;">블락 엘리먼트</div>
+        <!--들여쓸 가로 공간이 없음. 인라인 적용 안됨-->
+        <span style="text-indent: 5em;">인라인 엘리먼트</span>
+        <h3>수직방향 정렬</h3>
+        <!--세로로 움직일 공간이 없음. 블락,인라인 둘다 적용 안됨-->
+        <!--블락은 height하면 컨텐츠크기만큼에서 바뀌긴하는데 그래도 안먹는대, 그냥 그렇대, line-height쓰래-->
+        <div style="background-color: red;vertical-align: middle;height: 200px;">블락 엘리먼트</div>
+        <span style="background-color: yellow;vertical-align: middle;">인라인 엘리먼트</span><br />
+        <img src="../Images/button.jpg" width="200" height="200" alt="제품" style="vertical-align: middle;"/>제품 이미지
+        <!--제품 이미지 라는 텍스트가 이미지 오른쪽 옆 중앙에 위치-->
+        <h3>블락엘리먼트의 컨텐츠 정 가운데 정렬방법</h3><!--height와 line-height 똑같이 주면 수직중간/text-align이 수평중간-->
+        <div style="background-color: red;height: 200px;text-align: center;line-height: 200px;">블락 엘리먼트</div>
+    </div>
+</body>
+</html>

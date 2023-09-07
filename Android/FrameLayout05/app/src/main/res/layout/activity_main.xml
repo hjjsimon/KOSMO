@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="5dp"
+    >
+    <!--상단 메뉴 배치-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+        <!-- Material은 버튼의 background속성이 무시된다
+            background적용하기 위해서는 테마를 바꾸자
+            Theme.AppCompat.Light.NoActionBar 로(res->values->themes->themes.xml)-->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="메뉴1"
+            android:id="@+id/btnMenu1"
+            android:background="@color/black"
+            android:textColor="@color/white"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="메뉴2"
+            android:id="@+id/btnMenu2"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="1dp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="메뉴3"
+            android:id="@+id/btnMenu3"
+            android:background="@color/black"
+            android:textColor="@color/white"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <!--메뉴에 따른 화면구성을 위한 프레임 레이아웃 배치-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        >
+        <!-- 첫번째 화면 구성-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/frame1"
+            android:padding="10dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="첫번째 화면입니다"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:gravity="center_horizontal"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*"
+                android:padding="10dp"
+                >
+                <TableRow>
+                    <TextView android:text="아 이 디" android:layout_height="match_parent" android:gravity="center" android:textSize="18sp" />
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:hint="아이디를 입력하세요"
+                        android:id="@+id/username"
+                        android:layout_span="5"
+                        android:gravity="center"
+                        />
+                </TableRow>
+                <TableRow>
+                    <TextView android:text="비 밀 번 호" android:layout_height="match_parent" android:gravity="center" android:textSize="18sp"/>
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:hint="비밀번호를 입력하세요"
+                        android:id="@+id/password"
+                        android:inputType="textPassword"
+                        android:layout_span="5"
+                        android:gravity="center"
+                        />
+
+                </TableRow>
+                <TableRow>
+                    <Button android:text="확인" android:layout_column="4" android:id="@+id/btnOk"/>
+                    <Button android:text="취소" android:id="@+id/btnCancel" android:layout_marginLeft="5dp"/>
+
+                </TableRow>
+            </TableLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!--두번째 화면 구성-->
+        <!--방법1으로 구현시 두번째 및 세번째 화면 android:visibility="invisible"속성추가-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/frame2"
+            android:background="@color/black"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="두번째 화면입니다"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+        <!--세번째 화면 구성-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/frame3"
+            android:background="#5E6275"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="세번째 화면입니다"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

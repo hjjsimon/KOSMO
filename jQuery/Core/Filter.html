@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter.html</title>
+    <style>
+        .bg{
+          background-color: black;
+          color:white;
+          font-weight: bold;
+          text-decoration: none;
+        }
+        .border{
+          border:2px red solid
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('a').addClass('bg')
+            //a태그 3개 모두 선택 후 adClass로 class추가, class="bg" 추가된 것 그리고 위의 css먹음
+            .filter('[href*=nate]')//nate 포함된거 a태그 걸러냄
+            .addClass('border')//class="border" 추가
+            .end()//nate가 포함된 a태그 바로 직전에 선택된 객체로 이동
+            //a태그 1개 선택하기 전에는 3개 선택했음, 이 상태로 되돌아감
+            .filter(':eq(2)')//3개 선택 상태로 되돌아간 후 인덱스 2 즉 다음 선택
+            .removeClass('bg')//다음 의 bg 지움
+            .css('font-size','1.8em')//다음만 css로 변경
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>$(선택자).filter("선택된 DOM객체중 가져올 객체 선택자")</legend>
+		<a href="www.naver.com" >네이버</a>
+		<a href="www.nate.com" >네이트</a>
+		<a href="www.daum.net" >다음</a>
+	</fieldset>
+</body>
+</html>

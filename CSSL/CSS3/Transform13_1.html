@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transform13_1.html</title>
+    <style>
+        #rect{
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            display: flex;/*라인하이트 대신 flex하면 아래 중복코딩x, 자동 중간정렬*/
+            justify-content: center;
+            align-items: center;
+            /*line-height: 150px;
+            text-align: center;*/
+            /*transition animation의 유지시간, 변경시 걸리는 시간 3초*/
+            transition-duration: 3s;
+        }
+        #rect:hover{/*rect에 hover 마우스 갖다대면 바꿈(프레임 연결x, 그냥 바로 커짐*/
+            width: 300px;
+            height: 300px;
+            background-color: green;
+            /*line-height: 300px;
+            text-align: center;*/
+        }
+        #rect:active{/*꾹 클릭했을때 바뀜*/
+            background-color: rgb(189, 224, 138);
+            border-radius: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h2>변형1 - 반응 선택자(ex.hover)와 CSS속성 변경을 통해 변형</h2>
+    <div id="rect">RECTANGLE</div>
+</body>
+</html>

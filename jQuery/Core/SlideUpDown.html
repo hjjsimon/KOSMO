@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideUpDown.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //show = slideDown
+            //hide = slideUp
+            //toggle = slideToggle
+
+
+            //slideUp(): 페이지 최초 로드시 내용 숨기기(style="display: none;" 추가됨)
+            $('.content').hide();
+            //제목 클릭시 내용 보이기
+            //1] slideDown() : show한 상태에서 제목 다시 클릭시 그대로다
+            /*
+            $('.title').click(function(){
+                //$(this).next().show();//클릭한 div 다음꺼 보여줌
+                $(this).next().slideDown(1500,function(){//1.5초간 보여줌, 완전 보이면 함수 호출가능
+                    $(this).css('backgroundColor','yellow');
+                });
+            })
+            */
+
+            //2] slideToggle() : 제목을 다시 클릭시 토글링, slideDown(), slideUp() 반복
+            /*
+            $('.title').click(function(){
+                $(this).next().slideToggle(1500,function(){
+                    $(this).css('backgroundColor','yellow');//토글시 실행함수
+                });
+            })
+            */
+
+            //3] slideToggle()함수 미사용, slideDown()와 slideUp()만 사용하여 제목 클릭시 다른 제목의 내용이
+            //  열린게 있으면 자동으로 닫기도록 하기
+            /*
+            $('.title').click(function(){
+                var content = $(this).next();
+                
+                if (content.is(':visible')) {
+                    content.slideUp(1000);
+                }
+                else {
+                    $('.content').slideUp(1000);
+                    content.slideDown(1000);
+                }
+            });
+            */
+            
+            $('.title').click(function(){
+                //클릭한 제목의 내용이 숨겨져 있다면
+                if($(this).next().css('display')==='none'){
+                    $('.content').slideUp(1000);
+                    $(this).next().slideDown(1000);
+                }
+                else 
+                    $(this).next().slideUp(1000);
+            });
+            
+            
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>slideDown(),slideUp(),slideToggle()함수</legend>
+		
+			<h2 class="title">제목1</h2>
+			<div class="content">
+				내용입니다1<br/>
+				내용입니다1<br/>
+				내용입니다1<br/>
+			</div>
+			<h2 class="title">제목2</h2>
+			<div class="content">
+				내용입니다2<br/>
+				내용입니다2<br/>
+				내용입니다2<br/>
+			</div>
+			<h2 class="title">제목3</h2>
+			<div class="content">
+				내용입니다3<br/>
+				내용입니다3<br/>
+				내용입니다3<br/>
+			</div>
+		</div>
+	</fieldset>
+</body>
+</html>

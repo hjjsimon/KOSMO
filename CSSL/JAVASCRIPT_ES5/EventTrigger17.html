@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--아래3줄 부트스트랩으로 크롬,파폭 똑같이 만듦-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>EventTrigger17.html</title>
+    <script>
+        window.addEventListener('DOMContentLoaded',function(){
+            var file=document.querySelector('[type=file]');
+            var button=document.querySelector('[type=button]');
+            var text=document.querySelector('[type=text]');
+            //버튼 클릭시 type="file"요소에 클릭이벤트가 발생하도록 트리거를 건다
+            //사용자는 button(파일찾기)누르는데 type="file"이 실행되도록 하는 것
+            //cf) input type file에 클릭이벤트 그대로 전달            
+            button.onclick=function(){
+                // 인공 클릭 MouseEvent 생성
+                var evt = new MouseEvent("click", {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window,
+                });
+                //type='file' 요소로 마우스클릭 이벤트 발송
+                file.dispatchEvent(evt);
+            };
+            //파일선택시 선택한 파일명이 text박스에 표시되도록 추가코딩
+            //파일 대화상자(다이얼로그)의 열기 혹은 취소버튼 클릭시 change이벤트 발생
+            file.onchange=function(e){//파일 선택해서 열기버튼 누를 때 onchange(무조건 암기)
+                console.log('파일선택완료:',file.value);//파일선택완료: C:\fakepath\myjar.jar
+                var path=file.value.split('\\');// \로 split할 예정
+                text.value=path[path.length-1];
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <fieldset>
+            <legend>이벤트 트리거</legend>
+            <input type="file" hidden/><!--type="file"은 브라우저마다 모양이 다르다(크롬:파일선택, 파이어폭스:찾아보기)-->
+            <form class="form-inline"><!--아래는 브라우저마다 모양이 동일하다(즉 아래 UI로 type="file"효과내기)-->
+                <div class="form-group">
+                    <input type="text" class="form-control">
+                </div>
+                <button type="button" class="btn btn-success ml-2">파일찾기</button>
+                <!--버튼의 클릭이벤트가 방아쇠(trigger)역할, 그러면 input type file이 실행되는 것-->
+            </form>
+        </fieldset>
+    </div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebStorage21_3.html</title>
+    <script>
+        
+        //목표: 항목 체크 후 저장, 그리고 같은 도메인(=주소) 재접속 시에 체크 저장된 내용대로 떠야함
+        //체크한 개인화메뉴를 저장할 배열선언
+        //네이버에 내가 설정한 개인화메뉴가 자동으로 뿌려짐, 로드됐을 때 뿌려야함, span사이에 뿌릴 예정
+        var personalizer=[];
+        var favoriteFieldset;
+        var saveButton;
+        var favoriteSpan;
+        var checkboxs;
+
+        //체크박스마다 클릭이벤트 걸기 귀찮, 부모에 걸면 자식에도 적용, 근데 체크박스 없는 영역도 fieldset
+        window.addEventListener('DOMContentLoaded',function(){
+            favoriteFieldset = document.querySelector('.favorite-fieldset');
+            saveButton = document.querySelector('.save-button');
+            favoriteSpan = document.querySelector('.favorite');
+            checkboxs = document.querySelectorAll('[name=menu]');//여러개니까 셀렉터올, input태그해도 되고 이렇게 해도 됨
+
+            //테스트용 2개 넣어봄(더미데이터로 함수2개 테스트코드)
+            //personalizer.push('날씨');
+            //personalizer.push('웹툰');
+            //테스트용 호출
+            //personalDisplay();
+            //personalCheck();
+
+            //DOM로드시 로컬스토리지에 있는 개인화메뉴를 뿌려주고 체크박스 체크처리(로컬이라 유지됨)
+            if(localStorage.length !==0){
+                for(var i=0;i<localStorage.length;i++){
+                    var key = localStorage.key(i);//String key 반환
+                    var value = localStorage.getItem(key);//getKey()동일, key에 따른 value반환
+                    //개인화 메뉴를 배열에 저장
+                    personalizer.push(value);
+                }
+                //개인화 메뉴를 SPAN에 뿌려주는 함수
+                personalDisplay();
+                //개인화 메뉴 채크박스를 체크하는 함수
+                personalCheck();
+            }
+            //필드셋(부모)에 클릭이벤트걸기
+            //밖으로 빼면 에러, document가 실행되기 전에 window박스, 함수2개 시행됨, 그리고 밖의 페이버릿필드셋.onclick
+            //하려고함, 근데 위부터 아래로 순차진행시 아직 document(body내) 로드 안돼서 에러인것, 바디의 필드셋 아래에 있는거면 가능함
+            favoriteFieldset.onclick=function(e){//인자로 이벤트객체 e 받음
+                if(e.target.nodeName !== 'INPUT') return;//INPUT아니면, 즉 필드셋 영역 클릭시 return;으로 바로 빠져나감
+                //console.log(e.target.nodeName);//이제 체크박스 누를 때만 콘솔에 출력됨
+                //체크박스 클릭시(선택 또는 선택해제)마다 체크된 요소들 반환하는 함수
+                var checkedList = getCheckedlist();
+                //console.log(checkedList);//확인용
+                if(checkedList.length > 3){
+                    alert('최대 3개까지만 선택할 수 있습니다');
+                    e.preventDefault();//체크박스 클릭시 기본기능은 체크, 체크돼있으면 해제, 이 기본기능을 막음(즉 클릭이벤트 취소)
+                    return;//바로 빠져나감
+                }
+                //여기로 내려온건 3개보다 덜 선택한 것
+                //3개가 선택되지 않은경우
+                //체크하면 SPAN에 뿌려주고 해제하면 지워준다
+                //즉 체크시 배열에 넣어주고 해제시에는 배열에서 지워준다
+                if(e.target.checked)//클릭한 인풋태그, 체크한경우 personalizer에 넣어줌
+                    personalizer.push(e.target.value);//체크한 인풋요소가 e.target 거기서 value속성 얻어옴
+                else//해제한 경우
+                    delete personalizer[personalizer.indexOf(e.target.value)];//인덱스 반환함
+                //배열에 저장된 메뉴 뿌려주는 함수호출
+                personalDisplay();
+            };
+            //저장버튼 클릭시 체크한 메뉴를 로컬스토리지에 저장
+            saveButton.onclick=function(e){
+                //로컬스토리지 클리어
+                localStorage.clear();
+                //버튼의 클릭이벤트가 부모(필드셋)에게 전파됨, 문제 없더라도 괜한 전파는 막는게 좋음
+                e.stopPropagation();//fieldset으로 클릭이벤트 전파방지
+                //체크한 체크박스만 가져오자
+                var checkedList = getCheckedlist();
+                //체크한 체크박스를 키와 값의 쌍으로 로컬스토리지에 저장
+                checkedList.forEach(function(item,index){
+                    //로컬 스토리지에 저장
+                    localStorage.setItem("MENU"+(index+1),item.value);//item은 input, 그 value속성
+                });
+            };
+        });//////////////////addEventListener
+        function personalDisplay(){
+            var favoriteMenus="";
+            for(var index in personalizer){//forEach써도 됨(배열은 index, 객체는 키 꺼냄)
+                var value=personalizer[index];//인덱스로 밸류 하나씩 꺼내옴
+                if(isNaN(value)){//숫자아니면 t
+                    favoriteMenus+=value +" &nbsp;";//두칸띄어씀
+                }
+            }
+            favoriteSpan.innerHTML=favoriteMenus;
+        }
+        function personalCheck(){
+            for(var index in personalizer){
+                var value=personalizer[index];
+                checkboxs.forEach(function(item){//console에 찍어보면 NodeList유사배열이라 forEach있음, 안떠도 쓰면됨
+                    //날씨, 자동차... 이런걸 가져옴, personallizer 아까 저장한 배열과 같다면~ 체크한다~
+                    if(item.value===value) item.checked=true;
+                });
+            }
+        }
+        function getCheckedlist(){
+            return favoriteFieldset.querySelectorAll('[name=menu]:checked');//네임속성이 메뉴인 애들 중에(:) 체크된애
+        }
+    </script>
+</head>
+<body>
+    <fieldset class="favorite-fieldset">
+        <legend>네이버의 개인화 메뉴 설정 적용하기</legend>
+        <input type="checkbox" name="menu" value="날씨"/>날씨
+        <input type="checkbox" name="menu" value="자동차"/>자동차
+        <input type="checkbox" name="menu" value="영화"/>영화
+        <input type="checkbox" name="menu" value="부동산"/>부동산
+        <input type="checkbox" name="menu" value="웹툰"/>웹툰
+        <button class="save-button">저장</button><br/>
+        <span class="favorite" style='color:red;font-size: 1.2em;font-weight: bold;'></span>
+    </fieldset>
+</body>
+</html>

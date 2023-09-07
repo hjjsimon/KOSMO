@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM09_1.html</title>
+    <style>
+        /*클래스명 앞에는. 아이디명 앞에는 # 붙임, 점클래스, 샵아이디로 외움*/
+        .box{ /*div클래스명이 박스임, 블락이라 전체 색칠됨*/
+            background-color: yellow;
+        }
+
+
+    </style>
+    <script>
+/*
+교안자료실, 자바스크립트 BOM 및 DOM 참고
+속성은 회색표시, 같은 레벨은 같은 높이에 존재, 자식은 아래에 존재
+DOCTYPE, html 이런걸 노드라고 함
+<!DOCTYPE html>
+<html lang="en"> -> 맨위에 있는 이런것들을 하나의 객체로 만들어 통으로 뿌릴 수 있음
+태그는 엘리먼트 노드, 태그 안의 텍스트는 텍스트 노드라고함
+도큐먼트에는 body안에 있는 것만 보임
+DOM이랑 CSSOM을 랜더링하면 합쳐짐 그리고 그걸로 브라우저가 그리면 페이지가 보여지는 것
+
+-BOM 맨 아래레벨에 document 존재, 그 아래 DOM 존재
+
+BOM(Browser Object Model) : 브라우저를 스크립트 언어(컴파일 안되고 인터프리터로 순차실행되는 언어)로 제어하기 위해 
+                            웹브라우저 창을 객체로 모델링 한 것.
+                            그래서 자바스크립트에서 BOM API를 사용해서 "브라우저"를 제어 할 수 있다
+                            window객체(브라우저와 같다)는 BOM의 최상위 객체이다. 즉 전역객체로 브라우저당 1개이다
+                            (윈도우창(window객체) 내의 주소창은 location객체, 이런건 window객체 안에 있는 것)
+                            (내용보여지는 하얀색 배경은 document객체, <- -> 이전,다음 페이지는 history객체)
+
+DOM(Document Object Model) : HTML문서(웹페이지)를 스크립트 언어로 제어하기위해 태그들을 객체로 모델링
+                            (모델링=메모리에 생성한다는 뜻, 메모리에 생성한게 객체잖아, 그래야 제어가능) 한 것
+                            그래서 자바스크립트에서 DOM API를 사용해서 "HTML문서"를 제어 할 수 있다
+                            DOM의 최상위 노드는 window객체의 자식인 document객체이다
+                            document객체는 HTML문서 하나당 하나다
+                            (흰색 document 안에 html 문서가 보여지니까 당연하지!)
+                            (그래서 문서 접근할때 document. 했던 것)
+
+아래는 HTML문서와 관련된 DOM API이다
+1.노드 생성(노드는 객체임)
+    document객체의 createElement("태그명") 혹은 createTextNode("텍스트")
+    -><h2>~~~</h2> ~~~에 텍스트노드가 자식으로 들어감, 이것도 줄바꿈만 안했지 사이에 들어가니까 자식
+
+2.생성된 노드 부모에 붙이기
+
+    부모요소.prepend(노드 혹은 문자열(텍스트노드)) :부모의 자식요소 맨 앞에 붙인다
+    부모요소.append(노드 혹은 문자열(텍스트노드)) :부모의 자식요소 맨 뒤에 붙인다
+    부모요소.appendChild(노드)
+
+    부모요소.insertBefore(삽입할 노드, 기존 자식노드); 삽입할 노드가 기존 자식노드 앞에 들어감
+    기존요소.insertAdjacentElement(위치,새노드);부모요소가 필요없다 즉 기존요소를 기준으로 위치를 정해서 삽입한다
+    기존요소.insertAdjacentHTML(위치,'태그형태의 문자열')
+
+    ※insertBefor 와 insertAdjacentElement차이점
+    insertBefore() requires you to provide the parent node, an existing child node, and the new node to be inserted; the new node is put before the child node
+    insertAdjacentElement only requires you to provide an existing node and the new node. The new node is inserted at some place related to the existing node.
+    There's no need to provide the parent node.
+
+3.노드 추가 및 삭제
+    -부모의 자식요소 끝에 추가
+    부모요소.append(자식요소 혹은 문자열);
+    부모요소.appendChild(자식요소);
+    -부모의 자식요소 앞에 추가
+    부모요소.prepend(자식요소 혹은 문자열);
+    -삭제
+    부모요소.removeChild(자식요소): 자식제거
+    자신요소.remove(): 자신제거
+
+    append()와 appendChild()의 차이점:
+    Element.append() allows you to also append string objects, whereas Node.appendChild() only accepts Node objects.
+    ->문자열 객체를 넣어도 됨, append로 누적해도됨(전에 table 문자열 누적하듯), 근데 appendChild는 노드객체만 가능함
+    Element.append() has no return value, whereas Node.appendChild() returns the appended Node object.
+    ->append는 반환x, child는 추가된 노드를 반환
+    Element.append() can append several nodes and strings, whereas Node.appendChild() can only append one node.
+    ->append는 여러개 추가가능, child는 노드 1개만 추가가능
+
+4.노드 복제
+    타켓요소.cloneNode(true)
+
+5.노드(엘리먼트) 가져오기:
+    1)메소드
+    태그명으로 얻어 오기
+    document.getElementsTagName("태그명"); -> 유사배열반환
+    name속성으로 얻어 오기
+    document.getElementsByName("name속성 값");
+    클래스명으로 얻어오기
+    document.getElementsByClassName("클래스명"); -> 태그에 클래스도 줄 수 있음(모든 태그에 class속성 줄 수 있음)
+    id값으로 얻어 오기
+    document.getElementById("id속성값"); -> ID는 한페이지에서 1개뿐이라 element에 s가 안붙음, id없으면 null반환
+    document.querySelector('css선택자') -> 일치하는 요소가 있으면 무조건 첫번째 요소만 반환.없으면 null반환
+    document.querySelectorAll('css선택자') -> 일치하는 모든 요소반환(Nodelist) 없으면 length가 0인 Nodelist반환
+
+    2)속성
+    childNodes속성은 텍스트나 주석처리 등도 노드로 처리 ->귀찮게 이것저것 가져옴, 쓸일없음
+    children속성은 엘리먼트 노드(태그)만 노드로 처리 ->이게 중요
+
+    아래는 엘리먼트 노드뿐만 아니라 텍스트 노드도 대상이된다(주석도 노드에 포함) 
+    (ex. <h2>제목<b>안녕</b></h2> 이러면 텍스트노드 안녕의 부모는 <b>, 제목은 <b>랑 형제)
+    parentNode 
+    firstChild (첫번째 자식 찾아간 노드)는 children[0]과 같다
+    lastChild
+    previousSibling
+    nextSibling
+
+    엘리먼트 노드(태그) 대상일때는(텍스트 노드는 제외라 Element 붙여야함)
+    parentElement
+    firstElementChild  는 children[0]과 같다
+    lastElementChild
+    previousElementSibling
+    nextElementSibling
+
+6.노드 대체하기
+    타켓요소.replaceWith(새노드);
+*/
+
+    //이벤트 프로그래밍
+    window.addEventListener('DOMContentLoaded',function(){
+    //윈도우객체의 함수 쓰는것, 아래 바디 안에 있는게 브라우저에 보이는 DOM, 
+    //DOM 요소들이 다 메모리에 올라왔을 때(브라우저에 보일떄)~ 라서 이름이 저런 것, 여튼 올라오면 2번쨰로 준 콜백함수가 호출됨
+    //윈도우 객체에 이벤트리스너를 부착하겠다. 이벤트가 발생할지 안할지 항상 듣는게 이벤트리스너
+    //앞에 window. 안붙이면 이벤트가 발생해도 윈도우에서 이벤트처리를 못함
+    //body안의 DOM요소가 올라왔을 때의 이벤트 이름이 DONContentLoaded임, 그리고 올라오면 function() 호출
+        //querySelector는 아이디, 클래스명 없으니 태그명으로 얻어오는 것
+        //DOM의 최상위가 document라 document.으로 하위 요소들을 찾는것!
+        var fieldset=document.querySelector('fieldset');//css선택자 넣으면 됨,fieldset 여럿 있어도 첫번째꺼 가져옴
+        var span=document.querySelector('div.box > span');//box클래스명을 가진 div, 의 자식인 span
+        var divNode=document.querySelector('.box');//div.box나 동일
+        console.log(divNode);//여튼 그대로 가져옴
+        //console.log(divNode.firstElementChild);//element 1개뿐, 그거 나옴
+        //text도 읽는 firstChild하면 빈 공백도 text(자식)로 나옴
+        //lastChild하면 </span> 뒤의 엔터,공백,주석까지도 자식으로 node처리 출력
+        //NodeList: 모든 node를 담는 컬렉션(유사배열)
+        console.log(divNode.childNodes);//가진 노드가 다 출력됨, 그리고 유사배열로 저장, 공백이나 주석도 text노드 취급됨(\n\n도 나옴)
+        //[text, comment, span, text] -> 유사배열 출력, 눌러보면 엔터, 공백 등 다 보임([]대괄호는 배열!)
+        //유사배열도 배열처럼 forEach, length 갖고있음, 대신 자바의 Map이 갖는걸 가짐, 보고 유사배열이구나 해야함
+        //배열취급해서 인덱스로 접근하면 됨
+        //childNodes속성은 NodeList타입-> 모든 노드(주석 및 텍스트 포함)를 담는 컬렉션(유사배열)
+        console.log(divNode.childNodes[0]);//0번방은 text노드~ (data 보면 "\n        " 엔터랑 공백 들어있음)
+        console.log(divNode.childNodes[0].nodeName);//#text(노드명) <- 이게 노드명, 그냥 노드명 찾는법~
+        console.log(divNode.childNodes[1].nodeName);//#comment(노드명)
+        console.log(divNode.childNodes[2].nodeName);//SPAN(노드명: 대문자, #없음) <-중요
+        //children속성은 HTMLCollection타입()-> 엘리먼트노드(태그)만 담는 컬렉션(유사배열)
+        console.log(divNode.children);//HTMLCollection[span] -> 태그인 span만 있음, 굿
+        console.log(divNode.children[0]);
+        console.log(divNode.children[0].nodeName);//SPAN(노드명:태그 대문자명)
+
+        var button=document.querySelector("button");//아이디,클래스 없으니 그냥 태그명으로 얻어오는게 querySelector
+        button.onclick=function(){//버튼에 클릭이벤트 발생(이 노드의 속성임) 시 이 함수 실행
+            console.log(fieldset.children);//HTMLCollection(4) [legend, input.table, input.table, button]
+                                            //fieldset 위에서 미리 얻어놓음(이거 중요한가봐)
+                                            //클릭할때마다 함수 실행되어 태그만 가져옴, 유사배열이라 forEach적용x
+            var row=parseInt(fieldset.children[1].value);//문자열이라 파스, 입력한걸 얻음
+            var column=parseInt(fieldset.children[2].value);
+            //console.log(row,column); ->행, 렬에 입력한걸 숫자로 받아옴
+
+            //1.table 엘리먼트 생성
+            var table=document.createElement('table')//태그명 넣어서 엘리먼트 노드 만듦, 테이블 태그<table></table>만든것
+            //table엘리먼트에 속성추가(속성명부터 쓰기 ex. style)
+            table.setAttribute('style','background-color:black;border-spacing:1px')//마지막은 세미콜론 안해도 됨
+            //<table style='background-color:black;border-spacing:1px'></table> 만든것
+            for(var i=1;i<=row;i++){//입력받은 행만큼
+                //2.tr엘리먼트 생성
+                var tr=document.createElement('tr');
+                //tr.setAttribute('style','background-color:white')
+                tr.style="background-color:white";//속성도 변수이므로 .style해도 위랑 같은 코드임, 99% 제공한다고~
+                for(var k=1;k<=column;k++){
+                    //3.td엘리먼트 생성
+                    var td=document.createElement('td');//얘는 귀찮 속성 안줌
+                    var textNode=document.createTextNode(i+'행 '+k+'열');//td사이에 텍스트 들어가야함, 텍스트노드 만듦
+                    //4.텍스트 노드를 td에 추가
+                    td.append(textNode)//텍스트노드를 td에 붙여야함
+                    //5.생성된 td를 tr에 추가
+                    tr.append(td);
+                }
+                //6.tr을 table에 추가
+                table.append(tr);
+            }
+            console.log(table);
+            //7.table을 div에 추가
+            //divNode.append(table);//span 뒤에 table 붙임, 랜더링된거 보면 붙어있음
+            //divNode.appendChild(table);//위랑 결과 동일, 뭐가 다르지?
+            //divNode.prepend(table);//table노드 넣음, 스트링 넣어도 된다고 뜸
+                //console.log(typeof table);//object
+                //console.log('%O',table)//table
+            //divNode.insertBefore(table,span)//노드,자식노드 넣어줘야함-> 앞의 divNode가 부모기준이 됨
+            //부모노드의 자식으로 삽입할거임, 첫번쨰로 table노드 넣고, 두번쨰는 divNode의 어떤노드 앞에 넣을지 결정
+            //span은 저 위에 구해놓음, 결국 이건 prepend랑 동일코드
+            //divNode.insertAdjacentElement('afterbegin',table);//targetElement가 div, 그 안에, 또 첫쨰 자식 앞에 넣음
+            //이것도 prepend 동일코드
+            //divNode.insertAdjacentHTML('afterbegin',table);//이건 지금 table불가, 두번째에 문자열 넣어야함
+            //[object HTMLTableElement] 여기에 표를 위치 시킵니다. -> 이런식으로 출력, HTMLTableElement가 노드임
+            divNode.insertAdjacentHTML('afterbegin',table.outerHTML);//outerHTML 쓰면 문자열로 반환해줌!
+         };////button
+
+    });
+    </script>
+</head>
+<body>
+    <h2 >DOM API 사용하기:노드 추가하기</h2>
+
+    <fieldset>
+        <legend>표 설정하기</legend>
+        <input type="text" class="table" /> 행&nbsp;&nbsp;&nbsp;<!--클래스이름 같을 수 있음, 엔터가 스페이스하나라 4칸 떨어짐-->
+        <input type="text" class="table" /> 렬
+        <button >표만들기</button>
+    </fieldset>
+   
+    <div class="box">
+        <!-- comment --><span>여기에 표를 위치 시킵니다.</span>
+    </div>
+</body>
+</html>

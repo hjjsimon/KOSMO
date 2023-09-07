@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimateStop.html</title>
+    <style>
+        *{
+          padding:0;
+          margin:0
+        }
+        div{
+          width:50px;
+          height: 50px;
+          background-color: red;
+          position: relative;/*body기준 맨왼쪽상단 0,0에서 시작*/
+          left:0;
+          top:0
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function(){
+            $('#start').click(function(){
+                $('#div').animate(
+                    {width:'+=100',height:'+=100',left:'+=100',backgroundColor:'green'},//애니메이션 설정용 객체, 100씩 가로세로 증가
+                    //JQUERY core에는 칼라 애니메이션 불가, 위의 제이쿼리 ui 추가해야 백그라운드칼라 green 먹음
+                    1000,//애니메이션 지속시간 1초
+                    function(){//애니메이션 호출시 실행되는 함수가 3번째인자
+                        //현재 객체의 top, left 좌표 얻기
+                        //$(선택자).position().top: top좌표
+                        //$(선택자).position().left: left좌표
+                        console.log('애니 완료후 X좌표:%s, Y좌표:%s',$(this).position().left,$(this).position().top);
+                        console.log('애니 완료후 가로폭:%s, 세로폭:%s',$(this).width(),$(this).height());
+                });
+            });
+
+            $('#stop').click(function(){
+                $('#div').stop();//애니메이션 중지함수
+            })
+
+            $('#back').click(function(){
+                $('#div').animate(
+                    {width:'-=100',height:'-=100',left:'-=100',backgroundColor:'yellow'},
+                    1000);
+            })
+
+
+        });
+    </script>
+</head>
+<body>
+	<button id="start">Start</button>
+	<button id="stop">Stop</button>
+	<button id="back">Back</button>
+    <div id="div"></div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+1688560702693	Rename resource 'nutrient_select01.jsp'
+1688560737417	Rename resource 'Nutrient_select01.jsp'
+1688562938985	Rename resource 'nutrient_select'
+1688562951442	Rename resource 'Nutrient_Select01.jsp'
+1688562955665	Rename resource 'Nutrient_Select02.jsp'
+1688563033763	Rename resource 'NutrientSelect02.jsp'
+1688563038272	Rename resource 'NutrientSelect01.jsp'
+1688563933408	Rename type 'NutrientSelectController'
+1688563951523	Rename resource 'nutrientselect'
+1688610081151	Rename resource 'Nut_BG.PNG'
+1688616596751	Delete elements
+1688616612451	Rename resource 'images.png'
+1688621508183	Copy compilation unit
+1688621534326	Delete element
+1688621539964	Delete element
+1688622752666	Rename package 'com.kosmo.springapp.select.controller'
+1688622769061	Rename package 'com.kosmo.springapp.select.service.impl'
+1688622915668	Rename package 'com.kosmo.springapp.nutrient.impl'
+1688622941597	Delete element
+1688623107926	Rename type 'Servicess'
+1688645383011	Rename compilation unit 'NutrientSelectDTO.java'

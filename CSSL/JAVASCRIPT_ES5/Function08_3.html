@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function08_3.html</title>
+    <script>
+        //매개변수에 값전달은 콜바이밸류, 주소전달은 콜바이레퍼런스
+        var param=100,args=1;
+        //Call By Value]-값에 의한 호출, 값이 전달
+        function callByValue(param,args){//지금 매개변수 param,args는 지역변수, 여기는 var 안써도됨, 저 위의 전역변수랑 다름
+            var temp=param;
+            param=args;
+            args=temp;
+            console.log('callByValue함수 안:param-%s,args-%s',param,args);//2)100,1 전달받아서 순서바꿈 1,100출력
+        }
+        callByValue(param,args);//지금 param,args는 맨위 전역변수0-> 1)함수에 100,1전달
+        console.log('callByValue함수 밖:param-%s,args-%s',param,args);//100,1출력
+
+        var array=[100,1];//array라는 주소로 100,1 배열 찾음
+        var callByRef=function(arr){//arr 주소로 100,1 ? 그리고 정렬 바꾸면 함수 안에서 바꾼게 밖에서도 바뀐다? 여튼 결과 동일
+            var temp=arr[0];
+            arr[0]=arr[1];
+            arr[1]=temp;
+            console.log('callByRef함수 안:arr[0]-%s,arr[1]-%s',arr[0],arr[1]);
+        };
+        callByRef(array);            
+        console.log('callByRef함수 밖:array[0]-%s,array[1]-%s',array[0],array[1]);
+
+        //참조에 의한 호출예제]
+        var member=[];
+        function setMember(numberOfStudents,member){
+            for(var i=0;i<numberOfStudents;i++){
+                member.push(prompt(i+1+'번째 이름 입력?',''));//push로 계속 배열입력~
+                member.push(prompt(i+1+'번째 나이 입력?',''));
+                member.push(prompt(i+1+'번째 주소 입력?',''));
+            }
+        }
+        //var numberOfStudents=parseInt(prompt('인원수를 입력?',1));
+        //setMember(numberOfStudents,member);//바로위코드에서 입력받은 학생수
+        //console.log(member);
+
+        //지역변수와 전역변수 충돌시 지역변수 우선
+        var gVar=100;//전역변수
+        function conflict(gVar){//매개변수 gVar는 지역변수
+            //gVar=gVar*2;//지역변수 자신에 전역변수 100을 받고 2를 곱해서 넣음
+            console.log(this);//호출객체가 this다. (this는 윈도우객체), -> 지금 this 호출주체는 윈도우
+            this.gVar=gVar*2//전역변수 gVar는 윈도우에 등록돼있음, 왼쪽 gVar는 전역변수, 오른쪽은 뭐지???????
+            console.log('함수안의 지역변수(gVar):',gVar);//200
+        }
+        window.conflict(gVar);//호출객체가 this, 전역변수
+        //conflict(gVar) //지역변수 gVar에 2를 곱해서 전역변수 gVar에 넣고싶음
+        console.log('함수밖의 전역변수(gVar):',window.gVar);//100
+
+        /*
+        문]배열을 매개변수로 입력받아 배열을
+        크기순(큰 값부터)으로 재 정렬하는 함수를 정의해라
+        그리고 호출하여 그 결과를 출력하여라.(배열의 sort()함수 사용불가)
+        */
+        //1]함수정의
+        var arr=[9,45,10,23,99,222,34,100,77,88];
+        function sort(arr){
+            for(var i=0;i<arr.length-1;i++){
+                for(var k=i+1;k<arr.length;k++){
+                    if(arr[i]<arr[k]){
+                        var temp=arr[k];
+                        arr[k]=arr[i]
+                        arr[i]=temp;
+                    }
+                }
+            }
+        }
+        //2]함수호출
+        sort(arr);
+        //3]출력
+        console.log(arr);
+        arr.forEach(function(item){
+            console.log(item);
+        });
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

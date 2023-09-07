@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiveDie.html</title>
+    <style>
+        div{
+          width:200px;
+          height:100px;
+          text-align: center;
+          line-height: 100px;
+          background-color: black;
+          color:white;
+          border: 2px solid white;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!--
+        디프리케이트된 함수 사용시 아래 라이브러리 임베드, 마이그레이션 해야함
+        
+        마이그레이션에는 두 가지 버전이 있습니다. 
+        첫 번째는 1.9 이전 jQuery 코드를 jQuery 1.9에서 최대 3.0으로 업데이트하는 데 도움이 됩니다. 
+        여기에서 해당 버전을 얻을 수 있습니다.
+    -->
+    <!--https://jquery.com/download/에서 링크주소 복사해옴-->
+    <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>
+
+    <script>
+        $(function(){
+            /*
+            ※live/die 가 쌍, on/off가 쌍
+            1) 이벤트 등록시 live, 해제시 die(bind/unbid 유사)
+                단, bind는 자스로 새롭게 만들어진 동적 요소에는 바인딩 불가
+            */
+            //bind()함수로 이벤트 바인딩-동적으로 추가된 요소에는 이벤트 바인딩 불가
+            //미리 만들어놓은 DIV 클릭시 새로 다이브 추가, 근데 동적으로 추가된거 클릭시 새로 안생김
+            /*
+            $('div').bind('click',function(){
+                $(this).after('<div>동적으로 추가한 DIV</div>');
+                //prepend,append 같은게 after
+            });
+            */
+            /*
+                live()및 die()함수는 1.9버전부터 제거됨.(우리는 3.7)
+                사용시에는 1.9버전 미만 라이브러를 임베드 하거나 
+                혹은 마이그레이션 라이브러리를 현 최신 버전과 함께 임베드
+                혹은 최근에는 live나 bind대신 on()함수 사용
+            */
+            /*
+            $('div').live('click',function(){
+                $(this).after('<div>동적으로 추가한 DIV</div>');
+                //prepend,append 같은게 after
+            });
+            //live로 바인딩한 이벤트는 die로 이벤트 해제
+            $('button').click(function(){
+                $('div').die('click');//이벤트 해제버튼 클릭시 div에 걸린 클릭이벤트 죽임
+            });
+            */
+            /*
+                on()함수 사용
+                $("선택자").on("이벤트",콜백함수)는 이벤트 바인딩하나
+                동적으로 추가된 태그에는 이벤트가 바인딩 안됨.(bind처럼)
+                    이벤트 해제시:$("선택자").off("이벤트");
+                    
+                ※동적으로 추가한 요소에 이벤트 바인딩하려면
+                $(document).on("이벤트","선택자",콜백함수);	
+                해제시:$(document).off("이벤트","선택자");
+            */
+            /*
+             $('div').on('click',function(){
+                $(this).after('<div>동적으로 추가한 DIV</div>');
+             });
+             $('button').click(function(){
+                $('div').off('click');
+             });
+            */
+            $(document).on('click','div',function(){
+                $(this).after('<div>동적으로 추가한 DIV</div>');
+            });
+            $('button').click(function(){
+                $(document).off('click','div');
+            });
+
+            //children([선택자]) 함수, []는 생략가능
+            //[] 없으면 모든 자식들 가져옴
+            $('table tr').slice(1).click(function(){//슬라이스 1은 인덱스 1 tr 이후로 다 가져옴
+                console.log('클릭한 tr의 자식인 td의 수:',$(this).children().length )
+                //각 레코드 클릭하면 열 몇개인지 나옴 4/4/4/4/2
+                if($(this).children().length > 2){
+                    var title = $(this).children(':eq(1)').html();//제목 가져옴
+                    var name = $(this).children(':eq(2)').html();
+                    console.log('클릭한 행의 제목:%s, 작성자:%s',title,name)
+                }
+                
+            });
+            //자식이 서로 다른 경우인 경우
+            console.log(($('div:last')).children().html());
+            //span,a,span,a 선택했으나 html()은 첫번째만 가져와서 span꺼 자식1 가져옴
+            console.log(($('div:last')).children(':eq(1)').html());//자식2
+            console.log(($('div:last')).children('a:eq(1)').html());//자식4
+            //a 자식 중 2번째놈 가져옴
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>live("이벤트명",콜백함수),die("해제할이벤트명"),children([선택자])함수,on("이벤트명",[선택자],콜백함수),off("해제할이벤트명")</legend>
+		<div>미리 만들어 놓은 DIV</div>
+		<button>이벤트 해제</button>
+		
+		<table cellspacing="1" bgcolor="gray" width="60%">
+			<tr bgcolor="white">
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+			<tr bgcolor="white">
+				<td>1</td>
+				<td>제목1</td>
+				<td>작성자1</td>
+				<td>2013-9-12</td>
+			</tr>
+			<tr bgcolor="white">
+				<td>2</td>
+				<td>제목2</td>
+				<td>작성자2</td>
+				<td>2013-9-12</td>
+			</tr>
+			<tr bgcolor="white">
+				<td>3</td>
+				<td>제목3</td>
+				<td>작성자3</td>
+				<td>2013-9-12</td>
+			</tr>
+			<tr bgcolor="white">
+				<td>4</td>
+				<td>제목4</td>
+				<td>작성자4</td>
+				<td>2013-9-12</td>
+			</tr>
+			<tr bgcolor="white">
+				<td>총계</td>
+				<td colspan='3'>세개 셀 병합</td>
+			</tr>
+		</table>
+		<h3>자식이 서로 다른 요소인 경우</h3>
+		<div>
+			<span>자식1</span>
+			<a>자식2</a>
+			<span>자식3</span>
+			<a>자식4</a>
+		</div>
+	</fieldset>
+</body>
+</html>

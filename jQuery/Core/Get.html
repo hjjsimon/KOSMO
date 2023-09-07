@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //1.팩토리 함수 $()로 jQuery DOM 객체 얻는다. jQuery DOM 객체에만 jQuery 적용가능
+            var jQueryDom = $('#naver');//제이쿼리 돔객체
+            console.log('jQueryDom:',jQueryDom);
+            console.log('jQueryDom.href:',jQueryDom.href);//undefined, 자스처럼 .href 안먹음
+            //jQueryDom.css('color','red');//제이쿼리 DOM(객체)에만 제이쿼리 함수가 잘 적용됨
+           
+            var jsDom = document.querySelector('#naver');//자바스크립트 돔객체
+            console.log('jsDom:',jsDom);
+            console.log('jsDom.href:',jsDom.href);// https://www.naver.com/ 이건 href속성값 잘 읽어옴 
+            //jsDom.css('color','red');//에러 자스는 제이쿼리처럼 사용불가
+            jsDom.style.color='red';//바닐라 JS방식으로 이렇게 해야 red됨
+
+            //3.jQUery함수 get()로 자바스크립트 DOM객체 얻기]
+            //1] get(인덱스): jQuery DOM객체를 자바스크립트 DOM객체로 변환
+            //              인덱스-선택된 jQuery DOM객체중 인덱스값(인덱스는 0부터 시작)
+            console.log('jQueryDom.get(0):',jQueryDom.get(0));//이제 자스돔돼서 .href먹음
+            console.log('jQueryDom.get(0).href:',jQueryDom.get(0).href);
+
+            $('input[type=button]:first').click(function(){//클릭시 이 콜백함수 적용
+                //1.자스 함수 이용
+                console.log('자스이용:',document.querySelector('#txt').value);
+                //2.jQuery함수 이용
+                console.log('제이쿼리 이용1:',$('#txt').get(0).value);
+                console.log('제이쿼리 이용1:',$('#txt').val());//위처럼 안씀 함수정의돼있음
+            });
+
+            //문] "텍스트 변경하기" 버튼 클릭시 "실습입니다"라는 텍스트를 빨간색으로 바꾸고
+            //      글자크기는 1.8em으로 변경, 자스와 제이쿼리 버전 둘 다 쓰기
+            //      단, 버튼 클릭 이벤트는 순수 자스코드 사용
+            /*
+            var button = document.querySelector('#button');
+            var js = document.querySelector('#js');
+            var jquery = document.querySelector('#jquery');
+            var span = document.querySelector('#span')
+            button.onclick = function(){
+                if(js.selected) {
+                    span.style.color = 'red';
+                    span.style.fontSize = '1.8em';
+                }
+                if(jquery.selected) {
+                    $('#span').css('color','red').css('fontSize','1.8em');
+                }
+            }
+            */
+            document.querySelector('input[type=button]:last-child').onclick=function(){
+                var version = document.querySelector('#version').value;
+                if(version.toUpperCase()==='JS'){
+                    var span = document.querySelector('span')
+                    span.style.color = 'red';
+                    span.style.fontSize = '1.8em';
+                }
+                else {
+                    //$('#span').css('color','red').css('fontSize','1.8em');
+                    //json타입으로 위코드 바꾸기
+                    $('#span').css({'color':'blue','fontSize':'1.8em'});
+                }
+            };
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>get(인덱스)함수</legend>
+		  <input type="text" value="텍스트값" id="txt"/>
+	    <input type="button" value="확인" />
+	    <ul style="list-style-type: decimal;">
+		    <li><a href="https://www.naver.com" id="naver" >네이버</a></li>
+		    <li><a href="https://www.daum.net"  >다음</a></li>
+		    <li><a href="https://www.nate.com"  >네이트</a></li>
+	    </ul>
+	    <h2>실습하기</h2>
+	    <select id="version">
+	    	<option value="js" id="js">자바스크립트버전</option>
+	    	<option value="jquery" id="jquery">제이쿼리버전</option>
+	    </select>
+	    <span id="span">실습입니다</span>
+	    <input type='button' value="텍스트변경하기" id="button"/>
+	</fieldset>
+</body>
+</html>

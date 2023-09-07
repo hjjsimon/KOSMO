@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--컨텍스트 메뉴와 동일하게 코딩하되 icon속성도 추가-->
+    <item  android:id="@+id/home_menu" android:title="HOME" android:icon="@drawable/home"/>
+    <item android:id="@+id/setting_menu" android:title="설정" android:icon="@drawable/settings"/>
+    <item android:id="@+id/contact_menu" android:title="연락처" android:icon="@drawable/contact"/>
+</menu>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable01.html</title>
+    <script>
+        /*
+        https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+        -자스(지금 하고있는 JAVASCRIPT ES5스펙)에서는 대소문자를 구분한다.
+        -하나의 명령행이 끝나면 ;로 명령의 끝을 알린다.(자스는 ; 없어도 에러안남)
+        -자스에서는 모든 데이타가 객체이다.
+        -자스에서는 변수에 넣은 값에 따라 그 변수의 자료형이 결정된다.(그냥 대충 넣어도 알아서 맞춰줌, 짱임)
+        -변수 선언:var라는 키워드 사용(변수선언방법: var 변수명;)
+        -자바스크립트의 자료형은 Primative타입(기본 자료형)과 Object(객체)로 나눈다.
+        -Primative타입은 string, number (en-US), bigint (en-US), boolean, undefined, symbol등이 있다.
+         */
+        //1]변수선언
+        var num;//명령어 하나 끝나면 ;세미콜론 동일
+        //undefined는 하나의 자료형이자 값이다(변수선언 후 초기화 전), 변수의 값이 정의가 안됐다는 의미
+        //num의 값:undefined,num의 타입:undefined-> 언디파인드 값이면서 타입임, 위에 값 안넣었으니까 당연
+        console.log('num의 값:%s,num의 타입:%s',num,typeof num);//sysout같은 자스코드
+        num=100;
+        console.log('num의 값:%s,num의 타입:%s',num,typeof num);//num의 값:100,num의 타입:number
+        num=3.14;//정수,실수 모두 number타입임
+        console.log('num의 값:%s,num의 타입:%s',num,typeof num);
+        num=new Number(1000);//자스는 클래스 없음, 그래서 생성자함수로 클래스처럼 쓰기도 함(Number대문자는 생성자함수라고함)
+        console.log('num의 값:%s,num의 타입:%s',num,typeof num);//new 또는 {}로 뭘 만들면 무조건 object타입 됨-> 객체가 되는 것
+        num=true;
+        console.log('num의 값:%s,num의 타입:%s',num,typeof num);
+        num='자바스크립트';//자스에서 문자열은 '' "" 둘 다 상관없음
+        console.log('num의 값:%s,num의 타입:%s',num,typeof num);
+        num=new String('자바스크립트');
+        console.log('num의 값:%s,num의 타입:%s',num,typeof num);
+        var nullvar=null;
+        //null은 하나의 값이나 참조하는 객체가 없다는 의미(자료형으로는 object타입에 해당함)
+        console.log('nullvar의 값:%s,nullvar의 타입:%s',nullvar,typeof nullvar);//null은 object타입으로 나옴(원시데이터 null타입 아님, object타입임)
+        //자바(정적객체)는 클래스 정의 후 속성(멤버변수,필드) 추가불가
+        //자스(동적객체,ES5기반,ES6는 클래스가 생김)는 Class Less(프로토타입) 즉 객체(프로토타입:원형)를 먼저 정의하고 이후에 속성,함수 추가(원형에 살을 붙이는셈)
+        var obj={} //객체 리터럴 표기법: new연산자 없이 {}하면 객체가 되는 것, new Object()라는 생성자함수랑 동일함
+        console.log('obj의 값:%s,obj의 타입:%s',obj,typeof obj);
+        //obj의 값:[object Object],obj의 타입:object 출력(%s 자바처럼 다 출력가능)
+        console.log('obj의 값(리터럴 표기법):%o',obj);
+        //obj의 값:{} 출력-> 객체식별자, 리터럴표기법({})으로 출력(prototype object 아래와 동일)
+        console.log('obj의 값(Object로 출력):%O',obj);
+        //obj의 값:Object 출력-> prototype object라고 나옴(%O는 객체 출력)
+
+        /*
+            1) %o는 객체를 일반문자열로 출력(객체의 구조, 내용 파악 어려움)
+            2) %O는 객체를 펼쳐서 구조화된 형태로 출력(객체의 구조, 내용 파악 쉬움)
+        */
+
+
+
+
+        obj.name="가길동";//멤버변수 추가
+        obj.age=20;//멤버변수 추가
+        //자스는 함수형 프로그래밍지원(즉 변수에 함수 할당 가능)
+        obj.walk=function(){//변수에 함수를 담음,자바면 메소드 1개 추가한것,() 괄호 안은 인자, 인자 지금 없음
+            console.log('나이가 %d살인 %s이 걷다',this.age,this.name);//자바의 this랑은 다름
+        };
+        console.log('이름:%s,나이:%d',obj.name,obj.age);
+        obj.walk();//함수는 무조건 괄호열닫 해야함
+        var obj2={//JSON(JavaScript Object Notation) 자바객체표기법이라고함, {키값:밸류값}, 숫자는 아니어도 밸류는 반드시 '' 또는 ""로 감싸야함
+            username:"kosmo",//키:밸류
+            'password':'kosmo1234',//키:밸류
+            "name":'한소인',//키:밸류
+            eat:function(food){//인자 1개 있는 함수를 밸류로 담음
+                console.log('%s를(을) %s이(가) 먹다',food,this.name);
+            }    
+        };
+        console.log('obj2의 값:%o,obj2의 타입:%s',obj2,typeof obj2);
+        console.log(obj2);
+        obj2.eat("피자");
+        
+        var f=function(x,y){return x+y;};//함수표현식: 보통 이렇게 하고 함수이름 안줌(아래처럼 안함)
+        //function add(x,y){return x+y}//함수정의문(선언문)은 함수명 add가 있는 것, 이것도 잘 안씀(정의문,선언문은 context의 맨 위로 가서 먼저 실행됨)       
+        //var f=new Function('x','y','return x+y')//Function() 생성자함수를 쓴것, 마우스 갖대대면 String배열 var...args라 그대로 나열해주면 됨, 위랑 같은 코드임
+        console.log('f의 값:%s,f의 타입:%s',f,typeof f);//f의 값:function(x,y){return x+y;},f의 타입:function -> function 타입이라는게 있음
+        console.log(f(10,10));
+        /*
+        -정리
+        1) 정수나 실수 리터럴(예:100,3.14등) : number타입(리터럴: 그냥 표기법을 의미함)
+        2) new Number() : object타입(new쓰면 무조건)
+        3) true,false : boolean타입
+        4) new Boolean() : object타입
+        5) 문자열 리터럴('HELLO' 혹은 "안녕") : string 타입
+        6) new String() : object타입
+        - 자스는 데이타의 자료형 관련 크게 Number/Boolean/String타입을 제공한다.
+        - 단,생성자 함수(대문자시작)를 이용한 객체 생성은 무조건 Object타입이다
+        - 변수 선언후 객체를 할당하지 않은 경우:undefined타입(정의가 안됨)
+        - {}(객체 리터럴) : object 타입. new Object()과 동일한 JSON표기법(자스의 객체표기법을 JSON이라함, {}형태를 의미함)
+        - var f= function(){}(함수 리터럴, 함수표현식). new Function()과 동일한 JSON표기법(f는 function타입이다.)
+
+        ※상수와 리터럴의 차이
+        - 상수는 값이 변하지 않는 변수(상수는 변수는 맞긴 함, 안변할뿐)
+        - 리터럴은 변수에 넣는 변하지 않는 데이터를 의미 즉 데이타 자체(변수가 아니고 하나의 값 자체임, 그냥 리터럴도 안변한다)
+          ex. const NUM = 100; ->여기서 NUM는 상수(변수)이고, 100은 숫자 리터럴(값 그 자체)이다. 코드 상에서 데이터를 표현하는 방식을 리터럴이라 한다
+        */
+        
+        //추가:var를 붙인 경우와 붙이지 않은 경우의 차이점
+        //var를 붙이면 호이스팅이 일어난다(호이스팅:변수의 스코프안(변수가 사용되는 범위)에서 최상단으로 변수 선언코드가 올라간다)        
+        console.log(hoistVar);//변수 선언전 에러, hoistVar 이런 변수 만든 적 없음, Uncaught ReferenceError: hoistVar is not defined
+        var hoistVar;//선언부! 이걸 밑에 썼음에도 불구하고 에러안남, 이게 선언문이라 맨 위로 올라가서 시행되기 때문, 이제 위에 에러안남
+        //console.log(nonHoistVar);//이건 아래서 선언한게 아니라 에러남
+        nonHoistVar="호이스팅 되지않는다";//이건 실행부! var 선언 아니라 호이스팅 안일어남, 이건 사용한것, 그냥 값을 넣어 할당한것
+        console.log(nonHoistVar);//이건 됨 순차적 진행이라, 여튼 선언은 var가 중요함!!!!!
+        //var nonHoistvar="호이스팅 되지않는다"-> 이건 선언과 동시에 초기화한것, 실제 실행시2개로 쪼개짐, 선언부 var nonHoistvar; 아래에 실행부 nonHoistVar="호이스팅 되지않는다" 2줄 코드가됨
+
+        console.log("%cThis text will be red, bold, and with a yellow background", "color:red; font-weight: bold; background-color:yellow;border:1px green dotted");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

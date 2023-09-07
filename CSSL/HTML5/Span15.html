@@ -1,0 +1,95 @@
+<!DOCTYPE html><!--여기부터 DOM을 차례로 읽어나감, 근데 var span에서 'text'아이디를 아직 못봄 그래서 아래 null출력-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Span15.html</title>
+    <style>
+        .monday{/*클래스명 앞에는 . 찍는다~*/
+            font-size: .8em;
+            color: gray;
+        }    
+        .html5{
+            font-size: 1.8em;
+            color: rgb(45,148,60); /*rgb는 제공함수, 0~255까지 가능*/
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        var toggle=false;//토글변수 false로 초기화(동전 앞뒤 바뀌는게 토글임, 걍 누를떄마다 on off 똑딱똑딱 되는 것)
+        
+        function toggleText(){//함수선언문이라 그냥 메모리에 올리기만함, 아직 사용한게 아님, 버튼 누를때마다 이게 실행, 
+                              //바디로 가서 바디도 메모리에 올림, 그리고 사용시 실행
+            var span=document.getElementById('text')//document가 dom의 최상위, document로 얻어옴, text 아이디를 얻어옴
+            //console.log('span:',span);    
+            if(!toggle)
+                span.innerHTML='자바스크립트';
+            //innerHTML 하면 중간에 텍스트를 가져옴    
+            //콘솔로 찍으면 JavaScript를 그대로 읽어옴, 그리고 한글로 바꿈
+            //소스보기하면 처음 서버로부터 받은 소스 그대로임, 근데 랜더링된거 보면 '검사'에서 보면 자바스립트가 <span>사이로 들어가 바뀜
+            else
+                span.textContent='JavaScript';
+            toggle=!toggle;//1회시 한글 출력 후 f->t됨, 2회시 if안으로 안들어가므로 JavaScript되고 t->f됨, 3회시 한굴 출력 초기화
+        }
+        var setImage=function(){
+            var span=document.getElementById('image');
+            //방법1(속성이용), 텍스트컨텐츠 쓰면안됨, 텍스트로 처리함, HTML로 처리하도록 innerHTML
+            //span.innerHTML="<img src='../Images/button.jpg' alt='이미지'/>";//랜더링 보면 지금 입력한게 스팬사이 텍스트 대신 들어감
+            //방법2
+            var imgNode=document.createElement('img');//태그명만 쓰면됨, 이건 <img/>랑 동일, 객체만 생성한것, 그냥 메모리에만 올라온것
+            //imgNode.setAttribute('src','../Images/button.jpg');//src, alt 이런건 태그의 속성이라함, (속성명,값) 넣어줌
+            //imgNode.setAttribute('alt','이미지');//지금까지 그냥 이미지 만들기만함, span 사이에 이제 붙여야함
+            //span.prepend(imgNode);//prepend면 이미지 택스트 앞에 그림이 보임,append면 뒤에 보임
+            imgNode.src='../Images/button.jpg'//src, art 이런 속성은 만든 객체에 거의 100%존재한다~ 걍 갖다쓰면 됨
+            imgNode.alt='이미지';//위에 값2개 setAttribute 대체방법
+            //span.textContent="";//노드의 자식을 "" 빈문자열로 대체함, 근데 span태그 사이 다 지우는게 위험 
+            span.removeChild(span.firstChild);//()에 노드 넣어줘야함, 맨앞 child만 지움(근데 ) 
+            //~~~.remove() 하면 자기자신노드(~~~넣은것)를 지우는 것
+            span.appendChild(imgNode);//새로 imgNode를 만들어 넣을 예정
+            }
+        function printGugudan(){
+            var span=document.getElementById('gugudan'); 
+            var table="<table style='width:700;text-align:center;background-color:red;border-spacing:1px;'>";
+            for(var i=1;i<=9;i++){   
+                table+="<tr style='background-color:white'>";//문자열로 누적
+                for(var k=2;k<=9;k++){//안쪽 for문은 열을 만드니까 td필요
+                    table+="<td>"+k+"*"+i+"="+i*k+"</td>";
+                }
+                table+="</tr>"
+                span.innerHTML=table
+            }
+            table+="</table>"
+        }    
+    </script>
+</head>
+<body>
+    <!--
+        일반적인 HTML태그와 달리 MARKUP기능은 없다.(텍스트 진하게,색변화,밑줄 등이 마크업)
+        주로 자바스크립트와 CSS에서 활용(제어)하기 위한 태그
+        대신 ID를 줘서 쉽게 텍스트를 가져올 수 있음.
+    -->
+    기본 텍스트<!--태그 감싼거 없으니까 아무 마크업기능처리안됨, 브라우저 기본텍스트로 보임-->
+    <h2>&lt;span&gt;태그</h2>
+    <span>기본 텍스트</span><!--span태그도 마크업기능 없어서 위의 기본 텍스트랑 표현 동일-->
+    <h3>자바스크립트에서 활용</h3>
+    오늘의 첫 수업은 <span id="text">JavaScript</span>입니다<br/>
+    여기에 <span id="image">이미지</span> 표시하기<br/>
+    아래에 구구단 표시하기<br/>
+    <span id="gugudan"></span>
+    <fieldset>
+      <legend>버튼들</legend>
+      <button onclick="toggleText()">텍스트 변경</button><!--함수호출형식, 버튼 누르면 함수불러옴-->
+      <button onclick="setImage()">이미지 교체</button>
+      <button onclick="printGugudan()">구구단 표시</button>
+    </fieldset>
+    <h3>CSS에서 활용</h3>
+    오늘은 <span class="monday">월요일</span> 입니다<br/>
+    <span class="html5">HTML5</span> 수업입니다
+
+
+
+
+
+</body>
+</html>

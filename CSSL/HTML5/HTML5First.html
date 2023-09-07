@@ -1,0 +1,27 @@
+<!DOCTYPE html><!--DOCTYPE 선언:웹브라우저에 HTML5임을 알림, <>를 tag라 함-->
+<html lang="ko"><!--HTML문서 시작-->
+<head><!--HEAD태그 시작, 현재 웹문서의 정보(작성자,작성도구(지금 비주얼스튜디오코드),설명,인코딩 문자셋등)를 웹브라우저에 알려줌-->
+    <!--반드시 HEAD태그 안에 기술: meta태그, title태그
+        추가적인 태그: script태그(자바스크립트를 기술하기 위한 태그), style태그(CSS를 기술하기 위한 태그), script와 style태그는 body태그안에 기술해도 무방, 단 순서에 주의-->
+    <meta charset="UTF-8"><!--META종료태그 없음, 이런건 바로 /로 종료처리 해버림, 안해도 됨, 데이터정보를 갖고있는게 meta태그, 다국어지원 위해 최근 다 UTF-8지원, 어느나라에서도 인코딩 되도록-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><!--EDGE브라우저에 호환되도록 함-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--viewport, 핸드폰으로 볼 때 장치 크기에 맞추겠다는 뜻(반응형 웹)-->
+    <title>HTML5First.html</title><!--탭메뉴의 타이틀-->
+</head><!--HEAD태그 시작-->
+<body>
+    HELLO HTML!<!--실제 브라우저에 보이는 내용은 BODY에 구현, 모르겠으면 인터넷에서 페이지소스보고 따라치면 됨-->
+    <h1>HTML</h1><!--H1태그(마크업): 실행 시 굵고 크게 글자 표시함-->
+    <b>하이퍼 텍스트 마크업 언어</b>(<span style="font-size: smaller;">영어</span>: Hyper Text Markup Language, <b>HTML</b>, 
+    <span style="font-size: smaller;">문화어</span>: 초본문표식달기언어, 하이퍼본문표식달기언어)는<br/> 웹 페이지 표시를 위해 개발된 지배적인 마크업 언어다.
+</body>
+</html><!--HTML문서 끝-->
+<!--
+CSSL(Client Side Script Language)->텍스트 기반의 인터프리터(=웹브라우저) 언어
+->클라이언트 측 스크립트 언어  (클라이언트=웹브라우저/브라우저로 보는 어플리캐이션이 웹어플리케이션)
+SSSL(Server~~)->톰캣 쓸 예정, 이 프로그램을 설치해야 서버가됨, 그래야 .html페이지를 서비스할 수 있음
+웹브라우저 필수인 3개를 배울 것 HTML5,CSS3,Javascript(얘만 프로그래밍 언어임, 나머지는 스크립트언어)
+스크립트언어는 소스코드를 컴파일x, 런타임 시 한줄한줄 해석하며 실행, 
+브라우저는 웹 클라이언트 프로그램, 내가 네이버에 cafe.html에 요청하면 네이버가 응답해서 
+서비스해줌 그래서 서버, 그리고 카페 페이지가 뜨게 됨
+여튼 html로 작성된 코드를 웹브라우저 프로그램이 한줄한줄 실행해야 현재 보는 인터넷 페이지가 보임
+-->

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PositionTopLeft11.html</title>
+</head>
+<body>  
+    <!--
+        position(CSS속성, 하위 속성3개임):레이어의 위치지정
+
+        1) static 기본값으로 left,top의 영향을 받지 않는다
+
+        ※원칙]부모 요소에 position속성(absolute 혹은 relative)을 주면 자식은
+            무조건 부모요소를 기준으로 한다.즉 부모 영역의 왼쪽 상단이 오프셋(0,0)이다
+            -> 부모의 0,0기준으로 자식의 위치를 정하는 것
+        
+        2) position이 absolute(절대좌표):브라우저 상단(뒤로가기 아래가 0,0)(body가 부모인 경우) 혹은 
+                                        부모를 기준(부모x,자식에만 absolute줬을때)으로 left,top좌표가 결정됨
+        3) position이 relative(상대좌표):원래 자리했던 위치를 기준으로 left,top좌표가 결정됨
+    -->
+    <!--
+    <fieldset>
+        <legend>부모가 position:absolute 인 경우</legend>
+        <div style="background-color:yellow;position: absolute;">
+            <div style="background-color:red;width:50px;height:50px;
+                        left: 100px;top: 100px;position: absolute;">자식1</div>
+            <--left: x좌표, top: y좌표/ position: absolute 주기전에는 static이었던 것, 
+                부모에 absolute안주면(자식만 absolute) 브라우저(0,0)기준으로 100,100 위치 이동한 것
+                부모에 absolute주면(자식도 absolute) 부모(0,0/필드셋 칸내부)기준으로 100,100 위치 이동함->
+            <div style="background-color:green;width:50px;height:50px;
+                        left: 150px;top: 150px;position: absolute;">자식2</div>
+            <div style="background-color:blue;width:50px;height:50px;
+                        left: 200px;top: 200px;position: absolute;">자식3</div>
+        </div>
+    </fieldset>
+    -->
+    <!--
+    <fieldset>
+        <legend>부모가 position:relative 인 경우</legend>
+        <div style="background-color:yellow;
+                    left: 50px;top: 50px; position: relative;"><!-최초 자신 위치가 0,0->
+        원래 위치가 기준점(0,0)이 된다
+        <div style="background-color:red;width:50px;height:50px;    
+                    left: 100px;top: 100px;position: relative;">Child1</div>
+        <!-자식은 부모기준, 바뀐 부모위치가 0,0됨
+            자식에 relative주면 자기 원래 위치가 기준점->
+        <div style="background-color:green;width:50px;height:50px;
+                    left: 150px;top: 150px;position: relative;">Child2</div>
+        <div style="background-color:blue;width:50px;height:50px;
+                    left: 200px;top: 200px;position: relative;">Child3</div>
+        </div>
+    </fieldset>
+-->
+<!--
+    <fieldset>
+        <legend>부모에 position을 안 준 경우</legend>
+        <div style="background-color:yellow;">
+            <!-브라우저 왼쪽 상단이 오프셋이 된다->
+            <div style="background-color:red;width:50px;height:50px;
+                        left: 100px;top: 100px;position: absolute;">차일드1</div><!-부모 position 안주면 브라우저 0,0기준->
+            <div style="background-color:green;width:50px;height:50px;
+                        left: 150px;top: 150px;position: relative;">차일드2</div>
+            <!-브라우저 왼쪽 상단이 오프셋이 된다->
+            <div style="background-color:blue;width:50px;height:50px;
+                        left: 200px;top: 200px;position: absolute;">차일드3</div>
+        </div>
+    </fieldset>
+-->    
+    <fieldset>
+        <legend>Z-INDEX속성</legend><!--Z-Index속성으로 쌓인 위치 변경가능(낮은 숫자가 아래 쌓임/ 높은 숫자가 위에 쌓임)-->
+        <div style="background-color:yellow;width:300px;height:300px;
+                    position: relative;"><!--자식들을 내(부모) 영역안에서 배치하겠다는 뜻-->
+            <div style="background-color:red;width:100px;height:100px;
+                        position: absolute;left: 20px;top: 20px;z-index: 10;">div1</div><!--부모0,0기준 내려옴-->
+            <div style="background-color:green;width:100px;height:100px;
+                        position: absolute;left: 60px;top: 60px;z-index: 8;">div2</div><!--div1위에 쌓임-->
+            <div style="background-color:blue;width:100px;height:100px;
+                        position: absolute;left: 100px;top: 100px;z-index: 9;">div3</div>
+        </div>
+    </fieldset>
+    <h2>입력창 띄우기 버튼 클릭시 div를 특정 위치(정가운데)에 띄우기</h2>
+    <div id="parent" style="min-width:25em;margin-bottom:10px;background-color:rgb(109, 146, 15);
+                            width:100%;height:300px;position: relative;"><!--자식들을 내(부모) 영역안에서 배치하겠다는 뜻-->
+        <div id="child" style="text-align:center;line-height:100px;background-color:rgb(231, 225, 116);
+                            width:50%;height:100px;position: absolute;display: none;"><!--부모 기준0,0으로 배치하겠다는 뜻-->
+        나이를 입력 :<input type="text"/>
+        </div>
+    </div>
+    <button>입력창 띄우기</button>
+    <script>
+        var child=document.querySelector('#child');
+        var parent=child.parentElement;//document.querySelector('#parent'); ->아이디 줄 필요 없음, 그냥 부모로 찾으면 됨
+        //console.log(parent);//확인해보면 <div>태그 부모 잘 얻어옴
+        var button=parent.nextElementSibling;//document.querySelector('button');
+        //console.log(button);//확인해보면 <button>태그 다음형제 잘 얻어옴
+        
+        //1]고정좌표: 브라우저 크기변경시 가운데 배치 풀림(좌표를 px로 줘서, offset이 고정됐기 때문)
+/*        console.log(screen.availWidth);//해상도 가로폭 얻어옴, 1920
+        console.log(screen.availHeight);//1040
+        console.log(parent.style.width);//100% 출력, <div>의 style속성있으니 .찍으면 99% 존재, css속성도 이후 .으로 찾을 수 있음
+        console.log(parseInt(parent.style.width));//parseInt로 100숫자만 가져옴
+
+        //자식 div를 띄울 위치{left(x),top(y)}구하기(하드코딩 말고 값으로 가져오기)
+        console.log((parseInt(parent.style.width)/100)/2);//100으로 나누니까 1나옴, 또 2로 나누면 0.5
+                                         
+        var parentWidth=screen.availWidth*(parseInt(parent.style.width)/100)/2;
+        //0.5 * 1920 하면, 부모 가운데 x좌표 구한것
+        var leftChild=parentWidth-parentWidth/2;
+        //자식의 x좌표 구함(부모 50%라 부모가로길이 구하고 1/2곱해서 뺌)
+        var topChild=parseInt(parent.style.height)/2 - parseInt(child.style.height)/2;
+        //부모 가운데 y좌표 구하고, 자식 세로 절반 뺌, 자식 top구함
+        //top쓰면안됨, window객체의 속성이라 window타입이라고 찍힘
+*/
+        button.onclick=function(){
+            child.style.display='block';//자식의 디스플레이 none에서 block으로 바꿔줌, 이때 문자열로 줘야함
+            //1]정가운데 정렬
+            //child.style.left=leftChild+'px';//CSS는 px필수임
+            //child.style.top=topChild+'px';
+            //1-1]100,100 정렬
+            //child.style.left=100+'px';
+            //child.style.top=100+'px';
+
+            //2]반응형(고정좌표 대신 해상도에 따라 오프셍위치 변형)
+            //수평으로 가운데 정렬
+            parent.style.display='flex';
+            parent.style.justifyContent='center';//원래 justify-content인데 자스로 접근시 -빼고 대문자시작
+            //수직으로 가운데 정렬
+            //방법a]
+            //child.style.top='33%';//px대신 비율로 지정, 1/3이니까 33%
+            //방법b]
+            parent.style.alignItems='center';//flex container 속성이라 부모에 줘야함
+            
+            //브라우저를 스마트폰 해상도 크기로 줄일시 div보다 입력텍스트상자가 커서 아래로 내려가는 문제발생
+            //이를 방지하기위한 자식div의 최소폭 지정
+            child.style.minWidth="288px"//"18em";
+            //위에 최소폭 설정한 style속성 25em(25글자 들어감), 을 바꿔줌(%말고 em단위로 지정하는게 나음)
+            //(gpt)일반적으로, 1em은 기본 폰트 크기와 동일하며, 대개 16px로 설정됩니다. 따라서, 18em은 16px * 18 = 288px입니다.
+         };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarginPadding07.html</title>
+    <!--여백관련속성은 2개, margin과 padding이 있음
+        * 모든 컨텐츠는 영역을 가짐(margin과 padding은 값의 순서가 중요)
+        1. 태그(요소)간 간격이 margin(음수가능)
+        2. 컨텐츠와 컨텐츠를 포함한 전체영역(요소)사이 간격이 padding(음수불가)
+        * 간단하게 margin은 영역밖, padding은 영역안-->
+        
+</head>
+<body>
+    <h2>여백관련 속성</h2>
+    <div>
+        <h3>padding</h3>
+        <div style="border: 1px red solid;box-sizing: border-box;
+                    padding-top: 20px;padding-right: 40px;
+                    padding-bottom: 60px;padding-left: 80px;">상하좌우 여백 각각 지정(블락엘리먼트)</div>
+        <!--border속성은 순서무관, padding쓰면 영역변화, 오른쪽40px 주면 이를 유지하기 위해 화면 축소하면 컨텐츠가 내려감-->
+        <!--그냥 padding-right하면 컨텐츠 오른쪽에 투명글자가 있듯 유지됨, 모든 padding은 상하좌우 모두 그렇다, 티나냐 아니냐차이-->
+        <hr/>
+        <div style="border: 1px green solid;box-sizing: border-box;
+                    padding: 40px;">상하좌우 여백 동시 지정(블락엘리먼트)</div><!--상하좌우 모두 40px여백줌-->
+        <!-- 왼쪽 여백을 줄때만 컨텐츠가 오른쪽으로 움직인다.
+            그외 (위/아래/오른쪽)는 텍스트는 그대로 있고 영역이 늘어난다-->
+        <hr/>
+        <span style="border: 1px green solid;box-sizing: border-box;
+                    padding-top: 20px;padding-right: 40px;
+                    padding-bottom: 60px;padding-left: 80px;">인라인 엘리먼트</span>
+        <h3>margin</h3>
+        <fieldset>
+            <legend>block과 block</legend>
+            <!--
+            block1과 block2는 서로 margin-top 및 margin-bottom이 적용되고
+            (상하로 배치)
+            block1과 block2에 margin-left 와 margin-right는
+            부모 영역과의 여백이다.
+            그래서 margin-left 와 margin-right를 주면
+            영역의 가로폭이 줄어 든다.
+            -->
+            <!--div와 부모 fieldset 사이 위쪽 영역간 간격도 margin에 포함
+                1. div기준 margin top(div기준 바깥이니까 margin임)
+                2. fieldset기준 border top임(fieldset기준 안쪽이니까 border임)-->
+            <div style="border: 1px red solid;
+                        margin-bottom: 50px;margin-left: 50px;
+                        margin-top: 50px;margin-right: 50px;">block1</div>
+            <div style="border: 1px green solid;
+                        margin-top: 40px;">block2</div>
+            <!--block1과 block2사이 90px(50+40) 돼야할 것 같지만 더 큰 값을 따라서 margin bottom 50px만 먹음-->
+        </fieldset>
+        <!--결론은 인라인은 margin-left와 margin-right만 적용된다 -->
+        <fieldset>
+            <legend>block과 inline</legend>
+            <!-- block 에 마진을 주자-->
+            <div style="border: 1px red solid;
+                        margin-bottom: 50px;">block</div>
+            <!-- 인라인도 margin-left는 부모영역과의 여백이다:margin-left만 적용됨(top은 안됨)-->
+            <span style="border: 1px green solid;
+                        margin-top: 100px;margin-left: 100px;">inline</span>
+        </fieldset>
+        <!-- 수직으로 컨텐츠를 정가운데 배치시에는 위쪽하고 아래쪽 padding을 동일하게 주면된다
+             단,padding을 준 부모영역이 그만큼 늘어난다
+        -->
+        <fieldset >
+        <!--부모기준 패딩임, 근데 영역이 늘어나는 수직정렬, 영역 안늘어나려면 height, line-height쓰면됨-->
+            <legend>inline과 inline</legend>
+            <!--
+                인라인 인 경우 margin-top 및 margin-bottom은
+                부모와 여백을 의미하지만 적용이 안된다.
+                이때는 부모에서 padding으로 적용한다
+                span에 margin 말고 =>>>  이거 쓰기 <fieldset style="padding-top: 50px;padding-bottom: 50px;">
+            -->
+            <span style="border: 1px red solid;
+                        margin-top: 50px;margin-bottom: 50px;">inline1</span>
+            <span style="border: 1px green solid;
+                        ">inline2</span>
+        </fieldset>
+        <fieldset>
+            <legend>블락엘리먼트 안의 컨텐츠 정렬</legend>
+            <!--
+              수평정렬: text-align:center
+              수직정렬: height와 line-height값을 동일하게(영역이 늘어나지 않는다)
+            -->
+            <div style="width: 200px;height: 200px;border: 5px solid red;box-sizing: border-box;
+                        line-height: 200px; text-align: center;">텍스트 정렬</div>
+        </fieldset>
+    </div>
+</body>
+</html>

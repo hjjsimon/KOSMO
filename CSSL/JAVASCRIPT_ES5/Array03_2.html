@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array03_2.html</title>
+    <script>
+        console.log('[배열의 주요메소드]');
+        var method=[];
+        console.log("1.배열의 요소 추가: 인덱스지정 또는 push() 또는 unshift()함수")
+        //1.인덱스를 지정해 추가
+        method[0]=100;
+        //2.push()메소드:배열의 끝에 요소추가, 배열의 새로운 길이 반환
+        console.log(method.push(200));//배열길이 2됨
+        //3.unshift()메소드:배열의 맨앞에 요소추가(기존요소 인덱스 1추가), 배열의 새로운 길이 반환
+        console.log(method.unshift(300));//0번방 300, 1번방 100, 2번방 200됨
+        for(var i in method) {
+            //if(i==1) break; 이거 처리시 0번방만 출력, 1번방차례되면 break
+            console.log('%d인덱스방:%s',i,method[i]);//for in문은 배열적용시 index꺼내옴
+        }    
+        console.log("2.배열의 요소 꺼내오기: 인덱스지정 또는 pop() 또는 shift()함수")
+        //1.인덱스를 지정해 꺼냄
+        console.log(method[1]);//100꺼냄
+        console.log('인덱스로 꺼내온 후 배열크기:',method.length);
+        //2.pop()메소드:배열의 끝에서 요소꺼내고 배열에서 제거
+        console.log('꺼내온 요소:',method.pop());
+        console.log('pop()으로 꺼내온 후 배열크기:',method.length);//메모리(길이)3->2로 줄어듦
+        /*console.log('꺼내온 요소:',method.pop());
+        console.log('꺼내온 요소:',method.pop());
+        console.log('pop()으로 꺼내온 후 배열크기:',method.length);//메모리(길이)2->0로 줄어듦
+        console.log('꺼내온 요소:',method.pop());//꺼내올 요소 없으면 undefined나옴
+        console.log(method.pop()===undefined)//undefined는 값이자 타입, true나옴, 이때까지 꺼내면 됨*/
+        //3.shift()메소드:배열의 맨앞에서 요소꺼내고 배열에서 제거
+        console.log('꺼내온 요소:',method.shift());
+        console.log('shift()로 꺼내온 후 배열크기:',method.length);
+        console.log('3.배열요소의 일부를 추출하기')
+        //slice(start[,end])- start인덱스부터 끝까지(end생략시) 또는 start부터 end-1인덱스까지의 배열요소를 추출해서
+        //                      새로운 배열을 생성해 새로만든 배열을 반환함
+        //                      인자가 음수면 우측(마지막 원소)에서부터 -1,-2...로 번호매김(-0은 없으니 -1부터 시작)
+        //                      끝 인덱스 지정시(end포함) 끝인덱스(음수 혹은 양수) -1 하자
+        method.push(200);
+        method.push(300);
+        method.push(400);
+        method.push(500);
+        console.log(method);//[100,200,300,400,500], 우측끝부터 -1,-2,-3,-4,-5
+        var method_=method.slice(3);//시작인덱스가 3인 400부터 끝지정안했으니 끝인 500까지 새로운 배열로 만들어 반환
+        console.log('원본 배열:',method);//원본배열은 안변함
+        console.log('추출한 배열:',method_);
+        method_=method.slice(2,4);//300부터 끝인 4-1인 3번방 400까지 추출
+        console.log('추출한 배열:',method_);
+        method_=method.slice(2,-1); //우측부터 -1(끝 500)빼기 -1은 -2인 400
+        console.log('추출한 배열:',method_);
+        method_=method.slice(-3,-1);
+        console.log('추출한 배열:',method_);
+        console.log('4.배열요소 삭제 및 동시에 추가하기')
+        //splice(start[,삭제할 개수[,추가할 값,...]])
+        // 추가할 값들은 start와 삭제한 사이에 추가됨.
+        // ※원본배열이 변경됨. 삭제한 요소로 새로운 배열이 생성됨.(pop()이랑 비슷, 삭제하는셈인데 pop은 꺼낸거 반환, 이건 배열반환)
+        //  삭제 및 추가할 수도 있다
+        //method_=method.splice(2)//2번방 인덱스부터 끝까지 삭제, 300이후로 삭제해서 새로운 배열만듦, 원본배열은 100,200만 남음
+        //console.log('원본 배열:',method);
+        //console.log('삭제한 배열:',method_);
+        //method_=method.splice(2,2);//2번 인덱스부터 2개요소 삭제
+        //console.log('원본 배열:',method);//[100, 200, 500]
+        //console.log('삭제한 배열:',method_);//[300, 400]
+        //method_=method.splice(2,2,'삼백','사백','오백');//2번 인덱스부터 2개요소 삭제, 동시에 삭제한 2번부터 요소 3개 추가
+        //console.log('원본 배열:',method);//[100, 200, '삼백', '사백', '오백', 500]
+        //console.log('삭제한 배열:',method_);//[300, 400]
+        method_=method.splice(2,0,'삼백','사백','오백');//2번 인덱스부터 0개요소 삭제, 동시에 삭제한 2번부터 요소 3개 추가
+        console.log('원본 배열:',method);//[100, 200, '삼백', '사백', '오백', 300, 400, 500]
+        console.log('삭제한 배열:',method_);//[]
+        console.log('5.배열요소 찾기');
+        //indexOf(), lastIndexOf()- 배열의 요소 중에
+        //특정한 값의 인덱스 반환
+        //찾으면 해당 인덱스를, 찾지 못하면 -1을 반환.
+        method.push('오백');//[100, 200, '삼백', '사백', '오백', 300, 400, 500, '오백']
+        console.log(method.indexOf('오백'));//앞부터 '오백'찾음, 4
+        console.log(method.lastIndexOf('오백'));//뒤부터 '오백'찾음, 8
+        console.log(method.indexOf('백'))//없으면 -1
+        console.log('6.배열요소 변경하기')
+        //map함수:배열 내의 모든 요소 각각에 대하여 인자로 전달된 콜백 함수를 적용하여 새로운 배열을 반환
+        //          즉 배열의 모든 요소를 변경하는 함수이다(마우스 갖다대보면 숫자형배열? 근데 아니어도됨)
+        //arr.map(callback(currentValue[, index[, array]])[, thisArg])
+        //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+        var arr=[1,2,3,4,5];
+ /*       arr.map(function(item){//callback함수 넣으라고함, 이때 (currentValue[, index[, array]]) -> 인자 1개,2개,3개짜리 가능 
+        //배열 각각 요소에 함수가 적용됨, 처음에 1꺼내서 item에 담음, 다음에 2꺼내서 item....
+            console.log(item);
+        })*///이건 값 1개짜리 currentValue임
+        var arr_=arr.map(function(item,index){//값2개 넣음, [, index]까지
+            console.log('currentValue:%s,index:%s',item,index);
+            return item*2;
+        })
+        console.log('원본 배열:',arr);
+        console.log('변경된 배열:',arr_);
+        var not_=['A','B','C'];//숫자말고 영어도 됨
+        var not_new=not_.map(function(item){
+            console.log('currentValue:%s',item);
+            return item.toLowerCase();
+        })
+        console.log(not_new);
+        console.log('7.배열의 요소수를 하나로 만들기');//그래서 reduce(줄이기), number반환이므로 reduce쓰려면 다 숫자여야함
+        //reduce함수:배열의 각 요소에 대해 주어진 **리듀서**(reducer) 함수를 실행하고, 하나의 결과값을 반환
+        //arr.reduce(callback[, initialValue])
+        //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
+        console.log(arr.reduce(function(pre,curr){return pre+curr;}));//누적
+        //1이 pre에 2가 curr에, 그리고 합 3, 3은 pre에 3이 curr에 그리고 합 6, 6이 pre에 4가 curr에 그리고 합 10...결과 15
+        console.log(not_.reduce(function(pre,curr){return pre+curr;}));//누적, ABC 하나의 문자열이 됨
+        console.log('8.배열의 모든 요소를 하나의 문자열로 만들기');//원본은 그대로, 반환이 다를뿐
+        //join([구분자])-배열의 모든 요소들을 구분자로 연결해 하나의 문자열로 반환(쉼표(,)가 기본값)
+        console.log(arr.join(),typeof arr.join());//문자열 "1,2,3,4,5" 됨(string)
+        console.log(arr.join('♥'));//1♥2♥3♥4♥5
+        console.log('9.배열의 모든 요소를 거꾸로 재배치하기');//원본배열 변경
+        //reverse()-배열의 요소순서를 반대로 재배치해 반환
+        console.log(arr);//[1, 2, 3, 4, 5]
+        console.log(arr.reverse());//[5, 4, 3, 2, 1]
+        console.log('10.배열 정렬하기');
+        //sort([콜백함수])- 배열 안의 요소들을 정렬하여 반환
+        //인자가 없을 경우 배열 안의 원소들을 오름차순으로 정렬-원본배열이 변경됨
+        //숫자일때는 -
+        //문자열일때는 localeCompare()함수 적용(자바 compareTo()동일)
+        //function(인자1,인자2){return 인자1-인자2;//오름차순},(인자1,인자2)=>인자1-인자2 동일 (자바람다식이면 ->화살표)
+        //function(인자1,인자2){return 인자2-인자1;//내림차순}
+        //function(인자1,인자2){return 인자1.localeCompare(인자2);//오름차순}
+        //function(인자1,인자2){return 인자2.localeCompare(인자1);//내림차순}
+        var newArr=[5,2,1,4,3];
+        newArr.sort();//오름차순(원본변경)
+        console.log(newArr);
+        newArr.sort(function(x,y){return y-x;})//요소들이 다 숫자, 콜백함수, return은 뒤-앞, 내림차순(원본변경)
+        console.log(newArr);
+        newArr=['가','하','다','라'];
+        newArr.sort();//오름차순(원본변경)
+        console.log(newArr);
+        newArr.sort(function(x,y){return y.localeCompare(x);})//내림차순(원본변경)
+        console.log(newArr);
+        console.log('11.배열의 여러요소 한꺼번에 추가하기');
+        //concat()- "연결하다" 뜻, 기존 배열의 모든 요소에 concat() 메서드의 인자들을 추가한 새로운 배열 반환
+        //원본 배열은 변하지 않고 기존 배열에 추가된 새로운 배열을 반환.
+        newArr.splice(0,newArr.length,5,3,1,4,9);//0번부터 다 지우고 새로 넣음
+        console.log(newArr);
+        var newArr_=newArr.concat(10,7,2,6,8);//원본 바뀌는게 아니라 새로운 배열에 넣어줘야 출력가능
+        console.log('원본 배열:',newArr);//[5, 3, 1, 4, 9]
+        console.log('원본 배열:',newArr.sort());
+        console.log('반환된 배열:',newArr_);//[5, 3, 1, 4, 9, 10, 7, 2, 6, 8]
+        console.log('반환된 배열:',newArr_.sort());//[1, 10, 2, 3, 4, 5, 6, 7, 8, 9]
+        //문자열로 한글자씩 비교! 1은 맨앞, 다음에 10과 2 비교시 한글자씩 1,2비교하면 1이 작음, 그래서 10이 앞에 옴
+        //지금 문자열, localeCompare로 비교해서 이런 결과
+        console.log('반환된 배열:',newArr_.sort((x,y)=>x-y));//[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 숫자비교시 정상(자스의 람다식, 여기서는 화살표함수라함)
+        console.log('12.순회하며 배열요소 출력하기');
+        //배열명.forEach(function(요소를 담을 변수[,인덱스 저장 변수]){});
+        //변수는 배열만 가능 이건 바로 요소 가져옴(for in문 배열은 인덱스, 객체는 키값가져옴)
+        newArr.forEach(function(item){//배열에서 하나씩 꺼내 item에 담고 아래서 출력
+            console.log(item)
+        });
+        newArr.forEach(function(item,index){
+            //if(index==1) break; ->여기는 브레이크 불가
+            console.log('요소:%s,인덱스:%s',item,index)
+            //return; //function 함수니까 return 값;만나면 값 반환, 그냥 return;으로 끝나면 빠져나감 ->return도 안됨 continue처럼 계속 돌게됨
+        });
+        //forEach()함수는 break를 지원하지 않는다
+        //return은 continue와 같다(배열요소 수만큼 계속 순회)
+        var arr=['A','B','C','D','E'];
+        //forEach()에서 break하는 방법(빠져나오는 방법)
+        //방법1: try~catch
+        try{//C까지 출력 후 에러 던짐, 그리고 try로 잡음
+            arr.forEach(function(item){
+                console.log(item);
+                if(item==='C') throw new Error('C이후부터는 출력안할래');//Error라는 생성자함수 씀, 자바의 Exception 동일
+            })
+        }
+        catch(e){
+            //console.log('%O',e);//찍어보면 뭐 Stack도 있고~ 그렇대
+            //console.log('에러메시지:',e.message);//위에 설정한 에러메세지 C이후부터는 출력안할래 나옴
+        }
+
+        //방법2: Array.prototype.some():forEach()처럼 순회하면서 배열 안의 어떤 요소라도 주어진 판별 함수를 통과하는지 테스트
+        //      하나라도 주어진 판별 함수(내가 세팅)를 통과하면 true 반환 후 break;, 판별함수가 중간에 true를 반환하면 순회를 멈춘다
+        //      특정조건일 때 true 반환하게하면 break기능 가능(some: 어떤)
+        //자스는 프로토타입 기반으로 객체를 먼저 만들고, 필드,함수를 추가함, 
+        //뭐든(ex.Array라는) 생성자함수 이름에 . 찍으면 무조건 prototype이 있음, 또 . 찍으면 모든 메소드랑 속성이 나옴
+        //some()이라는 함수가 원래 Array에 정의되어 있음, 판별함수 통과테스트
+        //거기에 내가 추가도 가능함,
+        //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+        //return true는 break, return false는 continue(순회)와 같다
+        //배열의 메소드 중에 some()도 있다고~!!!!!!!!
+        console.log(arr.some(x => x>'F'));//false, arr배열에는 F문자 이상이 없다
+        //()안에 함수 넣어줘야함, x하나씩 꺼내와서 x가 'F'보다 큰지 비교, A~E 모두 F보다 작아 false반환 후 출력까지
+        arr.some(x=>{
+            console.log(x); 
+            if(x==='C') return true;
+            else return false;
+        });//true 발견할때까지 계속 순회, C출력 후 true라 break로 끊어짐
+
+        //방법3: Array.prototype.every():forEach()처럼 순회하면서 배열 안의 모든 요소가 주어진 판별 함수를 통과하는지 테스트
+        //       즉 모든 요소가 주어진 판별 함수를 통과해야 true 반환(계속 continue), 판별함수가 중간에 false를 반환하면 순회를 멈춘다
+        //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+        //return fasle는 break, return true는 continue(순회)와 같다(위의 some()과 반대임)
+        arr.every(x=>{
+            console.log(x); 
+            if(x==='C') return false;//A출력 후 if(false)인데 return false라 순회 멈춤?? 
+            else return true;//얘는 이걸 추가로 해줘야함!!!! 값 반환안하면 false처리해버림, 위에서는 false면 알아서 continue? 그냥 else 둘 다 써라~ 
+        });
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

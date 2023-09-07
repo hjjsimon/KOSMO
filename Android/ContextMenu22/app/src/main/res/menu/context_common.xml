@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--아이콘 설정 불가-->
+<!-- app접두어 필요없음.컨텍스트 메뉴에는 아이콘 표시안됨-->
+<!--공통 메뉴로 사용-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/red" android:title="RED"/>
+    <item android:id="@+id/green" android:title="GREEN"/>
+    <item android:id="@+id/blue" android:title="BLUE"/>
+</menu>

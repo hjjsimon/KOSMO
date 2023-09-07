@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM09_2.html</title>
+</head>
+<body>
+    <h2>DOM API 사용하기:노드 삭제하기</h2>
+  <fieldset>
+    <legend>행 삭제하기</legend>
+    <table style="width:400px;background-color:black;border-spacing: 1px;text-align: center;">
+      <tr style="background-color: white;">
+        <td><input type="checkbox" value="1"/></td>
+        <td>1행1열</td>
+        <td>1행2열</td>
+        <td>1행3열</td>
+      </tr>
+      <tr style="background-color: white;">
+        <td><input type="checkbox" value="2"/></td>
+        <td>2행1열</td>
+        <td>2행2열</td>
+        <td>2행3열</td>
+      </tr>
+      <tr style="background-color: white;">
+        <td><input type="checkbox" value="3"/></td>
+        <td>3행1열</td>
+        <td>3행2열</td>
+        <td>3행3열</td>
+      </tr>
+      <tr style="background-color: white;">
+        <td><input type="checkbox" value="4"/></td>
+        <td>4행1열</td>
+        <td>4행2열</td>
+        <td>4행3열</td>
+      </tr>
+      <tr style="background-color: white;">
+        <td>
+          <input type="checkbox" value="5"/>
+        </td>
+        <td>5행1열</td>
+        <td>5행2열</td>
+        <td>5행3열</td>
+      </tr>
+    </table>
+    <hr/>
+    <button>행 삭제하기</button>
+  </fieldset>
+
+  <script>
+    var table=document.querySelector('table');
+    var button=document.querySelector('button');
+    button.addEventListener('click',function(){//이벤트명 클릭, 클릭이벤트 발생시 function(){~~~} 시행됨
+        //체크된 체크박스들 얻기
+        var checked=table.querySelectorAll('input[type=checkbox]:checked')
+        //타입이 체크박스인 인풋태그 중에서 checked된건 다 가져옴
+        console.log(checked);//찍어보면 NodeList[] 나옴, 체크하면 개수대로 NodeList(2) [input, input] 이런식 출력
+        //NodeList는 텍스트, 주석 다 포함하는 리스트임, 다 눌러서 찾아보면 value=1~5까지 선택한대로 나옴
+        //prototype도 NodeList 거기에 forEach()있으니 쓸 수 있음
+        checked.forEach(function(item,index){//item이 input타입 체크박스, index에서 하나씩 꺼내옴
+            console.log('value:%s,index:%s',item.value,index);//item의 value속성으로 값 읽어옴(속성 이름대로 .찍으면 99% 된다고!)
+            //item.remove();//체크박스 자체 삭제
+            //checkbox의 조부인 tr노드 찾아 삭제해야함
+            item.parentElement.parentElement.remove();//parentElement 2번하면 tr을 찾은 것
+            //console.log(item.parentElement.parentElement)//출력하면 tr나옴
+            //행 삭제됨~ 소스보기는 처음 소스라 그대로 있고, 랜더링된거 보면 체크한 행은 삭제됨
+        })
+    })
+  </script>
+
+</body>
+</html>

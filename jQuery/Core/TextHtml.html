@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextHtml.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            /*
+                시작태그와 종료태그 사이의 컨텐츠 읽어 오기] - getter
+                text()혹은 html();
+                    1) html()함수는 태그 포함 모든 내용을 읽어오고
+                    2) text()함수는 태그 제외 텍스트 부분만 읽어옴
+            
+                시작태그와 종료태그 사이의 컨텐츠 출력하기] - setter
+                text("설정할 문자열")혹은 html("설정할 문자열");
+                    1) html()함수는 출력시 태그가 해석되서 출력됨.
+                    2) text()함수는 태그가 그대로 출력됨.	
+            */
+            $('button').click(function(){
+                switch(this.id){
+                    case 'read': 
+                        var html = $('div:eq(0)').html();
+                        var text = $('div:eq(0)').text();
+                        console.log('html():%s, text():%s', html, text);
+                        //html():<h2>제목입니다.</h2>
+                        //text():제목입니다.
+                        break;
+                    case 'write':
+                        //$('#display').html("<h3>시작태그와 종료태그 사이에 넣기</h3>");
+                        //<h3> 태그 출력안됨
+                        $('#display').text("<h3>시작태그와 종료태그 사이에 넣기</h3>");
+                        //<h3>를 텍스트로 출력    
+                        break;
+                    case 'img':
+                        $('#display').html("<img src='../images/1.jpg' alt='이미지'/>");
+                        //div사이에 이미지가 그대로 들어감
+                        break;
+                    default :
+                        console.log($(this).html());    
+                }        
+            });
+
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>string text() 및 string html()함수</legend>
+        <button id="read">읽기</button>
+        <button id="write">쓰기</button>
+        <button id="img">이미지 추가</button>
+        <button id="btnText">버튼태그사이의 텍스트 얻기</button>
+        <div><h2>제목입니다.</h2></div>
+        <div id="display"></div>
+   </fieldset>
+</body>
+</html>

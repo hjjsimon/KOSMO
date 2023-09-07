@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyframe14_1.html</title>
+    <style>
+        /*키프레임 규칙(@keyframe, @는 앳, 규칙이라는 뜻)을 이용한 애니메이션*/
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            display: flex;
+            flex-direction: column;
+        }
+        #rect{
+            width:100px;
+            height:100px;
+            background-color: red;
+            /*키프레임 애니메이션 이름지정(내맘)*/
+            /*animation-name: myani1;
+            animation-duration: 3s;얼마나 지속(이거 필수, 있어야 애니메이션 일어남)*/
+            /*animation-delay: 2s;2초 후에 실행*/
+            /*animation-iteration-count: 3;반복횟수 3회*/
+            /*animation: myani1 3s 2s 3;축약형으로 주기, 이것저것 많이 뜨는데 설정한 것만 숫자 쓰면 됨*/
+            /*작성순서는 상관없음, 단, duration은 delay보다 앞에 작성(1개 숫자만 쓰면 duration으로 적용), 
+              iteration-count로 여러번 애니메이션 수행시 delay는 최초 한번만 적용*/            
+        }
+        /*myany1이라는 애니메이션 이름의 요소에 키프레임 규칙을 적용하겠다(애니메이션을 만들겠다) 뜻*/
+        @keyframes myani1 {
+              /*키프레임 규칙 작성: 그래야 애니메이션 일어남*/
+            /*방법1- to블락만 기술해도 무방*/
+            /*from{
+                원래크기부터 애니메이션 시작해야 자연스러움, 원래크기 똑같이 주기
+                결론: from절은 생략, to블락만 작성하면 됨
+                from 절에 작성한 것부터 to 절에 작성한 내용으로 애니메이션 바뀜*/
+/*                width: 100px;
+                height: 100px;
+            }
+            to{
+                width: 400px;
+                height: 400px;
+                background-color: yellow;/*3초에 걸쳐서 빨간박스->노란박스 커짐*/
+/*            }*/
+            /*방법2*/
+            50%{/*0%~100%까지 진행이라고하면 그 절반시점까지만 진행하는 애니메이션*/
+                width: 250px;
+                height: 250px;
+                background-color: rgb(200, 175, 160);
+            }
+            100%{/*50%~100%까지 적용*/
+                width: 400px;
+                height: 400px;
+                background-color: yellow;
+            }
+        }
+        #circ1{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            animation: myani2 3s 3s;
+        }
+        @keyframes myani2 {
+            50%{
+                width: 200px;
+                height: 200px;
+                transform: rotate(180deg);
+                border-radius: 100px;/*절반길이주면 원됨*/
+            } 
+            100%{
+                width: 400px;
+                height: 400px;
+                transform: rotate(360deg);
+                border-radius: 200px;/*절반길이주면 원됨*/
+            }
+        }
+        #circ2{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            animation: myani3 infinite 3s 2s;/*무한반복*/
+        }
+        @keyframes myani3 {
+            to{/*to블락만 줌*/
+                transform: translate(400px,400px);
+            }
+        }
+        /*마우스 오버시 애니메이션 중지*/
+        #circ2:hover{
+            animation-play-state: paused;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>키프레임 규칙을 이용한 애니메이션</h2>
+    <div id="wrap">
+        <div id="rect"></div>
+        <div id="circ1">CIRCLE</div>
+        <div id="circ2"></div>
+	</div>
+</body>
+</html>

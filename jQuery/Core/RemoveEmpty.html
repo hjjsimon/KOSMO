@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RemoveEmpty.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            /*
+                ※ $('선택자') 하면 무조건 jQuery 객체 반환
+                해당 객체가 없어도 null, undefined가 아님
+                $('선택자').length==0 으로 없는 것을 판단하기
+            */
+            console.log($('h2')===null? 'h2요소가 없다': 'h2요소가 있다');//없는데 있다 나옴
+            console.log($('h2')===undefined? 'h2요소가 없다': 'h2요소가 있다');//없는데 있다 나옴
+            console.log($('h2').length===0? 'h2요소가 없다': 'h2요소가 있다');//없다고 잘 나옴
+            console.log($(':button').end().length===0?'버튼 이전 요소가 없다':'버튼 이전 요소가 있다')//있대
+
+            $(':button').click(function(){
+                //$(this)는 무조건 요소수가 하나이므로 아래는 모두 false반환
+                //console.log($(this).is(':first'));//false
+                //console.log($(this).is(':eq(0)'));//false, 위랑 둘 다 하나선택되므로 first,eq(0) 안먹음
+                console.log($(this).is('button:first')? '첫번째 버튼 클릭': '두번째 버튼 클릭');
+                //button중에 첫번째? 이렇게하면 true, false 잘 됨
+
+                //1) remove(): DOM에서 요소 자체를 삭제
+                //2) empty(): 요소는 두고 내용만 지움, text("") 동일
+                if($(this).is('button:first')){
+                    $('div').remove();//div가 통으로 사라짐
+                }
+                else{
+                    $('div').empty();//div 글자만 사라짐
+                }
+
+            })
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>remove()및 empty()함수</legend>
+		<button>REMOVE</button>
+		<button>EMPTY</button>
+		<div style="color:green;border:1px red solid">DIV</div>
+	</fieldset>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector01_3.html</title>
+    <style>
+        #content{/*id content인 div선택(샵아이디)*/
+            background-color: yellow;
+            width: 300px;
+        }
+        ul li{/*ul아래 모든 li선택*/
+            list-style: none;/*bullet(점표시) 지움*/
+            border: 1px green solid;
+            font-size: 1.4em;
+            font-weight: bold;
+            height: 50px;
+        }
+        /*
+            1)선택자 : (콜론하나) -> "선택자 중에~" 라는 뜻(선택자 뒤에 바로 콜론 씀)
+            2)선택자 :: (콜론두개) -> "선택자의 컨텐츠 중에~"라는 뜻
+        */
+        /*아래 내용들이 구조선택자: 구조적으로 선택함*/
+        /*nth-child(숫자): 숫자는 1부터 시작, 특정 자식을 숫자로 선택하면 됨/ nth-child: n번째 자식선택(구조선택자라함, 구조적 선택)*/
+        div#content li:nth-child(2){/*id 컨텐트인 div 하위의 li 중 2번째 선택*/
+            color: red;
+        }
+        /*2n+1로 홀수번째만 선택: n은 0부터 시작 1씩 증가*/
+        div#content li:nth-child(2n+1){/*div내의 모든 li를 1,3,5,7,9~~~ 선택*/
+            color: rgb(114,13,184);/*홀수만 보라색선택*/
+        }
+        /*2n으로 짝수번째만 선택: n은 0부터 시작 1씩 증가*/
+        div#content li:nth-child(2n){
+            color: rgb(3,148,128);/*위부터 순차진행이라 2번 빨간색에서 초록색으로 바뀜 ????? #content 빼면 안됨 */
+        }
+        ul li:last-child{/* : 는 ~중의~~ 라는 뜻, ul하위 li 중에~ 마지막 자식 선택 */ 
+            background-color: aqua;
+        }
+        div#content li:first-child{
+            border-radius: 10px 10px 0 0; /*위쪽이 곡선으로 변함*/
+            background-color: red;
+        }
+        div#content li:last-child{
+            border-radius: 0 0 10px 10px; /*아래쪽이 곡선으로 변함*/
+            background-color: red;
+        }
+
+        #start::first-letter,#end::first-letter{/*아이디 start인 요소의 컨텐츠(내부) 중에 첫번째 글자 2, 다중선택 또 2*/
+            font-size: 2em;
+        }
+        #start::first-line,#end::first-line{/*첫번쨰 줄은 2020년 1월 6일(이후는 br이라 넘어감)*/
+            color: red;
+            font-weight: bold;
+        }
+        #character p:first-child::selection{/*캐릭터 아이디 가진 div선택, 그리고 하위 p선택, 선택자 중 첫번째 p태그만 선택*/
+                                            /*그리고 그 첫번쨰 자식을 드래그했을 때(드래그=selection한다고함)*/
+            color: yellow;
+            background-color: black;/*드래그(selection)했을 때 글자색 노랑, 배경 검정 바꿈*/
+        }
+
+    </style>
+</head>
+<body>
+    <h1>구조 선택자</h1>
+    <div id="content">
+        <ul>
+            <li>menu1</li>
+            <li>menu2</li>
+            <li>menu3</li>
+            <li>menu4</li>
+            <li>menu5</li>
+            <li>menu6</li>
+        </ul>
+    </div>
+    <h1>문자 선택자</h1>
+    <div id="character">
+        <p id="start">
+            2020년 1월 6일<br />
+            6기 시작
+        </p>
+        <p id="end">
+            2020년 7월 24일<br />
+            6기 종료
+        </p>
+    </div>
+    <div>
+        <ul>
+            <li>menu1</li>
+            <li>menu2</li>
+            <li>menu3</li>
+            <li>menu4</li>
+            <li>menu5</li>
+            <li>menu6</li>
+        </ul>
+    </div>
+</body>
+</html>

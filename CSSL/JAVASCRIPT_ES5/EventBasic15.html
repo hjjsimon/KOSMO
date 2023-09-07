@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventBasic15.html</title>
+    <script>
+        /*
+        모든 엘리먼트(태그,요소)에는 사용자가 발생시킨 이벤트가 있다.
+        브라우저 상에서는 다 클릭이지만 요소에 따라 이벤트가 달라진다(submit이벤트,reset이벤트,click이벤트 등)
+
+        리스너: 이벤트가 발생할지 듣고 있는 객체
+        on계열의 리스너가 있다.(onXXXX 여기서 XXXX는 이벤트명)
+        리스너는 태그안에 속성으로 기술할 수 있다 
+
+        onXXXX에 함수 설정시 함수를 이벤트핸들러라고 함, 이 속성은 변수이므로 다른 함수 설정시 기존함수 제거됨
+        addEventListner, 이 방식으로 설정시 말그대로 add라서 다른 함수 추가시 기존 함수에 2개 함수가 설정됨
+        ->프로젝트 할 때 반드시 addEventListner사용, on쓰면 각자 맡은 임무 섞으면 다 사라짐
+        ->아니래 대부분 on을 쓴대, load나 addEventListner사용
+        
+        [이벤트 처리방법]
+        1] 해당 태그에 직접 on계열의 리스너 부착->onclick 속성은 모든 태그에 존재
+          예] <a href="#" onclick="이벤트를 처리할 자바스크립트 코드">텍스트</a>
+        2] 해당 태그 객체를 얻어 와서 해당 태그 객체의 속성(on계열)에 익명함수를 할당해서 처리
+          예] <a href="#" >텍스트</a>
+
+        document객체의 getXXXXX()메소드로 얻어 와서
+        얻어온 객체.on이벤트명 = function(e){} e는 이벤트 객체(익명함수는 함수표현식, 화살표함수)
+        혹은 얻어온 객체.addEventListener("on을 뺀 이벤트명",function(e){});
+        ※load이벤트 부착시에는 addEventListener("load",function(e){}); 사용하자
+
+        주요 이벤트] 두 이벤트는 window에 붙임, 태그로 따지면 body
+                    (두 이벤트는 주로 요소(태그)를 얻는 작업을 수행함)
+        1-1)DOMContentLoaded - 초기 HTML 문서를 완전히 불러오고(=DOM트리 만들어짐) 분석했을 때 발생.
+                        (DOM트리와 CSSOM이 합쳐져서 Render Tree만들어지고 load하면 완전히 브라우저에 보여짐)
+                        스타일 시트(.css), 이미지,.JS파일, 하위 프레임(ex.iframe 화면속화면 등)의 로딩은 기다리지 않습니다.
+                        (IE8이하에서 미 지원)
+        1-2)load - DOM 트리가 생성되고 외부
+               리소스 파일(이미지나 css혹은 .js파일)이 로드 된 경우 발생(DOMContentLoaded보다 늦게 발생)
+
+        -리스너:onload
+        -body태그안에서만 기술 가능
+        <body onload="자바스크립트 코드"> -> 속성으로 쓰기
+
+        unload : 페이지가 닫히거나 다른 페이지로 이동할때 발생하는 이벤트(이건 그냥 쓰지마 무조건, 파이어폭스는 적용 안됨)
+        -리스너:onunload
+        -body태그안에서만 기술가능
+        -콜백함수로 처리시에는 window객체에 onload 리스너 부착
+        <body onunload="자바스크립트 코드">
+
+        submit이벤트:type="submit" 혹은 type="image" 혹은 버튼태그인 경우 클릭시 발생하는 이벤트
+        즉 어떤 값을 form태그의 action에 지정한 페이지로 전송시(submit)시 발생하는 이벤트
+        -onsubmit
+        -form태그안에서만 사용가능
+
+        reset이벤트:type="reset"버튼 클릭시 발생하는 이벤트
+        -onreset
+        -form태그안에서만 사용가능
+
+        click이벤트:가장 많이 씀 .모든 태그에서 사용가능
+        사용자가 해당 엘리먼트(태그)영역을 클릭햇을때
+        발생하는 이벤트(onclick)
+
+        change이벤트:<select> 에서 선택을 바꿀때마다
+        아래에서는 onclick을 사용해라
+        <input type="radio"
+        <input type="checkbox"에서 선택을 바꿀때마다
+        발생하는 이벤트
+
+        키보드 이벤트:텍스트상자(<input type="text"
+        <input type="password"등
+        입력상자에서 적용되는 이벤트
+        keydown:모든 키를 누를때 발생하는 이벤트
+        keyup:키보드를 떨때 발생하는 이벤트
+        keypress:문자키를 누를때 발생하는 이벤트(방향키나 DELETE키,한글 누를때는
+        발생안함-FIREFOX에서만 적용안됨)
+
+        마우스 이벤트:
+        mousedown:태그영역에서 마우스 다운시
+        mouseup:마우스 뗐을때
+        mouseover:영역에 마우스가 들어 왓을때
+        mouseout:영역에서 마우스가 나갔을때
+
+        포커스 관련 이벤트
+        focus:포커스(커서)를 얻었을 발생하는 이벤트(리스너:onfocus)
+        blur:포커스(커서)를 잃었을때 발생하는 이벤트(리스너:onblur)
+
+        ※이벤트 취소
+        리스너에 false를 리턴하면 해당 이벤트가 취소된다
+        예] 유명함수 <태그명 on이벤트명="return false"> -> on이벤트명 속성에 false 저장하는셈
+        익명함수 태그객체.on이벤트명 =function(){return false;} ->태그말고 자스로 처리하는 방법
+        */
+
+        //방법2]객체의 on계열 속성(아래 body태그안에 넣는거 금지)
+/*        window.onload=function(){
+            console.log('window 객체의 onload속성:load이벤트 첫번째 발생');
+        };
+        window.onload=function(){//두번째 담은 함수로 onload속성 변경
+            console.log('window 객체의 onload속성:load이벤트 두번째 발생');//첫번째껀 출력x, 지워짐
+        };*/
+        //방법3]혹은 addEventListener("on뺀 이벤트명",콜백함수) 사용(아래 body태그안에 넣는거 금지)
+        window.addEventListener('load',function(){
+            console.log('window객체.addEventListener():load이벤트 첫번째 발생');//load 이벤트에 2개를 add해서 둘 다 실행됨
+        });
+        window.addEventListener('load',function(){
+            console.log('window객체.addEventListener():load이벤트 두번째 발생');
+        });
+        window.addEventListener('DOMContentLoaded',function(){//DOM트리만 로드됐을때, 시기상으로 먼저라 맨 위에 출력됨
+            //민감한 반응(ex.html요소얻기, 이미지쓸때?)에는 이걸 쓰는게 좋음
+            console.log('window객체.addEventListener():DOMContentLoaded이벤트 먼저 발생');
+            /*
+                이벤트 핸들러(콜백함수)의 이벤트 취소 방법 2가지:
+                1.return false; 2.이벤트객체.preventDefault()
+                form태그의 onsubmit="return fnSubmit()": 2가지 방법 모두 취소처리됨
+                form객체.onsubmit=콜백함수: 2가지 방법 모두 취소 처리 됨
+                form객체.addEventListener(): 2번인 이벤트객체.preventDefault()만 적용됨
+            */
+            //DOM어쩌구 로드돼야해서 여기다가 밑에 코드 작성
+            console.log(document.forms);//form요소 담는 유사배열, 지금 form태그 1개 있음
+            var form=document.forms[0];//당연히 document.querySelector('form')로 form해도 얻어옴
+            //form.onsubmit=fnSubmit;//속성에 만들어놓은 함수에서 ()제외 함수명만 또는 함수표현식 써야함, ()에 인자 쓰면 왼쪽에 저장됨
+            //인자전달 x, 이벤트객체가 알아서 전달, 대신 이럴 때는 2번째 인자인 param은 전달 불가, 그래서 undefined나옴
+            //근데 사실 인자 전달할 일 없음, 그냥 param 테스트용임
+            
+/*            form.onsubmit=function(e,param){//함수표현식 써보기
+                console.log('이벤트 객체:',e,typeof e,'파라미터:',param);//여기는 e괜찮, 그냥 이벤트 객체 
+                var text=document.querySelector('[name=txt]');
+                if(text.value.trim().length===0){//제대로 입력시 전송됨
+                    alert('입력하세요');
+                    text.focus();
+                    return false;//이벤트 취소방법1
+                    //e.preventDefault();//이벤트 취소방법2
+                }
+            };*/
+            //또 다른 방법(이때는 반드시 함수에 preventDefault로 이벤트 취소해야만 적용됨)
+            //form.addEventListener('submit',fnSubmit);//이때도 함수명만 전달,
+            form.addEventListener('submit',function(e){//익명함수로 전달하는 방법도 가능, 이벤트 취소하려면 이벤트 객체(e) 필수
+                var text=document.querySelector('[name=txt]');
+                if(text.value.trim().length===0){//제대로 입력시 전송됨
+                    console.log('폼에 submit이벤트 발생')
+                    alert('입력하세요');
+                    text.focus();
+                    e.preventDefault();//이벤트 취소방법2(이것만 됨)
+                }
+            });
+            //폼의 모든 하위요소 및 폼 영역 클릭시(노란배경) 클릭이벤트 발생을 확인하는 것
+            form.addEventListener('click',function(e){
+                console.log('폼에 click이벤트 발생:',e.target.nodeName)//이게 먼저 콘솔에 뜸, 클릭이벤트가 먼저 발생하기때문
+                e.preventDefault();//이거하면 submit도 안됨, 당연히 클릭이 돼야 submit이 되는 것
+            });
+            //<input type="submit">버튼 클릭시 발생하는 이벤트
+            //1.CLICK 이벤트 먼저 발생 후
+            //2.SUBMIT 이벤트 발생
+            //따라서 CLICK이벤트를 막으면 SUBMIT 이벤트는 일어나지 않는다
+            //근데 유효성 검사 시 CLICK을 막지는 않음, SUBMIT을 막아야함, 아래 딸린 RESET 같은 것도 동시에 안되니까
+        
+            //클릭이벤트 예제
+            var h2=document.querySelector('#h2');
+            h2.onclick= ()=>console.log('H2영역에 CLICK이벤트 발생:',h2.textContent); 
+            //태그에 있는 속성 onclick, 99%자스에도 있음
+            //h2영역 클릭하면 h2태그로 둘러싸인 텍스트도 가져오도록함
+
+        
+        
+        });
+
+
+
+        
+        function fnSubmit(e,param){//이벤트 핸들러(콜백함수), 이벤트 발생시 실행되는 함수, 이전까지는 e 필요없어서 안씀, 이번엔 씀
+            //e에는 모든 이벤트관련 정보가 저장,전달됨
+            //onsubmit="return fnSubmit(event); event 키워드 전달시 이벤트객체 나옴
+            //태그속성으로 이벤트 핸들러 함수에 이벤트 객체를 전달시 반드시 첫번째 인자로 event키워드를 써야한다
+            console.log('이벤트 객체:',e,typeof e,'파라미터:',param);//여기는 e괜찮, 그냥 이벤트 객체      
+            
+            var text=document.querySelector('[name=txt]');
+            if(text.value.trim().length===0){//제대로 입력시 전송됨
+                alert('입력하세요');
+                text.focus();
+                //return false;//이벤트 취소방법1
+                e.preventDefault();//이벤트 취소방법2
+            }
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+    <!--방법1]태그에 속성으로 on계열 부착(잘 안씀, 태그는 화면을 꾸미는 요소이므로, 자스코드랑 유지보수 편의성 위해 분리필요)-->
+    <!--load이벤트 발생시 = 이하 자스코드 발생, alert랑 콘솔 출력-->
+    
+    <!--<body onload="alert('body태그:load이벤트 발생');console.log('body태그:load이벤트 발생');" >-->
+    
+    <body>
+        
+        <h2 id="h2" onclick="alert('h2태그영역에 클릭이벤트 발생');" >이벤트 기초</h2>
+        
+        <!--<h2 id="h2">이벤트 기초</h2>-->
+
+        <fieldset>
+            <legend>submit,reset이벤트 및 이벤트 막기</legend>
+            
+            <!--방법1]태그안에 쓰는 방법-->
+            <!--<form action="https://www.naver.com" onsubmit="return fnSubmit(event,100);">--><!--문자열이라 ''로 감싸줘야 에러안남-->
+                
+            <form action="https://www.naver.com" onreset="return false;" style="background-color: yellow;">
+            <!--폼의 모든 하위요소 및 폼영역 클릭하면 다 클릭이벤트 나옴-->
+            <!--return false하면 입력한거 취소눌러도 안사라짐-->
+            <!--onsubmit="alert('이벤트 취소'); return false;"이거 쓰면 naver이동 x-->
+                <input type="text" name="txt" />
+                <input type="submit" value="전송" />
+                <!--이벤트는 클릭?, 근데 서브밋이벤트로 진행, 타입 서브밋이니까, 액션에 지정한 곳으로 데이터 전송, 제출, 페이지이동함-->
+                <input type="image"  src="../Images/button.jpg" alt="image버튼" style="margin-bottom:-6px"/>
+                <!--얘도 클릭이지만 submit이 기본기능-->
+                <input type="reset" value="취소" /><!--얘는 폼태그로 감싼 입력요소를 reset하는게 기본기능-->
+                <!--여튼 브라우저에서는 다 클릭이벤트지만, input type="~~"에 따라 실제 이벤트는 다르다-->
+            </form>
+        </fieldset>
+
+        <h2>네이트로 이동 막기</h2>
+        <a href="https://www.nate.com" onclick="event.preventDefault()">네이트로 이동</a>
+        <!--a태그는 이벤트가 클릭이벤트, 인풋타임서브밋 아님 -->
+        <!--태그에 preventDefault하면 기본기능을 막음, 이벤트 취소랑 결국 동의어-->
+
+        <script>
+        function fnClick(e,obj){
+            console.log('e:',e);
+            console.log('obj:',obj);
+            //1) on이벤트명="자바스크립트 코드 안에서 this", 이때 this는 자기자신의 태그 즉 이벤트가 발생한 객체를 가르킨다.
+            //2) javascript:함수(this), 이때 this는 자기자신의 태그가 아니고 window객체다.
+            if(obj.href !== undefined) console.log(obj.href);
+            //window객체에는 href없음, a태그에만 href있음, 콘솔 출력되는 풀URL 끝에 #붙어서 나옴
+        }
+        </script>
+        <fieldset>
+            <legend>click이벤트</legend>
+            태그의 onclick 속성으로 이벤트 처리
+            <div style="border:1px red solid" onclick="alert('DIV영역에 클릭이벤트 발생');">DIV클릭 이벤트</div>
+            <a href="#" onclick="alert('a태그영역에 click이벤트 발생1');fnClick(event,this);" style="background-color:red;" >A클릭 이벤트(#)</a>
+            <!--페이지 안에서 이동시 # 줌, 지금 this는 a요소를 의미, (클릭이벤트 발생시 fnclick 함수 호출함)
+                onclick 후 진행되는게 alert라 핸들러라고함, 핸들러 안의 this는 이벤트 발생한 자신 객체 의미
+                이렇게하면 자신 태그를 또 얻어올 필요 없으니까 편하대-->
+            <a href="javascript:alert('a태그영역에 click이벤트 발생2');fnClick(event,this);" style="background-color:green;">A클릭 이벤트(javascript:함수())</a>
+            <!--클릭이벤트 발생시 alert진행, 위랑 alert발생은 동일, 근데 지금 this는 window임
+                onclick으로 안준건 그냥 자스함수임, 그래서 지금 this는 window인 것
+                결론: 근데 이건 위에 fnclick 해보면 이벤트 전달이 안됨, 위에 onclick 쓰는게 나음
+                위에는 pointerEvent라고 이벤트 잘 나오는데, 아래꺼는 e: undefined 나옴-->
+            <a href="https://www.nate.com">순수 a태그만</a><!--의미X, 그냥 클릭하면 이동-->
+        </fieldset>
+        <script>
+        /*
+            선택된 인덱스 얻기]
+            -select객체.selectedIndex
+            -인덱스는 0부터 시작(아래 학력 선택 -> 이게 0번 인덱스)
+
+            select하위태그인 option(목록)의 개수 얻기]
+            -select객체.options로 얻는다
+            select객체.options.length
+
+            선택한 값 얻기]즉 option태그의 value속성에 지정한 값
+                    방법1]select객체.value(단일 선택)
+                    방법2]for문을 돌면서 selected속성 이용(다중선택)
+
+            option태그 사이의 텍스트 얻기]
+            options[인덱스].text로 혹은
+            select객체[select객체.selectedIndex].text
+            */
+            function fnSelect(obj){//fnselect(this) -> this는 select 자신태그 의미
+                console.log('선택한 항목의 인덱스:',obj.selectedIndex);
+                console.log(obj.options);//HTMLOptionsCollection(유사배열)
+                console.log('총 아이템 수:',obj.options.length,'또는:',obj.length);//둘 다 가능한 방법
+                console.log('선택한 값:',obj.options[obj.selectedIndex].value,'또는:',obj.value);//밸류 가져옴, 둘다 가능
+                //멀티플(다중선택) 모드일때는 여러 인덱스 선택 중 첫번째 인덱스만 위에 값으로 출력된다
+                //이를 해결하려면 반복문 돌아야함, 그래서 필요한게 options!
+                for(var i=0;i<obj.length;i++){
+                    if(obj.options[i].selected){//option에 selected속성 있었음
+                        console.log('다중선택한 값:',obj.options[i].value);
+                    }
+                }
+                //브라우저에 보여지는 텍스트 얻기(text속성이 있대)
+                console.log('텍스트 얻기1:',obj.options[obj.selectedIndex].text);
+                console.log('텍스트 얻기2:',obj.options[obj.selectedIndex].textContent);
+                console.log('텍스트 얻기3:',obj.options[obj.selectedIndex].innerHTML);
+                console.log('텍스트 얻기4:',obj.options[obj.selectedIndex].innerText);
+            }
+            function isSelect(){//이건 this주면 h2임, select 직접 얻어와야함
+                var select=document.querySelector('select');//얻어옴
+                if(select.selectedIndex===0){//선택된 인덱스가 0 이면 학력선택 안한것
+                    alert('학력을 선택하세요');
+                    select.focus();
+                }
+
+            }
+
+        </script>
+        <h2 onclick="isSelect();">선택 여부 알아내기</h2>
+        <fieldset>
+            <legend>change이벤트</legend>
+            <!--클릭이벤트 처리용, 체인지이벤트 처리용, 이벤트 리스너 2개 달수도 있음(체인지이벤트가 더 먼저 실행됨)-->
+            <select multiple size="3" onclick="console.log('click이벤트 발생')" 
+                onchange="console.log('change이벤트 발생');fnSelect(this);">
+                <option value="">학력 선택</option>
+                <option value="초딩">초등학교</option>
+                <option value="중딩">중학교</option>
+                <option value="고딩">고등학교</option>
+                <option value="대딩">대학교</option>
+            </select>
+            <input type="radio" name="gender" value="남자" onchange="console.log('change이벤트 발생');" onclick="console.log('click이벤트 발생');fnChoice(this)"/>남자
+            <input type="radio" name="gender" value="여자" onchange="console.log('change이벤트 발생');" onclick="console.log('click이벤트 발생');fnChoice(this)"/>여자
+            <input type="checkbox" name="inter" value="정치" onchange="console.log('change이벤트 발생');" onclick="console.log('click이벤트 발생');fnChoice(this)"/>정치
+            <input type="checkbox" name="inter" value="경제" onchange="console.log('change이벤트 발생');" onclick="console.log('click이벤트 발생');fnChoice(this)"/>경제
+            <input type="checkbox" name="inter" value="스포츠" onchange="console.log('change이벤트 발생');" onclick="console.log('click이벤트 발생');fnChoice(this)"/>스포츠
+        </fieldset>
+        <script>
+            //fnChoice(this) -> 클릭이 체인지보다 먼저 발생하므로 클릭에 함수 달아놓음
+            function fnChoice(obj){
+                console.log(obj.type);
+                if(obj.type==='radio'){
+                    console.log(obj.value,'선택');
+                }
+                else{
+                    if(obj.checked) console.log(obj.value,'선택');
+                    else console.log(obj.value,'해제');
+                }
+            }
+        </script>
+</body>
+</html>

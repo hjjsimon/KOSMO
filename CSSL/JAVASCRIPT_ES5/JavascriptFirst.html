@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavascriptFirst.html</title>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> JQUERY? 무슨 CDN에서 가져옴, 이건 순차실행이라 행의 위치가 매우 중요함-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min2.js"></script>이건 임포트하는것, 장문의 코딩을 한줄로 추가하는셈-->
+    <script>//script 만나면 자바스크립트로 처리함(스크립트 안에서는 //주석가능), 자바스크립트 코드는 <script>사이에 씀
+        alert("자바스크립트 함수입니다 ");//사용자가 코드 누르기 전까지 이후로 블락됨, 그래서 자바스크립트 첫시간 안보임
+        /* Client-Side Script Language(SCCL ex.HTML,CSS,JAVASCRIPT,JQUERY 등)는 웹브라우저에(웹클라이언트 프로그램) 의해 순차적으로 해석되는(Interpretor방식) 언어다.*/
+        //<h2> 이런건 자바스크립트 코드x, HTML코드라 body안에 넣어야함</h2>
+        console.log('자스에러 이후의 자스 출력문');//에러이후 자스코드는 실행 안됨
+    </script>
+</head>
+<body>
+    <h2>자바스크립트 첫시간</h2><!--W3스쿨에서 공부해도 됨-->
+    alert("자바스크립트 함수입니다");<!--이건 함수로 인식x, <script>안에 넣어야 함수임-->
+    <script>
+        //alert("자바스크립트 함수입니다 ");//여기 주석을 뺴면 확인 전에 자바스크립트 첫시간 보여야함, 파이어폭스는 되는데 크롬은 안됨
+    </script>
+</body>
+</html>

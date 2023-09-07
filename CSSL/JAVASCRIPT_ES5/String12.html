@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String12.html</title>
+    <script>
+        var str1="안녕 자바스크립트!";//자스는 문자열 리터럴 표현시 '',"" 둘다됨(String객체 생성-> 유사배열!)
+        var str2="Hello Javascript!";
+        var str3='Hi JS!';
+        var str4=new String('Hi JS!');//이번엔 생성자함수 사용,위3개는 string타입,new로 object객체생성(String메소드 쓰는건 동일)
+                                        //자료형 첫 대문자시작은 생성자함수 의미 ex. String()
+
+        console.log(typeof str1, typeof str4);//string object
+        console.log('%O',str1);//안녕 자바스크립트! -> 바로 출력, 오버라이딩 된 것
+        console.log('%O',str4);//String, 배열처럼 0번부터 5번까지 띄어쓰기 포함 한글자씩 들어감, 
+                               //prototype: String(String은 다시 prototype:Object상속)
+                               //index로 접근해서 문자열을 구성하는 하나의 문자를 추출가능(length도 있음)
+        console.log('%o',str1);//'안녕 자바스크립트!'
+        console.log('%o',str4);//String {'Hi JS!'}
+
+        console.log(str1.toString());//안녕 자바스크립트!
+        console.log(str4.toString());//Hi JS!
+
+        console.log(str1 instanceof String);//false, 문자열 리터럴로 String객체 생성한건 안됨(이걸로 String판단하면 안됨,string맞음)
+        console.log(str4 instanceof String);//true, String생성자함수로 인스턴스화해서 true
+
+        //자바랑 다르게 바로 인덱스로 문자열 하나를 가져올 수 있음
+        //자바는 String객체.toCharArray()호출 시 char[] 반환
+        //index로 접근해서 문자열을 구성하는 하나의 문자를 추출가능(length도 있음) -> 유사배열!!!!
+        console.log(str1[0]);//안
+        var str1Arr=Array.from(str1);//유사배열을 배열로 변경
+        str1Arr.forEach((item,index)=>{
+            console.log('%d번째 요소:%s',index,item);
+        });
+
+        //1]문자열 길이 얻기-length속성
+        console.log('str1의 길이:',str1.length);//10, 속성은 직육면체
+        console.log('str4의 길이:',str4.length);//6
+
+        //2]문자열 객체의 함수를 이용해서 텍스트 꾸미기(이전에 태그로 하던것)
+        document.write('<h2>함수로 텍스트 꾸미기</h2>');//브라우저 출력은 document.write();
+        console.log('볼드체(함수):',str1.bold());//str1 문자열을 <b>태그로 감쌈
+        document.write('볼드체(함수):',str1.bold());
+        document.write('</br>볼드체(태그):<b>',str1+'</b>');//함수모르면 이렇게 하면됨(물론 함수가 깔끔)
+        document.write('</br>이탤릭체(함수):',str1.italics());
+        document.write('</br>이탤릭체(태그):<i>',str1+'</i>');
+        document.write('</br>가운데 선긋기(함수):',str1.strike());
+        document.write('</br>가운데 선긋기(태그):<strike>',str1+'</strike>');
+        var url='https://www.nate.com';
+        console.log('링크걸기(함수):'+str1.link(url))
+        document.write('</br>링크걸기(함수):',str1.link(url));
+        document.write('</br>가운데 선긋기(태그):<a href='+url+'>',str1+'</a>');//바깥에 싱글이니까 내부는 '++'해야함
+
+        //3]대소문자 변경
+        console.log('대문자로 변경:',str2.toLocaleUpperCase());
+        console.log('소문자로 변경:',str2.toLocaleLowerCase());
+        
+        //4]특정위치(인덱스)의 하나의 문자 얻어오기
+        //charAt(인덱스):인덱스는 0시작
+        console.log(str3.charAt(3));//J
+        console.log('자바스크립트'.charAt(3));//크
+
+        //5]문자열에서 특정 문자열 얻어오기1
+        //subString(시작인덱스,끝인덱스): 시작~끝인덱스-1 까지 추출
+        console.log('ACADEMY'.substring(3,7));//3~6까지 DEMY추출
+
+        //5-1]문자열에서 특정 문자열 얻어오기2
+        //subStr(시작인덱스,문자열갯수)
+        console.log('ACADEMY'.substr(3,4));//3부터 4개 DEMY추출
+
+        //6]특정위치의 아스키코드값 가져오기 charCodeAt(인덱스)
+        //자바의 codePointAt(index)동일, <-이건 자스도 있음
+        console.log('ACADEMY'.charCodeAt(3));//68(A가 65)
+        console.log('ACADEMY'.codePointAt(3));
+
+        //7]특정 코드값을 문자로 변환(클래스메소드)
+        //위에는 다 인스턴스형 메소드
+        //지금은 생성자(String)로 접근, 정적메소드
+        console.log(String.fromCharCode(68));
+        console.log(String.fromCodePoint(68));
+
+        /*
+        ※String객체는 문자 하나 하나가 배열형태 처럼로 저장됨.
+        예]var str="AB가C";
+        str[0]="A"
+        str[1]="B"
+        str[2]="가"
+        str[3]="C" 형태로 저장됨.
+        var str="AB가C"; 는  1]그리고 2]처럼 접근할수 있다 즉 유사배열이다
+        //1]
+        var str= new Array(4);
+        str[0]="A"
+        str[1]="B"
+        str[2]="가"
+        str[3]="C"
+        //2]
+        var str = ["A","B","가","C"];
+        */
+        for(var i=0;i<str1.length;i++){
+            console.log('%d번째 요소:%s',i,str1[i]);
+        }
+
+        //8] 구분자로 문자열 분리-배열반환
+        //  split(구분자[정규표현식][,limit]) -> 구분자 또는 정규표현식 쓰면 됨
+        //  만약, 해당 구분자가 없으면 무조건 배열크기가 1인 배열에 문자열 전체가 저장(자바동일)
+        var tel='010.1234.5678';
+        var tel_='010A1234B5678';
+        //var arr=tel.split('.');// .을 구분자로 사용함(정규표현식으로 처리한게 아닌것,임의의 한 문자열이 '.')
+        //var arr=tel.split('.',2);//배열크기 2로 요소수 제한
+        var arr=tel.split(/./g);//자스에서 정규표현식은 //안에 넣어줘야함, 지금 . 이 임의의 한문자 의미하게됨
+                                //g는 모든 문자열, 의미 global(g생략시 일치하는 첫번째만 가져옴)
+                                //임의의 문자 1개 기준으로 split하므로
+                                //0이전에 하나도 없으니 ''빈문자열 들어감, 
+        var arr_=tel_.split(/[A-B]/g);
+        //var arr=tel.split(/\./g);//tel.split('.')과 동일 ->역슬래시 하면 '.' 동일한데 귀찮게 쓸일없음(임의의 한문자 아님 이스케이프처리)
+        console.log(arr);//(14) ['', '', '', '', '', '', '', '', '', '', '', '', '', '']
+        console.log(arr_);//(3) ['010', '1234', '5678']
+
+        //9]특정 문자열의 인덱스값 알아내기
+        //indexOf("찾는 문자열"):왼쪽부터 찾기시작, 찾는 문자열 존재시 인덱스 반환, 없으면 -1반환
+        console.log('ACADEMY'.indexOf('A'));//0, 0번방
+        console.log('ACADEMY'.indexOf('CAD'));//1, 1번방
+        console.log('ACADEMY'.indexOf('cad'));//-1, 없음
+
+        //9-1]
+        //lastIndexOf("문자열"): 오른쪽부터 찾기시작, indexOf와 반환값 동일
+        console.log('ACADEMY'.lastIndexOf('A'));//2, 2번방
+        console.log('ACADEMY'.lastIndexOf('CAD'));//1, 1번방
+        console.log('ACADEMY'.lastIndexOf('cad'));//-1, 없음
+
+        //10] 양쪽 공백제거:trim()
+        console.log('X'+'   H   E   Y    '+'Y');//X   H   E   Y    Y
+        console.log('X'+'   H   E   Y    '.trim()+'Y');//XH   E   YY
+
+        /*
+            문]
+            문자열을 매개변수로 받는 함수로,
+            받은 인자가 숫자형식이 아니면 false반환
+            숫자형식이면 true를 반환하는 함수를 정의해라.(isNaN말고)
+            그리고 호출해서 결과 확인해라...   
+            //"12A"->false  ,"가100"->false, "99"->true      
+        
+            자스에서 비교시
+            1.숫자와 숫자형식의 문자열(''로 감쌈) =>숫자형식의 문자열이 숫자로 변환
+            '100' >= 99 : 100 >= 99 :true
+            2.슷자형식 문자열 과 숫자형식 문자열 => 문자열 비교할때 처럼 한자씩 차례로 코드값 비교
+            '100' >='99' :문자열 비교(1=49,9=58) :false
+            3.숫자형식이 아닌 문자열과 숫자 :무조건 false
+            '가' > 99 : false(자바는 44032로 true나옴)
+            '가' > '99' : true(44032랑 첫문자 9=58 비교해서 나온것)
+        */
+        var isNumber=function(str){
+            //방법1]자스함수(string객체함수) 미사용
+            //위의 3번 숫자와 문자열 비교(모든 하나의 숫자는 0과 9사이이다)
+/*          for(var i=0;i<str.length;i++){
+                //한자한자 따져서 숫자 아니면 false 반환
+                if(!(str[i]>=0 && str[i]<=9)){ return false;
+                    //문자열은 str[]배열에 한글자씩 저장, 숫자0~9에 포함되는지 확인
+                    //ex. 359 -> 3부터 가져와서 확인, 모두 숫자니까 true
+                    //ex. 10A -> A되면 false나옴
+                }
+            }
+          //방법2]자스함수 사용
+            for(var i=0;i<str.length;i++){
+                if(!(str[i].charCodeAt(0)>='0'.charCodeAt(0) && str[i].charCodeAt(0)<='9'.charCodeAt(0))){
+                    //특정 인덱스의 코드값을 가져옴, 지금은 둘 다 한글자 가져오는거니까 무조건 인덱스 0
+                    return false;
+                }
+            }
+*/            //방법3]자스함수 사용
+            for(var i=0;i<str.length;i++){
+                if(!(str.charAt(i)>=0 && str.charAt(i)<=9)){
+                    return false;
+                }
+            }
+            return true;
+        }
+        console.log(isNumber('123'))//true
+        console.log(isNumber('12A'))//false
+        /*
+            문]배열을 매개변수로 받아서 가운데 도메인만 얻어서
+            출력하는 함수를 정의하고 함수를 호출하자.
+            아래 이메일 주소에서 @와 .사이에 있는 값만 얻어 오자
+        */
+        var emails=['kim@naver.com','park@cyworld.com','lee@nate.com'];   
+        
+        function print(emails){
+//          emails.forEach(function(item){
+//              console.log(item.substring(item.indexOf('@')+1,item.lastIndexOf(".")));//@위치이후 1칸부터 가져옴
+//          });
+            //정규표현식 사용
+            emails.forEach(function(item){
+                console.log(item.match(/\w+@(\w+)\.\w+/)[1]);//matcher반환, 1번방 바로 출력(0번은 전체문자열)
+            })
+        }
+        print(emails);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventBubbling16.html</title>
+    <style>
+        .small{
+          width:100px;
+          height:100px;
+        }
+        .big{
+          width:100%;
+          height:300px
+        }
+    </style>
+    <script>
+        //이벤트 캡처링 및 버블링 테스트
+        //이벤트 버블링: 이벤트가 자식에서 부모로 연달아 전파되는 기본방식.(최상위 부모까지)
+        //이벤트 캡처링: 이벤트가 부모에서 자식으로 전파되는 방식
+        //이벤트 캡처링 방식을 사용하려면 addEventListener("이벤트명", 콜백함수, useCapture);
+        //useCapture를 true 로 설정하면 해당 객체에는 이벤트 캡처링방식으로 이벤트가 전파된다
+        //즉 이벤트 버블링과 캡처링은 조상-자손 관계를 가진 두 개의 요소가 동일한
+        //이벤트에 대한 리스너를 가지고 있을 때, 두 요소에 이벤트가 전파되는 방법을 말한다.
+        //이벤트 전파 모드에 따라 두 요소 중 이벤트를 먼저 수신하는 쪽이 달라진다
+        //https://www.w3.org/TR/DOM-Level-3-Events/#event-flow
+
+/*        window.addEventListener('DOMContentLoaded',function(){
+            var body=document.querySelector('body');//바디 얻어옴
+            var fieldset=document.querySelector('fieldset');//필드셋 얻어옴(그냥 쓰면 첫번째 가져옴)
+            var img=document.querySelector('img');
+
+            window.addEventListener('click',function(){//DOM로디드+click 이런식으로 윈도우에 2개 이벤트 걺
+                console.log('Window에 클릭이벤트 발생');
+            },true);
+            document.addEventListener('click',function(){
+                console.log('Document에 클릭이벤트 발생');
+            },true);
+            body.addEventListener('click',function(){
+                console.log('body에 클릭이벤트 발생');
+            },true);
+            fieldset.addEventListener('click',function(){
+                console.log('fieldset에 클릭이벤트 발생');
+            },true); 
+            img.addEventListener('click',function(){
+                console.log('img에 클릭이벤트 발생');
+            },true);
+
+        });*/
+        //img에 클릭이벤트 발생fieldset에 클릭이벤트 발생body에 클릭이벤트 발생Document에 클릭이벤트 발생Window에 클릭이벤트 발생
+        //자식->부모로 출력됨
+        //true하면 캡쳐링이라 (없으면 버블링) 부모->자식으로 넘어감 즉 위의 반대로 출력
+
+        //1)이벤트 버블링 미적용: 순회하면서 모든 img요소에 click이벤트 리스너 부착해야함, 비효율적
+        //2)이벤트 버블링 적용: 모든 img요소에 바인딩할 필요없음, 부모요소에 이벤트 한번만 바인딩하면 됨
+        //ex. 자식->부모 이벤트 전달시, 이미지 100개에 리스너 부착할걸, 부모에 리스너 1개 부착해서, 부모에 이벤트 도달시 인식가능
+        
+        window.addEventListener('DOMContentLoaded',function(){
+            //작은 이미지 클릭시 큰 이미지로 교체
+            var big=document.querySelector('.big');
+ /*           //이벤트 버블링 미적용시
+            var smalls=document.querySelectorAll('.small');
+            //순회하면서 모든 이미지에 이벤트 부착
+            smalls.forEach(function(item){//item(=이미지) 하나씩꺼내서 이벤트 걺, 비효율 구림
+                item.onclick=function(){
+                    console.log(item.src);
+                    //작은 이미지 클릭시 큰 이미지를 작은 이미지로 교체
+                    big.src=item.src;
+                };
+            });*/
+            
+            //이벤트 버블링 적용시
+            var fieldset=document.querySelector('fieldset');
+            fieldset.onclick=function(e){//이때는 이벤트객체 반드시 필요
+                console.log('%O:',e.target);
+                console.log('e.target:',e.target);//이벤트시작점(=img, 이벤트 발생한 객체)
+                console.log('e.currentTarget:',e.currentTarget);//이벤트진행지점(=fieldset, 리스너가 부착된 객체)
+                console.log('e.target.nodeName:',e.target.nodeName);//노드명(=IMG, 대문자 태그명 나옴)
+                console.log('e.target.className:',e.target.className);//class만 쓰면 안됨, ES6에 추가된 키워드임
+
+                if(e.target.nodeName!=='IMG'||e.target.className!=='small') return; //img아니면 바로 빠져나감
+                big.src=e.target.src;
+            };
+            //버블링을 막아야되는 경우:
+            //요소들이 같은 부모를 공유하지만 각자 별개의 이벤트를 처리해야 하는 경우
+            //즉 버튼클릭시는 DIV의 배경색을 변경하고
+            //SPAN클릭시는 SPAN을 버튼으로 다시 버튼을 SPAN으로 변경하는 이벤트 처리를 하는 경우
+            //SPAN클릭시 부모인 FIELDSET에도 불필요하게 클릭 이벤트가 전달된다.
+
+            var fieldset2=document.querySelector('fieldset:nth-child(2)');
+            //console.log(fieldset2);//<fieldset>태그시작부터 끝까지 다 얻어옴, 이런거 확인해봐야함
+            var div=fieldset2.querySelector('.target');
+            var span=fieldset2.querySelector('span'); 
+            //버튼 클릭시 div의 배경색을 버튼의 텍스트로 변경
+            fieldset2.onclick=function(e){
+                console.log('fieldset에 클릭이벤트 발생');
+                if(e.target.nodeName!=='BUTTON') return;
+                console.log('e.target.textContent:',e.target.textContent);
+                div.style.backgroundColor=e.target.textContent;
+            }
+            
+            var toggle=false;
+            var span_=span;
+            span.onclick=function(e){
+                e.stopPropagation();//부모로 전파를 막음, span에만 클릭이벤트 발생
+                console.log('span에 클릭이벤트 발생')//span의 클릭이 fieldset으로 전파(둘 다 출력됨)
+                
+                var button=document.createElement('button');//버튼 하나 만듦
+                button.textContent=e.target.textContent;//e.target말고 span도됨
+                if(!toggle){
+                    button.onclick=span.onclick;//span눌렀지만 전파되어 위에 fieldset 어쩌구도 출력됨
+                    e.target.replaceWith(button);//span을 버튼으로 변경(string이나 node넣으래,만든 노드 넣음)
+                }
+                else{
+                    e.target.replaceWith(span_);//다시 버튼을 span으로 변경
+                }
+                toggle=!toggle;
+            };
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset style="background-color:yellow;">
+        <legend>이벤트 버블링을 이용한 이벤트 처리</legend>
+        <img src="../Images/1.jpg" alt="풍경 첫번째" class="small">
+        <img src="../Images/2.jpg" alt="풍경 두번째" class="small">
+        <img src="../Images/3.jpg" alt="풍경 세번째" class="small">
+        <img src="../Images/4.jpg" alt="풍경 네번째" class="small">
+        <hr/>
+        <img src="../Images/1.jpg" alt="큰 풍경" class="big">
+    </fieldset>
+    <fieldset>
+        <legend>이벤트 버블링 막기 즉 부모로 전파되는 이벤트 막기</legend>
+        <button>#FF0000</button>
+        <button>#00FF00</button>
+        <button>#0000FF</button>
+        <button>#000000</button>
+        <span>REPLACE</span>
+        <hr/>
+        <div class="target" style="width:100px;height:100px;background-color:#000000;"></div>
+    </fieldset>
+</body>
+</html>

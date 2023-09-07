@@ -1,0 +1,45 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 테마가 Material계열일때 activity_main.xml에서
+         버튼 백그라운드로 색상 설정시 버튼은 백그라운드가 적용이 안된다
+         즉 Material계열 테마는
+         Button 자체적으로 별도의 background가 적용되어 있어서 바꿀 수 없다
+         아래 두 가지 설정으로 배경색을 설정 할 수 있다
+         backgroundTint로 색상 설정
+         backgroundTintMode로 add 설정
+         -->
+
+    <!-- Base application theme. -->
+    <style name="Base.Theme.StyleTheme08" parent="Theme.Material3.DayNight.NoActionBar">
+
+
+        <!-- Customize your light theme here. -->
+        <!--colorPrimary:액션바 혹은 버튼등의 배경색 -->
+        <item name="colorPrimary">@color/my_light_primary</item>
+        <!-- 버튼의 배경색 설정:적용하려면 위의 테마를 Theme.AppCompat.DayNight.NoActionBar로 변경-->
+        <item name="colorButtonNormal">#00FF00</item>
+        <!--위젯의 텍스트 색상 설정-->
+        <item name="android:textColor">#20A397</item>
+    </style>
+
+    <!--나만의 스타일을 테마로 적용하는 방법
+        1. Androidmanifest.xml의 application요소의 theme속성 변경
+        2. 자바코드로 변경 :setTheme(테마 리소스 아이디)
+    -->
+
+    <style name="Theme.StyleTheme08" parent="Base.Theme.StyleTheme08" />
+    <!--나만의 스타일 만들기-->
+    <style name="MyTheme.StyleTheme08" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!--앱의 모든 글자 색-->
+        <item name="android:textColor">#C55252</item>
+        <!--배경색-->
+        <item name="android:background">#53532A</item>
+        <!--글자 크기-->
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!--내가만든 스타일 상속 및 오버라이딩-->
+    <style name="MyTheme.Base" parent="MyTheme.StyleTheme08">
+        <!--글자 크기 오버라이딩-->
+        <item name="android:textSize">25sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,484 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<jsp:include page="/WEB-INF/views/template/Top.jsp"/><!-- webapp가 루트 -->
+    <div class="container" style="margin-top:50px">
+        <div class="jumbotron bg-info">
+            <h1>Spring Framework <small>jQuery Ajax</small></h1> 
+        </div><!--jumbotron-->
+        <fieldset class="form-group border p-3">
+        	<legend class="w-auto px-3">Ajax(Asynchronous Javascript And Xml)</legend>
+        	<!--
+			    ajax로 서버에 요청시에는 form태그가 의미 없다
+			    (form의 서브밋으로 하는게 아니라 자스로 보내는 처리하기 때문 ,자바스크립트 객체인 XMLHttpRequest가 서버에 요청하기 때문에).
+			    단, 전송할 데이타가 많을시에는 form태그 추가시  유리함.
+		    -->
+			<form id="frm">
+				아이디 <input type="text" name="id" />
+				비빌번호 <input type="password" name="pwd" />
+			</form>
+			<ul style="list-style-type: upper-roman;">
+				<li><input type="button" id="btnNoAjax" value="회원여부(AJAX미사용-HTML페이지를 받는다)" /></li>
+				<!--
+				   Spring:반환타입을 void로 하거나
+				          반환타입을 String으로하고 @ResponseBody어노테이션 사용
+				-->
+				<li><a href="#" id="btnAjaxText">회원여부(AJAX사용-데이타를 TEXT로 응답받기)</a></li>
+				<li><input type="button" id="btnAjaxJson"
+					value="회원여부(AJAX사용-데이타를 JSON으로 응답받기)" /></li>
+			</ul>
+			<hr />
+			<span id="lblDisplay" style="color: red; font-size: 2em; font-weight: bold">${isLogin}</span>
+			<h3>JSON형식(JSON배열타입 [{},{},...] 객체를 가진 배열형태)</h3>
+			<button type="button" id="ajaxArray">목록가져오기</button>		
+			<br /> <span id="list"></span>
+			<h3>Ajax폴링을 이용한 실시간 업데이트 웹 구현</h3>
+			<!-- 일정간격으로 계속 요청을 보내서 실시간 새로고침을 시킴 -->
+			<button id="ajaxPolling">실시간 웹 업데이트</button>
+			<br /> <span id="polling"></span>
+			<!--
+			    문]
+			    닷넷과정 선택시  커리큘럼에
+			    <option value="d01">C#</option>
+			    <option value="d02">ASP.NET</option>
+			    <option value="d03">WPF4</option>
+			    사물인터넷과정 선택시  커리큘럼에
+			    <option value="i01">라즈베리 파이</option>
+			    <option value="i02">파이썬</option>
+			    이 보이도록 AJAX로구현하여라, 단, 서버에서 데이타를 JSON타입으로 받아라.(d01 같은 밸류가 키)
+		     -->
+			<h3>AJAX 실습하기</h3>
+			과정 <select id="course">
+					<option value="java">자바과정</option>
+					<option value="dotnet">닷넷과정</option>
+					<option value="iot">사물인터넷과정</option>
+				</select>
+			커리큘럼 <select id="curriculum">
+			<span id="selected">
+						<option value="j01">자바</option>
+						<option value="j02">JSP</option>
+						<option value="j03">스프링</option>
+			</span>
+					</select>
+			<h3>Jackson라이브러리 실습</h3>
+			<h4>자바객체를 JSON으로 변환</h4>
+			<h5>form태그로 요청</h5>
+			<!-- key=value로 데이타 보내기 -->
+			<form id="ajaxForm" action="<c:url value="/Ajax/form.do"/>"
+				method="post" enctype="application/x-www-form-urlencoded">
+				제목 <input type="text" name="title" /> 이름 <input type="text"
+					name="name" /> <br /> 내용<br />
+				<textarea rows="10" name="content"></textarea>
+				<input type="submit" value="확인" />
+			</form>
+			<button type="button" id="btnAjaxDataKeyValue">AJAX로 요청(데이타는 KEY=VALUE로 전송)</button>
+			<br />
+			<button type="button" id="btnAjaxDataJson">AJAX로 요청(데이타는 JSON형태의 문자열로 전송*중요*)</button>
+			<br />
+			<button type="button" id="btnAjaxDataArray">JSON형태의 배열로 받기</button>
+			<br />
+			<h4>JSON을 자바객체로 변환</h4>
+			<button type="button" id="btnJsonToJava">Map혹은 DTO으로 변환</button>
+			<br /> ${formRequestResult}
+			
+			<h4>Spring Rest API서버로 데이터 요청1(자체 REST API)</h4>
+			<button type="button" id="btnSelfRestApi">자체 REST API</button>
+			
+			<h4>Spring Rest API서버로 데이터 요청2(구글비젼 API-객체 탐지)</h4>
+			<button type="button" id="btnGoogleRestApi">이미지 비젼(구글-객체 탐지)</button>
+			
+			<h4>Spring Rest API서버로 데이터 요청3(구글비젼 API-OCR)</h4>
+			
+			<select id="apiserver">
+				<option value="spring">Spring RESTFul API</option>
+				<option> Flask RESTFul API</option>
+			</select>
+			
+			
+			<input type="file" name="files"/><br/>
+			<img id="preview" style="width:300px;height:200px"/>
+			
+			<h4>Flask RESTFul API서버로 데이터 요청</h4>
+			<button type="button" id="btnCrawling">스타벅스서울전체매장</button>
+	        	
+        </fieldset>        
+    </div><!--container-->
+<jsp:include page="/WEB-INF/views/template/Footer.jsp"/>
+<script>
+
+	//1] Ajax 미사용 - 위에 있는 버튼 submit 없음, 자스로 submit 처리하기
+	$('#btnNoAjax').click(function(){
+		//form태그의 action속성 및 method속성 설정
+		$('#frm').prop({
+			action:"<c:url value="/Ajax/NoAjax.do"/>",
+			method:'post'
+		})
+		//폼객체의 submit()함수로 서버로 전송
+		$('#frm').submit();
+		
+	});
+	/*
+	 2]AJAX사용-서버로 부터 응답은 TEXT로 받기(할일없음 다 JSON으로 받음)
+	
+	   ※POST방식으로 전송시 type:"post" 
+	   ※GET방식(디폴트)으로 전송시 type:"get"로
+	  
+	   contentType은 디폴트로 "application/x-www-form-urlencoded"
+	   즉 key=value쌍으로 전송한다
+	  
+	   ※전송할 데이타가 여러개인 경우 <form>태그로 감싸주고
+	  
+	   $("form선택자").serialize()함수 사용 시 아래처럼 키=밸류쌍으로 반환
+	   이름1=값1&이름2=값2&이름3=값3.....쿼리 스트링 형태(key=value쌍)로 반환
+	*/
+	$('#btnAjaxText').click(function(e){//이벤트객체 한번도 출력안해봄, 한번 해보기
+		console.log(e);
+//S.Event {originalEvent: PointerEvent, type: 'click', target: a#btnAjaxText, currentTarget: a#btnAjaxText, isDefaultPrevented: ƒ, …}
+//자바스크립트랑 똑같음, 속성 다양하게 있음
+		console.log('serialize()함수:',$('#frm').serialize());
+		//serialize()함수: id=KIM&pwd=1234
+		//KIM, 1234 입력시 위처럼 출력
+		
+		//ajax요청
+		$.ajax({
+			url:'<c:url value="/Ajax/AjaxText.do"/>',//요청할 서버의 URL주소
+			method: 'post',//데이터 전송방식, 디폴트 get, method 대신 type 가능, 대부분 method라함
+			dataType: 'text',//서버로부터 응답받을 데이터의 형식 설정
+			data:
+				//방법1] 쿼리스트링 문자열로 전송 - 데이터가 적을때
+				//'id='+$(':input[name=id]').val()+'&pwd='+$(':input[name=pwd]').val()
+				//방법2] $('form선택자').serialize()함수 사용 - 데이터가 많을때
+				//$('#frm').serialize()
+				//방법3] JSON데이터 형식으로 전달 - 데이터가 적을때
+				{id:$(':input[name=id]').val(), pwd:$(':input[name=pwd]').val()}//키, 밸류 쌍으로 바껴 전송됨
+			
+		}).done(function(data){//서버로부터 정상응답(200)을 받으면 호출되는 콜백함수(data: 서버로부터 받은 데이터)
+			//여기 콜백함수안에 받은 데이터를 특정요소에 표시해줄 코드 구현]	
+			//서버로부터 받은 데이터는 인자 매개변수로 전달됨(data)
+			console.log('서버로부터 받은 데이터:%s, 데이터 타입:%s',data,typeof data);
+			//서버로부터 받은 데이터:Y, 데이터 타입:string
+			//회원이면 Y, 아니면 N 나옴
+			//위에서 dataType text로 해서 String 타입이 되어 나옴
+			
+			//서버에서 "Y"혹은 "N"으로 응답할때
+			//방법1] AjaxController확인
+			//$('#lblDisplay').html(data==='Y'? $(':input[name=id]').val()+'님 방가방가': '회원이 아니야');
+			//방법2] 메시지로 응답하기
+			$('#lblDisplay').html(data);
+			
+		}).fail(function(error){//서버로부터 비정상 응답을 받았을때 호출되는 콜백함수 
+			console.log('%O',error);
+			console.log('에러:',error.responseText);
+		});
+	});
+	
+	//3]AJAX사용 - 하나의 JSON데이터로 응답받기
+	$('#btnAjaxJson').click(function(){
+		$.ajax({
+			url:'<c:url value="/Ajax/AjaxJson.do"/>',
+			method: 'post',
+			dataType: 'json',//json으로 받음
+			data: $('#frm').serialize() //
+		}).done(success)//아래에 success()함수로 따로 뺄 수도 있음, 호출이라 함수명만 넣기
+		.fail(function(req,status,error){
+			console.log('응답코드:%s,에러메세지:%s,error:%s,status:%s',req.status,req.responseText,error,status);
+		});
+	});
+	
+	//4]AJAX사용 - JSON 배열로 응답받기
+	$('#ajaxArray').click(function(){
+		$.ajax({
+			url:'<c:url value="/Ajax/AjaxJsonArray.do"/>',
+			datatype: 'json'
+		}).done(function(data){
+			successArray(data,'list');//두번째 인자는 데이터를 뿌려줄 요소의 id값
+		});
+	});	
+	
+	//5]AJAX 폴링 구현하기
+	$('#ajaxPolling').one('click',function(){//one(): 한번만 실행함
+		
+		window.setInterval(function(){
+			//일정 시간(0.5초)간격으로 서버에 요청
+			$.ajax({
+				url:'<c:url value="/Ajax/AjaxJsonArray.do"/>',
+				datatype: 'json'
+			}).done(function(data){
+				successArray(data,'polling');//두번째 인자는 데이터를 뿌려줄 요소의 id값
+			});
+		},500);//0.5초간격으로 서버에 요청
+		
+	});	
+	
+	//6]AJAX COURSE 문제 - 데이터만 받아 뿌려주므로 입력해놓은 값은 그대로 유지, 페이지는 유지됨 
+	$('#course').change(function(){//select태그는 change 이벤트
+	    //var selectedCourse = $(this).val(); // 선택된 과정의 값 가져오기
+	    $.ajax({
+	        url: '<c:url value="/Ajax/AjaxCourse.do"/>',
+	        dataType: 'json',
+	        //data: { course: selectedCourse } // 선택된 과정 값을 서버로 전달, 키값 course, 밸류는 선택한 것
+	        data: {course : $(this).val()}
+	    }).done(function(data){
+	    	console.log(data); //서버로부터 받은 데이터 찍어보는 검토, 찍어보니 json객체
+	        // 서버로부터 받아온 데이터로 커리큘럼 셀렉트 박스 업데이트
+	        var curriculumSelect = $('#curriculum');
+	        curriculumSelect.empty(); // 기존 옵션 제거
+	        // 받아온 데이터를 기반으로 옵션 추가
+	        $.each(data, function(key, value){
+	            curriculumSelect.append('<option value="' + key + '">' + value + '</option>');
+	        });
+	    });
+	});
+	
+	//7]AJAX로 요청(데이터는 KEY=VALUE로 전송)
+	$('#btnAjaxDataKeyValue').click(function(){
+		$.ajax({
+	        url: '<c:url value="/Ajax/AjaxDataKeyValue.do"/>',
+	        data: $('#ajaxForm').serialize(),
+	        dataType: 'json',
+	        method:'post'
+	    }).done(function(data){
+	    	console.log(data); 
+	    });
+	});
+	
+	//8]AJAX로 요청(데이타는 JSON으로 전송)
+	$('#btnAjaxDataJson').click(function(){
+		var json={title:$('input[name=title]').val(),name:$('input[name=name]').val(),content:$('textarea').val()};
+		$.ajax({
+			url:'<c:url value="/Ajax/AjaxDataJson.do"/>',
+			data:JSON.stringify(json),
+			dataType:'json',
+			method:'post',
+			contentType:'application/json'//내가 보내는게 json형태야~ 이건 json 보낼 때 필수!!!!!
+		}).done(function(data){
+			console.log(data);			
+		});
+	});
+	
+	//9]JSON형태의 배열로 받기
+	$('#btnAjaxDataArray').click(function(){
+		$.ajax({
+	        url: '<c:url value="/Ajax/AjaxDataArray.do"/>',
+	        dataType: 'json',
+	        method:'post'
+	    }).done(function(data){
+	    	console.log(data); 
+	    	/*
+		    	(2) [{…}, {…}]
+				0: {name: '김길동', id: 'KIM'}
+				1: {name: '이길동', id: 'LEE'}
+				length: 2
+				[[Prototype]]:Array(0)
+	    	*/
+	    });
+	});
+	
+	//10]Map 혹은 DTO로 변환
+	$('#btnJsonToJava').click(function(){
+		$.ajax({
+			url:'<c:url value="/Ajax/AjaxJsonToJava.do"/>',			
+			dataType:'json',
+			method:'post',			
+		}).done(function(data){
+			console.log(data);			
+		});
+	});
+	
+	//11]스프링 REST API서버로 자체 데이터 요청
+	$('#btnSelfRestApi').click(function(){
+		$.ajax({
+			url:"http://localhost:8080/users",
+			dataType:'json'
+		}).done(function(data){
+			console.log(data);
+		});
+	});
+	
+	//12]스프링 REST API서버로 요청(구글비전-객체탐지)
+	$('#btnGoogleRestApi').click(function(){
+		$.ajax({
+			url:"http://localhost:8080/vision/object-detect",//url 요청보내는 곳
+			dataType:'json',
+			method:"post",//추가)
+			contentType:"application/json",//추가)
+			data:JSON.stringify({"url":"https://cdn.imweb.me/upload/S201911194483dd7a28d0d/ea7d24ddebffb.png","type":"TEXT_DETECTION"})//추가)
+		}).done(function(data){
+			console.log(data);
+			var detect = data.responses[0]['localizedObjectAnnotations']//F12 콘솔보면 responses키로 배열1개 저장, 인덱스0
+			$.each(detect,function(index, item){
+				console.log("객체명:%s,정확도:%s",item.name,item.score*100+'%');
+			});
+		});
+	});
+	
+	//13]OCR
+	//MDN에 다 나와있음
+	//https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+	//https://developer.mozilla.org/ko/docs/Web/API/FormData/FormData
+	$('input[name=files]').change(function(e){
+		
+		///////////파이썬 하다가 추가 및 수정 부분
+		var apiserver = $('#apiserver').val();
+		if(apiserver==='spring'){
+			//스프링 API 서버에 이미지 파일 업로드 성공 후 BASE64인코딩 문자열 전송
+			var formData = new FormData();//AJAX로 파일 업로드시 사용
+			console.log("e.target.files:",e.target.files);//multiple안줘서 단일선택, 무조건 0번방, +e.target.files안먹음 , 필수
+			//append(첫번째인자 파라미터명, 두번째인자 File객체)
+			formData.append("files",e.target.files[0]);
+			$.ajax({
+				url:"http://localhost:8080/files",
+				processData:false,
+				contentType:false,
+				data:formData,
+				method:'post'
+			}).done(function(data){//파일업로드 완료시, 업로드 완료시 서버에서 Content-Type~~ map return함 RestApiController 7.파일 업로드 참고
+				console.log('업로드 성공:',data);//위 명령대로 서버에 업로드 성공시 아래 미리보기가 되는 것
+				//이미지 파일을 Base64로 인코딩
+				var reader = new FileReader();//자바는 클라이언트 스크립트, 사용자가 수정하면 안됨, 파일 write는 아예 없고 reader만 가능
+				
+				reader.onload = function(e){//로드시 콜백함수 호출
+					//이미지 미리보기
+					$('#preview').attr("src",e.target.result);
+					//Base64 인코딩
+					var base64 = e.target.result;
+					console.log(base64.split(",")[1]);//앞에 data:image/bmp;base64, 이후부터가 실제 base64 인코딩정보임
+					//스프링 레스트API 서버로 인코딩된 , 이후부터만 보냄
+					//여기서 Base64인코딩된 문자열을 스프링 REST API서버로 전송한다
+					$.ajax({
+						url:"http://localhost:8080/vision/ocr",//요청보냄
+					    method: 'POST', // HTTP 요청 메서드
+						data: 'base64='+encodeURIComponent(base64.split(",")[1]),//@RequestParam이니까 키=밸류, 파라미터명 base64(키)
+						dataType:'json'
+					}).done(function(data){
+						console.log('구글 서버로부터 받은 데이터:',data);
+						console.log(data['responses'][0]['fullTextAnnotation']['text'])
+					});
+				};
+				//미리보기용
+				reader.readAsDataURL(e.target.files[0]);
+			});
+		}
+		else{
+			//Flask API서버에 BASE64인코딩 문자열 전송
+			var reader = new FileReader();//이미지파일을 BASE64로 인코딩용
+			reader.onload = function(e) {
+				//이미지 미리보기
+				$('#preview').attr("src",e.target.result);
+				//Base64 인코딩
+				var base64 = e.target.result.split(",")[1];
+				console.log(base64);
+				//여기서 BASE64 인코딩된 문자열을 Flask REST API 서버로 전송한다
+				$.ajax({
+					url:"http://localhost:5000/ocr",
+				    method: 'POST',
+				    data:JSON.stringify({"base64":base64}),
+					contentType:"application/json",
+					dataType:'json'
+				}).done(function(data){
+					console.log('Flask 서버로부터 받은 데이터:',data);
+				});
+				
+			}
+			//미리보기용
+			reader.readAsDataURL(e.target.files[0]);
+		};
+			
+		
+	});
+	
+	// 7.10 추가 - 파이썬에서 false 에러 확인하기 위함
+	$('#btnCrawling').click(function(){
+		$.ajax({
+			url:"http://127.0.0.1:8282/coffees",
+		    method: 'POST',
+			dataType:'json'
+		}).done(function(data){
+			console.log('Flask 서버로부터 받은 데이터:',data);
+		});
+	})
+	
+	//<h4>Flask RESTFul API서버로 데이터 요청</h4>
+	//<button type="button" id="btnCrawling">스타벅스서울전체매장</button>
+	$('#btnCrawling').click(function(){
+		$(this).html('크롤링 중입니다...')
+		var this_ = $(this);
+		$.ajax({
+			 url:"http://127.0.0.1:5000//starbucks",
+			 dataType:'json'
+		 }).done(function(data){
+			$(this_).html('스타벅스서울전체매장')
+			 console.log('Flask RestFul 서버로부터 받은 데이타:',data);
+			 console.log('매장명:%s,위치:%s,연락처:%s',data[0]['store'],data[0]['loc'],data[0]['contact'])
+		 });		
+	});
+	
+	
+	
+	
+	
+	function success(data){
+		console.log('서버로부터 받은 데이터:%o, 데이터 타입:%s',data,typeof data);
+		//서버로부터 받은 데이터:{isLogin: '방가방가', id: 'KIM', pwd: '1234'}, 데이터 타입:object
+		//데이터에 키:밸류 나옴, 키로 접근해서 값 가져오면 됨
+		
+		/*
+		인자인 data는 서버측에서 받은 데이타(JSON형식)
+		data는 dataType:"json"로 지정했기때문에 JSON데이타 타입(object)임.
+		만약 dataType:"text"로 설정하면 data는 string객체 타입임.
+		
+		※string타입을 JSON타입으로 변환하려면
+		JSON.parse(string객체)
+		즉 data.키값 으로 value값을 꺼내온다.]
+		{isLogin:"메시지"}형태로 서버에서 응답
+		data=JSON.parse(data);//dataType:"text"일때
+		
+		※string JSON.stringify(JSON객체 즉 {}):
+		 {}타입의 객체를 string
+		*/
+		//dataType: 'text'일 때 아래 추가해야함(현재 json)
+		//data=JSON.parse(data);
+		
+		$('#lblDisplay').html(data.isLogin+":아이디-"+data.id+",비번-"+data.pwd);
+		//data.isLogin -> isLogin 키로 접근함, id, pwd도 동일
+		//반환타입 json이라 되는것, TEXT면 String 반환이라 isLogin 이딴 속성 없음, json은 객체라 되는 것
+		//TEXT인 경우 split해야함, '{"키":"밸류","키":"밸류"}' 이런식으로 나옴, parse 해야함
+	}
+	
+	function successArray(data,elementId){
+		/*
+			※ JSON배열을 출력할때는 $.each(data,function(index,index에 따른 요소값){}); 
+			사용]
+			data:서버로부터 전송받은 데이타(JSON배열타입)
+			index:JSON배열의 인덱스(0부터 시작)	
+			item(index에 따른 요소값):JSON배열에서 하나씩 꺼내온거를 담은 인자		
+	    */
+	    console.log(data);
+		$('#'+elementId).empty();
+		$.each(data,function(index,item){
+			var content = '번호:'+item.no+",제목:"+item.title+",작성자:"+item.name+",작성일:"+item.postDate+"<br/>";
+			$('#'+elementId).append(content);//변수에 # 붙이려면 String처럼	
+		})
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+
+
+
+
+
+
+
+
+
+
+

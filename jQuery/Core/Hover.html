@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover.html</title>
+    <style>
+        .bg{
+            background-color: green;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+			//mouseover()함수와 mouseout()함수로 구현해보기
+			/*
+			$('tr').slice(1).mouseover(function(){
+				$(this).addClass('bg');//this는 마우스오버가 발생한 tr
+			}).mouseout(function(){
+				$(this).removeClass('bg');
+			});
+			*/
+			//hover()함수로 구현
+			$('tr').slice(1).hover(function(){//마우스 오버시
+				$(this).addClass("bg");
+			},function(){//마우스 아웃시
+				$(this).removeClass("bg");
+			})
+			//이미지 위에 마우스 오버시 2.jpg로 마우스 아웃시 1.jpg로 바꾸기
+			/*
+			$('img').hover(function(){
+				this.src='../images/2.jpg';
+			},function(){
+				this.src='../images/1.jpg'
+			});
+			*/
+			//문] 이미지에 마우스 오버시 이미지 크기를
+			// 가로폭 2배, 세로폭 1.5배 마우스 아웃은 원래크기로
+			/*
+			$('img').hover(function(){
+				$(this).css({width: $(this).width()*2, height: $(this).height()*1.5});
+			},function(){
+				$(this).css({width:'', height:''});
+			})
+			*/
+			//원래 이미지 크기 얻기
+			var width = parseInt($('img').get(0).style.width);
+			var height = parseInt($('img').get(0).style.width);
+			$('img').hover(function(){
+				this.style.width=width*2+'px';
+				this.style.height=height*1.5+'px';
+			},function(){
+				this.style.width=width+'px';
+				this.style.height=height+'px';
+			});
+
+        });
+    </script>
+</head>
+<body>
+    <fieldset>
+		<legend>hover(콜백함수1,콜백함수2)</legend>
+		<table cellspacing="1" bgcolor="gray" width="60%">
+			<tr bgcolor="white">
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+			<tr bgcolor="white">
+				<td>1</td>
+				<td>제목1</td>
+				<td>작성자1</td>
+				<td>2013-9-12</td>
+			</tr>
+			<tr bgcolor="white">
+				<td>2</td>
+				<td>제목2</td>
+				<td>작성자2</td>
+				<td>2013-9-12</td>
+			</tr>
+			<tr bgcolor="white">
+				<td>3</td>
+				<td>제목3</td>
+				<td>작성자3</td>
+				<td>2013-9-12</td>
+			</tr>
+			<tr bgcolor="white">
+				<td>4</td>
+				<td>제목4</td>
+				<td>작성자4</td>
+				<td>2013-9-12</td>
+			</tr>
+		</table>
+		<hr />
+		<img src="../images/1.jpg" alt="이미지"
+			style="width:100px; height:100px" />
+	</fieldset>
+</body>
+</html>

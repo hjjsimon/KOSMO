@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DisplayVisibility09.html</title>
+    <style>
+        /*html5는 태그에 표시하는 것, 태그에 직접 주는 hidden 속성 html5에 추가됨
+            안보이는걸 CSS로도 처리가능, display none 동일, visibility hidden 좀 다름*/
+        fieldset{/*모든 필드셋 태그 선택*/
+            width: 400px;
+        }
+        fieldset > div{/*div블락이라 부모전체 차지, 조금 바꿈*/
+            width: 50px;
+            height: 50px;
+        }
+        .inline > div{/*인라인의 자식 div*/
+            /*div가 가로배치되고 inline요소로 바뀜*/
+            display: inline;
+        }
+        .inline-block > div{
+            /*div 가로배치 되지만 block의 성격은 유지(ex.width,height조절가능/인라인은 컨텐츠 크기고정)*/
+            display: inline-block;
+        }
+        .block > span{/*span이라 기본 인라인*/
+            /*인라인이 블락으로 변경*/
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h2>display 및 visibility속성</h2>
+    <div>
+    <h3>visibility</h3>
+    <fieldset class="visible">
+        <legend>visibility:hidden일때 영역은 그대로 존재</legend>
+        <div style="background-color:red;">left</div>
+        <div style="background-color:green; visibility: hidden;">center</div>
+        <div style="background-color:blue;">right</div>
+    </fieldset>
+    <h3>display</h3>
+    <fieldset class="visible">
+        <legend>display:none일때 영역도 사라짐</legend>
+        <div style="background-color:red;">left</div>
+        <div style="background-color:green;display: none;">center</div>
+        <div style="background-color:blue;">right</div>
+    </fieldset>
+    <h3>HTML5의 hidden속성</h3>
+    <fieldset class="visible">
+        <legend>태그의 hidden 속성으로 CSS의 diplay:none효과</legend>
+        <div style="background-color:red;">left</div>
+        <div style="background-color:green;" hidden>center</div>
+        <div style="background-color:blue;">right</div>
+    </fieldset>
+    <h3>block->inline</h3>
+    <fieldset class="inline">
+        <legend>가로배치로 변경</legend>
+        <div style="background-color:red;">left</div>
+        <div style="background-color:green;">center</div>
+        <div style="background-color:blue;">right</div>
+    </fieldset>
+    <h3>block->inline-block</h3>
+    <fieldset class="inline-block">
+        <legend>가로배치로 변경</legend>
+        <div style="background-color:red;">left</div>
+        <div style="background-color:green;">center</div>
+        <div style="background-color:blue;">right</div>
+    </fieldset>
+    <h3>inline->block</h3>
+    <fieldset class="block">
+        <legend>세로배치로 변경</legend>
+        <span style="background-color:red;">left</span>
+        <span style="background-color:green;">center</span>
+        <span style="background-color:blue;">right</span>
+    </fieldset>
+</body>
+</html>

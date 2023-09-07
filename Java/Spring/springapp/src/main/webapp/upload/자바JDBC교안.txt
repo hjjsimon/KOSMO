@@ -1,0 +1,469 @@
+[JDBC(Java Database Connectivity)]
+
+	JDBC란?]
+
+		- Java언어로 데이타베이스에 연결해서 입력,수정,삭제 및 조회등의 작업을 할 수 
+		   있도록 해주는 기술이다
+
+		- JDBC는 프로그램과 각각의 데이타베이스(Oeacle,MS-SQL,DB2,MySQL등) 
+		   중간에서 각 데이타베이스의 벤더(회사)에서 
+		  제공하는 API들을 사용할 수 있도록 변환해주는 기능을 수행한다.
+		
+		- JDBC가 각 벤더에 맞는 API를 사용할 수 있도록 프로그래머는
+                    각 벤더에서 제공해주는 드라이버를 다운받아 JAVA개발환경에 설정 해줘야 한다.
+
+		- 데이타베이스에 일관된 방식으로 접근 할 수 있도록 API를 제공하는 
+		  클래스의 집합이라고 할 수 잇다.
+		 
+
+	드라이버 다운로드 및 JDBC프로그래밍을 위한 환경 설정]
+
+		 
+		-드라이버 다운로드
+				
+				1] Oracle데이타베이스가 설치된 경우
+				 
+					  10g인 경우 Oracle폴더 ->Product->버전->db_1폴더->JDBC폴더->LIB폴더
+					  11g인 경우 App폴더 로 가서 Administrator ->Product->버전->DbHome_1폴더->JDBC폴더->lib폴더
+
+					  안에 드라이버(.jar)가 존재함
+
+					  10g인 경우:ojdbc14.jar파일(jdk1.4 이상 버전)
+					  11g인 경우:ojdbc5.jar(jdk 5버전),ojdbc6.jar(jdk 6.0버전)
+
+					  *상기에서 본인이  사용하고 있는 jdk버전에 맞는 .jar파일을 복사해서 환경설정을 하자.
+
+				2] Oracle서버가 원격에 설치 된 경우
+
+					www.oracle.com접속->download메뉴->Divers->JDBC Drivers->Orcale버전 선택후 사용하는 jdk버전에 맞는 드라이버 다운로드
+																		   
+			   
+
+
+			2)환경설정
+
+
+			   - classpath로 설정하는 경우
+				 내 컴퓨터 ->마우스 우클릭 ->속성->고급->환경변수에서 classpath에 드라이버가 있는 폴더 추가 
+				
+			   - 혹은 드라이버를 복사 후 JDK가 설치된 폴더로 가서 
+				  
+				 jdk버전\jre\lib\ext폴더 안에 붙여 넣는다.
+
+				 
+
+
+	JDBC 프로그래밍 절차]
+
+				1] 드라이버 로딩
+
+
+					- Class의 forName()메서드를 이용 
+					   JDBC 드라이버를 메모리에 로딩후
+					  DriverManager에 등록 함.
+
+				      Class.forName("패키지를 포함한 클래스명");
+				
+
+					  
+					  -오라클인 경우:
+							Class.forName("oracle.jdbc.OracleDriver");
+					  -MySql인 경우
+							Class.forName("com.mysql.jdbc.Driver");
+					  *드라이버가 정상적으로 로딩 되면 DiverManager에 등록됨
+
+
+				2]데이타 베이스 연결 
+
+
+					- DriverManager클래스의 getConnection()메서드로 연결 시도
+
+					- geConnection("드라이버종류:@서버가 위한 주소:사용포트:전역데이타베이스명","아이디","비밀번호");
+
+					
+					-오라클인 경우
+						Connection con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:데이타베이스명","아이디","패스워드");->127.0.0.1는 localhost 로 바꿔
+
+					-MySql인 경우
+						Connection con = DriverManager.getConnection("jdbc:mysql:@127.0.0.1:3306:데이타베이스명","아이디","패스워드");
+
+				3] 쿼리문 전송을 위한  준비
+
+					- Connection 개체의 메서드 이용해서 Statement 계열 개체 얻기
+						
+						-Statement > PreparedStatement > CallableStatement(상속 계층도)
+
+						-쿼리문이 일반 Text형태의 SQL문 인경우
+						    
+							1)파라미터 이용 하지 않을때
+								
+								
+								Statement st =con.createStarement();
+							
+							2)파라미터 이용시
+
+								PreparedStatement st = con.prepareStatement("SELECT * FROM emp WHERE empno=?");
+				
+								*SQL문에는 ? 를 이용 파라미터에 값을 전달 한다
+
+						-쿼리문이 스토어드 프로시저 인 경우
+
+								CallableStatement  st = con.prepareCall("{call 프로시저명(?,?....)}");
+					
+					
+
+						
+					  ※파라미터 : 쿼리문 중에 변경되는 부분 즉 값 부분을  ?로 
+					                   처리하고 미리 쿼리문을 준비하자는 의미.
+									
+				4] 쿼리문 전송
+
+					- Statement/ PreparedStatement /CallableStatement 
+					    개체를 통해 연결된 
+					   데이타 베이스에 일반 쿼리문 혹은 
+					  스토어드 프로시저 전송
+
+					  ※ Statement 인터페이스 는 execute계열 메서드에 직접 쿼리문을 인자로 넣어준다
+					    단,PreparedStatement /CallableStatement 인터페이스는는
+					    Connection 개체의 prepare계열 메서드로 
+					    개체를 얻어 올때 미리(Prepare) 쿼리문을 넣어 준다
+
+				
+					- 쿼리 전송시 메서드의 종류
+
+						ResultSet rs= st.executeQuery(): 쿼리가 SELECT문인 경우
+						int affectedcount = st.executeUpdate():쿼리가 UPDATE/INSERT/DELETE 인 경우
+						boolean bool = st.execute(): 쿼리가 SELECT인 경우 true,
+						                                        UPDATE/INSERT/DELETE인 경우 false;
+						                                        혹은 쿼리가 프로시저나 함수인 경우 사용
+
+			
+
+					소스 예]
+
+							1. Statement  이용시
+
+								Statement st = con.createStatment(); //쿼리문을 미리 넣지 않는다
+
+								//쿼리문 실행
+								ResultSet rs = st.executeQuery("SELECT * FROM emp WHERE job='MANAGER'");
+								혹은
+								int affectedCount = st.executeUpdate("DELETE FROM emp WHERE empno=7788");
+
+								혹은 쿼리문에 구애받지 않고 사용하고자 할때
+
+								boolean flag = st.execute("파라미터가 없는 쿼리문");
+
+								if(flag){//쿼리가 SELECT
+									//getResultSet()메서드로 결과 셋을 얻어 온다
+									ResultSet rs = st.getResultSet();
+					
+								}
+								else{
+									//getUpdateCount()메서드로 영향을 받은 행의 수 얻기
+									int affectedCount = st.getUpdateCount();
+
+								}
+
+							2. PreparedStatement 이용시
+								//미리 쿼리 준비
+
+								PreparedStatement st = 
+								con.prepareStatement("SELECT * FROM emp WHERE job=?" );
+								//파라미터 설정
+								//setXXX(인덱스,변수 혹은 값)게열 메서드로 파라미터에 값을 전달. 
+								인덱스는 1부터(?의 인덱스를 의미)
+								st.setString(1,"MANAGER");
+								//쿼리문 실행
+								//이후는 Statement 개체와 동일하다
+								//단, 인자가 없는 execute 게열 메서드를 호출해야 한다. 
+								미리 쿼리를 준비해 놓았기 때문에
+
+								
+
+							3. CallableStatement 이용시
+
+								- 일반 쿼리문이 아닌 스토어 프로시저나 함수 인 경우 사용
+								//미리 쿼리 준비
+								- 프로시저인 경우
+									CallableStatement st=con.prepareCall("{call 프로시저명(?,?,?..)}");
+								- 함수인 경우
+									CallableStatement st=con.prepareCall("{?=call 함수명(?,?,?..)}");
+								
+								//파라미터 설정
+								- 프로 시저인 경우
+
+									.IN 파라미터인 경우:st.setXXX(인덱스,값)설정
+									.OUT파라미터인 경우:
+									st.registerOutParameter(인덱스,java.sql.Types.VARCHAR)등으로 등록한다
+
+								- 함수인 경우
+
+									.return 값은 cs.registerOutParameter(1,java.sql.Types.VARCHAR)로 regist한다.
+									?첫번째 임으로 인덱스는 무조건 1 임
+									.IN 파라미터인 경우:cs.setXXX(인덱스,값)설정
+
+								//쿼리문 실행
+								 st.execute();
+
+				5] ResultSet에서 값 꺼내 오기
+
+					- SELECT로 보낸 쿼리 결과는 ResultSet 개체에 담긴다 
+
+
+				   - 데이터 꺼내오기
+
+							while(rs.next()){
+
+									rs.getXXX(컬럼인덱스) 혹은
+									rs.getXXX(컬럼명) 등의 메소드를 통해 데이터를 꺼내온다.
+									
+									*인덱스로 가져오는것이 성능면에서 유리(속도가 더 빠름)
+								   
+							}
+
+							      [ResultSet 개체의 주요 메서드]
+
+							-next():다음행으로 커서를 옮김
+							-previous():이전 행으로 커서를 옮김
+							-first():첫번째 행으로 커서를 옮김
+							-last()마지막 행으로 커서를 옮김
+							-afterLast():커서를 마지막 행 바로 다음으로 옮김(EOF:END OF FILE)
+							-beforeFirst():커서를 첫번째 행 바로 앞으로 옮김(BOF:BEGIN OF FILE)
+							-getRow():현재 커서가 위한 행의 인덱스를 돌려 준다.인덱스는 첫번째 행 바로 앞이 0
+							-absolute(인덱스): 해당 인덱스 로 커서 이동 
+											   양수-전진 ,음수-후진
+
+
+
+							1) Connection 개체로 Statement 계열 개체를 얻어 올때 
+							ResultSet 타입을 주지 않은 경우
+
+								-기본적인 ResultSet은  next()메서드만 
+								사용 가능하도록 되어 있다.(전방향만 가능-forward)								
+						
+
+							2) Statement 계열 개체 할당 받을때 
+							con.XXXXXStatement()메서드에 ResultSet 타입 지정
+					
+								ResultSet.TYPE_SCROLL_INSENSITIVE,
+								ResultSet.TYPE_SCROLL_SENSITIVE 나 혹은
+								ResultSet.CONCUR_UPDATABLE,
+								ResultSet.CONCUR_READ_ONLY
+
+								지정시에는 결과셋에서 Cursor를 상하 마음대로 이동이 가능하다.
+
+								*ResultSet 의 next()메서드를 제외한 
+								Cursor응 이용하는 다른 메서드 사용시 타입을 지정해야 함
+								
+								*검색한 결과의 총 레코드 개수를 알아 내기.(자바코드로)
+					
+								예]
+								 //커서를 마지막으로 옮긴다
+								 rs.last();		
+								 //마지막 지점의 현재 row값으로 총 레코드 수를 구한다
+								
+								 int rowCount = rs.getRow();
+
+								 //rowCount 가 0 이면 검색결과가 없다는 것이다.
+
+								 //다시 맨처음 바로 앞으로 커서를 옮긴다
+								 rs.beforeFirst();
+
+								 while(rs.next()){
+
+									//출력
+								 }
+					  
+					
+				5-1] 프로시저나 함수인 경우 
+
+					- CallableStatement 를 이용 프로시저의 OUT파라미터 나 함수의 리컨값을 받기
+
+				      값은  역시  st.getXXX(인덱스)로 읽는다 ,함수인 경우 함수의 반환값은 무조건 인덱스가 1임 cs.getXXX(1)로 받는다
+
+					  예]
+
+						- 프로시저인 경우
+							//첫번쩨 ?와 세번째 ?가 OUT파라미터라고 가정하자.두번째는 IN 파라미터
+
+							//1.프로시저 준비
+							CallableStatement st = con.prepareCall("{call 프로시저명(?,?,?)}");
+
+							//2.파라미터 설정
+							st.setString(2,"값");
+							st.registerOutParameter(1,java.sql.Types.VARCHAR);
+							st.registerOutParameter(3,java.sql.Types.INTEGER );
+
+							//3.쿼리 실행
+							st.execute();
+
+							//4.값 얻어 오기
+							//CallableStatement의 getXXXX()계열 메서드로 받는다.
+							String str=st.getString(1);
+							int num = st.getInt(3);
+
+						- 함수인 경우
+							//두번쩨 ,세번째 은 IN파라미터라고 가정하자
+							//1.함수 준비
+							CallableStatement st = con.prepareCall("{?=call 함수명(?,?)}");
+
+							//2.파라미터 설정
+							
+							st.registerOutParameter(1,java.sql.Types.VARCHAR);
+							st.setString(2,"값2");
+							st.setString(3,"값3");						
+
+							//3.쿼리 실행
+							st.execute();
+
+							//4.값 얻어 오기
+							//CallableStatement의 getXXXX()계열 메서드로 받는다.
+							String str=st.getString(1); //리턴값인 ? 가 항상 첫번째 임으로 인덱스 1로 받는다.		
+
+				  
+
+
+				6] 개체 자원 반납
+				   
+					- close()메서드로 Connection 개체, Statement,PreparedStatement,CallableStatement 및 ResultSet 
+					  개체등의 자원 반납.
+
+				  
+
+
+			
+		※ ResultSetMetaData 인터페이스 
+
+			-ResultSetMetaData인터페이스를 통해 얻어 올 수 잇다.
+			-ResultSetMetaData인터페이스는 
+			ResultSet 개체의 getMetaData()메서드로 얻어 올 수 있다.
+			-ResultSetMetaData는 
+			          컬럼명,컬럼의 null여부,
+				  컬럼 타입등  컬럼에 대한 정보를 가지고 잇다
+			  
+
+			ResultSetMetaData의 주요 메서드]
+
+				int getColumnCount():컬럼의 개수 얻어 온다.
+				String getColumnName(int column)  :컬럼의 이름을 얻어 온다.
+				(column에는 인덱스 값을 준다)
+				
+				int getColumnType(int column)/
+				String getColumnTypeName(int column)  : 컬럼의 타입을 얻어 온다.
+				int isNullable(int column)  :컬럼의 null허용여부 null허용 : 1,not null:0 
+
+
+
+
+			예] 컬럼의 개수 얻어 오기 
+
+				ResultSet rs = stmt.executeQuery("SELECT a, b, c FROM TABLE2");
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int numberOfColumns = rsmd.getColumnCount();
+
+
+
+		※ CallableStatement를 이용 즉 프로시저를 이용해서 여러행을 ResultSet 으로 받아오기
+					
+		   -오라클에서 프로시저나 함수로는 여러행을 반환 할 수 없다 그래서 Cursor를 이용해야 한다.
+
+		   - 자바에서 커서를 사용하려면 
+				   	
+				1) procedure작성시 out 매개변수의 타입은 SYS_REFCURSOR
+						   
+				2) PROCEDURE 내부에서는 선언과 FETCH 그리고 CLOSE를 하지 않는다
+
+				3) 실행부(BEGIN) 에서 OPEN 커서명 FOR select-statements구문
+				
+				4)Oracle에서 프로시저를 직접 실행 할 수는 없다
+
+
+				프로시저 예]
+
+				오라클 에서 프로시저 생성]
+				CREATE OR REPLACE PROCEDURE EMP_PROC(p_job IN emp.job%TYPE,empout out SYS_REFCURSOR)
+				IS
+				BEGIN
+						OPEN empout FOR
+							SELECT * FROM emp 
+								WHERE job=p_job;
+
+				END;
+				/      
+
+				JAVA 코딩 소스]
+					0) import oracle.jdbc.driver.*; //OracleTypes.CURSOR
+					1) CallableStatement st = con.prepareCall("{call emp_proc(?,?)}");
+					2) st.setString(1,"MANAGER");
+					4) st.registerOutParameter(2,OracleTypes.CURSOR);
+					5) st.execute();
+					6) ResultSet rs = (ResultSet)st.getObject(2);//여기서 2는 out파라미터인 Cursor를 의미
+					7) while(rs.next(){
+									
+						값은 역시 st.getXXX(인덱스)로 읽는다 
+
+					   }
+
+		※트랜잭션 처리]
+
+			1) Connection 개체의 setAutoCommit(false)를 이용 자동 커및 막기: 
+			    단, false로 설정하더라도 Connection 개체 close()시 자동 commit됨
+			    그러나 close()를 안하면 commit이 안됨.
+
+			    setAutoCommit(true)인 경우 close()를 안하더라도 자동 commit됨
+			2) catch 절에서 con.rollback();
+			3) try절의 마지막에서 con.commit();
+
+		
+		※	 Oracle                    java
+
+          where loc like '%값%'        where loc like '%' || ? || '%'
+     
+          where loc like '값%'         where loc like ? || '%'
+
+          where loc like '%값'         where loc like '%' || ?
+
+	  where loc like '_값%'       where loc like '_' || ? ||  '%'
+
+
+
+java.sql.Types		Oracle			MSSQL			MySql			java.sql.ResultSet
+	---------------------------------------------------------------------------------------------------------------------
+	LONGVARCHAR		LONG			TEXT/NTEXT		TEXT			getCharacterStream
+	CLOB			CLOB						LONGTEXT	
+
+	LONGVARBINARY		LONG RAW					BLOB			
+	BLOB			BLOB						LONGBLOB		getBinaryStream
+
+	TINYINT						TYNYINT			TINYINT   		
+	SMALLINT					SMALLINT		SMALLINT 		
+	INTEGER						INT			INTEGER/INT		getInt	
+	BIGINT			NUMBER			BIGINT			BIGINT			getLong
+
+	BIT						BIT						
+	BOOLEAN												getByte
+
+	DECIMAL						DECIMAL			DECIMAL 
+	NUMERIC						NUMERIC	                                        
+	FLOAT						FLOAT			FLOAT			
+	REAL						REAL
+	DOUBLE			NUMBER(p, s)					DOUBLE			getDouble
+
+	CHAR			CHAR/NCAHR		CHAR/NCHAR		CHAR
+	VARCHAR			VARCHAR2/NVARCHAR2	ARCHAR/NVARCHAR		VARCHAR			getString
+
+	BINARY						BINARY
+	VARBINARY		RAW(n)			VARBINAR/IMAGE					getBytes
+
+	DATE			DATE			SMALLDATETIME		DATE			getDate
+	TIME									TIME			getTime
+	TIMESTAMP		TIMESTAMP		DATETIME		DATETIME/TIMESTAMP	getTimestamp  
+	---------------------------------------------------------------------------------------------------------------------
+	** sql.Types.CLOB, Types.LONGVARCHAR일 경우 MySql은 getString으로 Oracle, MSSQL은 getCharacterStream으로 처리한다
+	   sql.Types.LONGVARBINARY, sql.Types.BLOB은 getBinaryStream으로 처리한다
+	   sql.Types.NUMERIC, sql.Types.DECIMAL일 경우 소수점이 없으면 getLong을 사용한다
+	   sql.Types.BINARY, sql.Types.VARBINARY는 바이트 배열(Byte[])로 데이타를 읽어온다
+
+	
+	

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector01_1.html</title>
+    <style>
+        /*CSS코드는 style태그 안에서 작성
+        -> CSS는 캐스캐이딩이라 자식(하위)에도 쭉~~~~~~~~~~~~적용됨
+        HTML문서(연예인)를 꾸미는게 CSS(스타일리스트)
+        <head>태그 사이에 기술, <body>사이에 써도 되긴 함
+        선택자로 선택한 요소에 스타일을 부여함~~ 속성 마지막에 ;는 안써도됨
+        전체선택자는 <body>내의 모든걸 선택함(주로 여백 없앨 때 씀, <h2>태그 등 떄문에 여백발생 없애야 이쁘게 재배치가능)
+        */
+        /*전체 선택자: *로 모든태그(body이하부터)선택- 글꼴이나 여백을 처음에 전체에 적용할 때 사용*/
+        *{
+            margin:0;/*여백을 안주는게 margin=0*/
+            font-family: Verdana, Geneva, Tahoma, sans-serif;/*글꼴바꿈*/
+        }
+        /*태그 선택자: 태그명으로 선택*/
+        span{/*모든 span태그 선택한 것*/
+            color: greenyellow;/*span으로 감싼건 다 초록색됨*/
+            font-size: 1.8em;/*글자크기 바꿈*/
+        }
+        /*클래스 선택자: .클래스명으로 선택-한페이지안에 클래스명 중복가능*/
+        .positive{
+            font-weight: bold;
+            background-color: yellow;
+        }
+        .negative{
+            color: gray;/*위에서 초록색처리했지만 여기서 바꿈*/
+            font-size: .8em;/*0.8em인데 0생략한거임*/
+        }
+        /*하위 선택자: 스페이스로 구분하여 선택-자식,손자,증손자.. 다 선택됨*/
+        .mydiv span{/*mydive 한칸 띄고 span하면 mydive 클래스안의 모든span선택, 자식 span하나, 손자 span하나 총 2개 선택한것*/
+            color: red;
+            font-size: .8em;
+        }
+        /*자식 선택자: >로 구분해서 선택*/
+        .mydiv>span{/*자식인 span만 선택, 손자는 선택x*/
+            color: cyan;
+            font-size: 1.2em;
+        }
+        /*다중 선택자: ,로 구분해서 여러 선택자 사용*/
+        .multi h2,.multi h3,h4,h5{/*많은 h2 중 multi클래스의 자식만 선택 + 그리고 종류 달라도 multi의 h3 하나 선택,  */
+            color: blue;
+        }
+        /*아이디 선택자: #아이디명으로 선택-아이디는 한페이지 안에서 중복불가*/
+        #bas{/*샵 아이디 쩜 클래스*/
+            color: yellow;/*bas 아이디인 농구만 선택*/
+        }
+        /*한칸 스페이스 차이가 크다*/
+        /*li태그중에서 myclass라는 클래스명을 가진 li태그*/
+        li.myclass{/*이건 li요소가 선택됨, myclass라는 클래스명을 가진 li요소 선택됨, li태그 선택됨(그냥 li만 있으면 모든 li태그)*/
+            color: yellow;/*배구선택*/
+        }
+        /*li의 하위태그중에서 myclass라는 클래스명을 가진 태그(li인지는 모름, 웬만해서 li안에 li안쓰니 li는 아닐 확률 높음)*/
+        li .myclass{/*이건 li의 하위요소가 선택됨, li의 하위요소중에서 myclass명을 가진 요소를 선택함, 아래에서 <b>태그 선택됨*/
+            color: red;/*축구선택*/
+        }
+
+    </style>
+</head>
+<body>
+    <h2>태그 선택자/클래스 선택자</h2><!--태그명, 클래스명으로 요소를 선택해서 각각 선택자라함-->
+    <div>
+        저의 <span class="positive">장점</span>은 <span class="positive">긍정적인 성격</span> 입니다.<br/>
+        저의 <span class="negative">단점</span>은 <span class="negative">지저분한 스타일</span> 입니다.
+    </div>
+    <h2>하위 및 자식 선택자</h2>
+    <div class="mydiv">
+        <span>DIV안의 SPAN태그</span>
+        <fieldset>
+            <span>FIELDSET안의 SPAN태그</span>
+        </fieldset>
+    </div>
+    <h2>다중 선택자</h2>
+    <div class="multi">
+        <h2>제목2</h2>
+        <h3>제목3</h3>
+        <h4>제목4</h4>
+        <h5>제목5</h5>
+    </div>
+    <h2>아이디 선택자</h2>
+    <ul>
+        <li class="myclass"><b class="myclass">축구</b></li>
+        <li id="bas">농구</li>
+        <li class="myclass">배구</li>
+    </ul>
+    <h3>h3태그입니다</h3>
+</body>
+</html>
