@@ -1,2 +1,2 @@
 # KOSMO
-Examples and Practice Codes
+KOSMO Examples and Practice Codes
